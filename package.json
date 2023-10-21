@@ -12,7 +12,8 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"test:integration": "playwright test",
-		"test:unit": "vitest"
+		"test:unit": "vitest",
+		"video": "tsx "
 	},
 	"devDependencies": {
 		"@fontsource-variable/lexend": "^5.0.16",
@@ -33,9 +34,11 @@
 		"svelte-check": "^3.4.3",
 		"svelte-preprocess": "^5.0.4",
 		"tslib": "^2.4.1",
+		"tsx": "^3.14.0",
 		"typescript": "^5.0.0",
 		"vite": "^4.4.2",
-		"vitest": "^0.32.2"
+		"vitest": "^0.32.2",
+		"youtube-dl-exec": "^2.4.15"
 	},
 	"type": "module"
 }
