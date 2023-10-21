@@ -5,7 +5,7 @@
 	import '../app.css';
 </script>
 
-<Navbar />
+<!-- <Navbar /> -->
 
 <div class="content">
 	<slot />
