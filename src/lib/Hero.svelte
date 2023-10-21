@@ -10,7 +10,7 @@
 	</div>
 	<div class="wrapper">
 		<div class="container">
-			<h1>Make for NASA</h1>
+			<h1>Make for <span class="nasa">NASA</span></h1>
 			<div class="container-small">
 				<h2>Solve real-world problems.<br>Create real-world impact.</h2>
 			</div>
@@ -36,6 +36,11 @@
 		background-color: rgba(255, 255, 255, 0.5);
 		width: 100px;
 		height: 100px;
+	}
+
+	.nasa {
+		color: #105bd8;
+		mix-blend-mode: screen;
 	}
 
 	.arrow {
@@ -76,13 +81,10 @@
 	}
 	.container h1 {
 		margin-top: 10rem;
-		text-shadow: 2px 2px 0 #ededed, -2px 2px 0 #ededed, -2px -2px 0 #ededed, 2px -2px 0 #ededed;
 		font-size: 10rem;
-		color: rgba(0, 0, 0, 0.3);
+		color: white;
 		font-weight: 900;
 		line-height: 1;
-		mix-blend-mode: hard-light; 
-		
 	}
 
 	.container-small {
@@ -97,11 +99,11 @@
 		margin: 0px;
 		font-size: 5rem;
 		font-family: 'Lexend Variable', sans-serif;
-		background: #ccc;
+		background: white;
 		border-radius: 1rem;
 		width: fit-content;
 		padding: 0.25rem 1rem;
-		text-shadow: 2px 2px 0 #ccc, -2px 2px 0 #ccc, -2px -2px 0 #ccc, 2px -2px 0 #ccc;
+		text-shadow: 2px 2px 0 white, -2px 2px 0 white, -2px -2px 0 white, 2px -2px 0 white;
 		color: rgba(0, 0, 0, 0.3);
 		font-weight: 700;
 		line-height: 1;
