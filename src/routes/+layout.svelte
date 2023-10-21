@@ -1,5 +1,9 @@
 <script lang="ts">
-	import '../../node_modules/@uswds/uswds/dist/css/uswds.min.css';
+    import Navbar from "$lib/Navbar.svelte";
 </script>
 
-<slot />
+<Navbar />
+
+<div class="content">
+    <slot />
+</div>
