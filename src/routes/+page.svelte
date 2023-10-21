@@ -12,7 +12,7 @@
 		<h1>Make for NASA</h1>
 	</div>
 	<div class="container-small">
-		<h2>Solve real-world problems, have real-world impact.</h2>
+		<h2>Solve real-world problems, create real-world impact.</h2>
 	</div>
 </header>
 
@@ -28,13 +28,12 @@
 	}
 
 	h1 {
-		background: white;
 		margin: 0.5rem;
 		border-radius: 1rem;
 		padding: 0 2rem;
 		mix-blend-mode: screen;
 		font-size: 15rem;
-		color: black;
+		color: #ddd;
 		font-weight: 900;
 		line-height: 1;
 	}
@@ -44,7 +43,7 @@
 		font-family: 'Lexend Variable', sans-serif;
 		color: black;
 		font-weight: 700;
-		background: white;
+		background: #ccc;
 		mix-blend-mode: screen;
 		border-radius: 1rem;
 		width: fit-content;
