@@ -15,9 +15,11 @@
 				<h2>Solve real-world problems.<br>Create real-world impact.</h2>
 			</div>
 		</div>
-		<h1>
-			some generic arrow
-		</h1>
+		<div class="arrow-container">
+			<h1 class="arrow">
+				↓
+			</h1>
+		</div>
 	</div>
 </header>
 
@@ -27,6 +29,33 @@
 		padding: 0px;
 		text-align: center;
 		overflow: hidden;
+	}
+
+	.arrow-container {
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.5);
+		width: 100px;
+		height: 100px;
+	}
+
+	.arrow {
+		position: relative;
+		top: -4rem;
+		color: white;
+		font-size: 5rem;
+		animation: bounce 4s infinite ease-in-out;
+	}
+
+	@keyframes bounce {
+		0% {
+			transform: translateY(0px);
+		}
+		25% {
+			transform: translateY(5px);
+		}
+		50% {
+			transform: translateY(0px);
+		}
 	}
 	
 	.wrapper {
@@ -96,7 +125,7 @@
 		top: 0px;
 		left: 0px;
 		width: 100%;
-		height: 100vh;
+		height: calc(100vh - 100px);
 		object-fit: cover;
 		z-index: -1;
 	}

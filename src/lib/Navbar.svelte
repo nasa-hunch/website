@@ -1,6 +1,6 @@
 <nav>
 	<a href="/" class="logoLink">
-		<img src="/favicon.png"/>
+		<img alt="NASA Hunch Logo" src="/favicon.png"/>
 	</a>
 	<ul class="navInner">
 		
@@ -30,7 +30,7 @@
 <style>
 	nav {
 		position: sticky;
-		z-index: 1000000;
+		z-index: 10000;
 		width: 100%;
 		top: 0;
 		height: 100px;
