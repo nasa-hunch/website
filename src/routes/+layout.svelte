@@ -10,3 +10,9 @@
 <div class="content">
 	<slot />
 </div>
+
+<style>
+	:global(body) {
+		margin: 0px;
+	}
+</style>
