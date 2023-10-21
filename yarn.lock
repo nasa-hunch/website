@@ -157,6 +157,16 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.49.0.tgz#86f79756004a97fa4df866835093f1df3d03c333"
   integrity sha512-1S8uAY/MTJqVx0SC4epBq+N2yhuwtNwLbJYNZyhL2pO1ZVKn5HFXav5T41Ryzy9K9V7ZId2JB2oy/W4aCd9/2w==
 
+"@fontsource-variable/lexend@^5.0.16":
+  version "5.0.16"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/lexend/-/lexend-5.0.16.tgz#e393911eb2f6742fb3c79e3a225d72656b558d64"
+  integrity sha512-0ykiu3O3vMFPD5scTZyVTO/xZDkTibpwYrUmPCj3lIFVCDzjYFP3M5/dVylhU95V/Y2fG9Qf4NXjaJRe4FrEsA==
+
+"@fontsource-variable/manrope@^5.0.16":
+  version "5.0.16"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/manrope/-/manrope-5.0.16.tgz#4d70381274dd1ebaff018f1c70b3ba1cdfd46dd8"
+  integrity sha512-6zsLHlf/nSDByrtdzhMc25LAuyJDw+f1RZXXoSODe7k7/h9osUqUSjfQmZTSFoVVRyLxwS0Hphoi8wrcymB/vg==
+
 "@humanwhocodes/config-array@^0.11.11":
   version "0.11.11"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.11.tgz#88a04c570dbbc7dd943e4712429c3df09bc32844"

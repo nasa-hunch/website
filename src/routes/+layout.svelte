@@ -1,5 +1,8 @@
 <script lang="ts">
     import Navbar from "$lib/Navbar.svelte";
+    import '@fontsource-variable/manrope';
+    import '@fontsource-variable/lexend';
+    import '../app.css'
 </script>
 
 <Navbar />
