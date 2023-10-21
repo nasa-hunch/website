@@ -13,7 +13,7 @@
 	</div>
 	<div class="container-small">
 		<h2>Solve real-world problems.</h2>
-		<h2>create real-world impact.</h2>
+		<h2>Create real-world impact.</h2>
 	</div>
 </header>
 
@@ -75,9 +75,9 @@
 		transform: translate(-50%, -50%);
 		z-index: -1;
 	}
-
 	header {
-		text-align: center;
+		
+		text-align: center; 
 		padding: 5rem 0;
 	}
 </style>
