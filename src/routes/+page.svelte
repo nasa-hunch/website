@@ -12,7 +12,8 @@
 		<h1>Make for NASA</h1>
 	</div>
 	<div class="container-small">
-		<h2>Solve real-world problems, create real-world impact.</h2>
+		<h2>Solve real-world problems.</h2>
+		<h2>create real-world impact.</h2>
 	</div>
 </header>
 
@@ -25,6 +26,21 @@
 	.container-small {
 		margin: 5rem auto;
 		width: fit-content;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.container-small h2 {
+		margin: 0px;
+		font-size: 5rem;
+		font-family: 'Lexend Variable', sans-serif;
+		color: black;
+		font-weight: 700;
+		background: #ccc;
+		mix-blend-mode: screen;
+		border-radius: 1rem;
+		width: fit-content;
+		padding: 0.5rem 2rem;
 	}
 
 	h1 {
@@ -38,18 +54,7 @@
 		line-height: 1;
 	}
 
-	h2 {
-		font-size: 5rem;
-		font-family: 'Lexend Variable', sans-serif;
-		color: black;
-		font-weight: 700;
-		background: #ccc;
-		mix-blend-mode: screen;
-		border-radius: 1rem;
-		width: fit-content;
-		margin: 0 max(2rem, auto);
-		padding: 0.5rem 2rem;
-	}
+
 
 	.video-container {
 		width: 100vw;
