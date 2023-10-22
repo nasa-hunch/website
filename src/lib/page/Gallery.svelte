@@ -8,6 +8,8 @@
 </script>
 
 <script lang="ts">
+	const base = `/nasa-hunch`
+
 	export let gallaryImages: GalleryImage[];
 	export let title = "Gallery"
 </script>
@@ -17,7 +19,7 @@
 	<h3>{title}</h3>
 	<div class="items">
 		{#each gallaryImages as image}
-			<a class="gallaryImage" href={image.href} style="background-image: url({image.src})">
+			<a class="gallaryImage" href={base + image.href} style="background-image: url({image.src})">
 				<div class="caption">
 					{image.caption}
 				</div>

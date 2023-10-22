@@ -1,7 +1,5 @@
 <script lang="ts">
     export let program: string;
-	export let reach;
-	export let projects;
 </script>
 <div class="reach">
 </div>

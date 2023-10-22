@@ -1,28 +1,39 @@
+<script lang="ts">
+	interface Link {
+		name: string;
+		href: string;
+		special?: boolean;
+	}
+
+	const base = `/nasa-hunch`
+
+	const link = (name: string, href: string, special?: boolean): Link => {
+		return {
+			name,
+			href: `/${base}/${href}`,
+			special
+		}
+	}
+
+	const links = [
+		link("About", "about"),
+		link("Programs", "programs"),
+		link("Partners", "partners"),
+		link("Connect", "connect"),
+		link("Get Started", "get-started", true)
+	]
+</script>
+
 <nav>
-	<a href="/" class="logoLink">
-		<img alt="NASA Hunch Logo" src="/favicon.png"/>
+	<a href={base} class="logoLink">
+		<img alt="NASA Hunch Logo" src="{base}/favicon.png"/>
 	</a>
 	<ul class="navInner">
-		
-		
-		<li class="navButton navRegularLink">
-			<a href="/about">About</a>
-			
-		</li>
-		<li class="navButton navRegularLink">
-			<a href="/programs">Programs</a>
-			
-		</li >
-		<li class="navButton navRegularLink">
-			<a href="/partners">Partners</a>
-			
-		</li>
-		<li class="navButton navRegularLink">
-			<a href="/connect">Connect</a>
-		</li>
-		<li class="specialButton navButton" >
-			<a href="/get-started">Get Started</a>
-		</li>
+		{#each links as link}
+			<li class="navbutton {link.special ? "specialButton" : "navRegularLink"}">
+				<a href={link.href}>{link.name}</a>
+			</li>
+		{/each}
 	</ul>
 	
 </nav>
@@ -105,10 +116,6 @@
 	.navRegularLink a:hover::after {
 		width: 100%;
 		transform: scale(1, 1);
-	}
-	
-	.navButton {
-		padding: 0px 10px;
 	}
 
 	

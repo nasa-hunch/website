@@ -44,7 +44,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		background: #323a45;
+		background: #061f4a;
 		color: white;
 		padding: 3rem 0px;
 	}
