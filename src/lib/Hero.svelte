@@ -4,7 +4,7 @@
 
 <header>
 	<div class="video-container">
-		<video autoplay loop muted>
+		<video autoplay loop muted playsinline>
 			<source src={video} type="video/mp4" />
 		</video>
 	</div>
@@ -32,10 +32,10 @@
 	}
 
 	.arrow-container {
-		border-radius: 50%;
+		border-radius: 2rem;
 		background-color: rgba(255, 255, 255, 0.5);
 		width: 100px;
-		height: 100px;
+		height: 200px;
 	}
 
 	.nasa {
@@ -45,7 +45,7 @@
 
 	.arrow {
 		position: relative;
-		top: -4rem;
+		top: 1rem;
 		color: white;
 		font-size: 5rem;
 		animation: bounce 4s infinite ease-in-out;
