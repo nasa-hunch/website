@@ -5,12 +5,10 @@
 		special?: boolean;
 	}
 
-	const base = `/nasa-hunch`
-
 	const link = (name: string, href: string, special?: boolean): Link => {
 		return {
 			name,
-			href: `/${base}/${href}`,
+			href: `/${href}`,
 			special
 		}
 	}
@@ -25,8 +23,8 @@
 </script>
 
 <nav>
-	<a href={base} class="logoLink">
-		<img alt="NASA Hunch Logo" src="{base}/favicon.png"/>
+	<a href={"/"} class="logoLink">
+		<img alt="NASA Hunch Logo" src="/favicon.png"/>
 	</a>
 	<ul class="navInner">
 		{#each links as link}
