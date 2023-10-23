@@ -1,25 +1,12 @@
 <script lang="ts">
-	import video from "$lib/videos/hero.mp4";
+	export let title = "Make for Nasa"
+	export let image = "https://www.nasa.gov/wp-content/uploads/2023/03/pia19836-ngc2174.jpg"
 </script>
 
 <header>
-	<div class="video-container">
-		<video autoplay loop muted playsinline>
-			<source src={video} type="video/mp4" />
-		</video>
-	</div>
-	<div class="wrapper">
-		<div class="container">
-			<h1>Make for <span class="nasa">NASA</span></h1>
-			<div class="container-small">
-				<h2>Solve real-world problems.<br>Create real-world impact.</h2>
-			</div>
-		</div>
-		<div class="arrow-container">
-			<h1 class="arrow">
-				↓
-			</h1>
-		</div>
+	<!-- TODO: give this life on the main page -->
+	<div class="wrapper" style="--img: url({image})">
+		<h1>{title}</h1>
 	</div>
 </header>
 
@@ -31,105 +18,39 @@
 		overflow: hidden;
 	}
 
-	.arrow-container {
-		border-radius: 2rem;
-		background-color: rgba(255, 255, 255, 0.5);
-		width: 100px;
-		height: 200px;
-	}
-
-	.nasa {
-		color: #105bd8;
-		mix-blend-mode: screen;
-	}
-
-	.arrow {
-		position: relative;
-		top: 1rem;
-		color: white;
-		font-size: 5rem;
-		animation: bounce 4s infinite ease-in-out;
-	}
-
-	@keyframes bounce {
-		0% {
-			transform: translateY(0px);
-		}
-		25% {
-			transform: translateY(5px);
-		}
-		50% {
-			transform: translateY(0px);
-		}
-	}
-	
 	.wrapper {
 		width: 100%;
 		height: calc(100vh - 100px);
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-around; 
+		justify-content: center; 
 	}
 
-	.container {
+	.wrapper::before {
+		background-image: var(--img);
+		content: '';
+		position: absolute;
+		width: 100%;
 		height: calc(100vh - 100px);
+		background-size: cover;
+		background-position: center;
+	}
+
+
+	h1 {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-	}
-	.container h1 {
-		margin-top: 10rem;
 		font-size: 10rem;
-		color: white;
+		color: transparent;
 		font-weight: 900;
 		line-height: 1;
-	}
-
-	.container-small {
-		margin: 5rem auto;
-		width: fit-content;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.container h2 {
-		margin: 0px;
-		font-size: 5rem;
-		font-family: 'Lexend Variable', sans-serif;
-		background: white;
-		border-radius: 1rem;
-		width: fit-content;
-		padding: 0.25rem 1rem;
-		text-shadow: 2px 2px 0 white, -2px 2px 0 white, -2px -2px 0 white, 2px -2px 0 white;
-		color: rgba(0, 0, 0, 0.3);
-		font-weight: 700;
-		line-height: 1;
-		mix-blend-mode: hard-light; 
-	}
-
-	.video-container {
+		background: rgba(0, 0, 0, 0.6);
+		color: white;
 		width: 100%;
-		height: 100vh;
-		position: absolute;
-		top: 0;
-		left: 0;
-		background: black;
-		filter: brightness(0.3);
-		pointer-events: none;
-		z-index: -1;
-	}
-
-	video {
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		width: 100%;
-		height: calc(100vh - 100px);
-		object-fit: cover;
-		z-index: -1;
+		height: 100%;
+		mix-blend-mode: multiply;
 	}
 	
 </style>
