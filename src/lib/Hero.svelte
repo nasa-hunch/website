@@ -46,7 +46,7 @@
 		color: transparent;
 		font-weight: 900;
 		line-height: 1;
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(50, 50, 50, 0.6);
 		color: white;
 		width: 100%;
 		height: 100%;
