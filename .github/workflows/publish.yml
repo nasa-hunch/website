@@ -27,8 +27,6 @@ jobs:
           node-version: '18.x'
       - name: Install dependencies
         run: yarn install
-      - name: Run video
-        run: yarn video
       - name: Build page
         run: yarn build
       - name: Upload built project output
