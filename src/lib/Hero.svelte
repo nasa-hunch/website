@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let title = "Make for Nasa"
-	export let image = "https://www.nasa.gov/wp-content/uploads/2023/03/pia19836-ngc2174.jpg"
+	export let image = "https://www.nasa.gov/wp-content/uploads/2023/08/wff-2023-068-004.jpg"
 </script>
 
 <header>
@@ -46,7 +46,7 @@
 		color: transparent;
 		font-weight: 900;
 		line-height: 1;
-		background: rgba(0, 0, 0, 0.6);
+		background: rgba(0, 0, 0, 0.5);
 		color: white;
 		width: 100%;
 		height: 100%;
