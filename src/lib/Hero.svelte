@@ -1,12 +1,12 @@
 <script lang="ts">
-	export let title = "Make for Nasa"
-	export let image = "https://www.nasa.gov/wp-content/uploads/2023/08/wff-2023-068-004.jpg"
+	import ActiveHero from "$lib/ActiveHero";
+
 </script>
 
 <header>
 	<!-- TODO: give this life on the main page -->
-	<div class="wrapper" style="--img: url({image})">
-		<h1>{title}</h1>
+	<div class="wrapper" style="--img: url({$ActiveHero.image})">
+		<h1>{$ActiveHero.title}</h1>
 	</div>
 </header>
 

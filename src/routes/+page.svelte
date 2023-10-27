@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Hero from "$lib/Hero.svelte";
-	import Navbar from "$lib/Navbar.svelte";
 	import Gallery from "$lib/page/Gallery.svelte";
 	import type { GalleryImage } from "$lib/page/Gallery.svelte";
 	import Section from "$lib/page/Section.svelte";
@@ -85,8 +83,6 @@
 	]
 
 </script>
-<Hero />
-<Navbar />
 
 <Section title="About NASA Hunch">
 	<p>
