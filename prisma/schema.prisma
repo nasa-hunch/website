@@ -39,7 +39,8 @@ model ProjectUser {
   userid Int
   projectid Int
   User User @relation(fields: [userid], references: [id])
-  Project Project @relation(fields: [projectid], references: [id])
+  Project Project @relation("users", fields: [projectid], references: [id])
+  ownedProject Project? @relation("owner")
   permissions Int
 }
 
@@ -51,8 +52,9 @@ model Project {
   description String @db.VarChar(255)
   organization Organization @relation(fields: [orgid], references: [id])
   orgid Int
-  users ProjectUser[]
-  ownerId Int
+  users ProjectUser[] @relation("users")
+  owner ProjectUser @relation("owner", fields: [ownerId], references: [id])
+  ownerId Int @unique
   files File[]
 }
 
