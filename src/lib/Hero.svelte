@@ -1,6 +1,5 @@
 <script lang="ts">
-	import ActiveHero from "$lib/ActiveHero";
-
+	import ActiveHero from '$lib/ActiveHero';
 </script>
 
 <header>
@@ -24,7 +23,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: center; 
+		justify-content: center;
 	}
 
 	.wrapper::before {
@@ -36,7 +35,6 @@
 		background-size: cover;
 		background-position: center;
 	}
-
 
 	h1 {
 		display: flex;
@@ -52,5 +50,4 @@
 		height: 100%;
 		mix-blend-mode: multiply;
 	}
-	
 </style>
