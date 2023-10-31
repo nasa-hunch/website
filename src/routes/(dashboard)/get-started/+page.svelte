@@ -1,3 +1,8 @@
+<script>
+    import ActiveHero from "$lib/ActiveHero";
+    $ActiveHero.disabled = true;
+</script>
+
 <div class="wrap">
 	<form class="content">
 		<span class="inputDiv">
