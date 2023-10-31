@@ -3,6 +3,7 @@ import { writable, type Writable } from 'svelte/store';
 type ActiveHero = {
     title: string,
     image: string,
+    disabled?: boolean;
 }
 
 const ActiveHero: Writable<ActiveHero> = writable({
