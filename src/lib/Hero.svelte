@@ -2,7 +2,7 @@
 	import ActiveHero from "$lib/ActiveHero";
 
 </script>
-
+{#if !$ActiveHero.disabled}
 <header>
 	<!-- TODO: give this life on the main page -->
 	<div class="wrapper" style="--img: url({$ActiveHero.image})">
@@ -54,3 +54,4 @@
 	}
 	
 </style>
+{/if}
