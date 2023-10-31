@@ -20,6 +20,7 @@
         font-size: 1.2rem;
         cursor: pointer;
     }
+    button:focus,
     button:hover,
     button:active {
         border: 1px solid #02bfe7;

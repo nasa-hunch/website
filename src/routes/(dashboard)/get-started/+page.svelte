@@ -66,34 +66,9 @@
 		justify-content: center;
 		border-radius: 10px;
 	}
-	input {
-		font-size: 1.2rem;
-		width: 100%;
-		padding: 10px;
-		box-sizing: border-box;
-		position: relative;
-		border-radius: 5px;
-		outline: 0px;
-		border: 1px solid gray;
-	}
 	.inputDiv {
 		margin: 7px;
 		width: 100%;
 		background: white;
-	}
-	input:hover {
-		border: 1px solid black;
-	}
-	input:focus {
-		border: 1px solid #dd361c;
-	}
-	button {
-		font-size: 1.2rem;
-		padding: 10px;
-		width: 100%;
-		position: relative;
-		border-radius: 5px;
-		outline: 0px;
-		border: 1px solid gray;
 	}
 </style>

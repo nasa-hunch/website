@@ -61,6 +61,7 @@
         border-radius: 3px;
         border: 1px solid gray;
         cursor: text;
+        background: var(--bgColor);
     }
     input {
         border: 0px;
@@ -70,10 +71,11 @@
         font-size: 1.2rem;
         width: 100%;
         font-family: 'Lexend Variable', sans-serif;
+        background: transparent;
     }
 
     .labelBase {
-        transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+        transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
     }
 
     .label1 {
@@ -89,6 +91,7 @@
         display: flex;
         align-items: center;
         justify-content: start;
+        background: transparent;
     }
     .labelMoved {
         font-size: 0.8rem;
