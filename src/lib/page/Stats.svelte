@@ -1,8 +1,8 @@
 <script context="module" lang="ts">
 	export type StatType = {
-		name: string,
-		value: number,
-		suffix?: string
+		name: string;
+		value: number;
+		suffix?: string;
 	};
 </script>
 
@@ -10,7 +10,7 @@
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
 	import { inview } from 'svelte-inview';
-	
+
 	export let stats: StatType[];
 
 	let scrollY = 0;
@@ -25,17 +25,15 @@
 
 <div class="stats">
 	<h3>Reach</h3>
-	
+
 	<ul class="statList" use:inview on:inview_enter={() => tweening.set(1)}>
-		{#each stats as stat} 
+		{#each stats as stat}
 			<li>
-				<p>{Math.floor(stat.value * $tweening)}{stat.suffix ?? ""}</p>
+				<p>{Math.floor(stat.value * $tweening)}{stat.suffix ?? ''}</p>
 				<h4>{stat.name}</h4>
-				
 			</li>
 		{/each}
 	</ul>
-	
 </div>
 
 <style>
