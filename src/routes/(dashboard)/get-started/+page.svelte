@@ -1,11 +1,4 @@
-<script>
-	import Navbar from "$lib/Navbar.svelte";
-
-</script>
-
-
 <div class="wrap">
-    <Navbar/>
     <form class="content">
         <span class="inputDiv">
             <input name="firstName" placeholder="First Name"/>
@@ -14,7 +7,7 @@
             <input name="lastName" placeholder="Last Name"/>
         </span>
         <span class="inputDiv">
-            <input name="email" placeholder="Email"/>
+            <input name="email" type="email" placeholder="Email"/>
         </span>
         <span class="inputDiv">
             <input class="passwordHolder" name="pass1" placeholder="Password" type="password"/>
@@ -25,11 +18,6 @@
         <span class="inputDiv">
             <button type="submit">Register</button>
         </span>
-        
-        
-        
-        
-       
     </form>
 </div>
 
