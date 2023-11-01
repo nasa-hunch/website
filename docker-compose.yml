@@ -15,12 +15,15 @@ services:
   web:
     image: node:latest
     container_name: nasa-hunch-web
+    environment:
+      - OUTER_PORT_FRONTEND=3000
+      - INNER_PORT_FRONTEND=5173
     ports:
-      - '3000:3000'
+      - '3000:5173'
     volumes:
       - ./:/app
       - /app/node_modules/
     working_dir: /app
-    command: bash -c "yarn && npx dotenv-cli -e .env.test -- yarn db:deploy && yarn dev --host --port 3000"
+    command: bash -c "yarn && npx dotenv-cli -e .env.test -- yarn db:deploy && yarn dev --host --port 5173"
     depends_on:
       - db
