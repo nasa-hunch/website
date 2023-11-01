@@ -87,17 +87,16 @@
 	];
 </script>
 
-<Hero {title} {image} /> 
+<Hero {title} {image} />
 
 <Section title="About NASA Hunch">
 	<p>
-		We empower and inspire students through project-based learning where
-		high school students learn modern skills, granting them the opportunity to launch their careers
-		through designing and fabricating real-world, valued products for NASA. We want to expand the
-		HUNCH program to more schools throughout the United States. However, this means that we need
-		more volunteer mentors for our schools. Individuals knowledgeable in any of the following
-		categories who have time to visit schools and mentor students are encouraged to apply by filling
-		out this application.
+		We empower and inspire students through project-based learning where high school students learn
+		modern skills, granting them the opportunity to launch their careers through designing and
+		fabricating real-world, valued products for NASA. We want to expand the HUNCH program to more
+		schools throughout the United States. However, this means that we need more volunteer mentors
+		for our schools. Individuals knowledgeable in any of the following categories who have time to
+		visit schools and mentor students are encouraged to apply by filling out this application.
 	</p>
 	<p>
 		There are many different ways to join the HUNCH Program; from volunteering your time as a mentor

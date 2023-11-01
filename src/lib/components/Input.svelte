@@ -44,7 +44,7 @@
 		{name}
 		on:focus={selectInput}
 		on:blur={deselectText}
-		bind:value={value}
+		bind:value
 		{...{ type /* asserting string input since we know the type is always a password */ }}
 	/>
 	<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>

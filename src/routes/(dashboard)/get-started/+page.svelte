@@ -1,12 +1,10 @@
 <script lang="ts">
-
 	import type { ActionData } from './$types';
 
 	import Input from '$lib/components/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Navbar from '$lib/Navbar.svelte';
 	export let form: ActionData;
-	
 </script>
 
 <div class="wrap">

@@ -41,7 +41,8 @@
 		background-position: center;
 	}
 
-	.text, .img {
+	.text,
+	.img {
 		z-index: 1;
 	}
 

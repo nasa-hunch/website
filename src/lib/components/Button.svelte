@@ -2,7 +2,7 @@
 	// why a custom button?
 	// keeps everything looking clean
 	export let value = 'Button!';
-	export let type: HTMLButtonElement["type"] = 'submit';
+	export let type: HTMLButtonElement['type'] = 'submit';
 </script>
 
 <button {type}>

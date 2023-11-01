@@ -1,3 +1,7 @@
 # nasa-hunch
 
-Redesigning the NASA hunch website according to NASA styling guidelines.
+Redesigning the NASA hunch website.
+
+## Setup
+
+We use NodeJS, Yarn, and Prisma. Make sure you have them installed.
