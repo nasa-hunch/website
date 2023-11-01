@@ -38,7 +38,7 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		background-image: url('/cool_space.jpg');
+		background-image: url('/cool_space2.jpg');
 		background-size: cover;
 		background-position: center;
 	}

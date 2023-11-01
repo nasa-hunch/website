@@ -42,7 +42,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: start;
-		background-image: url('/cool_space.jpg');
+		background-image: url('/cool_space2.jpg');
 	}
 	.contentWrap {
 		width: 100%;
