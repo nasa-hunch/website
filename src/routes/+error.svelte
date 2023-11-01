@@ -3,12 +3,13 @@
 	import { page } from '$app/stores';
 </script>
 
+<Navbar />
+
 <div class="wrap">
 	<div class="content">
 		<h1 class="title">"Houston, we've had a problem here"</h1>
 		<h2><span class="errorCode">{$page.status}</span> {$page.error?.message}</h2>
 	</div>
-	<Navbar />
 </div>
 
 <style>
@@ -33,7 +34,7 @@
 	}
 
 	.wrap {
-		height: 100vh;
+		height: calc(100vh - 100px);
 		width: 100%;
 		display: flex;
 		flex-direction: column;
