@@ -12,25 +12,16 @@
 <div class="wrap">
 	<Navbar />
 	<div class="contentWrap">
-		<form class="content" method="post" action="?/register">
-			<h1>Register</h1>
+		<form class="content" method="post" action="?/login">
+			<h1>Login</h1>
 			<span class="inputDiv">
-				<Input name="firstName" label="First Name" />
+				<Input name="email" label="Email" />
 			</span>
 			<span class="inputDiv">
-				<Input name="lastName" label="Last Name" />
+				<Input name="password" label="Password" type="password" />
 			</span>
 			<span class="inputDiv">
-				<Input name="email" label="Email" type="email" />
-			</span>
-			<span class="inputDiv">
-				<Input name="pass1" label="Password" type="password" />
-			</span>
-			<span class="inputDiv">
-				<Input name="pass2" label="Confirm Password" type="password" />
-			</span>
-			<span class="inputDiv">
-				<Button value="Register" type="submit" />
+				<Button value="Log In" type="submit" />
 			</span>
 			{#if form?.success == false}
 				<p class="error">Error: {form?.message}</p>

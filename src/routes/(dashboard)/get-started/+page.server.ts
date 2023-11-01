@@ -1,4 +1,5 @@
  import { prisma } from '$lib/prismaConnection'
+ import { redirect } from '@sveltejs/kit';
  import crypto from "crypto";
 
 export let actions = {
@@ -94,6 +95,9 @@ export let actions = {
         })
 
         console.log("User Created")
+
+        throw redirect(307, "/dashboard");
+
         return {
             success: true,
             message: "user created!"
