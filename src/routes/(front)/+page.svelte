@@ -4,9 +4,11 @@
 	import Section from '$lib/page/Section.svelte';
 	import Stats from '$lib/page/Stats.svelte';
 	import type { StatType } from '$lib/page/Stats.svelte';
-	import { activeHero } from '$lib/ActiveHero';
+	import Hero from '$lib/Hero.svelte';
 
-	$activeHero.title = 'NASA Hunch';
+	const title = 'NASA&nbsp;Hunch';
+	const image = 'https://live.staticflickr.com/65535/53142754400_9dde8a8d78_k_d.jpg';
+
 	// define the stats
 	let stats: StatType[] = [
 		{
@@ -33,7 +35,7 @@
 	];
 
 	//define the image gallery
-	let gallary: GalleryImage[] = [
+	let gallery: GalleryImage[] = [
 		{
 			caption: 'Design and Prototyping',
 			src: 'https://nasahunch.com/images/design.jpg',
@@ -85,10 +87,12 @@
 	];
 </script>
 
+<Hero {title} {image} /> 
+
 <Section title="About NASA Hunch">
 	<p>
-		NASA HUNCH's mission is to empower and inspire students through project-based learning, where
-		high school students learn 21st-century skills and have the opportunity to launch their careers
+		We empower and inspire students through project-based learning where
+		high school students learn modern skills, granting them the opportunity to launch their careers
 		through designing and fabricating real-world, valued products for NASA. We want to expand the
 		HUNCH program to more schools throughout the United States. However, this means that we need
 		more volunteer mentors for our schools. Individuals knowledgeable in any of the following
@@ -104,13 +108,9 @@
 	</p>
 </Section>
 <Stats {stats} />
-<Gallery gallaryImages={gallary} title="Explore Program Categories" />
-<div class="tempSpacer" />
+<Gallery galleryImages={gallery} title="Explore Program Categories" />
 
 <style>
-	.tempSpacer {
-		height: 300vh;
-	}
 	p {
 		font-size: 1.2rem;
 	}

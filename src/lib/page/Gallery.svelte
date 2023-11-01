@@ -8,14 +8,14 @@
 </script>
 
 <script lang="ts">
-	export let gallaryImages: GalleryImage[];
+	export let galleryImages: GalleryImage[];
 	export let title = 'Gallery';
 </script>
 
 <div class="gallery">
 	<h3>{title}</h3>
 	<div class="items">
-		{#each gallaryImages as image}
+		{#each galleryImages as image}
 			<a class="gallaryImage" href={image.href} style="background-image: url({image.src})">
 				<div class="caption">
 					{image.caption}

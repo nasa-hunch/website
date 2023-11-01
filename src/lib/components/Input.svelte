@@ -1,12 +1,12 @@
 <script lang="ts">
-	//yes this uses javascript and is not good for js disabled browsers
-	//no I am not going to fix it because we need js for the backend anyways.
-	//it will still work but it will look bad
+	// yes this uses javascript and is not good for js disabled browsers
+	// no I am not going to fix it because we need js for the backend anyways.
+	// it will still work but it will look bad
 
 	export let name = 'Input';
 	export let label = 'Input';
 	export let bgColor = '#ffffff';
-	export let customType: 'password' | 'input' = 'input';
+	export let type: 'password' | 'email' | undefined = undefined;
 
 	let input: HTMLInputElement;
 	export let value: string = '';
@@ -21,7 +21,6 @@
 	};
 
 	let deselectText = () => {
-		console.log('deselected');
 		if (value.length == 0) {
 			moveText = false;
 		}
@@ -32,48 +31,26 @@
 	let active = false;
 </script>
 
-{#if customType == 'input'}
-	<button
-		type="button"
-		style="--bgColor: {bgColor}"
-		class="wrap"
-		class:active
-		on:click={startFocus}
-		tabindex="-1"
-	>
-		<input
-			bind:this={input}
-			{name}
-			on:focus={selectInput}
-			on:blur={deselectText}
-			bind:value={value}
-		/>
-		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
-			{label}
-		</div>
-	</button>
-{:else if customType == 'password'}
-	<button
-		type="button"
-		style="--bgColor: {bgColor}"
-		class="wrap"
-		class:active
-		on:click={startFocus}
-		tabindex="-1"
-	>
-		<input
-			bind:this={input}
-			{name}
-			on:focus={selectInput}
-			on:blur={deselectText}
-			bind:value={value}
-			type="password"
-		/>
-		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
-			{label}
-		</div>
-	</button>
-{/if}
+<button
+	type="button"
+	style="--bgColor: {bgColor}"
+	class="wrap"
+	class:active
+	on:click={startFocus}
+	tabindex="-1"
+>
+	<input
+		bind:this={input}
+		{name}
+		on:focus={selectInput}
+		on:blur={deselectText}
+		bind:value={value}
+		{...{ type /* asserting string input since we know the type is always a password */ }}
+	/>
+	<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
+		{label}
+	</div>
+</button>
 
 <style>
 	.wrap {
@@ -115,6 +92,7 @@
 		align-items: center;
 		justify-content: start;
 		background: transparent;
+		color: #333;
 	}
 	.labelMoved {
 		font-size: 0.8rem;
@@ -123,6 +101,7 @@
 		left: 10px;
 		background: var(--bgColor);
 		padding: 0px 5px;
+		color: black;
 	}
 	.active {
 		border: 1px solid #02bfe7;

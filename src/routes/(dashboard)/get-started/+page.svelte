@@ -16,13 +16,13 @@
 				<Input name="lastName" label="Last Name" />
 			</span>
 			<span class="inputDiv">
-				<Input name="email" label="Email" />
+				<Input name="email" label="Email" type="email" />
 			</span>
 			<span class="inputDiv">
-				<Input name="pass1" label="Password" customType="password" />
+				<Input name="pass1" label="Password" type="password" />
 			</span>
 			<span class="inputDiv">
-				<Input name="pass2" label="Confirm Password" customType="password" />
+				<Input name="pass2" label="Confirm Password" type="password" />
 			</span>
 			<span class="inputDiv">
 				<Button value="Register" type="submit" />

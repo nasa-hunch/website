@@ -5,8 +5,8 @@
 	export let buttonText = 'Learn More';
 </script>
 
-<div class="section">
-	<div class="sectionInner">
+<div class="sectionOuter">
+	<section>
 		<div class="title">
 			<h3>{title}</h3>
 		</div>
@@ -15,11 +15,18 @@
 		{#if showButton}
 			<a href={buttonLink} class="button">{buttonText}</a>
 		{/if}
-	</div>
+	</section>
 </div>
 
 <style>
-	.section {
+	.sectionOuter {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	section {
+		max-width: 900px;
 		margin-top: 5vh;
 		width: 100%;
 		display: flex;
@@ -29,8 +36,9 @@
 	}
 	.title {
 		display: flex;
+		text-align: left;
 	}
-	.section h3 {
+	section h3 {
 		font-size: 3rem;
 		font-family: 'Lexend Variable', sans-serif;
 		font-weight: 500;
@@ -38,7 +46,7 @@
 		padding: 0px;
 		position: relative;
 	}
-	.section h3::after {
+	h3::after {
 		content: '';
 		position: absolute;
 		bottom: 0px;
@@ -47,8 +55,5 @@
 		height: 0.25rem;
 		background: #dd361c;
 		border-radius: 1rem;
-	}
-	.sectionInner {
-		width: 95%;
 	}
 </style>

@@ -55,6 +55,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0px 3rem;
+		transition: opacity 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 	}
 
 	.navInner {
@@ -123,5 +124,9 @@
 	}
 	.specialButton a {
 		color: #f1f1f1;
+	}
+
+	.logoLink:hover {
+		opacity: 0.6;
 	}
 </style>
