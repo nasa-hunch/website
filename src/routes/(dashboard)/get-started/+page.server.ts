@@ -14,7 +14,7 @@ export let actions = {
 
         if(!firstName || !lastName || !email || !pass1 || !pass2) {
             return {
-                status: "error",
+                success: false,
                 message: "Please fill all required fields."
             }
         }
@@ -34,7 +34,7 @@ export let actions = {
 
         if(userEmailCheck) {
             return {
-                status: "erorr",
+                success: false,
                 message: "Email already in use!"
             }
         }
@@ -64,7 +64,7 @@ export let actions = {
 
         if(!newUser) {
             return {
-                status: "error",
+                success: false,
                 message: "Something went wrong :("
             }
         }
@@ -88,7 +88,7 @@ export let actions = {
 
         console.log("User Created")
         return {
-            status: "success",
+            success: true,
             message: "user created!"
         }
 

@@ -1,7 +1,12 @@
-<script>
+<script lang="ts">
+
+	import type { ActionData } from './$types';
+
 	import Input from '$lib/components/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Navbar from '$lib/Navbar.svelte';
+	export let form: ActionData;
+	
 </script>
 
 <div class="wrap">
@@ -27,6 +32,9 @@
 			<span class="inputDiv">
 				<Button value="Register" type="submit" />
 			</span>
+			{#if form?.success == false}
+				<p class="error">Error: {form?.message}</p>
+			{/if}
 		</form>
 	</div>
 </div>
@@ -68,5 +76,9 @@
 		margin: 7px;
 		width: 100%;
 		background: white;
+	}
+	.error {
+		margin: 0px;
+		color: red;
 	}
 </style>
