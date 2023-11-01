@@ -13,7 +13,7 @@
 				<Input name="firstName" label="First Name" />
 			</span>
 			<span class="inputDiv">
-				<Input name="lastName" label="last Name" />
+				<Input name="lastName" label="Last Name" />
 			</span>
 			<span class="inputDiv">
 				<Input name="email" label="Email" />
