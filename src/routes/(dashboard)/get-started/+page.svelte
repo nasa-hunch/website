@@ -1,36 +1,34 @@
 <script>
-	import Input from "$lib/components/Input.svelte";
-	import Button from "$lib/components/Button.svelte";
-	import Navbar from "$lib/Navbar.svelte";
+	import Input from '$lib/components/Input.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import Navbar from '$lib/Navbar.svelte';
 </script>
 
-
 <div class="wrap">
-	<Navbar/>
+	<Navbar />
 	<div class="contentWrap">
 		<form class="content">
 			<h1>Register</h1>
 			<span class="inputDiv">
-				<Input name="firstName" label="First Name"/>
+				<Input name="firstName" label="First Name" />
 			</span>
 			<span class="inputDiv">
-				<Input name="lastName" label="last Name"/>
+				<Input name="lastName" label="last Name" />
 			</span>
 			<span class="inputDiv">
-				<Input name="email" label="Email"/>
+				<Input name="email" label="Email" />
 			</span>
 			<span class="inputDiv">
-				<Input name="pass1" label="Password" customType="password"/>
+				<Input name="pass1" label="Password" customType="password" />
 			</span>
 			<span class="inputDiv">
-				<Input name="pass2" label="Confirm Password" customType="password"/>
+				<Input name="pass2" label="Confirm Password" customType="password" />
 			</span>
 			<span class="inputDiv">
-				<Button value="Register" type="submit"/>
+				<Button value="Register" type="submit" />
 			</span>
 		</form>
 	</div>
-	
 </div>
 
 <style>
@@ -45,7 +43,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: start;
-		background-image: url("cool_space.jpg");
+		background-image: url('cool_space.jpg');
 	}
 	.contentWrap {
 		width: 100%;
