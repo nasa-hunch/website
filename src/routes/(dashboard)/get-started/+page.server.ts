@@ -2,6 +2,31 @@
  import { redirect } from '@sveltejs/kit';
  import crypto from "crypto";
 
+export let load = async ({request, cookies}) => {
+    //if the user is logged in, we can skip all this stuff
+    let session = cookies.get("session");
+    if(!session) {
+        return;
+    }
+
+    console.log(session)
+
+    let sessionCheck = await prisma.session.findFirst({
+        where: {
+            sessionText: session
+        }
+    })
+
+    console.log(sessionCheck)
+
+    if(sessionCheck) {
+        throw redirect(307, "/dashboard");
+    } else {
+        return;
+    }
+}
+
+
 export let actions = {
     register: async ({request, cookies}) => {
         //get all for the form data
@@ -81,7 +106,7 @@ export let actions = {
 
         let session = crypto.randomBytes(64).toString("hex");
         //add session to db
-        let newSession = prisma.session.create({
+        let newSession = await prisma.session.create({
             data: {
                 sessionText: session,
                 userId: newUser.id

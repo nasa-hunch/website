@@ -47,7 +47,7 @@ export let actions = {
 		//generate a new session for the user 
 
 		let sessionToken = crypto.randomBytes(32).toString("hex");
-		prisma.session.create({
+		let newSession = await prisma.session.create({
 			data: {
 				sessionText: sessionToken,
 				userId: user.id,
@@ -62,10 +62,6 @@ export let actions = {
 
 		throw redirect(307, "/dashboard");
 
-		return {
-			success: true,
-			message: "Logged in!"
-		}
 
 		
 	}};
