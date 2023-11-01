@@ -40,21 +40,26 @@ export let actions = {
         }
 
         //now that that's done, we can create a salt and hash of the password
-        let salt = crypto.randomBytes(32).toString();
-        let hash = crypto.pbkdf2Sync(pass1, salt, 1000, 100, "sha512").toString();
+        let salt = crypto.randomBytes(32).toString("hex");
+        let hash = crypto.pbkdf2Sync(pass1, salt, 1000, 100, "sha512").toString("hex");
         
         //now we can make the user!
+        let newUserData = {
+            firstName,
+            lastName,
+            email: newEmail,
+            hash,
+            salt,
+            createdAt: new Date(Date.now()),
+            updatedAt: new Date(Date.now()),
+            role: null,
+            orgid: null,
+        }
+
+        console.log(newUserData)
 
         let newUser = await prisma.user.create({
-            data: {
-                firstName,
-                lastName,
-                email: newEmail,
-                hash,
-                salt,
-                createdAt: new Date(Date.now()),
-                updatedAt: new Date(Date.now()),
-            }
+            data: newUserData
         })
 
         if(!newUser) {
@@ -64,6 +69,24 @@ export let actions = {
             }
         }
 
+        //creata a new session! 
+
+        let session = crypto.randomBytes(64).toString("hex");
+        //add session to db
+        let newSession = prisma.session.create({
+            data: {
+                sessionText: session,
+                userId: newUser.id
+            }
+        })
+
+        cookies.set("session", session, {
+            secure: true,
+            sameSite: "strict",
+            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+        })
+
+        console.log("User Created")
         return {
             status: "success",
             message: "user created!"
