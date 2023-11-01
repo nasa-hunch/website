@@ -3,34 +3,32 @@
 	let projectsDropDown = (event: MouseEvent) => {
 		event.preventDefault();
 		projectsDropped = !projectsDropped;
-	}
+	};
 </script>
 
 <nav class="nav">
 	<div class="top">
 		<a href="/dashboard" class="logoButton">
-			<img src="/favicon.png" alt="Nasa Hunch Logo">
+			<img src="/favicon.png" alt="Nasa Hunch Logo" />
 		</a>
 		<a href="/dashboard" class="button">Dashboard</a>
 		<a href="##" class="button" on:click={projectsDropDown}>Projects</a>
 		{#if projectsDropped}
-			<div class="linksDropDown">
-				
-			</div>
+			<div class="linksDropDown" />
 		{/if}
 	</div>
 	<div class="bottom">
 		<a href="#/dashboard/notifications" class="button bottomButton">
-			<img width="30px" class="bottomIcon" src="/notifications.svg" alt="logout">
+			<img width="30px" class="bottomIcon" src="/notifications.svg" alt="logout" />
 		</a>
 		<a href="#/dashboard/settings" class="button bottomButton">
-			<img width="30px" class="bottomIcon" src="/settings.svg" alt="logout">
+			<img width="30px" class="bottomIcon" src="/settings.svg" alt="logout" />
 		</a>
-		<a href="#/dashboard/signout" class="button bottomButton" >
-			<img width="30px" class="bottomIcon" src="/logout.svg" alt="logout">
+		<a href="#/dashboard/signout" class="button bottomButton">
+			<img width="30px" class="bottomIcon" src="/logout.svg" alt="logout" />
 		</a>
 	</div>
-</nav>	
+</nav>
 
 <style>
 	.nav {
@@ -69,7 +67,7 @@
 		border: 0px;
 		outline: 0px;
 		box-sizing: border-box;
-		padding: 5px 10px; 
+		padding: 5px 10px;
 		color: #ffffff;
 		font-size: 1.2rem;
 		text-decoration: none;

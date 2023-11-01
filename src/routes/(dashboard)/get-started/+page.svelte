@@ -1,16 +1,27 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
+	import { enhance } from '$app/forms';
 
 	import Input from '$lib/components/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Navbar from '$lib/Navbar.svelte';
+
 	export let form: ActionData;
 </script>
 
 <div class="wrap">
 	<Navbar />
 	<div class="contentWrap">
-		<form class="content" method="post" action="?/register">
+		<form
+			class="content"
+			method="post"
+			action="?/register"
+			use:enhance={() => {
+				return async ({ update }) => {
+					update({ reset: false });
+				};
+			}}
+		>
 			<h1>Register</h1>
 			<span class="inputDiv">
 				<Input name="firstName" label="First Name" />

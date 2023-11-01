@@ -1,13 +1,11 @@
 <script>
-	import Sidebar from "$lib/Sidebar.svelte";
-
+	import Sidebar from '$lib/Sidebar.svelte';
 </script>
 
 <div class="wrap">
-	<Sidebar/>
-	<slot/>
+	<Sidebar />
+	<slot />
 </div>
-
 
 <style>
 	.wrap {

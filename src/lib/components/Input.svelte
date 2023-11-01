@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte';
 
 	// yes this uses javascript and is not good for js disabled browsers
 	// no I am not going to fix it because we need js for the backend anyways.
@@ -15,13 +15,13 @@
 
 	let startFocus = () => input.focus();
 
-	let selectInput = () => active = true;
-	let deselectText = () => active = false;
+	let selectInput = () => (active = true);
+	let deselectText = () => (active = false);
 
 	$: moveText = value.length > 0 || active;
 
-	onMount(() => value = value)
-	let active = false
+	onMount(() => (value = value));
+	let active = false;
 </script>
 
 <button
