@@ -9,7 +9,7 @@
 	export let customType: 'password' | 'input' = 'input';
 
 	let input: HTMLInputElement;
-	let inputvalue: string = '';
+	export let value: string = '';
 
 	let startFocus = () => {
 		input.focus();
@@ -22,7 +22,7 @@
 
 	let deselectText = () => {
 		console.log('deselected');
-		if (inputvalue.length == 0) {
+		if (value.length == 0) {
 			moveText = false;
 		}
 		active = false;
@@ -46,7 +46,7 @@
 			{name}
 			on:focus={selectInput}
 			on:blur={deselectText}
-			bind:value={inputvalue}
+			bind:value={value}
 		/>
 		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
 			{label}
@@ -66,7 +66,7 @@
 			{name}
 			on:focus={selectInput}
 			on:blur={deselectText}
-			bind:value={inputvalue}
+			bind:value={value}
 			type="password"
 		/>
 		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
