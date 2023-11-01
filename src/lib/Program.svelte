@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let program: string;
-	import ActiveHero from '$lib/ActiveHero';
-	$ActiveHero.title = program;
+	import { activeHero } from '$lib/ActiveHero';
+	$activeHero.title = program;
 </script>
 
 <div class="reach" />

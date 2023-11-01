@@ -1,11 +1,11 @@
 <script lang="ts">
-	import ActiveHero from '$lib/ActiveHero';
+	import { activeHero } from '$lib/ActiveHero';
 </script>
-{#if !$ActiveHero.disabled}
+{#if !$activeHero.disabled}
 <header>
 	<!-- TODO: give this life on the main page -->
-	<div class="wrapper" style="--img: url({$ActiveHero.image})">
-		<h1>{$ActiveHero.title}</h1>
+	<div class="wrapper" style="--img: url({$activeHero.image})">
+		<h1>{$activeHero.title}</h1>
 	</div>
 </header>
 

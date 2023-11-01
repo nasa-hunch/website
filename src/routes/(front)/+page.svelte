@@ -4,9 +4,10 @@
 	import Section from '$lib/page/Section.svelte';
 	import Stats from '$lib/page/Stats.svelte';
 	import type { StatType } from '$lib/page/Stats.svelte';
-	import ActiveHero from '$lib/ActiveHero';
-	$ActiveHero.title = 'NASA Hunch';
-	//define the stats
+	import { activeHero } from '$lib/ActiveHero';
+
+	$activeHero.title = 'NASA Hunch';
+	// define the stats
 	let stats: StatType[] = [
 		{
 			name: 'Programs',
