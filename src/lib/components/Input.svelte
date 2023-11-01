@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+
 	// yes this uses javascript and is not good for js disabled browsers
 	// no I am not going to fix it because we need js for the backend anyways.
 	// it will still work but it will look bad
@@ -11,24 +13,15 @@
 	let input: HTMLInputElement;
 	export let value: string = '';
 
-	let startFocus = () => {
-		input.focus();
-	};
+	let startFocus = () => input.focus();
 
-	let selectInput = () => {
-		moveText = true;
-		active = true;
-	};
+	let selectInput = () => active = true;
+	let deselectText = () => active = false;
 
-	let deselectText = () => {
-		if (value.length == 0) {
-			moveText = false;
-		}
-		active = false;
-	};
+	$: moveText = value.length > 0 || active;
 
-	let moveText = false;
-	let active = false;
+	onMount(() => value = value)
+	let active = false
 </script>
 
 <button
