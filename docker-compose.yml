@@ -1,0 +1,26 @@
+# Set the version of docker compose to use
+version: '3.9'
+
+# The containers that compose the project
+services:
+  db:
+    image: postgres:13
+    restart: always
+    container_name: nasa-hunch-postgres
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: prisma
+      POSTGRES_DB: tests
+
+  web:
+    image: node:latest
+    container_name: nasa-hunch-web
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+      - /app/node_modules/
+    working_dir: /app
+    command: bash -c "yarn && npx dotenv-cli -e .env.test -- yarn db:deploy && yarn dev --host --port 3000"
+    depends_on:
+      - db
