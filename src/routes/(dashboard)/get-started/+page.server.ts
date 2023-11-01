@@ -19,6 +19,13 @@ export let actions = {
             }
         }
 
+        if(pass1 !== pass2) {
+            return {
+                success: false,
+                message: "Passwords do not match!"
+            }
+        }
+
         //now we need to verify that this email is in fact one of a kind which is pretty much impossible
         //we are just going to cast out certain groups here, so we will only check for lowercase and if the email already exsists
 
