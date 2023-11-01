@@ -49,13 +49,11 @@ export let actions = {
             data: {
                 firstName,
                 lastName,
-                email,
+                email: newEmail,
                 hash,
                 salt,
                 createdAt: new Date(Date.now()),
                 updatedAt: new Date(Date.now()),
-                role: 0,
-                orgid: 0
             }
         })
 
