@@ -2,7 +2,7 @@ import { prisma } from '$lib/prismaConnection.js';
 import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 
-export let actions = {
+export const actions = {
 	login: async ({ request, cookies }) => {
 		//get all for the form data
 		let formData = await request.formData();
@@ -60,6 +60,6 @@ export let actions = {
 			expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
 		});
 
-		throw redirect(307, '/dashboard');
+		throw redirect(303, '/dashboard');
 	}
 };

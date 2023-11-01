@@ -121,7 +121,7 @@ export const actions = {
 
 		console.log('User Created');
 
-		throw redirect(307, '/dashboard');
+		throw redirect(303, '/dashboard');
 
 		return {
 			success: true,
