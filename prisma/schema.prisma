@@ -28,11 +28,12 @@ model User {
   email String @db.VarChar(255)
   hash String @db.VarChar(1000)
   salt String @db.VarChar(255)
-  role Int
-  organization Organization @relation(fields: [orgid], references: [id])
-  orgid Int
+  role Int?
+  organization Organization? @relation(fields: [orgid], references: [id])
+  orgid Int?
   ProjectUser ProjectUser[]
 }
+
 
 model ProjectUser {
   id Int @id @default(autoincrement())

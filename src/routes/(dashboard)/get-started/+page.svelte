@@ -7,7 +7,7 @@
 <div class="wrap">
 	<Navbar />
 	<div class="contentWrap">
-		<form class="content">
+		<form class="content" method="post" action="?/register">
 			<h1>Register</h1>
 			<span class="inputDiv">
 				<Input name="firstName" label="First Name" />
