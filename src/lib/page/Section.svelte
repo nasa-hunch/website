@@ -2,7 +2,7 @@
 	export let title = 'Title';
 	export let showButton = false;
 	export let buttonLink = '';
-	export let buttonText = "Learn More";
+	export let buttonText = 'Learn More';
 </script>
 
 <div class="section">
@@ -10,14 +10,12 @@
 		<div class="title">
 			<h3>{title}</h3>
 		</div>
-		
-		<slot></slot>
+
+		<slot />
 		{#if showButton}
-			<a href="{buttonLink}" class="button">{buttonText}</a>
+			<a href={buttonLink} class="button">{buttonText}</a>
 		{/if}
 	</div>
-	
-	
 </div>
 
 <style>

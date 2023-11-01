@@ -1,0 +1,108 @@
+<script lang="ts">
+
+    //yes this uses javascript and is not good for js disabled browsers
+    //no I am not going to fix it because we need js for the backend anyways. 
+    //it will still work but it will look bad
+    
+    export let name = "Input"
+    export let label = "Input"
+    export let bgColor = "#ffffff"
+    export let customType: "password" | "input" = "input"
+
+    
+
+
+    let input: HTMLInputElement;
+    let inputvalue: string = "";
+
+    let startFocus = () => {
+        input.focus()
+    }
+
+    let selectInput = () => {
+        moveText = true;
+        active = true;
+    }
+
+    let deselectText = () => {
+        console.log('deselected')
+        if(inputvalue.length == 0) {
+            moveText = false;
+        }
+        active = false;
+    }
+
+    let moveText = false;
+    let active = false;
+</script>
+
+{#if customType == "input"}
+<button type="button" style="--bgColor: {bgColor}" class="wrap" class:active on:click={startFocus} tabindex="-1" >
+    <input bind:this={input} name="{name}" on:focus={selectInput} on:blur={deselectText} bind:value={inputvalue} />
+    <div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
+        {label}
+    </div>
+</button>
+{:else if customType == "password"}
+<button type="button" style="--bgColor: {bgColor}" class="wrap" class:active on:click={startFocus} tabindex="-1" >
+    <input bind:this={input} name="{name}" on:focus={selectInput} on:blur={deselectText} bind:value={inputvalue} type="password"/>
+    <div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
+        {label}
+    </div>
+</button>
+{/if}
+
+<style>
+    .wrap {
+        all: unset;
+        position: relative;
+        width: 100%;
+        font-family: 'Lexend Variable', sans-serif;
+        border-radius: 3px;
+        border: 1px solid gray;
+        cursor: text;
+        background: var(--bgColor);
+    }
+    input {
+        border: 0px;
+        outline: 0px;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 1.2rem;
+        width: 100%;
+        font-family: 'Lexend Variable', sans-serif;
+        background: transparent;
+    }
+
+    .labelBase {
+        transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+    }
+
+    .label1 {
+        font-size: 1.12rem;
+        font-weight: 400;
+        box-sizing: border-box;
+        padding: 10px;
+        top: 0px;
+        left: 0px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        background: transparent;
+    }
+    .labelMoved {
+        font-size: 0.8rem;
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        background: var(--bgColor);
+        padding: 0px 5px;
+    }
+    .active {
+        border: 1px solid #02bfe7;
+    }
+</style>
+

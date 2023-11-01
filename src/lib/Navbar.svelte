@@ -10,30 +10,29 @@
 			name,
 			href: `/${href}`,
 			special
-		}
-	}
+		};
+	};
 
 	const links = [
-		link("About", "about"),
-		link("Programs", "programs"),
-		link("Partners", "partners"),
-		link("Connect", "connect"),
-		link("Get Started", "get-started", true)
-	]
+		link('About', 'about'),
+		link('Programs', 'programs'),
+		link('Partners', 'partners'),
+		link('Connect', 'connect'),
+		link('Get Started', 'get-started', true)
+	];
 </script>
 
 <nav>
-	<a href={"/"} class="logoLink">
-		<img alt="NASA Hunch Logo" src="/favicon.png"/>
+	<a href={'/'} class="logoLink">
+		<img alt="NASA Hunch Logo" src="/favicon.png" />
 	</a>
 	<ul class="navInner">
 		{#each links as link}
-			<li class="navbutton {link.special ? "specialButton" : "navRegularLink"}">
+			<li class="navbutton {link.special ? 'specialButton' : 'navRegularLink'}">
 				<a href={link.href}>{link.name}</a>
 			</li>
 		{/each}
 	</ul>
-	
 </nav>
 
 <style>
@@ -48,8 +47,7 @@
 		align-items: center;
 		justify-content: center;
 	}
-	
-	
+
 	.logoLink {
 		height: 100%;
 		width: 5rem;
@@ -59,8 +57,6 @@
 		padding: 0px 3rem;
 	}
 
-	
-	
 	.navInner {
 		list-style-type: none;
 		width: 100%;
@@ -96,7 +92,7 @@
 		position: relative;
 	}
 	.navRegularLink a::after {
-		content: "";
+		content: '';
 		position: absolute;
 		bottom: 0px;
 		left: 0px;
@@ -104,7 +100,7 @@
 		height: 4px;
 		background: #dd361c;
 		transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-		transform: scale(0.0, 1);
+		transform: scale(0, 1);
 	}
 
 	.navRegularLink a:hover {
@@ -116,7 +112,6 @@
 		transform: scale(1, 1);
 	}
 
-	
 	.specialButton {
 		background-size: 300%;
 		background-position: 100%;
@@ -129,6 +124,4 @@
 	.specialButton a {
 		color: #f1f1f1;
 	}
-
-	
 </style>

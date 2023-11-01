@@ -4,14 +4,13 @@
 		src: string;
 		href: string;
 		alt: string;
-	};
+	}
 </script>
 
 <script lang="ts">
 	export let gallaryImages: GalleryImage[];
-	export let title = "Gallery"
+	export let title = 'Gallery';
 </script>
-
 
 <div class="gallery">
 	<h3>{title}</h3>
@@ -35,14 +34,14 @@
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	.items {
 		width: 95%;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 	}
-	
+
 	.gallaryImage {
 		position: relative;
 		min-width: 250px;
@@ -76,9 +75,9 @@
 	}
 
 	.gallaryImage:hover::after {
-		background: rgba(221,54,28, 0.5)
+		background: rgba(221, 54, 28, 0.5);
 	}
-	
+
 	.caption {
 		background: rgba(0, 0, 0, 0.75);
 		color: white;
@@ -87,7 +86,6 @@
 		font-size: 1.5rem;
 		z-index: 4;
 		backdrop-filter: blur(5px);
-		
 	}
 	h3 {
 		font-size: 3rem;
@@ -98,4 +96,3 @@
 		position: relative;
 	}
 </style>
-
