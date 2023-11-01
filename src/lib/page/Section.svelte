@@ -10,8 +10,8 @@
 		<div class="title">
 			<h3>{title}</h3>
 		</div>
-
 		<slot />
+
 		{#if showButton}
 			<a href={buttonLink} class="button">{buttonText}</a>
 		{/if}
@@ -20,9 +20,10 @@
 
 <style>
 	.sectionOuter {
-		width: 100%;
+		width: calc(100% - 10rem);
 		display: flex;
 		justify-content: center;
+		margin: 0 5rem;
 	}
 
 	section {
@@ -33,12 +34,16 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-	}
-	.title {
-		display: flex;
 		text-align: left;
 	}
+
+	.title {
+		display: flex;
+		width: 100%;
+	}
+
 	section h3 {
+		text-align: left;
 		font-size: 3rem;
 		font-family: 'Lexend Variable', sans-serif;
 		font-weight: 500;

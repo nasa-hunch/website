@@ -41,7 +41,8 @@
 		z-index: 10000;
 		width: 100%;
 		top: 0;
-		height: 100px;
+		min-height: 100px;
+		max-height: 100px;
 		background: #f1f1f1;
 		display: flex;
 		align-items: center;
@@ -61,7 +62,7 @@
 	.navInner {
 		list-style-type: none;
 		width: 100%;
-		height: 100%;
+		height: 100px;
 		display: flex;
 		padding: 0px;
 		margin: 0px;
