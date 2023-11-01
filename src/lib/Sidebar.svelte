@@ -1,19 +1,32 @@
+<script lang="ts">
+	let projectsDropped = false;
+	let projectsDropDown = (event: MouseEvent) => {
+		event.preventDefault();
+		projectsDropped = !projectsDropped;
+	}
+</script>
+
 <nav class="nav">
 	<div class="top">
 		<a href="/dashboard" class="logoButton">
 			<img src="/favicon.png" alt="Nasa Hunch Logo">
 		</a>
-		<a href="/dashboard/profile" class="button">Dashboard</a>
-		<a href="/dashboard/profile" class="button">Projects</a>
+		<a href="/dashboard" class="button">Dashboard</a>
+		<a href="##" class="button" on:click={projectsDropDown}>Projects</a>
+		{#if projectsDropped}
+			<div class="linksDropDown">
+				
+			</div>
+		{/if}
 	</div>
 	<div class="bottom">
-		<a href="/dashboard/notifications" class="button bottomButton">
+		<a href="#/dashboard/notifications" class="button bottomButton">
 			<img width="30px" class="bottomIcon" src="/notifications.svg" alt="logout">
 		</a>
-		<a href="/dashboard/settings" class="button bottomButton">
+		<a href="#/dashboard/settings" class="button bottomButton">
 			<img width="30px" class="bottomIcon" src="/settings.svg" alt="logout">
 		</a>
-		<a href="/dashboard/signout" class="button bottomButton" >
+		<a href="#/dashboard/signout" class="button bottomButton" >
 			<img width="30px" class="bottomIcon" src="/logout.svg" alt="logout">
 		</a>
 	</div>
@@ -56,7 +69,7 @@
 		border: 0px;
 		outline: 0px;
 		box-sizing: border-box;
-		padding: 5px;
+		padding: 5px 10px; 
 		color: #ffffff;
 		font-size: 1.2rem;
 		text-decoration: none;
