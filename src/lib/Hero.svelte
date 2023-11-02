@@ -17,7 +17,6 @@
 	header {
 		margin: 0px;
 		padding: 0px;
-		text-align: center;
 		overflow: hidden;
 	}
 
@@ -69,8 +68,9 @@
 
 	h2 {
 		color: white;
-		font-size: 4rem;
+		font-size: 3rem;
 		margin: 0;
 		margin-bottom: 3rem;
+		margin-left: 8.4rem;
 	}
 </style>
