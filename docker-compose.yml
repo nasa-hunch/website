@@ -24,6 +24,6 @@ services:
       - ./:/app
       - /app/node_modules/
     working_dir: /app
-    command: bash -c "yarn && npx dotenv-cli -e .env.test -- yarn db:deploy && yarn dev --host --port 5173"
+    command: bash -c "yarn && npx dotenv-cli -e .env.test -- yarn db:deploy && npx dotenv-cli -e .env.test yarn dev --host --port 5173"
     depends_on:
       - db
