@@ -6,7 +6,10 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		csrf: {
+			checkOrigin: process.env.NODE_ENV != 'development'
+		}
 	}
 };
 
