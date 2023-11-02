@@ -7,7 +7,9 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-		csrf: process.env.NODE_ENV != 'development'
+		csrf: {
+			checkOrigin: process.env.NODE_ENV != 'development'
+		}
 	}
 };
 
