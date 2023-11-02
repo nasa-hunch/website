@@ -28,8 +28,8 @@
 
 	section {
 		max-width: 900px;
-		margin-top: 5vh;
 		width: 100%;
+		margin: 1.5rem 0;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -50,11 +50,12 @@
 		margin: 0px;
 		padding: 0px;
 		position: relative;
+		width: 100%;
 	}
 	h3::after {
 		content: '';
 		position: absolute;
-		bottom: 0px;
+		bottom: -5px;
 		left: 0px;
 		width: 100%;
 		height: 0.25rem;
