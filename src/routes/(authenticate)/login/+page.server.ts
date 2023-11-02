@@ -5,10 +5,10 @@ import crypto from 'crypto';
 export const actions = {
 	login: async ({ request, cookies }) => {
 		//get all for the form data
-		let formData = await request.formData();
+		const formData = await request.formData();
 
-		let email = formData.get('email')?.toString();
-		let password = formData.get('password')?.toString();
+		const email = formData.get('email')?.toString();
+		const password = formData.get('password')?.toString();
 
 		if (!email || !password) {
 			return {
@@ -18,9 +18,9 @@ export const actions = {
 		}
 
 		//pull the user from the database
-		let newEmail = email.toLowerCase();
+		const newEmail = email.toLowerCase();
 
-		let user = await prisma.user.findFirst({
+		const user = await prisma.user.findFirst({
 			where: {
 				email: newEmail
 			}
@@ -34,8 +34,8 @@ export const actions = {
 		}
 
 		//get the salt and rehash the password
-		let salt = user.salt;
-		let hash = crypto.pbkdf2Sync(password, salt, 1000, 100, 'sha512').toString('hex');
+		const salt = user.salt;
+		const hash = crypto.pbkdf2Sync(password, salt, 1000, 100, 'sha512').toString('hex');
 
 		if (hash != user.hash) {
 			return {
@@ -46,8 +46,8 @@ export const actions = {
 
 		//generate a new session for the user
 
-		let sessionToken = crypto.randomBytes(32).toString('hex');
-		let newSession = await prisma.session.create({
+		const sessionToken = crypto.randomBytes(32).toString('hex');
+		await prisma.session.create({
 			data: {
 				sessionText: sessionToken,
 				userId: user.id

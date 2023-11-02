@@ -3,22 +3,17 @@ import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 
 export const load = async ({ cookies }) => {
-	//if the user is logged in, we can skip all this stuff
+	// if the user is logged in, we can skip all this stuff
 	const session = cookies.get('session');
 	if (!session) {
 		return;
 	}
-
-	console.log(session);
 
 	const sessionCheck = await prisma.session.findFirst({
 		where: {
 			sessionText: session
 		}
 	});
-
-	console.log(sessionCheck);
-
 	if (sessionCheck) {
 		throw redirect(307, '/dashboard');
 	} else {
@@ -101,11 +96,11 @@ export const actions = {
 			};
 		}
 
-		//creata a new session!
+		// creata a new session!
 
 		const session = crypto.randomBytes(64).toString('hex');
-		//add session to db
-		const newSession = await prisma.session.create({
+		// add session to db
+		await prisma.session.create({
 			data: {
 				sessionText: session,
 				userId: newUser.id
@@ -119,13 +114,6 @@ export const actions = {
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 		});
 
-		console.log('User Created');
-
 		throw redirect(303, '/dashboard');
-
-		return {
-			success: true,
-			message: 'user created!'
-		};
 	}
 };

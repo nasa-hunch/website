@@ -1,4 +1,4 @@
-//https://github.com/prisma/prisma/issues/5030#issuecomment-1398076317
+// https://github.com/prisma/prisma/issues/5030#issuecomment-1398076317
 import type { PrismaClient as ImportedPrismaClient } from '@prisma/client';
 import { createRequire } from 'module';
 

@@ -19,14 +19,19 @@
 	</div>
 	<div class="bottom">
 		<a href="#/dashboard/notifications" class="button bottomButton">
-			<img width="30px" class="bottomIcon" src="/notifications.svg" alt="logout" />
+			<img width="30px" class="bottomIcon" src="/notifications.svg" alt="Notifications" />
 		</a>
 		<a href="#/dashboard/settings" class="button bottomButton">
-			<img width="30px" class="bottomIcon" src="/settings.svg" alt="logout" />
+			<img width="30px" class="bottomIcon" src="/settings.svg" alt="Settings" />
 		</a>
-		<a href="#/dashboard/signout" class="button bottomButton">
-			<img width="30px" class="bottomIcon" src="/logout.svg" alt="logout" />
-		</a>
+		<!-- <a href="#/dashboard/signout" class="button bottomButton">
+			<img width="30px" class="bottomIcon" src="/logout.svg" alt="Log out" />
+		</a> make this into a form that triggers /signout -->
+		<form action="/logout" method="POST">
+			<button class="button bottomButton" type="submit">
+				<img width="30px" class="bottomIcon" src="/logout.svg" alt="Log out" />
+			</button>
+		</form>
 	</div>
 </nav>
 
@@ -73,6 +78,7 @@
 		text-decoration: none;
 		width: calc(100% - 15px);
 		border-radius: 5px;
+		background-color: transparent;
 	}
 	.button:hover {
 		background: #212121;
