@@ -3,6 +3,7 @@
 	import type { PageData } from "./$types.js";
 
 	let projectsDropped = false;
+	let adminDropped = false;
 	let projectsDropDown = (event: MouseEvent) => {
 		event.preventDefault();
 		projectsDropped = !projectsDropped;
@@ -14,14 +15,26 @@
 
 <nav class="nav">
 	<div class="top">
-		<a href="/dashboard" class="logoButton">
-			<img src="/favicon.png" alt="Nasa Hunch Logo" />
-		</a>
-		<a href="/dashboard" class="button">Dashboard</a>
-		<a href="##" class="button" on:click={projectsDropDown}>Projects</a>
-		{#if projectsDropped}
-			<div class="linksDropDown" />
-		{/if}
+		<div class="indent">
+			<a href="/dashboard" class="logoButton">
+				<img src="/favicon.png" alt="Nasa Hunch Logo" />
+			</a>
+			<a href="/dashboard" class="button">Dashboard</a>
+			<a href="##" class="button" on:click={projectsDropDown}>Projects</a>
+			{#if projectsDropped}
+				<div class="indent" />
+			{/if}
+			{#if data.user.role == 0}
+				<a href="##" on:click={() => adminDropped = !adminDropped} class="button">Admin</a>
+			{/if}
+			{#if adminDropped}
+				<div class="indent dd">
+					<a href="/dashboard/admin/users" class="button">Users</a>
+				</div>
+			{/if}
+		</div>
+		
+		
 	</div>
 	<div class="bottom">
 		<a href="#/dashboard/notifications" class="button bottomButton">
@@ -51,11 +64,34 @@
 	.top {
 		background: #323a45;
 		height: 100%;
+		padding-right: 10px;
+		box-sizing: border-box;
 		width: 250px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: start;
+	}
+	.indent {
+		padding-left: 10px;
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: start;
+	}
+	.dd {
+		position: relative;
+	}
+	.dd::after {
+		content: "";
+		position: absolute;
+		height: 100%;
+		left: 10px;
+		top: 0px;
+		width: 1px;
+		background: rgb(161, 161, 161);
 	}
 	.bottom {
 		padding-bottom: 20px;
@@ -79,7 +115,7 @@
 		color: #ffffff;
 		font-size: 1.2rem;
 		text-decoration: none;
-		width: calc(100% - 15px);
+		width: 100%;
 		border-radius: 5px;
 		background-color: transparent;
 	}
