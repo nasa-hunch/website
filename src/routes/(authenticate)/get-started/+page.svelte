@@ -41,6 +41,7 @@
 			<span class="inputDiv">
 				<Button value="Register" type="submit" />
 			</span>
+			<p>Already have an account? <a href="/login">Login</a></p>
 			{#if form?.success == false}
 				<p class="error">Error: {form?.message}</p>
 			{/if}
@@ -89,5 +90,24 @@
 	.error {
 		margin: 0px;
 		color: red;
+	}
+	a {
+		color: #046b99;
+		position: relative;
+		text-decoration: none;
+	}
+	a::after {
+		content: "";
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		width: 100%;
+		height: 2px;
+		transform: scaleX(0);
+		background: #046b99;
+		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+	}
+	a:hover::after {
+		transform: scaleX(1);
 	}
 </style>
