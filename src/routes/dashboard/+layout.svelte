@@ -1,5 +1,5 @@
 <script>
-	import Sidebar from '$lib/Sidebar.svelte';
+	import Sidebar from './Sidebar.svelte';
 </script>
 
 <div class="wrap">
