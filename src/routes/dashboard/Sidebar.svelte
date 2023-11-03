@@ -10,7 +10,6 @@
 	};
 
 	let data = $page.data as PageData;
-	console.log(data)
 </script>
 
 <nav class="nav">
