@@ -2,6 +2,7 @@
 
 Redesigning the NASA hunch website.
 
-## Setup
+## Roles
 
-We use NodeJS, Yarn, and Prisma. Make sure you have them installed.
+- **Teacher** - Number: 1
+- **Student** - Number: 4

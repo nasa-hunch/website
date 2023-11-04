@@ -22,14 +22,14 @@ export const load = async ({ cookies }) => {
 		throw redirect(303, '/login');
 	}
 
-	let user = sessionCheck.user;
+	const user = sessionCheck.user;
 
 	return {
 		user
 	};
 };
 
-export let actions = {
+export const actions = {
 	setRoleStudent: async ({ cookies }) => {
 		const session = cookies.get('session');
 		if (!session) {
@@ -50,9 +50,9 @@ export let actions = {
 			throw redirect(303, '/login');
 		}
 
-		let user = sessionCheck.user;
+		const user = sessionCheck.user;
 
-		let newUser = await prisma.user.update({
+		await prisma.user.update({
 			where: {
 				id: user.id
 			},
@@ -82,9 +82,9 @@ export let actions = {
 			throw redirect(303, '/login');
 		}
 
-		let user = sessionCheck.user;
+		const user = sessionCheck.user;
 
-		let newUser = await prisma.user.update({
+		await prisma.user.update({
 			where: {
 				id: user.id
 			},

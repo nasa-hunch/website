@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import type { PageData } from './$types.js';
+	import type { PageData } from './$types';
 
 	let projectsDropped = false;
+
 	let adminDropped = false;
 	let projectsDropDown = (event: MouseEvent) => {
 		event.preventDefault();
 		projectsDropped = !projectsDropped;
 	};
 
-	let data = $page.data as PageData;
+	let data: PageData;
 </script>
 
 <nav class="nav">
