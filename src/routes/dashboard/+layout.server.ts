@@ -1,6 +1,6 @@
 import { prisma } from '$lib/prismaConnection';
+import { Role } from '@prisma/client';
 import { redirect } from '@sveltejs/kit';
-import { scale } from 'svelte/transition';
 
 export const load = async ({ cookies }) => {
 	// if the user isn't logged in, we need to redirect them to the login page
@@ -23,13 +23,13 @@ export const load = async ({ cookies }) => {
 		throw redirect(303, '/login');
 	}
 
-	let user = sessionCheck.user;
+	const user = sessionCheck.user;
 	if (user.role == null) {
 		//we need more info from the user
 		throw redirect(303, '/more-info');
 	}
 
-	if (user.orgid == null && user.role != 0) {
+	if (user.orgid == null && user.role != Role.HUNCH_ADMIN) {
 		throw redirect(303, '/more-info');
 	}
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Role } from '@prisma/client';
 	import type { PageData } from './$types';
 
 	let projectsDropped = false;
@@ -23,7 +24,7 @@
 			{#if projectsDropped}
 				<div class="indent" />
 			{/if}
-			{#if data.user.role == 0}
+			{#if data.user.role == Role.HUNCH_ADMIN}
 				<a href="##" on:click={() => (adminDropped = !adminDropped)} class="button">Admin</a>
 			{/if}
 			{#if adminDropped}

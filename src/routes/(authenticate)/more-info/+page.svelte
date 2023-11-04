@@ -2,6 +2,7 @@
 	import Navbar from '$lib/Navbar.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
+	import { Role } from '@prisma/client';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -27,7 +28,7 @@
 				</form>
 			</div>
 		{:else if data.user.orgid == null}
-			{#if data.user.role == 1}
+			{#if data.user.role == Role.UNVERIFIED_TEACHER}
 				<h1>Awaiting Verification</h1>
 				<p>
 					Please email a completed copy of the <a href="/connect#statement_of_work"

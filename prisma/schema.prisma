@@ -10,6 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  STUDENT
+  UNVERIFIED_TEACHER
+  TEACHER
+  SCHOOL_ADMIN
+  HUNCH_ADMIN
+}
+
 model Organization {
   id      Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -35,7 +43,7 @@ model User {
   email String @db.VarChar(255)
   hash String @db.VarChar(1000)
   salt String @db.VarChar(255)
-  role Int?
+  role Role?
   sessions Session[]
   organization Organization? @relation(fields: [orgid], references: [id])
   orgid Int?
@@ -67,7 +75,7 @@ model Project {
   files File[]
 }
 
-//project management items
+// project management items
 model File {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())

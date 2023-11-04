@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { prisma } from '$lib/prismaConnection.js';
+import { Role } from '@prisma/client';
 
 export const load = async ({ cookies }) => {
 	// if the user isn't logged in, we need to redirect them to the login page
@@ -57,7 +58,7 @@ export const actions = {
 				id: user.id
 			},
 			data: {
-				role: 4
+				role: Role.STUDENT
 			}
 		});
 		return;
@@ -89,7 +90,7 @@ export const actions = {
 				id: user.id
 			},
 			data: {
-				role: 1
+				role: Role.TEACHER
 			}
 		});
 		return;
