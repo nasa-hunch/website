@@ -13,7 +13,9 @@
 	<Navbar />
 	<div class="content">
 		{#if data.user.role == null}
-			<h2>Welcome to NASA Hunch! To verify your identity, we need to know a little more about you.</h2>
+			<h2>
+				Welcome to NASA Hunch! To verify your identity, we need to know a little more about you.
+			</h2>
 			<h3>I am a:</h3>
 			<div class="buttons">
 				<form method="post" use:enhance action="?/setRoleStudent">
