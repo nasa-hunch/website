@@ -19,23 +19,23 @@ export const load = async ({ cookies }) => {
 
 	// We have a valid session!
 	if (!sessionCheck || !sessionCheck.user) {
-		throw redirect(303, "/login")
+		throw redirect(303, '/login');
 	}
 
-	let user = sessionCheck.user
- 
+	let user = sessionCheck.user;
+
 	return {
 		user
-	}
+	};
 };
 
 export let actions = {
-	setRoleStudent: async ({cookies}) => {
+	setRoleStudent: async ({ cookies }) => {
 		const session = cookies.get('session');
 		if (!session) {
 			throw redirect(303, '/login');
 		}
-	
+
 		const sessionCheck = await prisma.session.findFirst({
 			where: {
 				sessionText: session
@@ -45,15 +45,13 @@ export let actions = {
 			}
 		});
 
-		
-	
 		// We have a valid session!
 		if (!sessionCheck || !sessionCheck.user) {
-			throw redirect(303, "/login")
+			throw redirect(303, '/login');
 		}
 
-		let user = sessionCheck.user
-	
+		let user = sessionCheck.user;
+
 		let newUser = await prisma.user.update({
 			where: {
 				id: user.id
@@ -61,15 +59,15 @@ export let actions = {
 			data: {
 				role: 4
 			}
-		})
-		return
+		});
+		return;
 	},
-	setRoleTeacher: async ({cookies}) => {
+	setRoleTeacher: async ({ cookies }) => {
 		const session = cookies.get('session');
 		if (!session) {
 			throw redirect(303, '/login');
 		}
-	
+
 		const sessionCheck = await prisma.session.findFirst({
 			where: {
 				sessionText: session
@@ -79,15 +77,13 @@ export let actions = {
 			}
 		});
 
-		
-	
 		// We have a valid session!
 		if (!sessionCheck || !sessionCheck.user) {
-			throw redirect(303, "/login")
+			throw redirect(303, '/login');
 		}
 
-		let user = sessionCheck.user
-	
+		let user = sessionCheck.user;
+
 		let newUser = await prisma.user.update({
 			where: {
 				id: user.id
@@ -95,7 +91,7 @@ export let actions = {
 			data: {
 				role: 1
 			}
-		})
-		return
-	},
-}
+		});
+		return;
+	}
+};

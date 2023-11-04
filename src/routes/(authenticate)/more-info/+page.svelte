@@ -1,50 +1,50 @@
 <script lang="ts">
-	import Navbar from "$lib/Navbar.svelte";
-	import Button from "$lib/components/Button.svelte";
-	import Input from "$lib/components/Input.svelte";
-	import type { PageData } from "./$types";
+	import Navbar from '$lib/Navbar.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import Input from '$lib/components/Input.svelte';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
-
 </script>
 
 <div class="wrap">
-	<Navbar/>
+	<Navbar />
 	<div class="content">
-		
 		{#if data.user.role == null}
-		<h3>I am currently a:</h3>
+			<h3>I am currently a:</h3>
 			<div class="buttons">
 				<form method="post" action="?/setRoleStudent">
 					<button class="bigButton">
-						<img src="student_cap.svg" alt="student"/>
+						<img src="student_cap.svg" alt="student" />
 						<p>Student</p>
 					</button>
 				</form>
 				<form method="post" action="?/setRoleTeacher">
 					<button class="bigButton">
-						<img src="admin_shield.svg" alt="teacher"/>
+						<img src="admin_shield.svg" alt="teacher" />
 						<p>Teacher/Admin</p>
 					</button>
 				</form>
 			</div>
-				
 		{:else if data.user.orgid == null}
 			{#if data.user.role == 1}
 				<h1>Awaiting Verification</h1>
-				<p>Please email a completed copy of the <a href="/connect#statement_of_work">Statement of Work</a> to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a></p>
+				<p>
+					Please email a completed copy of the <a href="/connect#statement_of_work"
+						>Statement of Work</a
+					>
+					to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a>
+				</p>
 			{:else}
-			<form method="post" action="?/submitJoinCode" class="joinCode">
-				<h1>Join a Project</h1>
-				<div class="formItem">
-					<Input label="Project Join Code" bgColor="#f1f1f1"/>
-				</div>
-				<div class="formItem">
-					<Button value="Submit"/>
-				</div>
-				
-			</form>
-				
+				<form method="post" action="?/submitJoinCode" class="joinCode">
+					<h1>Join a Project</h1>
+					<div class="formItem">
+						<Input label="Project Join Code" bgColor="#f1f1f1" />
+					</div>
+					<div class="formItem">
+						<Button value="Submit" />
+					</div>
+				</form>
 			{/if}
 		{/if}
 	</div>
@@ -66,7 +66,6 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		
 	}
 	.bigButton {
 		background: #f1f1f1;
@@ -121,5 +120,3 @@
 		margin: 7px 0px;
 	}
 </style>
-
-

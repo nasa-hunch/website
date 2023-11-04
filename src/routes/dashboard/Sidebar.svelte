@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from "$app/stores";
-	import type { PageData } from "./$types.js";
+	import { page } from '$app/stores';
+	import type { PageData } from './$types.js';
 
 	let projectsDropped = false;
 	let adminDropped = false;
@@ -24,7 +24,7 @@
 				<div class="indent" />
 			{/if}
 			{#if data.user.role == 0}
-				<a href="##" on:click={() => adminDropped = !adminDropped} class="button">Admin</a>
+				<a href="##" on:click={() => (adminDropped = !adminDropped)} class="button">Admin</a>
 			{/if}
 			{#if adminDropped}
 				<div class="indent dd">
@@ -32,8 +32,6 @@
 				</div>
 			{/if}
 		</div>
-		
-		
 	</div>
 	<div class="bottom">
 		<a href="#/dashboard/notifications" class="button bottomButton">
@@ -84,7 +82,7 @@
 		position: relative;
 	}
 	.dd::after {
-		content: "";
+		content: '';
 		position: absolute;
 		height: 100%;
 		left: 10px;

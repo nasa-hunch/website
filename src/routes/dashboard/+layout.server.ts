@@ -20,19 +20,19 @@ export const load = async ({ cookies }) => {
 
 	// We have a valid session!
 	if (!sessionCheck || !sessionCheck.user) {
-		throw redirect(303, "/login")
+		throw redirect(303, '/login');
 	}
 
-	let user = sessionCheck.user
-	if(user.role == null) {
+	let user = sessionCheck.user;
+	if (user.role == null) {
 		//we need more info from the user
-		throw redirect(303, "/more-info")
+		throw redirect(303, '/more-info');
 	}
 
-	if(user.orgid == null && user.role != 0) {
-		throw redirect(303, "/more-info")
+	if (user.orgid == null && user.role != 0) {
+		throw redirect(303, '/more-info');
 	}
- 
+
 	return {
 		user: {
 			id: user.id,
@@ -42,8 +42,7 @@ export const load = async ({ cookies }) => {
 			lastName: user.lastName,
 			email: user.email,
 			role: user.role,
-			orgid: user.orgid,
+			orgid: user.orgid
 		}
-    	
-	}
+	};
 };

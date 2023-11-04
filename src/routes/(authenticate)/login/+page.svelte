@@ -77,7 +77,7 @@
 		text-decoration: none;
 	}
 	a::after {
-		content: "";
+		content: '';
 		position: absolute;
 		bottom: 0px;
 		left: 0px;
