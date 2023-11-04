@@ -90,7 +90,7 @@ export const actions = {
 				id: user.id
 			},
 			data: {
-				role: Role.TEACHER
+				role: Role.UNVERIFIED_TEACHER
 			}
 		});
 		return;

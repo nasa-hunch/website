@@ -4,6 +4,7 @@
 	import Input from '$lib/components/Input.svelte';
 	import { Role } from '@prisma/client';
 	import type { PageData } from './$types';
+	import { enhance } from '$app/forms';
 
 	export let data: PageData;
 </script>
@@ -14,13 +15,13 @@
 		{#if data.user.role == null}
 			<h3>I am currently a:</h3>
 			<div class="buttons">
-				<form method="post" action="?/setRoleStudent">
+				<form method="post" use:enhance action="?/setRoleStudent">
 					<button class="bigButton">
 						<img src="student_cap.svg" alt="student" />
 						<p>Student</p>
 					</button>
 				</form>
-				<form method="post" action="?/setRoleTeacher">
+				<form method="post" use:enhance action="?/setRoleTeacher">
 					<button class="bigButton">
 						<img src="admin_shield.svg" alt="teacher" />
 						<p>Teacher/Admin</p>
@@ -36,8 +37,8 @@
 					>
 					to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a>
 				</p>
-			{:else}
-				<form method="post" action="?/submitJoinCode" class="joinCode">
+			{:else if data.user.role == Role.STUDENT}
+				<form method="post" use:enhance action="?/submitJoinCode" class="joinCode">
 					<h1>Join a Project</h1>
 					<div class="formItem">
 						<Input label="Project Join Code" bgColor="#f1f1f1" />
@@ -46,6 +47,9 @@
 						<Button value="Submit" />
 					</div>
 				</form>
+			{:else}
+				<p>Unexpected Role: {data.user.role}</p>
+				<p>Contact an administrator</p>
 			{/if}
 		{/if}
 	</div>
