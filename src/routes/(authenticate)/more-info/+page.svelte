@@ -37,6 +37,9 @@
 					>
 					to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a>
 				</p>
+				<form method="post" use:enhance action="?/rescindRole">
+					<p>Not a teacher? <button class="button">Rescind Your Role</button></p>
+				</form>
 			{:else if data.user.role == Role.STUDENT}
 				<form method="post" use:enhance action="?/submitJoinCode" class="joinCode">
 					<h1>Join a Project</h1>
@@ -47,8 +50,12 @@
 						<Button value="Submit" />
 					</div>
 				</form>
+				<form method="post" use:enhance action="?/rescindRole">
+					<p>Not a student? <button class="button">Rescind Your Role</button></p>
+				</form>
 			{:else}
 				<p>Unexpected Role: {data.user.role}</p>
+				<p>It seems as if you're missing an organization.</p>
 				<p>Contact an administrator</p>
 			{/if}
 		{/if}

@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { prisma } from '$lib/prismaConnection.js';
 import { Role } from '@prisma/client';
 
@@ -61,7 +61,6 @@ export const actions = {
 				role: Role.STUDENT
 			}
 		});
-		return;
 	},
 	setRoleTeacher: async ({ cookies }) => {
 		const session = cookies.get('session');
@@ -93,6 +92,40 @@ export const actions = {
 				role: Role.UNVERIFIED_TEACHER
 			}
 		});
-		return;
+	},
+	rescindRole: async ({ cookies }) => {
+		const session = cookies.get('session');
+		if (!session) {
+			throw redirect(303, '/login');
+		}
+
+		const sessionCheck = await prisma.session.findFirst({
+			where: {
+				sessionText: session
+			},
+			include: {
+				user: true
+			}
+		});
+
+		// We have a valid session!
+		if (!sessionCheck || !sessionCheck.user) {
+			throw redirect(303, '/login');
+		}
+
+		const user = sessionCheck.user;
+
+		if (user.orgid == null) {
+			await prisma.user.update({
+				where: {
+					id: user.id
+				},
+				data: {
+					role: null
+				}
+			});
+		} else {
+			throw error(400, 'You cannot rescind your role if you are a member of an organization.');
+		}
 	}
 };
