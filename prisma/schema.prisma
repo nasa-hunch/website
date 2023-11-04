@@ -73,6 +73,7 @@ model Project {
   owner ProjectUser @relation("owner", fields: [ownerId], references: [id])
   ownerId Int @unique
   files File[]
+  joinCode Int @unique
 }
 
 // project management items

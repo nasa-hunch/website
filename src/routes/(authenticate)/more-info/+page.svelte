@@ -13,7 +13,8 @@
 	<Navbar />
 	<div class="content">
 		{#if data.user.role == null}
-			<h3>I am currently a:</h3>
+			<h2>Welcome to NASA Hunch! To verify your identity, we need to know a little more about you.</h2>
+			<h3>I am a:</h3>
 			<div class="buttons">
 				<form method="post" use:enhance action="?/setRoleStudent">
 					<button class="bigButton">
@@ -88,6 +89,11 @@
 		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
 		cursor: pointer;
 	}
+
+	h2 {
+		margin-bottom: 5rem;
+	}
+
 	.buttons {
 		width: 100%;
 		display: flex;
