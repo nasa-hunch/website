@@ -74,20 +74,18 @@ export const actions = {
 		const hash = (await pkdf2(pass1, salt, 1000, 100, 'sha512')).toString('hex');
 
 		// now we can make the user!
-		const newUserData = {
-			firstName,
-			lastName,
-			email: newEmail,
-			hash,
-			salt,
-			createdAt: new Date(Date.now()),
-			updatedAt: new Date(Date.now()),
-			role: null,
-			orgid: null
-		};
-
 		const newUser = await prisma.user.create({
-			data: newUserData
+			data: {
+				firstName,
+				lastName,
+				email: newEmail,
+				hash,
+				salt,
+				createdAt: new Date(Date.now()),
+				updatedAt: new Date(Date.now()),
+				role: null,
+				orgId: null
+			}
 		});
 
 		if (!newUser) {

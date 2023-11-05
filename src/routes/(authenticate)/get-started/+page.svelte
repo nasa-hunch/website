@@ -24,19 +24,19 @@
 		>
 			<h1>Register</h1>
 			<span class="inputDiv">
-				<Input required name="firstName" label="First Name" />
+				<Input required name="firstName" autocomplete="given-name" label="First Name" />
 			</span>
 			<span class="inputDiv">
-				<Input required name="lastName" label="Last Name" />
+				<Input required name="lastName" autocomplete="family-name" label="Last Name" />
 			</span>
 			<span class="inputDiv">
-				<Input required name="email" label="Email" type="email" />
+				<Input required name="email" autocomplete="email" label="Email" type="email" />
 			</span>
 			<span class="inputDiv">
-				<Input required name="pass1" label="Password" type="password" />
+				<Input required name="pass1" autocomplete="new-password" label="Password" type="password" />
 			</span>
 			<span class="inputDiv">
-				<Input required name="pass2" label="Confirm Password" type="password" />
+				<Input required name="pass2" autocomplete="new-password" label="Confirm Password" type="password" />
 			</span>
 			<span class="inputDiv">
 				<Button value="Register" type="submit" />

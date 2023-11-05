@@ -9,11 +9,11 @@
 	export let label = 'Input';
 	export let bgColor = '#ffffff';
 	export let type: 'password' | 'email' | undefined = undefined;
+	export let required = false;
+	export let autocomplete: HTMLInputElement["autocomplete"] | null = null;
 
 	let input: HTMLInputElement;
 	export let value: string = '';
-
-	export let required = false;
 
 	let startFocus = () => input.focus();
 
@@ -41,6 +41,7 @@
 		on:blur={deselectText}
 		bind:value
 		{required}
+		{autocomplete}
 		{...{ type /* asserting string input since we know the type is always a password */ }}
 	/>
 	<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>

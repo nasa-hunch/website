@@ -48,10 +48,10 @@ model User {
   organization Organization? @relation(fields: [orgId], references: [id])
   orgId Int?
   projectUser ProjectUser[]
+  ownedProjects Project[]
 }
 
 enum ProjectUserPermission {
-  OWNER
   EDITOR
   VIEWER
 }
@@ -64,7 +64,6 @@ model ProjectUser {
   projectId Int
   user User @relation(fields: [userId], references: [id])
   project Project @relation("users", fields: [projectId], references: [id])
-  ownedProject Project? @relation("owner")
   permission ProjectUserPermission
 }
 
@@ -77,7 +76,7 @@ model Project {
   organization Organization @relation(fields: [orgId], references: [id])
   orgId Int
   users ProjectUser[] @relation("users")
-  owner ProjectUser @relation("owner", fields: [ownerId], references: [id])
+  owner User @relation(fields: [ownerId], references: [id])
   ownerId Int @unique
   files File[]
   joinCode Int @unique

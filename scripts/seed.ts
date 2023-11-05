@@ -37,21 +37,16 @@ async function main() {
                     lastName: 'Board',
                     role: Role.TEACHER,
                     ...await makePassword('password'),
-                    projectUser: {
+                    ownedProjects: {
                         create: {
-                            permission: ProjectUserPermission.OWNER,
-                            ownedProject: {
-                                create: {
-                                    name: 'Test Project',
-                                    description: 'This is a test project.',
-                                    organization: {
-                                        connect: {
-                                            id: 0
-                                        }
-                                    },
-                                    joinCode: 123456
+                            name: 'Test Project',
+                            description: 'This is a test project.',
+                            organization: {
+                                connect: {
+                                    id: 0
                                 }
-                            }
+                            },
+                            joinCode: 123456,
                         }
                     }
                 }
