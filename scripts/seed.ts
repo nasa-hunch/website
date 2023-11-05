@@ -25,34 +25,33 @@ async function main() {
         throw new Error("Organization with id 0 already exists and is not Cardboard. Are you sure this is the right database?");
     }
 
+    console.log("Seeding database...");
+
     await prisma.organization.upsert({
         where: { id: 0, name: "Cardboard" },
         update: {},
         create: {
             name: 'Cardboard',
-            users: {
+            projects: {
                 create: {
-                    email: 'a@b.c',
-                    firstName: 'Chalk',
-                    lastName: 'Board',
-                    role: Role.TEACHER,
-                    ...await makePassword('password'),
-                    ownedProjects: {
+                    name: 'Test Project',
+                    description: 'This is a test project.',
+                    joinCode: 123456,
+                    owner: {
                         create: {
-                            name: 'Test Project',
-                            description: 'This is a test project.',
-                            organization: {
-                                connect: {
-                                    id: 0
-                                }
-                            },
-                            joinCode: 123456,
+                            email: 'a@b.c',
+                            firstName: 'Chalk',
+                            lastName: 'Board',
+                            role: Role.TEACHER,
+                            ...await makePassword('password'),
                         }
                     }
                 }
             }
         }
     })
+
+    console.log("Database seeded!");
 }
 
 main()

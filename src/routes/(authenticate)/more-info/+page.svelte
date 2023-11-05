@@ -47,7 +47,7 @@
 				<form method="post" use:enhance action="?/submitJoinCode" class="joinCode">
 					<h1>Join a Project</h1>
 					<div class="formItem">
-						<Input label="Project Join Code" bgColor="#f1f1f1" />
+						<Input name="code" label="Project Join Code" bgColor="#f1f1f1" />
 					</div>
 					<div class="formItem">
 						<Button value="Submit" />

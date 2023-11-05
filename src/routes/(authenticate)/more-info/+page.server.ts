@@ -1,29 +1,10 @@
 import { error, redirect } from '@sveltejs/kit';
-import { prisma } from '$lib/prismaConnection.js';
-import { Role } from '@prisma/client';
+import { prisma } from '$lib/prismaConnection';
+import { ProjectUserPermission, Role } from '@prisma/client';
+import { validateSession } from '$lib/auth.js';
 
 export const load = async ({ cookies }) => {
-	// if the user isn't logged in, we need to redirect them to the login page
-	const session = cookies.get('session');
-	if (!session) {
-		throw redirect(303, '/login');
-	}
-
-	const sessionCheck = await prisma.session.findFirst({
-		where: {
-			sessionText: session
-		},
-		include: {
-			user: true
-		}
-	});
-
-	// We have a valid session!
-	if (!sessionCheck || !sessionCheck.user) {
-		throw redirect(303, '/login');
-	}
-
-	const user = sessionCheck.user;
+	const user = await validateSession(cookies.get('session'));
 
 	return {
 		user
@@ -32,26 +13,7 @@ export const load = async ({ cookies }) => {
 
 export const actions = {
 	setRoleStudent: async ({ cookies }) => {
-		const session = cookies.get('session');
-		if (!session) {
-			throw redirect(303, '/login');
-		}
-
-		const sessionCheck = await prisma.session.findFirst({
-			where: {
-				sessionText: session
-			},
-			include: {
-				user: true
-			}
-		});
-
-		// We have a valid session!
-		if (!sessionCheck || !sessionCheck.user) {
-			throw redirect(303, '/login');
-		}
-
-		const user = sessionCheck.user;
+		const user = await validateSession(cookies.get('session'));
 
 		await prisma.user.update({
 			where: {
@@ -63,27 +25,7 @@ export const actions = {
 		});
 	},
 	setRoleTeacher: async ({ cookies }) => {
-		const session = cookies.get('session');
-		if (!session) {
-			throw redirect(303, '/login');
-		}
-
-		const sessionCheck = await prisma.session.findFirst({
-			where: {
-				sessionText: session
-			},
-			include: {
-				user: true
-			}
-		});
-
-		// We have a valid session!
-		if (!sessionCheck || !sessionCheck.user) {
-			throw redirect(303, '/login');
-		}
-
-		const user = sessionCheck.user;
-
+		const user = await validateSession(cookies.get('session'));
 		await prisma.user.update({
 			where: {
 				id: user.id
@@ -93,27 +35,59 @@ export const actions = {
 			}
 		});
 	},
-	rescindRole: async ({ cookies }) => {
-		const session = cookies.get('session');
-		if (!session) {
-			throw redirect(303, '/login');
+	submitJoinCode: async ({ cookies, request }) => {
+		const data = await request.formData();
+
+		const code = data.get('code');
+
+		if (!code) {
+			throw error(400, 'No code provided.');
 		}
 
-		const sessionCheck = await prisma.session.findFirst({
+		const user = await validateSession(cookies.get('session'));
+
+		const project = await prisma.project.findUnique({
 			where: {
-				sessionText: session
+				joinCode: parseInt(code.toString())
 			},
 			include: {
-				user: true
+				users: true,
+				owner: true
 			}
 		});
 
-		// We have a valid session!
-		if (!sessionCheck || !sessionCheck.user) {
-			throw redirect(303, '/login');
+		if (!project) {
+			throw error(400, 'Invalid code.');
 		}
 
-		const user = sessionCheck.user;
+		if (project.owner.id == user.id) {
+			throw error(400, 'You can\'t join a project you own.');
+		}
+
+		if (project.users.find((u) => u.id == user.id)) {
+			throw error(400, 'You are already a member of this project.');
+		}
+
+		await prisma.projectUser.create({
+			data: {
+				project: {
+					connect: {
+						id: project.id
+					}
+				},
+				user: {
+					connect: {
+						id: user.id
+					}
+				},
+				permission: ProjectUserPermission.NEEDS_APPROVAL
+			}
+		})
+
+		throw redirect(303, '/dashboard');
+	},
+	rescindRole: async ({ cookies }) => {
+		const user = await validateSession(cookies.get('session'));
 
 		if (user.orgId == null) {
 			await prisma.user.update({
