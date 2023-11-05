@@ -29,7 +29,7 @@ export const load = async ({ cookies }) => {
 		throw redirect(303, '/more-info');
 	}
 
-	if (user.orgid == null && user.role != Role.HUNCH_ADMIN) {
+	if (user.orgId == null && user.role != Role.HUNCH_ADMIN) {
 		throw redirect(303, '/more-info');
 	}
 

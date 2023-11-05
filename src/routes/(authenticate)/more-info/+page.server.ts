@@ -115,7 +115,7 @@ export const actions = {
 
 		const user = sessionCheck.user;
 
-		if (user.orgid == null) {
+		if (user.orgId == null) {
 			await prisma.user.update({
 				where: {
 					id: user.id

@@ -31,7 +31,7 @@
 					</button>
 				</form>
 			</div>
-		{:else if data.user.orgid == null}
+		{:else if data.user.orgId == null}
 			{#if data.user.role == Role.UNVERIFIED_TEACHER}
 				<h1>Awaiting Verification</h1>
 				<p>
