@@ -50,6 +50,11 @@ model User {
   projectUser ProjectUser[]
 }
 
+enum ProjectUserPermission {
+  OWNER
+  EDITOR
+  VIEWER
+}
 
 model ProjectUser {
   id Int @id @default(autoincrement())
@@ -60,7 +65,7 @@ model ProjectUser {
   user User @relation(fields: [userId], references: [id])
   project Project @relation("users", fields: [projectId], references: [id])
   ownedProject Project? @relation("owner")
-  permissions Int
+  permission ProjectUserPermission
 }
 
 model Project {
