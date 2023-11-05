@@ -13,6 +13,8 @@
 	let input: HTMLInputElement;
 	export let value: string = '';
 
+	export let required = false;
+
 	let startFocus = () => input.focus();
 
 	let selectInput = () => (active = true);
@@ -38,6 +40,7 @@
 		on:focus={selectInput}
 		on:blur={deselectText}
 		bind:value
+		{required}
 		{...{ type /* asserting string input since we know the type is always a password */ }}
 	/>
 	<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
