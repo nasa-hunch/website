@@ -27,5 +27,7 @@ jobs:
           node-version: '18.x'
       - name: Install dependencies
         run: yarn install
+      - name: Check
+        run: yarn check
       - name: Build page
         run: yarn build
