@@ -42,7 +42,7 @@ export const load = async ({ cookies }) => {
 			lastName: user.lastName,
 			email: user.email,
 			role: user.role,
-			orgid: user.orgid
+			orgId: user.orgId
 		}
 	};
 };
