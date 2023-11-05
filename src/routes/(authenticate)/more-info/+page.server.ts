@@ -61,7 +61,7 @@ export const actions = {
 		}
 
 		if (project.owner.id == user.id) {
-			throw error(400, 'You can\'t join a project you own.');
+			throw error(400, "You can't join a project you own.");
 		}
 
 		if (project.users.find((u) => u.id == user.id)) {
@@ -82,7 +82,7 @@ export const actions = {
 				},
 				permission: ProjectUserPermission.NEEDS_APPROVAL
 			}
-		})
+		});
 
 		throw redirect(303, '/dashboard');
 	},

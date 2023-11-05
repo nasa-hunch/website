@@ -36,7 +36,13 @@
 				<Input required name="pass1" autocomplete="new-password" label="Password" type="password" />
 			</span>
 			<span class="inputDiv">
-				<Input required name="pass2" autocomplete="new-password" label="Confirm Password" type="password" />
+				<Input
+					required
+					name="pass2"
+					autocomplete="new-password"
+					label="Confirm Password"
+					type="password"
+				/>
 			</span>
 			<span class="inputDiv">
 				<Button value="Register" type="submit" />

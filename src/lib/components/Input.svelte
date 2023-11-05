@@ -10,7 +10,7 @@
 	export let bgColor = '#ffffff';
 	export let type: 'password' | 'email' | undefined = undefined;
 	export let required = false;
-	export let autocomplete: HTMLInputElement["autocomplete"] | null = null;
+	export let autocomplete: HTMLInputElement['autocomplete'] | null = null;
 
 	let input: HTMLInputElement;
 	export let value: string = '';
