@@ -49,12 +49,12 @@ export const actions = {
 			};
 		}
 
-		//now we need to verify that this email is in fact one of a kind which is pretty much impossible
-		//we are just going to cast out certain groups here, so we will only check for lowercase and if the email already exsists
+		// now we need to verify that this email is in fact one of a kind which is pretty much impossible
+		// we are just going to cast out certain groups here, so we will only check for lowercase and if the email already exsists
 
 		const newEmail = email.toLowerCase();
 
-		//check if a user with this email already exsists
+		// check if a user with this email already exsists
 
 		const userEmailCheck = await prisma.user.findFirst({
 			where: {
@@ -69,11 +69,11 @@ export const actions = {
 			};
 		}
 
-		//now that that's done, we can create a salt and hash of the password
+		// now that that's done, we can create a salt and hash of the password
 		const salt = crypto.randomBytes(32).toString('hex');
 		const hash = (await pkdf2(pass1, salt, 1000, 100, 'sha512')).toString('hex');
 
-		//now we can make the user!
+		// now we can make the user!
 		const newUserData = {
 			firstName,
 			lastName,

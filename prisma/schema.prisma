@@ -45,9 +45,9 @@ model User {
   salt String @db.VarChar(255)
   role Role?
   sessions Session[]
-  organization Organization? @relation(fields: [orgid], references: [id])
-  orgid Int?
-  ProjectUser ProjectUser[]
+  organization Organization? @relation(fields: [orgId], references: [id])
+  orgId Int?
+  projectUser ProjectUser[]
 }
 
 
@@ -55,10 +55,10 @@ model ProjectUser {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userid Int
-  projectid Int
-  User User @relation(fields: [userid], references: [id])
-  Project Project @relation("users", fields: [projectid], references: [id])
+  userId Int
+  projectId Int
+  user User @relation(fields: [userId], references: [id])
+  project Project @relation("users", fields: [projectId], references: [id])
   ownedProject Project? @relation("owner")
   permissions Int
 }
@@ -69,8 +69,8 @@ model Project {
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
   description String @db.VarChar(255)
-  organization Organization @relation(fields: [orgid], references: [id])
-  orgid Int
+  organization Organization @relation(fields: [orgId], references: [id])
+  orgId Int
   users ProjectUser[] @relation("users")
   owner ProjectUser @relation("owner", fields: [ownerId], references: [id])
   ownerId Int @unique

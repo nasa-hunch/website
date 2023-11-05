@@ -1,6 +1,22 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
+import { promisify } from 'util';
+import crypto from 'crypto';
+
+const pkdf2 = promisify(crypto.pbkdf2);
 
 const prisma = new PrismaClient();
+
+interface PasswordData {
+    hash: string;
+    salt: string;
+}
+
+async function makePassword(password: string): Promise<PasswordData> {
+    const salt = crypto.randomBytes(32).toString('hex');
+    const hash = (await pkdf2(password, salt, 1000, 100, 'sha512')).toString('hex');
+
+    return { hash, salt };
+}
 
 async function main() {
     const org = await prisma.organization.findFirst({ where: { id: 0 } });
@@ -14,6 +30,15 @@ async function main() {
         update: {},
         create: {
             name: 'Cardboard',
+            users: {
+                create: {
+                    email: 'a@b.c',
+                    firstName: 'Chalk',
+                    lastName: 'Board',
+                    role: Role.TEACHER,
+                    ...await makePassword('password'),
+                }
+            }
         }
     })
 }
