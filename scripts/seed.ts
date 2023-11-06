@@ -49,7 +49,28 @@ async function main() {
 						}
 					}
 				}
+			},
+			users: {
+				create: {
+					email: "admin@card.board",
+					firstName: "Admin",
+					lastName: "Cardboard",
+					role: Role.SCHOOL_ADMIN,
+					...(await makePassword("school_admin"))
+				}
 			}
+		}
+	});
+
+	await prisma.user.upsert({
+		where: { email: 'admin@nasa.fake' },
+		update: {},
+		create: {
+			email: 'admin@nasa.fake',
+			firstName: 'Admin',
+			lastName: 'NASA',
+			role: Role.HUNCH_ADMIN,
+			...(await makePassword('hunch_admin'))
 		}
 	});
 
