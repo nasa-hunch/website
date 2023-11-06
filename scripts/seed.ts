@@ -1,4 +1,4 @@
-import { PrismaClient, ProjectUserPermission, Role } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 import { promisify } from 'util';
 import crypto from 'crypto';
 
@@ -19,18 +19,18 @@ async function makePassword(password: string): Promise<PasswordData> {
 }
 
 async function main() {
-	const org = await prisma.organization.findFirst({ where: { id: 0 } });
+	const org = await prisma.organization.findFirst({ where: { id: 1 } });
 
 	if (org && org.name != 'Cardboard') {
 		throw new Error(
-			'Organization with id 0 already exists and is not Cardboard. Are you sure this is the right database?'
+			'Organization with id 1 already exists and is not Cardboard. Are you sure this is the right database?'
 		);
 	}
 
 	console.log('Seeding database...');
 
 	await prisma.organization.upsert({
-		where: { id: 0, name: 'Cardboard' },
+		where: { id: 1, name: 'Cardboard' },
 		update: {},
 		create: {
 			name: 'Cardboard',

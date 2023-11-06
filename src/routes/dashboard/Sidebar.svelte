@@ -10,7 +10,7 @@
 		projectsDropped = !projectsDropped;
 	};
 
-	let data: PageData;
+	export let data: PageData;
 </script>
 
 <nav class="nav">

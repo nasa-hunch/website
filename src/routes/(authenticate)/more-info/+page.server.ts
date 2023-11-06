@@ -4,7 +4,13 @@ import { ProjectUserPermission, Role } from '@prisma/client';
 import { validateSession } from '$lib/auth.js';
 
 export const load = async ({ cookies }) => {
-	const user = await validateSession(cookies.get('session'));
+	const user = await validateSession(cookies.get('session'), {
+		projectUser: true,
+	});
+
+	if (user.role == Role.STUDENT && user.projectUser.length != 0) {
+		throw redirect(303, '/dashboard');
+	}
 
 	return {
 		user

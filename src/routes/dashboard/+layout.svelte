@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
+	import type { PageData } from './$types';
 	import Sidebar from './Sidebar.svelte';
+
+	export let data: PageData;
 </script>
 
 <div class="wrap">
-	<Sidebar />
+	<Sidebar {data} />
 	<slot />
 </div>
 

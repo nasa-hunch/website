@@ -14,7 +14,11 @@ export const load = async ({ cookies }) => {
 			sessionText: session
 		},
 		include: {
-			user: true
+			user: {
+				include: {
+					projectUser: true
+				}
+			}
 		}
 	});
 
@@ -25,12 +29,24 @@ export const load = async ({ cookies }) => {
 
 	const user = sessionCheck.user;
 	if (user.role == null) {
-		//we need more info from the user
+		// we need more info from the user
 		throw redirect(303, '/more-info');
 	}
 
 	if (user.orgId == null && user.role != Role.HUNCH_ADMIN) {
-		throw redirect(303, '/more-info');
+		if (user.projectUser.length == 0) {
+			throw redirect(303, '/more-info');
+		} else {
+			// error recovery: if the user has a projectUser but no orgId, set the orgId to the project's orgId
+			await prisma.user.update({
+				where: {
+					id: user.id
+				},
+				data: {
+					orgId: user.projectUser[0].projectId
+				}
+			});
+		}
 	}
 
 	return {
@@ -42,7 +58,7 @@ export const load = async ({ cookies }) => {
 			lastName: user.lastName,
 			email: user.email,
 			role: user.role,
-			orgId: user.orgId
+			orgId: user.orgId ?? user.projectUser[0].projectId
 		}
 	};
 };
