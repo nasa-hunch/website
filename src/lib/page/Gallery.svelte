@@ -16,7 +16,7 @@
 	<h3>{title}</h3>
 	<div class="items">
 		{#each galleryImages as image}
-			<a class="gallaryImage" href={image.href} style="background-image: url({image.src})">
+			<a class="galleryImage" href={image.href} style="background-image: url({image.src})">
 				<div class="caption">
 					{image.caption}
 				</div>
@@ -42,7 +42,7 @@
 		justify-content: center;
 	}
 
-	.gallaryImage {
+	.galleryImage {
 		position: relative;
 		min-width: 250px;
 		width: calc(25% - 20px);
@@ -57,7 +57,7 @@
 		border-radius: 5px;
 		transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 	}
-	.gallaryImage::after {
+	.galleryImage::after {
 		content: '';
 		position: absolute;
 		top: 0px;
@@ -70,11 +70,11 @@
 		z-index: 3;
 	}
 
-	.gallaryImage:hover {
+	.galleryImage:hover {
 		transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 	}
 
-	.gallaryImage:hover::after {
+	.galleryImage:hover::after {
 		background: rgba(221, 54, 28, 0.5);
 	}
 
