@@ -7,7 +7,7 @@ export default defineConfig({
 		host: '0.0.0.0',
 		...(process.env.OUTER_PORT_FRONTEND && process.env.INNER_PORT_FRONTEND
 			? {
-					hmr: {
+					hmr: process.env.CODESPACES ? false : {
 						clientPort: parseInt(process.env.OUTER_PORT_FRONTEND)
 					},
 					port: parseInt(process.env.INNER_PORT_FRONTEND)

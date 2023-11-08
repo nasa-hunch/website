@@ -29,6 +29,7 @@ services:
     environment:
       - OUTER_PORT_FRONTEND=3000
       - INNER_PORT_FRONTEND=5173
+      - CODESPACES
     ports:
       - '3000:5173'
     env_file:
