@@ -4,12 +4,6 @@ import { Role } from '@prisma/client';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ cookies }) => {
-	const session = await validateSession(cookies.get("session"));
-
-	if (session.role != Role.HUNCH_ADMIN) {
-		throw redirect(303, "/login");
-	}
-
 	const userList = await prisma.user.findMany();
 	return {
 		userList: userList.map(user => ({
