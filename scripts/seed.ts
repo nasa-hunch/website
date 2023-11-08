@@ -41,7 +41,7 @@ async function main() {
 					joinCode: 123456,
 					owner: {
 						create: {
-							email: 'a@b.c',
+							email: 'teacher@card.board',
 							firstName: 'Chalk',
 							lastName: 'Board',
 							role: Role.TEACHER,
