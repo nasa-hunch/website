@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Role } from "@prisma/client";
 	import type { PageData } from "./$types";
 
 	export let data: PageData;
@@ -6,12 +7,14 @@
 
 <main>
 	<p>Welcome, {data.user.firstName} {data.user.lastName}!</p>
-	<h1>Projects</h1>
-	{#each data.user.projectUser as { project }}
-		<div class="project">
-			<p>{project.name}</p>
-		</div>
-	{/each}
+	{#if data.user.role != Role.HUNCH_ADMIN}
+		<h1>Projects</h1>
+		{#each data.user.projectUser as { project }}
+			<div class="project">
+				<p>{project.name}</p>
+			</div>
+		{/each}
+	{/if}
 </main>
 
 <style>
