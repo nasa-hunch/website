@@ -8,7 +8,9 @@
 	<p>Welcome, {data.user.firstName} {data.user.lastName}!</p>
 	<h1>Projects</h1>
 	{#each data.user.projectUser as { project }}
-		<p>{project.name}</p>
+		<div class="project">
+			<p>{project.name}</p>
+		</div>
 	{/each}
 </main>
 
