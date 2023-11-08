@@ -91,19 +91,10 @@
 
 <Section title="About NASA Hunch">
 	<p>
-		We empower and inspire students through project-based learning where high school students learn
-		modern skills, granting them the opportunity to launch their careers through designing and
-		fabricating real-world, valued products for NASA. We want to expand the HUNCH program to more
-		schools throughout the United States. However, this means that we need more volunteer mentors
-		for our schools. Individuals knowledgeable in any of the following categories who have time to
-		visit schools and mentor students are encouraged to apply by filling out this application.
-	</p>
-	<p>
-		There are many different ways to join the HUNCH Program; from volunteering your time as a mentor
-		to a local school, to becoming a HUNCH Teacher through the school district, or attending one of
-		our Design Reviews across the country. The HUNCH program welcomes any and all interested persons
-		or organizations to get involved in encouraging student STEM involvement through NASA HUNCH
-		projects.
+		We aim to equip and motivate high school students through
+		<b>hands-on, project-based learning</b>, enabling them to acquire contemporary
+		skills allowing them to begin their careers by designing
+		and producing real-world, valuable products for NASA.
 	</p>
 </Section>
 <Stats {stats} />
