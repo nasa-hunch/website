@@ -16,7 +16,12 @@ export const load = async ({ cookies }) => {
 		include: {
 			user: {
 				include: {
-					projectUser: true
+					organization: true,
+					projectUser: {
+						include: {
+							project: true
+						}
+					},
 				}
 			}
 		}
@@ -43,7 +48,7 @@ export const load = async ({ cookies }) => {
 					id: user.id
 				},
 				data: {
-					orgId: user.projectUser[0].projectId
+					orgId: user.projectUser[0].project.orgId
 				}
 			});
 		}
@@ -58,7 +63,8 @@ export const load = async ({ cookies }) => {
 			lastName: user.lastName,
 			email: user.email,
 			role: user.role,
-			orgId: user.orgId ?? user.projectUser[0].projectId
+			projectUser: user.projectUser,
+			orgId: user.orgId ?? user.projectUser[0].project.orgId,
 		}
 	};
 };
