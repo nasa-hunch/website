@@ -1,7 +1,8 @@
 import { prisma } from '$lib/prismaConnection';
 
-export const load = async ({ cookies }) => {
+export const load = async () => {
 	const userList = await prisma.user.findMany();
+	
 	return {
 		userList: userList.map(user => ({
 			id: user.id,

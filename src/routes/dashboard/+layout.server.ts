@@ -64,7 +64,7 @@ export const load = async ({ cookies }) => {
 			email: user.email,
 			role: user.role,
 			projectUser: user.projectUser,
-			orgId: user.orgId ?? user.projectUser[0].project.orgId,
+			orgId: user.role == Role.HUNCH_ADMIN ? null : user.orgId ?? user.projectUser[0].project.orgId,
 		}
 	};
 };
