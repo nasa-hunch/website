@@ -1,7 +1,4 @@
-import { validateSession } from '$lib/auth.js';
 import { prisma } from '$lib/prismaConnection';
-import { Role } from '@prisma/client';
-import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ cookies }) => {
 	const userList = await prisma.user.findMany();
