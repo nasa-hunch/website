@@ -10,7 +10,9 @@
 		<div class="title">
 			<h3>{title}</h3>
 		</div>
-		<slot />
+		<div class="content">
+			<slot />
+		</div>
 
 		{#if showButton}
 			<a href={buttonLink} class="button">{buttonText}</a>
@@ -19,6 +21,10 @@
 </div>
 
 <style>
+	.content {
+		width: 100%;
+	}
+
 	.sectionOuter {
 		width: calc(100% - 10rem);
 		display: flex;
