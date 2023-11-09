@@ -5,9 +5,10 @@ interface TeamMember {
 	description: string;
 	email?: string;
 	phoneNumber?: string;
-    img: string;
+	img: string;
 }
 
+// TODO: move photos to public folder
 export const members: TeamMember[] = [
 	{
 		firstName: 'Blake',
@@ -190,4 +191,4 @@ export const members: TeamMember[] = [
 		phoneNumber: '281-244-2852',
 		img: '/images/meet-the-team/donald-hecker.jpg'
 	}
-].map(x => ({ ...x, img: "https://nasahunch.com" + x.img }))
+].map((x) => ({ ...x, img: 'https://nasahunch.com' + x.img }));
