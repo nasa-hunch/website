@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Role } from "@prisma/client";
-	import type { PageData } from "./$types";
+	import { Role } from '@prisma/client';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>

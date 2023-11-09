@@ -7,7 +7,10 @@ import { redirect } from '@sveltejs/kit';
  *
  * Throws a redirect if the session is invalid.
  */
-export async function validateSession(session: string | undefined, include: Prisma.UserInclude = {}) {
+export async function validateSession(
+	session: string | undefined,
+	include: Prisma.UserInclude = {}
+) {
 	if (!session) {
 		throw redirect(303, '/login');
 	}

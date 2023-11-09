@@ -5,7 +5,7 @@ import { validateSession } from '$lib/auth.js';
 
 export const load = async ({ cookies }) => {
 	const user = await validateSession(cookies.get('session'), {
-		projectUser: true,
+		projectUser: true
 	});
 
 	if (user.role == Role.STUDENT && user.projectUser.length != 0) {

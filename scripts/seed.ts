@@ -52,11 +52,11 @@ async function main() {
 			},
 			users: {
 				create: {
-					email: "admin@card.board",
-					firstName: "Admin",
-					lastName: "Cardboard",
+					email: 'admin@card.board',
+					firstName: 'Admin',
+					lastName: 'Cardboard',
 					role: Role.SCHOOL_ADMIN,
-					...(await makePassword("school_admin"))
+					...(await makePassword('school_admin'))
 				}
 			}
 		}

@@ -92,9 +92,8 @@
 <Section title="About NASA Hunch">
 	<p>
 		We aim to equip and motivate high school students through
-		<b>hands-on, project-based learning</b>, enabling them to acquire contemporary
-		skills allowing them to begin their careers by designing
-		and producing real-world, valuable products for NASA.
+		<b>hands-on, project-based learning</b>, enabling them to acquire contemporary skills allowing
+		them to begin their careers by designing and producing real-world, valuable products for NASA.
 	</p>
 </Section>
 <Stats {stats} />
