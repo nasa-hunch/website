@@ -12,6 +12,7 @@
         <div class="member">
             <img src={member.img} alt={member.firstName} />
             <p>{member.firstName} {member.middleInitial ?? ""} {member.lastName}</p>
+            <p>{member.description}</p>
             <p><a href="mailto:{member.email}">{member.email}</a></p>
             {#if member.phoneNumber}
                 <p>{member.phoneNumber}</p>
