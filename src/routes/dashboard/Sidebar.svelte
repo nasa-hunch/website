@@ -43,13 +43,17 @@
 		</a>
 		<form action="/logout" method="POST">
 			<button class="button bottomButton" type="submit">
-				<img width="30px" class="bottomIcon" src="/logout.svg" alt="Log out" />
+				<img width="30px" class="bottomIcon" src="/logout.svg" alt="Log Out" />
 			</button>
 		</form>
 	</div>
 </nav>
 
 <style>
+	form {
+		display: contents;
+	}
+
 	.nav {
 		background: #323a45;
 		height: 100vh;
