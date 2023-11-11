@@ -3,7 +3,7 @@ interface Partner {
 	logo: string;
 }
 
-export const partners = [
+export const partners: Partner[] = [
 	{ name: 'World Association of Chefs Societies', logo: '/images/partners/world-chefs.jpg' },
 	{
 		name: 'Lone Star Flight Museum',
@@ -33,4 +33,4 @@ export const partners = [
 		logo: '/images/partners/Eastern-Florida-State-College-Partner-Logo-bw.jpg'
 	},
 	{ name: 'Sullivan University', logo: '/images/partners/SU_logo_trans_BW-1.png' }
-];
+].map((x) => ({ ...x, logo: 'https://nasahunch.com' + x.logo }));

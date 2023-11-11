@@ -16,7 +16,7 @@
 	const links = [
 		link('About', 'about'),
 		link('Programs', 'programs'),
-		link('Partners', 'partners'),
+		link('Team', 'team'),
 		link('Connect', 'connect'),
 		link('Get Started', 'get-started', true)
 	];
