@@ -18,13 +18,13 @@
 			</h2>
 			<h3>I am a:</h3>
 			<div class="buttons">
-				<form method="post" use:enhance action="?/setRoleStudent">
+				<form method="post" action="?/setRoleStudent">
 					<button class="bigButton">
 						<img src="student_cap.svg" alt="student" />
 						<p>Student</p>
 					</button>
 				</form>
-				<form method="post" use:enhance action="?/setRoleTeacher">
+				<form method="post" action="?/setRoleTeacher">
 					<button class="bigButton">
 						<img src="admin_shield.svg" alt="teacher" />
 						<p>Teacher/Admin</p>
@@ -40,11 +40,11 @@
 					>
 					to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a>
 				</p>
-				<form method="post" use:enhance action="?/rescindRole">
+				<form method="post" action="?/rescindRole">
 					<p>Not a teacher? <button class="button">Rescind Your Role</button></p>
 				</form>
 			{:else if data.user.role == Role.STUDENT}
-				<form method="post" use:enhance action="?/submitJoinCode" class="joinCode">
+				<form method="post" action="?/submitJoinCode" class="joinCode">
 					<h1>Join a Project</h1>
 					<div class="formItem">
 						<Input name="code" label="Project Join Code" bgColor="#f1f1f1" />
@@ -53,7 +53,7 @@
 						<Button value="Submit" />
 					</div>
 				</form>
-				<form method="post" use:enhance action="?/rescindRole">
+				<form method="post" action="?/rescindRole">
 					<p>Not a student? <button class="button">Rescind Your Role</button></p>
 				</form>
 			{:else}

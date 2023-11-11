@@ -29,6 +29,8 @@ export const actions = {
 				role: Role.STUDENT
 			}
 		});
+
+		return;
 	},
 	setRoleTeacher: async ({ cookies }) => {
 		const user = await validateSession(cookies.get('session'));
@@ -40,6 +42,7 @@ export const actions = {
 				role: Role.UNVERIFIED_TEACHER
 			}
 		});
+		return;
 	},
 	submitJoinCode: async ({ cookies, request }) => {
 		const data = await request.formData();
@@ -91,6 +94,7 @@ export const actions = {
 		});
 
 		throw redirect(303, '/dashboard');
+		return;
 	},
 	rescindRole: async ({ cookies }) => {
 		const user = await validateSession(cookies.get('session'));
@@ -107,5 +111,7 @@ export const actions = {
 		} else {
 			throw error(400, 'You cannot rescind your role if you are a member of an organization.');
 		}
+
+		return;
 	}
 };
