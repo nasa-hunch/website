@@ -10,9 +10,9 @@
 	{#if data.user.role != Role.HUNCH_ADMIN}
 		<h1>Projects</h1>
 		{#each data.user.projectUser as { project }}
-			<div class="project">
+			<a class="project" href="/dashboard/project/{project.id}">
 				<p>{project.name}</p>
-			</div>
+			</a>
 		{/each}
 	{/if}
 </main>
@@ -20,5 +20,23 @@
 <style>
 	main {
 		margin: 1rem;
+	}
+
+	.project {
+		margin: 1rem;
+		padding: 1rem;
+		border: 1px solid black;
+		border-radius: 0.5rem;
+		text-align: center;
+		background-color: #f0f0f0;
+		display: block;
+	}
+
+	.project:hover {
+		background-color: #e0e0e0;
+	}
+
+	.project:active {
+		background-color: #d0d0d0;
 	}
 </style>
