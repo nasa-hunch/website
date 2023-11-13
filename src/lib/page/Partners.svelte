@@ -18,14 +18,14 @@
     <div class="slideshow-container">
 		<div class="slideshow" style="--slide-width: -{sumWidth}px">
 			{#each sizedPartners as partner}
-				<div class="wrapper-image" bind:clientWidth={partner.width}>
+				<a href={partner.href} target="_blank" class="wrapper-image" bind:clientWidth={partner.width}>
 					<img height="60px" src={partner.logo} alt={partner.name} />
-				</div>
+                </a>
 			{/each}
 			{#each sizedPartners as partner}
-				<div class="wrapper-image">
+				<a href={partner.href} target="_blank" class="wrapper-image">
 					<img height="60px" src={partner.logo} alt={partner.href} />
-				</div>
+                </a>
 			{/each}
 		</div>
 	</div>
