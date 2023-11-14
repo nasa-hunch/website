@@ -5,10 +5,6 @@
 	let projectsDropped = false;
 
 	let adminDropped = false;
-	let projectsDropDown = (event: MouseEvent) => {
-		event.preventDefault();
-		projectsDropped = !projectsDropped;
-	};
 
 	export let data: PageData;
 </script>
@@ -20,7 +16,7 @@
 				<img src="/favicon.png" alt="Nasa Hunch Logo" />
 			</a>
 			<a href="/dashboard" class="button">Dashboard</a>
-			<a href="##" class="button" on:click={projectsDropDown}>Projects</a>
+			<a href="/dashboard/projects" class="button">Projects</a>
 			{#if projectsDropped}
 				<div class="indent" />
 			{/if}
@@ -120,6 +116,7 @@
 		width: 100%;
 		border-radius: 5px;
 		background-color: transparent;
+		cursor: pointer;
 	}
 	.button:hover {
 		background: #212121;

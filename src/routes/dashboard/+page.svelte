@@ -10,7 +10,7 @@
 	{#if data.user.role != Role.HUNCH_ADMIN}
 		<h1>Projects</h1>
 		{#each [...data.user.projectUser.map(user => user.project), ...data.user.ownedProjects] as project}
-			<a class="project" href="/dashboard/project/{project.id}">
+			<a class="project" href="/dashboard/projects/{project.id}">
 				<p>{project.name}</p>
 			</a>
 		{/each}
