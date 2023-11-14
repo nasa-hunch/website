@@ -28,7 +28,7 @@ async function main() {
 	}
 
 	console.log('Seeding database...');
-
+	
 	await prisma.organization.upsert({
 		where: { id: 1, name: 'Cardboard' },
 		update: {},
@@ -45,6 +45,11 @@ async function main() {
 							firstName: 'Chalk',
 							lastName: 'Board',
 							role: Role.TEACHER,
+							organization: {
+								connect: {
+									id: 1
+								}
+							},
 							...(await makePassword('password'))
 						}
 					}
