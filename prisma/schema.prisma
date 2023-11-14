@@ -26,6 +26,7 @@ model Category {
   name String @db.VarChar(255)
   color String @db.VarChar(6)
   icon String @db.VarChar(255)
+  deadline DateTime
 }
 
 model Organization {
