@@ -21,7 +21,8 @@ export const load = async ({ cookies }) => {
 						include: {
 							project: true
 						}
-					}
+					},
+					ownedProjects: true,
 				}
 			}
 		}
@@ -63,6 +64,7 @@ export const load = async ({ cookies }) => {
 			lastName: user.lastName,
 			email: user.email,
 			role: user.role,
+			ownedProjects: user.ownedProjects,
 			projectUser: user.projectUser,
 			orgId: user.role == Role.HUNCH_ADMIN ? null : user.orgId ?? user.projectUser[0].project.orgId
 		}

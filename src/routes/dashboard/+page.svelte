@@ -9,7 +9,7 @@
 	<p>Welcome, {data.user.firstName} {data.user.lastName}!</p>
 	{#if data.user.role != Role.HUNCH_ADMIN}
 		<h1>Projects</h1>
-		{#each data.user.projectUser as { project }}
+		{#each [...data.user.projectUser.map(user => user.project), ...data.user.ownedProjects] as project}
 			<a class="project" href="/dashboard/project/{project.id}">
 				<p>{project.name}</p>
 			</a>
