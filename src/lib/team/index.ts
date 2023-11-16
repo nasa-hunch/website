@@ -92,7 +92,7 @@ export const members: TeamMember[] = [
 	{
 		firstName: 'Julio',
 		lastName: 'Zambrana',
-		description: 'Flight hardware Processing Assistant',
+		description: 'Flight Hardware Processing Assistant',
 		email: 'jzambra@okstate.edu',
 		img: '/images/meet-the-team/julio-zambrana.jpg'
 	},

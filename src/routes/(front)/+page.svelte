@@ -2,10 +2,8 @@
 	import Gallery from '$lib/page/Gallery.svelte';
 	import type { GalleryImage } from '$lib/page/Gallery.svelte';
 	import Section from '$lib/page/Section.svelte';
-	import Stats from '$lib/page/Stats.svelte';
 	import type { StatType } from '$lib/page/Stats.svelte';
 	import Hero from '$lib/Hero.svelte';
-	import Partners from '$lib/page/Partners.svelte';
 
 	const title = 'NASA&nbsp;Hunch';
 	const image = 'https://live.staticflickr.com/65535/53142754400_9dde8a8d78_k_d.jpg';
@@ -89,19 +87,6 @@
 
 <Hero {title} {image} />
 
-<Section title="About NASA Hunch">
-	<p>
-		We aim to equip and motivate high school students through
-		<b>hands-on, project-based learning</b>, enabling them to acquire contemporary skills allowing
-		them to begin their careers by designing and producing real-world, valuable products for NASA.
-	</p>
-	<p>
-		We work side-by-side with schools, administrators, and organizations
-		to provide students with the exemplary education they deserve.
-	</p>
-</Section>
-<Partners />
-<Stats {stats} />
 <Gallery galleryImages={gallery} title="Explore Program Categories" />
 
 <style>

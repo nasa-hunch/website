@@ -10,7 +10,9 @@ body {
 }
 
 * {
-	font-family: 'Lexend Variable', sans-serif;
+	font-family: 'Manrope Variable';
+	font-weight: 500;
+
 }
 
 h1,
