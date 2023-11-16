@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { Role } from '@prisma/client';
 	import type { PageData } from './$types';
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
 
 	export let data: PageData;
 </script>
+
+<ModelHelper></ModelHelper>
 
 <main>
 	<h1>User Management Panel</h1>
