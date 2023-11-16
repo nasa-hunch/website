@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { Role } from '@prisma/client';
+	const Role = {
+		STUDENT: "STUDENT",
+		UNVERIFIED_TEACHER: "UNVERIFIED_TEACHER",
+		TEACHER: "TEACHER",
+		SCHOOL_ADMIN: "SCHOOL_ADMIN",
+		HUNCH_ADMIN: "HUNCH_ADMIN",
+	}
 	import type { PageData } from './$types';
 
 	export let data: PageData;
