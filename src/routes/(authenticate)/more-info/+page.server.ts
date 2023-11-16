@@ -8,7 +8,11 @@ export const load = async ({ cookies }) => {
 		projectUser: true
 	});
 
-	if (user.role == Role.STUDENT && user.projectUser.length != 0) {
+	if (
+		(user.role == Role.STUDENT && user.projectUser.length != 0) ||
+		(user.role == Role.TEACHER && user.organization != null) ||
+		(user.role == Role.HUNCH_ADMIN)
+	) {
 		throw redirect(303, '/dashboard');
 	}
 

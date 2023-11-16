@@ -1,6 +1,6 @@
 <script lang="ts">
     import { partners, type Partner } from "$lib/partners";
-
+	import Section from "./Section.svelte";
     interface SizedPartner extends Partner {
         width?: number;
     }
@@ -10,8 +10,7 @@
     $: sumWidth = sizedPartners.reduce((acc, image) => acc + (image.width ?? 0), 0);;
 </script>
 
-<div class="container">
-    <h1>Partners</h1>
+<Section title="Sponsors">
 
     <p>We work with cutting-edge companies and organizations to bring the best possible experience to our students.</p>
 
@@ -29,13 +28,9 @@
 			{/each}
 		</div>
 	</div>
-</div>
+</Section>
 
 <style lang="scss">
-    .container {
-        text-align: center;
-    }
-
     .slideshow {
 		margin: 1rem;
 		display: flex;

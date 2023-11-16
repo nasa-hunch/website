@@ -23,6 +23,7 @@
 <style>
 	.content {
 		width: 100%;
+		font-size: 18px;
 	}
 
 	.sectionOuter {
@@ -30,12 +31,14 @@
 		display: flex;
 		justify-content: center;
 		margin: 0 5rem;
+		margin-top: 1.5rem;
+		margin-bottom: 0!important;
 	}
 
 	section {
 		max-width: 900px;
 		width: 100%;
-		margin: 1.5rem 0;
+		
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -61,7 +64,7 @@
 	h3::after {
 		content: '';
 		position: absolute;
-		bottom: -5px;
+		bottom: -10px;
 		left: 0px;
 		width: 100%;
 		height: 0.25rem;

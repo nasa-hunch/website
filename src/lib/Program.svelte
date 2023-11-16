@@ -12,3 +12,9 @@
 		<Project {project} />
 	{/each}-->
 </div>
+
+<style>
+	.description {
+		margin: 1rem;
+	}
+</style>

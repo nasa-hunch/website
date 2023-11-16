@@ -9,7 +9,7 @@
 	<h1>User Management Panel</h1>
 
 	<table>
-		<tr>
+		<tr class="headRow">
 			<th>id</th>
 			<th>email</th>
 			<th>first name</th>
@@ -39,5 +39,31 @@
 <style>
 	main {
 		margin: 1rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	table {
+		width: 100%;
+		background: #f1f1f1;
+		padding: 1rem;
+		box-sizing: border-box;
+		border-radius: 5px;
+	}
+	tr {
+		width: 100%;
+		display: flex;
+	}
+	th,
+	td {
+		width: 100%;
+		display: flex;
+		align-items: start;
+		justify-content: start;
+		overflow: hidden;
+	}
+	.headRow {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+		margin-bottom: 5px;
+		position: sticky;
 	}
 </style>

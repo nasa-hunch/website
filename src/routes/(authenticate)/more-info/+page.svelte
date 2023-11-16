@@ -31,6 +31,9 @@
 					</button>
 				</form>
 			</div>
+			<form method="post" use:enhance action="/logout">
+				<Button value="Or Sign Out" />
+			</form>
 		{:else if data.user.orgId == null}
 			{#if data.user.role == Role.UNVERIFIED_TEACHER}
 				<h1>Awaiting Verification</h1>
