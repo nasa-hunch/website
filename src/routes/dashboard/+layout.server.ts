@@ -1,7 +1,5 @@
 import { prisma } from '$lib/prismaConnection';
-const Role = {
-	HUNCH_ADMIN: "HUNCH_ADMIN"
-}
+import { Role } from '@prisma/client';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ cookies }) => {

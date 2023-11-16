@@ -4,7 +4,6 @@
 	"private": true,
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development vite dev",
-		"serve": "cross-env NODE_ENV=development node build",
 		"build": "vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
