@@ -1,9 +1,9 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { prisma } from '$lib/prismaConnection';
-import { Prisma, Role } from '@prisma/client';
+//import { Prisma, Role } from '@prisma/client';
 
-function filterProject(
+/*function filterProject(
 	role: Role,
 	orgId: number | null,
 	id: number
@@ -35,7 +35,7 @@ function filterProject(
 				}
 			};
 	}
-}
+}*/
 
 export const load: PageServerLoad = async ({ params, parent }) => {
 	const { user } = await parent();
@@ -44,7 +44,7 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 	const project = prisma.project.findFirst({
 		where: {
 			id,
-			...filterProject(user.role, user.orgId, user.id)
+			//...filterProject(user.role, user.orgId, user.id)
 		}
 	});
 

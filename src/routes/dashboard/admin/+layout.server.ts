@@ -1,4 +1,4 @@
-import { Role } from '@prisma/client';
+import { Role } from '$lib/enums.ts';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ parent }) => {

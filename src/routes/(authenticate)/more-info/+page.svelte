@@ -2,7 +2,7 @@
 	import Navbar from '$lib/Navbar.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import { Role } from '@prisma/client';
+	import { Role } from '$lib/enums';
 	import type { PageData } from './$types';
 	import { enhance } from '$app/forms';
 

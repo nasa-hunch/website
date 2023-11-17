@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-    import { Role } from '@prisma/client';
+    import { Role } from '$lib/enums.ts';
     import Button from '$lib/components/Button.svelte';
 
 	export let data: PageData;

@@ -1,5 +1,5 @@
 import { prisma } from '$lib/prismaConnection';
-import { Role } from '@prisma/client';
+import { Role } from '$lib/enums';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ cookies }) => {
