@@ -1,21 +1,6 @@
 name: publish
 
-on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow one concurrent deployment
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+on: ['pull_request', 'push']
 
 jobs:
   checks:
