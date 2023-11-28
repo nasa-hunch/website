@@ -1,12 +1,38 @@
 <script lang="ts">
-	import { Role } from '$lib/enums.ts';
+	import { Role } from '$lib/enums';
 	import type { PageData } from './$types';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import ModelForm from '$lib/components/ModelForm.svelte';
 
 	export let data: PageData;
+	let showDeleteForm = false;
+
+	type DeleteData = {
+		id: number,
+		firstName: string,
+		lastName: string
+	} | undefined
+
+	let deleteData: DeleteData;
+
+	let deletePerson = (id: number, firstName: string, lastName: string) => {
+		showDeleteForm = true;
+		deleteData = {
+			id,
+			firstName,
+			lastName
+		}
+	}
+
 </script>
 
-<ModelHelper></ModelHelper>
+<ModelHelper bind:visibile={showDeleteForm}>
+	<ModelForm method="post" action="?/deleteUser">
+		<p>Are you sure you want to delete user #{deleteData?.id}</p>
+		<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`}/>
+	</ModelForm>
+</ModelHelper>
 
 <main>
 	<h1>User Management Panel</h1>
@@ -31,7 +57,7 @@
 					{#if user.role == Role.UNVERIFIED_TEACHER}
 						<button on:click={() => {}}>verify</button>
 					{:else if user.role != Role.HUNCH_ADMIN}
-						<button on:click={() => {}}>delete</button>
+						<button on:click={() => {deletePerson(user.id, user.firstName, user.lastName)}}>delete</button>
 					{/if}
 				</td>
 			</tr>
