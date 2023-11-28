@@ -1,21 +1,17 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-    import { Role } from '$lib/enums.ts';
-    import Button from '$lib/components/Button.svelte';
-
-	export let data: PageData;
+    import type { PageData } from "../$types";
+    export let data: PageData;
 </script>
-
 <main>
-    <h1>Projects</h1>
-
-    {#if data.user.role == Role.TEACHER}
-        <Button value="Make a new project"/>
-    {/if}
+    {#each [...data.user.projectUser.map(user => user.project), ...data.user.ownedProjects] as project}
+		<a class="project" href="/dashboard/projects/{project.id}">
+			<p>{project.name}</p>
+		</a>
+	{/each}
 </main>
 
 <style>
     main {
         margin: 1rem;
-    }
+    } 
 </style>

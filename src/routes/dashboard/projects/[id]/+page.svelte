@@ -5,7 +5,7 @@
 </script>
 
 <main>
-	<h1>{data.project.name}</h1>
+	<h1>{data.project?.name}</h1>
 </main>
 
 <style>

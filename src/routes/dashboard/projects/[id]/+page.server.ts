@@ -41,14 +41,14 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 	const { user } = await parent();
 	const id = parseInt(params.id);
 
-	const project = prisma.project.findFirst({
+	const project = await prisma.project.findFirst({
 		where: {
 			id,
 			//...filterProject(user.role, user.orgId, user.id)
 		}
 	});
 
-	if (!project) {
+	if (!project || project == null) {
 		throw error(404, 'Project not found');
 	}
 
