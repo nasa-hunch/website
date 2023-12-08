@@ -2,35 +2,11 @@
 	import Gallery from '$lib/page/Gallery.svelte';
 	import type { GalleryImage } from '$lib/page/Gallery.svelte';
 	import Section from '$lib/page/Section.svelte';
-	import type { StatType } from '$lib/page/Stats.svelte';
 	import Hero from '$lib/Hero.svelte';
 
 	const title = 'NASA&nbsp;Hunch';
 	const image = 'https://live.staticflickr.com/65535/53142754400_9dde8a8d78_k_d.jpg';
-	
-	let stats: StatType[] = [
-		{
-			name: 'Programs',
-			value: 511
-		},
-		{
-			name: 'States',
-			value: 47
-		},
-		{
-			name: 'Partners',
-			value: 21
-		},
-		{
-			name: 'Flown Items',
-			value: 3000,
-			suffix: '+'
-		},
-		{
-			name: 'Students',
-			value: 2575
-		}
-	];
+
 
 	// Set the image gallery
 	let gallery: GalleryImage[] = [
