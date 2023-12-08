@@ -11,6 +11,15 @@ services:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
+  storage:
+    container_name: s3.docker.test
+    image: zenko/cloudserver
+    ports:
+      - '8000:8000'
+    environment:
+      - REMOTE_MANAGEMENT_DISABLE=1
+      - S3BACKEND=mem
+    command: bash -c "yarn start"
   web:
     image: node:20.9.0-alpine3.18
     container_name: nasa-hunch-web
