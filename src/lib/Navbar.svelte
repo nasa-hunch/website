@@ -14,7 +14,7 @@
 	};
 
 	const links = [
-		link('About', 'about'),
+		link('Partners', 'partners'),
 		link('Programs', 'programs'),
 		link('Team', 'team'),
 		link('Connect', 'connect'),
