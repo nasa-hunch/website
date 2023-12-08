@@ -17,7 +17,7 @@
 		"studio": "dotenv -e .env.test prisma studio",
 		"db:deploy": "prisma migrate deploy",
 		"seed": "tsx scripts/seed.ts",
-		"s3devdata": "tsx scripts/s3.ts",
+		"s3devdata": "tsx scripts/s3.ts"
 	},
 	"devDependencies": {
 		"@aws-sdk/client-s3": "^3.468.0",
