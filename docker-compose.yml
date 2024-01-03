@@ -11,6 +11,8 @@ services:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
+    ports:
+      - '5432:5432'
   storage:
     container_name: s3.docker.hunch
     image: zenko/cloudserver
@@ -35,7 +37,7 @@ services:
       - /app/node_modules/
       - /app/.pnpm-store/
     working_dir: /app
-    command: sh -c "npm i -g pnpm@8.12.1 && pnpm install && pnpm run db:deploy && pnpm run s3devdata && pnpm run seed && pnpm run dev --host --port 5173"
+    command: sh -c "npm i -g pnpm@8.12.1 && pnpm install && pnpm run db:deploy && pnpm run s3devdata && pnpm run seed && pnpm run dev --host"
     depends_on:
       - db
       - storage
