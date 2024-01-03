@@ -32,13 +32,13 @@
 		justify-content: center;
 		margin: 0 5rem;
 		margin-top: 1.5rem;
-		margin-bottom: 0!important;
+		margin-bottom: 0 !important;
 	}
 
 	section {
 		max-width: 900px;
 		width: 100%;
-		
+
 		display: flex;
 		flex-direction: column;
 		align-items: center;

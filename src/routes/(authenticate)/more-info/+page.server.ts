@@ -11,7 +11,7 @@ export const load = async ({ cookies }) => {
 	if (
 		(user.role == Role.STUDENT && user.projectUser.length != 0) ||
 		(user.role == Role.TEACHER && user.organization != null) ||
-		(user.role == Role.HUNCH_ADMIN)
+		user.role == Role.HUNCH_ADMIN
 	) {
 		throw redirect(303, '/dashboard');
 	}

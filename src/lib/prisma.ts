@@ -8,4 +8,4 @@ const { PrismaClient: RequiredPrismaClient } = require('@prisma/client');
 
 const _PrismaClient: typeof ImportedPrismaClient = RequiredPrismaClient;
 
-export class PrismaClient extends _PrismaClient {} 
+export class PrismaClient extends _PrismaClient {}

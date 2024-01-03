@@ -28,7 +28,7 @@ async function main() {
 	}
 
 	console.log('Seeding database...');
-	
+
 	await prisma.organization.upsert({
 		where: { id: 1, name: 'Cardboard' },
 		update: {},

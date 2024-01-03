@@ -43,7 +43,7 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 
 	const project = await prisma.project.findFirst({
 		where: {
-			id,
+			id
 			//...filterProject(user.role, user.orgId, user.id)
 		}
 	});

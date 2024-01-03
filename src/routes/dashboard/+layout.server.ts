@@ -22,7 +22,7 @@ export const load = async ({ cookies }) => {
 							project: true
 						}
 					},
-					ownedProjects: true,
+					ownedProjects: true
 				}
 			}
 		}

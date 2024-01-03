@@ -8,11 +8,13 @@
 	export let data: PageData;
 	let showDeleteForm = false;
 
-	type DeleteData = {
-		id: number,
-		firstName: string,
-		lastName: string
-	} | undefined
+	type DeleteData =
+		| {
+				id: number;
+				firstName: string;
+				lastName: string;
+		  }
+		| undefined;
 
 	let deleteData: DeleteData;
 
@@ -22,15 +24,14 @@
 			id,
 			firstName,
 			lastName
-		}
-	}
-
+		};
+	};
 </script>
 
 <ModelHelper bind:visibile={showDeleteForm}>
 	<ModelForm method="post" action="?/deleteUser">
 		<p>Are you sure you want to delete user #{deleteData?.id}</p>
-		<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`}/>
+		<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`} />
 	</ModelForm>
 </ModelHelper>
 
@@ -57,7 +58,11 @@
 					{#if user.role == Role.UNVERIFIED_TEACHER}
 						<button on:click={() => {}}>verify</button>
 					{:else if user.role != Role.HUNCH_ADMIN}
-						<button on:click={() => {deletePerson(user.id, user.firstName, user.lastName)}}>delete</button>
+						<button
+							on:click={() => {
+								deletePerson(user.id, user.firstName, user.lastName);
+							}}>delete</button
+						>
 					{/if}
 				</td>
 			</tr>

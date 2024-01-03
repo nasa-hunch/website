@@ -7,7 +7,6 @@
 	const title = 'NASA&nbsp;Hunch';
 	const image = 'https://live.staticflickr.com/65535/53142754400_9dde8a8d78_k_d.jpg';
 
-
 	// Set the image gallery
 	let gallery: GalleryImage[] = [
 		{
