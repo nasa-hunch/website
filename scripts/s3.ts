@@ -8,7 +8,7 @@ import {
 
 const S3 = new S3Client({
 	region: 'us-east-1',
-	endpoint: 'http://s3.docker.test:8000',
+	endpoint: 'http://s3.docker.hunch:8000',
 	forcePathStyle: true,
 	credentials: {
 		accessKeyId: 'accessKey1',

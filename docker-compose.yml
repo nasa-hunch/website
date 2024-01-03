@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
   storage:
-    container_name: s3.docker.test
+    container_name: s3.docker.hunch
     image: zenko/cloudserver
     ports:
       - '8000:8000'
