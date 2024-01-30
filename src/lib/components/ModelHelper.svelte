@@ -17,7 +17,7 @@
 
 <svelte:window on:keydown={keyHelper} />
 {#if visibile}
-	<button class="wrap" bind:this={buttonElement} on:click={clickHelper}>
+	<button class="wrap" bind:this={buttonElement} on:mousedown={clickHelper}>
 		<slot />
 	</button>
 {/if}

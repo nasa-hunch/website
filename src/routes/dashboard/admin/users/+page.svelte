@@ -5,10 +5,27 @@
 	import Button from '$lib/components/Button.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import { enhance } from '$app/forms';
+	import Combobox from "$lib/components/Combobox.svelte"
 
 	export let data: PageData;
 	let showDeleteForm = false;
 
+	let verifyUserForm = false;
+
+	const orgOptions = [
+		{
+			value: 1,
+			display: "test"
+		},
+		{
+			value: 2,
+			display: "test2"
+		},
+		{
+			value: 3,
+			display: "test3"
+		}
+	]
 
 	type DeleteData =
 		| {
@@ -37,6 +54,12 @@
 	</ModelForm>
 </ModelHelper>
 
+
+<ModelHelper bind:visibile={verifyUserForm}>
+	<ModelForm method="post" action="?/verifyUser">
+		<Combobox options={orgOptions} label="Organization"/>
+	</ModelForm>
+</ModelHelper>
 <main>
 	<h1>User Management Panel</h1>
 
@@ -58,10 +81,8 @@
 				<td>{user.role}</td>
 				<td>
 					{#if user.role == Role.UNVERIFIED_TEACHER}
-						<form method="POST" action="?/verifyUser" use:enhance>
-							<input name="id" hidden value="{user.id}"/>
-							<button>verify</button>
-						</form>
+	
+					<button on:click={() => {verifyUserForm = true}}>verify</button>
 						
 					{:else if user.role != Role.HUNCH_ADMIN}
 						<button
