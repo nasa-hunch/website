@@ -1,4 +1,8 @@
+import { formHandler } from '$lib/bodyguard.js';
+import { Role } from '$lib/enums.js';
 import { prisma } from '$lib/prismaConnection';
+import { verifySession } from '$lib/verifySession.js';
+import { z } from 'zod';
 
 export const load = async () => {
 	const userList = await prisma.user.findMany();
@@ -19,5 +23,24 @@ export const load = async () => {
 
 
 export const actions = {
-	
+	verifyUser: formHandler(z.object({
+		id: z.coerce.number()
+	}), async ({id}, {cookies}) => {
+		await verifySession(cookies, Role.HUNCH_ADMIN)
+
+		await prisma.user.update({
+			where: {
+				id
+			},
+			data: {
+				role: Role.TEACHER
+			}
+		})
+
+
+		return {
+			success: true,
+			message: "Teacher Verified"
+		}
+	})	
 }

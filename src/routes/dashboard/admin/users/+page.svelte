@@ -4,9 +4,11 @@
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
+	import { enhance } from '$app/forms';
 
 	export let data: PageData;
 	let showDeleteForm = false;
+
 
 	type DeleteData =
 		| {
@@ -56,7 +58,11 @@
 				<td>{user.role}</td>
 				<td>
 					{#if user.role == Role.UNVERIFIED_TEACHER}
-						<button on:click={() => {}}>verify</button>
+						<form method="POST" action="?/verifyUser" use:enhance>
+							<input name="id" hidden value="{user.id}"/>
+							<button>verify</button>
+						</form>
+						
 					{:else if user.role != Role.HUNCH_ADMIN}
 						<button
 							on:click={() => {
