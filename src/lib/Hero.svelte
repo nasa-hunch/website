@@ -1,13 +1,15 @@
 <script lang="ts">
 	export let image: string;
+	export let image2: string;
 	export let title: string;
 </script>
 
 <header>
 	<!-- TODO: give this life on the main page -->
-	<div class="wrapper" style="--img: url({image})">
+	<div class="background" style="--img: url({image})" />
+	<div class="wrapper" style="--img: url({image2})">
 		<div class="text">
-			<h1><img class="img" src="/favicon.png" alt="NASA Hunch Logo" />{@html title}</h1>
+			<h1><img class="img" src="/logo.svg" alt="NASA Hunch Logo" />{@html title}</h1>
 			<h2>Make for space.</h2>
 		</div>
 	</div>
@@ -20,17 +22,18 @@
 		overflow: hidden;
 	}
 
-	.wrapper {
+	.wrapper, .background {
 		width: 100%;
 		height: calc(100vh - 100px);
 		display: flex;
 		flex-direction: row;
 		align-items: end;
 		justify-content: flex-start;
-		/* clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0 100%); TODO: curve this :D */
+		clip-path: inset(0% 0% 0% 0% round 0 0 min(20vh, 20vw) 0);
 	}
 
-	.wrapper::before {
+	.background {
+		z-index: -1;
 		background-image: var(--img);
 		content: '';
 		position: absolute;
@@ -38,6 +41,20 @@
 		height: calc(100vh - 100px);
 		background-size: cover;
 		background-position: center;
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.wrapper::before {
+		background-image: var(--img);
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: calc(100vh);
+		background-size: cover;
+		background-position: 50% 10%;
+		background-repeat: no-repeat;
 	}
 
 	.text,

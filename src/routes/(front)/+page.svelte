@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Gallery from '$lib/page/Gallery.svelte';
 	import type { GalleryImage } from '$lib/page/Gallery.svelte';
-	import Section from '$lib/page/Section.svelte';
 	import Hero from '$lib/Hero.svelte';
 
+	import NonTransparent from '$lib/landing/images/non-transparent.jpg'
+	import Transparent from '$lib/landing/images/transparent.png'
+
 	const title = 'NASA&nbsp;Hunch';
-	const image = 'https://live.staticflickr.com/65535/53142754400_9dde8a8d78_k_d.jpg';
 
 	// Set the image gallery
 	let gallery: GalleryImage[] = [
@@ -60,12 +61,7 @@
 	];
 </script>
 
-<Hero {title} {image} />
+<Hero {title} image={NonTransparent} image2={Transparent} />
 
 <Gallery galleryImages={gallery} title="Explore Program Categories" />
 
-<style>
-	p {
-		font-size: 1.2rem;
-	}
-</style>
