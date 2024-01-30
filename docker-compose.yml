@@ -14,8 +14,10 @@ services:
     ports:
       - '5432:5432'
   storage:
-    container_name: s3.docker.hunch
+    container_name: hunch.docker.test
     image: zenko/cloudserver
+    volumes:
+      - ./cloudServerConfig.json:/usr/src/app/config.json
     ports:
       - '8000:8000'
     environment:
