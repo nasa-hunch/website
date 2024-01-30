@@ -1,4 +1,4 @@
-import { Role } from '$lib/enums.ts';
+import { Role } from '$lib/enums';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ parent }) => {

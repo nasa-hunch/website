@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Role } from '$lib/enums.ts';
+	import { Role } from '$lib/enums';
 	import type { PageData } from './$types';
 
 	let projectsDropped = false;
