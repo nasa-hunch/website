@@ -11,7 +11,7 @@
 	let showDeleteForm = false;
 
 	let verifyUserForm = false;
-
+	let selectedUserId = 0;
 
 	const orgOptions = data.orgList.map((item) => {
 		return {
@@ -42,7 +42,7 @@
 	};
 </script>
 
-<ModelHelper bind:visibile={showDeleteForm}>
+<ModelHelper bind:visible={showDeleteForm}>
 	<ModelForm method="post" action="?/deleteUser">
 		<p>Are you sure you want to delete user #{deleteData?.id}</p>
 		<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`} />
@@ -50,9 +50,13 @@
 </ModelHelper>
 
 
-<ModelHelper bind:visibile={verifyUserForm}>
+<ModelHelper bind:visible={verifyUserForm}>
 	<ModelForm method="post" action="?/verifyUser">
-		<Combobox options={orgOptions} label="Organization"/>
+		<h2>Verify User</h2>
+		<input hidden name="id" bind:value={selectedUserId}/>
+		<Combobox options={orgOptions} label="Organization" name="orgId"/>
+		<hr class="spacer">
+		<Button value="verify"/>
 	</ModelForm>
 </ModelHelper>
 <main>
@@ -77,7 +81,7 @@
 				<td>
 					{#if user.role == Role.UNVERIFIED_TEACHER}
 	
-					<button on:click={() => {verifyUserForm = true}}>verify</button>
+					<button on:click={() => {selectedUserId = user.id; verifyUserForm = true}}>verify</button>
 						
 					{:else if user.role != Role.HUNCH_ADMIN}
 						<button
@@ -121,5 +125,14 @@
 		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 		margin-bottom: 5px;
 		position: sticky;
+	}
+	.spacer {
+		height: 0px;
+		border: 0px;
+		outline: 0px;
+		background: transparent;
+	}
+	h2 {
+		text-align: center;
 	}
 </style>

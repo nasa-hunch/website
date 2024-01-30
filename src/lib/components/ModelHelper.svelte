@@ -1,22 +1,22 @@
 <script lang="ts">
-	export let visibile = false;
+	export let visible = false;
 	let buttonElement: HTMLButtonElement;
 
 	let clickHelper = (e: MouseEvent) => {
 		if (e.target == buttonElement) {
-			visibile = false;
+			visible = false;
 		}
 	};
 
 	let keyHelper = (e: KeyboardEvent) => {
 		if (e.key == 'Escape') {
-			visibile = false;
+			visible = false;
 		}
 	};
 </script>
 
 <svelte:window on:keydown={keyHelper} />
-{#if visibile}
+{#if visible}
 	<button class="wrap" bind:this={buttonElement} on:mousedown={clickHelper}>
 		<slot />
 	</button>

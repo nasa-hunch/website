@@ -25,8 +25,9 @@ export const load = async () => {
 
 export const actions = {
 	verifyUser: formHandler(z.object({
-		id: z.coerce.number()
-	}), async ({id}, {cookies}) => {
+		id: z.coerce.number(),
+		orgId: z.coerce.number(),
+	}), async ({id, orgId}, {cookies}) => {
 		await verifySession(cookies, Role.HUNCH_ADMIN)
 
 		await prisma.user.update({
@@ -34,7 +35,8 @@ export const actions = {
 				id
 			},
 			data: {
-				role: Role.TEACHER
+				role: Role.TEACHER,
+				orgId
 			}
 		})
 
