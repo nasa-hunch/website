@@ -3,7 +3,7 @@
 	import type { GalleryImage } from '$lib/page/Gallery.svelte';
 	import Hero from '$lib/Hero.svelte';
 
-	import NonTransparent from '$lib/landing/images/non-transparent.jpg'
+	import NonTransparent from '$lib/landing/images/non-transparent.png'
 	import Transparent from '$lib/landing/images/transparent.png'
 
 	const title = 'NASA&nbsp;Hunch';
