@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@faker-js/faker':
+    specifier: ^8.4.0
+    version: 8.4.0
   '@leodog896/bodyguard':
     specifier: ^1.3.2
     version: 1.3.2
@@ -943,6 +946,11 @@ packages:
   /@exact-realty/multipart-parser@1.0.10:
     resolution: {integrity: sha512-qfjWXnX3Zwhsaj6lO96OBhaSKEHfpFRhrQTbEhNhQ+oNTqQ7r6J1acbBDb5LQXaECRzZuC9cbq0mvQWzD5pnrw==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
+    dev: false
+
+  /@faker-js/faker@8.4.0:
+    resolution: {integrity: sha512-htW87352wzUCdX1jyUQocUcmAaFqcR/w082EC8iP/gtkF0K+aKcBp0hR5Arb7dzR8tQ1TrhE9DNa5EbJELm84w==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
     dev: false
 
   /@fastify/busboy@2.1.0:
