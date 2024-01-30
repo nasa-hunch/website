@@ -8,6 +8,30 @@ interface TeamMember {
 	img: string;
 }
 
+import BlakeRatcliff from './images/blake-ratcliff.jpg';
+import GeorgeKessler from './images/george-kessler.jpg';
+import BobZeek from './images/bob-zeek.jpg';
+import StacyHale from './images/stacy-hale.jpg';
+import FloGold from './images/flo-gold.jpg';
+import RoyBellard from './images/roy-bellard.jpg';
+import JenniferLeonard from './images/jennifer-leonard.jpg';
+import PhongDo from './images/phong-do.jpg';
+import LoyTrevino from './images/loy-trevino.jpg';
+import LukeSammons from './images/luke-sammons.jpg';
+import JulioZambrana from './images/julio-zambrana.jpg';
+import GladysHall from './images/gladys-hall.jpg';
+import NancyHall from './images/nancy-hall.jpg';
+import AllisonWestover from './images/alli-westover.jpg';
+import CarlosValencia from './images/carlos-valencia.jpg';
+import BillGibson from './images/bill-gibson.jpg';
+import GlennJohnson from './images/glenn-johnson.jpg';
+import LisaPassarelli from './images/lisa-passarelli.jpg';
+import YolandaSimmons from './images/yolanda-simmons.jpg';
+import MikeBennet from './images/mike-bennet.jpg';
+import GeneGordon from './images/gene-gordon.jpg';
+import DaveSchlichting from './images/dave-schlichting.jpg';
+import DonaldHecker from './images/donald-hecker.jpg';
+
 // TODO: move photos to public folder
 export const members: TeamMember[] = [
 	{
@@ -16,7 +40,7 @@ export const members: TeamMember[] = [
 		description: 'HUNCH Program Manager',
 		email: 'steven.b.ratcliff@nasa.gov',
 		phoneNumber: '(832) 795-8581',
-		img: '/images/meet-the-team/blake-ratcliff.jpg'
+		img: BlakeRatcliff
 	},
 	{
 		firstName: 'Geroge',
@@ -24,7 +48,7 @@ export const members: TeamMember[] = [
 		description: 'HUNCH Director of Projects',
 		email: 'george.j.kessler@nasa.gov',
 		phoneNumber: '(713) 213-6487',
-		img: '/images/meet-the-team/george-kessler.jpg'
+		img: GeorgeKessler
 	},
 	{
 		firstName: 'Bob',
@@ -32,7 +56,7 @@ export const members: TeamMember[] = [
 		description: 'MSFC Project Resource Manage and Co-Founder',
 		email: 'robert.c.zeek@nasa.gov',
 		phoneNumber: '(256) 542-7219',
-		img: '/images/meet-the-team/bob-zeek.jpg'
+		img: BobZeek
 	},
 	{
 		firstName: 'Stacy',
@@ -40,7 +64,7 @@ export const members: TeamMember[] = [
 		description: 'HUNCH Founder and Projects Manager',
 		email: 'stacy.l.hale@nasa.gov',
 		phoneNumber: '(832) 226-3963',
-		img: '/images/meet-the-team/stacy-hale.jpg'
+		img: StacyHale
 	},
 	{
 		firstName: 'Flo',
@@ -48,7 +72,7 @@ export const members: TeamMember[] = [
 		description: 'Video & Media',
 		email: 'florence.v.gold@nasa.gov',
 		phoneNumber: '(406) 690-2661',
-		img: '/images/meet-the-team/flo-gold.jpg'
+		img: FloGold
 	},
 	{
 		firstName: 'Roy',
@@ -56,7 +80,7 @@ export const members: TeamMember[] = [
 		description: 'Hardware Education Manager',
 		email: 'elroy-bellard-1@nasa.gov',
 		phoneNumber: '(281) 787-1495',
-		img: '/images/meet-the-team/roy-bellard.jpg'
+		img: RoyBellard
 	},
 	{
 		firstName: 'Jennifer',
@@ -65,7 +89,7 @@ export const members: TeamMember[] = [
 		description: 'Softgoods Lead',
 		email: 'jennifer.m.leonard@nasa.gov',
 		phoneNumber: '(281) 898-2382',
-		img: '/images/meet-the-team/jennifer-leonard.jpg'
+		img: JenniferLeonard
 	},
 	{
 		firstName: 'Phong',
@@ -73,7 +97,7 @@ export const members: TeamMember[] = [
 		description: 'Softgoods',
 		email: 'phong.t.do@nasa.gov',
 		phoneNumber: '(281) 483-3184',
-		img: '/images/meet-the-team/phong-do.jpg'
+		img: PhongDo
 	},
 	{
 		firstName: 'Loy',
@@ -81,20 +105,20 @@ export const members: TeamMember[] = [
 		description: 'Business Partnership',
 		email: 'elroy.w.trevino@nasa.gov',
 		phoneNumber: '(281) 244-0706',
-		img: '/images/meet-the-team/loy-trevino.jpg'
+		img: LoyTrevino
 	},
 	{
 		firstName: 'Luke',
 		lastName: 'Sammons',
 		description: 'HUNCH Technician',
-		img: '/images/meet-the-team/luke-sammons.jpg'
+		img: LukeSammons
 	},
 	{
 		firstName: 'Julio',
 		lastName: 'Zambrana',
 		description: 'Flight Hardware Processing Assistant',
 		email: 'jzambra@okstate.edu',
-		img: '/images/meet-the-team/julio-zambrana.jpg'
+		img: JulioZambrana
 	},
 	{
 		firstName: 'Gladys',
@@ -102,7 +126,7 @@ export const members: TeamMember[] = [
 		description: 'Project Coordinator',
 		email: 'gladys.e.hall@nasa.gov',
 		phoneNumber: '(281) 244-0733',
-		img: '/images/meet-the-team/gladys-hall.jpg'
+		img: GladysHall
 	},
 	{
 		firstName: 'Nancy',
@@ -110,7 +134,7 @@ export const members: TeamMember[] = [
 		description: 'GRC Project Manager',
 		email: 'nancy.r.hall@nasa.gov',
 		phoneNumber: '(216) 385-6302',
-		img: '/images/meet-the-team/Nancy-Hall.jpg'
+		img: NancyHall
 	},
 	{
 		firstName: 'Allison',
@@ -118,7 +142,7 @@ export const members: TeamMember[] = [
 		description: 'Culinary Project Manager Design and Prototype Engineer',
 		email: 'allison.r.westover@nasa.gov',
 		phoneNumber: '(281) 898-2486',
-		img: '/images/meet-the-team/alli-westover.jpg'
+		img: AllisonWestover
 	},
 	{
 		firstName: 'Carlos',
@@ -126,7 +150,7 @@ export const members: TeamMember[] = [
 		description: 'Hardware Assembly Specialist',
 		email: 'juan.c.valencia@nasa.gov',
 		phoneNumber: '(832) 537-8768',
-		img: '/images/meet-the-team/carlos-valencia.jpg'
+		img: CarlosValencia
 	},
 	{
 		firstName: 'Bill',
@@ -134,7 +158,7 @@ export const members: TeamMember[] = [
 		description: 'Hardware Support Specialist',
 		email: 'william.e.gibson@nasa.gov',
 		phoneNumber: '(256) 529-3804',
-		img: '/images/meet-the-team/bill-gibson.jpg'
+		img: BillGibson
 	},
 	{
 		firstName: 'Glenn',
@@ -142,7 +166,7 @@ export const members: TeamMember[] = [
 		description: 'Design & Prototype',
 		email: 'glenn.f.johnson@nasa.gov',
 		phoneNumber: '(281) 755-2823',
-		img: '/images/meet-the-team/glenn-johnson.jpg'
+		img: GlennJohnson
 	},
 	{
 		firstName: 'Lisa',
@@ -150,7 +174,7 @@ export const members: TeamMember[] = [
 		description: 'Interim Softgoods Manager',
 		email: 'lisa.c.passarelli@nasa.gov',
 		phoneNumber: '(231) 861-8454',
-		img: '/images/meet-the-team/lisa-passarerlli.jpg'
+		img: LisaPassarelli
 	},
 	{
 		firstName: 'Yolanda',
@@ -158,7 +182,7 @@ export const members: TeamMember[] = [
 		description: 'LaRC Program Manager',
 		email: 'yolanda.watford.simmons@nasa.gov',
 		phoneNumber: '(757) 864-1569',
-		img: '/images/meet-the-team/yolanda-simmons.jpg'
+		img: YolandaSimmons
 	},
 	{
 		firstName: 'Mike',
@@ -166,21 +190,21 @@ export const members: TeamMember[] = [
 		description: 'Flight Configuration Project Manager',
 		email: 'donald.m.bennett@nasa.gov',
 		phoneNumber: '(281) 483-0938',
-		img: '/images/meet-the-team/mike-bennet.jpg'
+		img: MikeBennet
 	},
 	{
 		firstName: 'Gene',
 		lastName: 'Gordon',
 		description: 'NASA HUNCH Mentor',
 		email: 'gene@nanoracks.com',
-		img: '/images/meet-the-team/gene-gordon.jpg'
+		img: GeneGordon
 	},
 	{
 		firstName: 'Dave',
 		lastName: 'Schlichting',
 		description: 'NASA HUNCH Mentor',
 		email: 'dave@nanoracks.com',
-		img: '/images/meet-the-team/dave-schlichting.jpg'
+		img: DaveSchlichting
 	},
 	{
 		firstName: 'Donald',
@@ -189,6 +213,6 @@ export const members: TeamMember[] = [
 		description: 'Flight Hardware Project Manager',
 		email: 'donald.a.hecker@nasa.gov',
 		phoneNumber: '281-244-2852',
-		img: '/images/meet-the-team/donald-hecker.jpg'
+		img: DonaldHecker
 	}
-].map((x) => ({ ...x, img: 'https://nasahunch.com' + x.img }));
+];
