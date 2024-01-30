@@ -12,20 +12,15 @@
 
 	let verifyUserForm = false;
 
-	const orgOptions = [
-		{
-			value: 1,
-			display: "test"
-		},
-		{
-			value: 2,
-			display: "test2"
-		},
-		{
-			value: 3,
-			display: "test3"
+
+	const orgOptions = data.orgList.map((item) => {
+		return {
+			value: item.id,
+			display: item.name
 		}
-	]
+	})
+
+
 
 	type DeleteData =
 		| {

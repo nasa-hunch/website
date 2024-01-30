@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 export const load = async () => {
 	const userList = await prisma.user.findMany();
-
+	const orgList = await prisma.organization.findMany({})
 	return {
 		userList: userList.map((user) => ({
 			id: user.id,
@@ -17,7 +17,8 @@ export const load = async () => {
 			email: user.email,
 			role: user.role,
 			orgId: user.orgId
-		}))
+		})),
+		orgList
 	};
 };
 

@@ -48,7 +48,7 @@ const users: {
 //250 orgs
 for(let i = 0; i < 250; i++) {
 	orgs.push({
-		name: `${faker.word.adjective}-${faker.word.noun}`
+		name: `${faker.word.adjective()}-${faker.word.noun()}`
 	})
 }
 
@@ -56,7 +56,7 @@ console.log(`Orgs generated in ${Date.now() - recentStartTime}ms`)
 recentStartTime = Date.now()
 
 
-//10,000 users
+//2,500 users
 for(let i = 0; i < 2500; i++) {
 
 	const firstName = faker.person.firstName();
