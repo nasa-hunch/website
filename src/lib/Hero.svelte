@@ -33,7 +33,7 @@
 	}
 
 	.background {
-		z-index: -1;
+		z-index: -2;
 		background-image: var(--img);
 		content: '';
 		position: absolute;
@@ -53,7 +53,7 @@
 		width: 100%;
 		height: calc(100vh);
 		background-size: cover;
-		background-position: 50% 10%;
+		background-position: center;
 		background-repeat: no-repeat;
 	}
 
