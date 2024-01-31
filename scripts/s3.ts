@@ -1,14 +1,14 @@
 import {
-	S3Client,
-	CreateBucketCommand,
 	BucketCannedACL,
+	CreateBucketCommand,
+	ListBucketsCommand,
 	PutBucketPolicyCommand,
-	ListBucketsCommand
+	S3Client
 } from '@aws-sdk/client-s3';
 
 const S3 = new S3Client({
 	region: 'us-east-1',
-	endpoint: 'http://hunch.docker.test:8000',
+	endpoint: 'http://s3.docker.test:8000',
 	forcePathStyle: true,
 	credentials: {
 		accessKeyId: 'accessKey1',

@@ -16,7 +16,7 @@ jobs:
           POSTGRES_DB: tests
         ports:
           - '5432:5432'
-      hunch.docker.test:
+      s3.docker.test:
         image: zenko/cloudserver
         env:
           REMOVE_MANAGEMENT_DISABLE: 1
