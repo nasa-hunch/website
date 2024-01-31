@@ -6,7 +6,7 @@ import {
 	ListBucketsCommand
 } from '@aws-sdk/client-s3';
 
-const endpoint = 'http://hunch.docker.test:8000/'
+const endpoint = 'http://hunch.docker.test:8000'
 
 const S3 = new S3Client({
 	region: 'us-east-1',
