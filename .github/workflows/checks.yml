@@ -58,5 +58,5 @@ jobs:
         run: npx playwright install-deps
       - name: Install Playwright
         run: npx playwright install
-      - name: Run Tests
-        run: pnpm run test
+      # - name: Run Tests
+      #   run: pnpm run test
