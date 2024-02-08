@@ -35,7 +35,9 @@
 	</ul>
 </nav>
 
-<style>
+<style lang="scss">
+	@import '$lib/utils.scss';
+
 	nav {
 		position: sticky;
 		z-index: 10000;
@@ -100,13 +102,13 @@
 		left: 0px;
 		width: 100%;
 		height: 4px;
-		background: #dd361c;
+		background: $primary;
 		transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 		transform: scale(0, 1);
 	}
 
 	.navRegularLink a:hover {
-		color: #dd361c;
+		color: $primary;
 		transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 	}
 	.navRegularLink a:hover::after {
@@ -117,7 +119,7 @@
 	.specialButton {
 		background-size: 300%;
 		background-position: 100%;
-		background-image: linear-gradient(to right, #99231b 40%, #dd361c 60%);
+		background-image: linear-gradient(to right, #99231b 40%, $primary 60%);
 		transition: all 0.2s ease-in-out;
 	}
 	.specialButton:hover {

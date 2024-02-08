@@ -2,10 +2,14 @@
 	export let program: string;
 </script>
 
-<div class="reach" />
-<div class="description">
-	<h2>NASA Hunch {program} Program</h2>
-</div>
+<header>
+	<div class="reach" />
+	<div class="description">
+		<h1>{program}</h1>
+		<h2><slot name="subtitle" /></h2>
+	</div>
+</header>
+
 <div class="projects">
 	<!--
 	{#each projects as project}
@@ -13,8 +17,23 @@
 	{/each}-->
 </div>
 
-<style>
+<style lang="scss">
 	.description {
 		margin: 1rem;
+
+		h1 {
+			font-size: 4rem;
+			font-weight: 700;
+			margin-bottom: 1rem;
+			text-align: center;
+		
+		}
+
+		h2 {
+			font-size: 3rem;
+			font-weight: 700;
+			margin-bottom: 1rem;
+			text-align: center;
+		}
 	}
 </style>

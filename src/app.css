@@ -22,3 +22,7 @@ h5,
 h6 {
 	font-family: 'Manrope Variable', sans-serif;
 }
+
+b {
+	font-weight: 800;
+}

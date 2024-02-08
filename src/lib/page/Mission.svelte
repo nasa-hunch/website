@@ -53,6 +53,8 @@
 </div>
 
 <style lang="scss">
+	@import '$lib/utils.scss';
+
 	.wrap {
 		width: 100%;
 		display: flex;
@@ -123,6 +125,6 @@
 		position: absolute;
 		height: 2px;
 		width: 100%;
-		background: #dd361c;
+		background: $primary;
 	}
 </style>
