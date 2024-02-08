@@ -11,7 +11,9 @@
 </script>
 
 
-<div class="wrap" use:inview on:inview_enter={() => {opacity.set(1)}}>
+<div class="wrap" use:inview={{
+	rootMargin: "-100px"
+}} on:inview_enter={() => {opacity.set(1)}}>
 	<div class="inner" style="opacity: {$opacity}">
 		<h2>The mission is simple.</h2>
 		<div class="cards">

@@ -12,7 +12,7 @@
 
 	$: console.log(options)
 
-	const opacity = tweened(0, {
+	const opacity = tweened(0.01, {
 		delay: 150,
 		duration: 500,
 		easing: quadInOut
