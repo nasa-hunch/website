@@ -1,8 +1,5 @@
 <script>
-	import { fade } from 'svelte/transition';
 	import { inview } from 'svelte-inview';
-	import { quadInOut } from 'svelte/easing';
-	import { tweened } from 'svelte/motion';
 	export let options = {
 		href: '',
 		src: '',
@@ -10,17 +7,11 @@
 		multiplier: 1
 	};
 
-	$: console.log(options);
-
-	const opacity = tweened(0.01, {
-		delay: 150,
-		duration: 500,
-		easing: quadInOut
-	});
+	let inView = false;
 </script>
 
-<div class="wrap" use:inview on:inview_enter={() => opacity.set(1)}>
-	<div class="item" style="opacity: {$opacity}">
+<div class="wrap" use:inview on:inview_enter={() => inView = true}>
+	<div class="item" class:inView={inView}>
 		<div class="bg" style="background-image: url({options.src})" />
 		<a class="link" href={options.href}>
 			<div class="caption">
@@ -30,7 +21,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.wrap {
 		position: relative;
 		min-width: 300px;
@@ -42,7 +33,22 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
+		opacity: 0;
+
+		&.inView {
+			animation: fadeIn 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+		}
 	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
 	.bg {
 		width: 100%;
 		height: 100%;

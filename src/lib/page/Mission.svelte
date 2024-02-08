@@ -1,12 +1,7 @@
 <script>
 	import { inview } from 'svelte-inview';
-	import { cubicInOut } from 'svelte/easing';
-	import { tweened } from 'svelte/motion';
 
-	let opacity = tweened(0, {
-		duration: 750,
-		easing: cubicInOut
-	});
+	let inView = false;
 </script>
 
 <div
@@ -14,11 +9,9 @@
 	use:inview={{
 		rootMargin: '-100px'
 	}}
-	on:inview_enter={() => {
-		opacity.set(1);
-	}}
+	on:inview_enter={() => (inView = true)}
 >
-	<div class="inner" style="opacity: {$opacity}">
+	<div class="inner" class:inView={inView}>
 		<h2>The mission is simple.</h2>
 		<div class="cards">
 			<div class="card">
@@ -59,7 +52,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.wrap {
 		width: 100%;
 		display: flex;
@@ -70,7 +63,22 @@
 		width: 90%;
 		display: flex;
 		flex-direction: column;
+		opacity: 0;
+
+		&.inView {
+			animation: fadeIn 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+		}
 	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
 	h2 {
 		width: 100%;
 		text-align: center;
