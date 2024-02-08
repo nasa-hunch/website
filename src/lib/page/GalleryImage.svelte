@@ -2,6 +2,7 @@
 	import { fade } from "svelte/transition";
 	import {inview} from "svelte-inview"
 	import { quadInOut } from "svelte/easing";
+	import { tweened } from "svelte/motion";
 	export let options = {
 		href: "",
 		src: "",
@@ -11,20 +12,18 @@
 
 	$: console.log(options)
 
-	let showing = false;
+	const opacity = tweened(0, {
+		delay: 150,
+		duration: 500,
+		easing: quadInOut
+	})
+
 </script>
 
 
 
-<div class="wrap" use:inview on:inview_enter={() => showing=true} on:inview_exit={() => showing = false}>
-	{#if showing}
-		<div class="item" transition:fade={
-			{
-				delay: 150,
-				duration: 500,
-				easing: quadInOut
-			}
-		}>
+<div class="wrap" use:inview on:inview_enter={() => opacity.set(1)}>
+		<div class="item" style="opacity: {$opacity}">
 			<div class="bg" style="background-image: url({options.src})"/>
 			<a class="link" href={options.href} >
 				<div class="caption">
@@ -35,7 +34,6 @@
 		</div>
 		
 		
-	{/if}
 </div>
 
 
