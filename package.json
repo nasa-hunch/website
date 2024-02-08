@@ -37,6 +37,8 @@
 		"dotenv-cli": "^7.3.0",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
+		"eslint-define-config": "^2.1.0",
+		"eslint-plugin-simple-import-sort": "^11.0.0",
 		"eslint-plugin-svelte": "^2.30.0",
 		"fluent-ffmpeg": "^2.1.2",
 		"libphonenumber-js": "^1.10.49",
