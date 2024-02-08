@@ -70,7 +70,8 @@
 		flex-direction: row;
 		align-items: center;
 		border-radius: 5px;
-		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+		transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+		border: 1px solid transparent;
 	}
 	.category:hover {
 		transform: scale(1.01);
