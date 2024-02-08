@@ -12,9 +12,11 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
+	@import '$lib/utils.scss';
+
 	.errorCode {
-		color: #dd361c;
+		color: $primary;
 	}
 	.content {
 		height: 100%;

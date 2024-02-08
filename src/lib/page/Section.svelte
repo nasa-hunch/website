@@ -20,7 +20,9 @@
 	</section>
 </div>
 
-<style>
+<style lang="scss">
+	@import '$lib/utils.scss';
+
 	.content {
 		width: 100%;
 		font-size: 18px;
@@ -68,7 +70,7 @@
 		left: 0px;
 		width: 100%;
 		height: 0.25rem;
-		background: #dd361c;
+		background: $primary;
 		border-radius: 1rem;
 	}
 </style>
