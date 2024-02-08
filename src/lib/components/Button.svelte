@@ -5,7 +5,7 @@
 	export let type: HTMLButtonElement['type'] = 'submit';
 </script>
 
-<button {type}>
+<button {type} on:click>
 	{value}
 </button>
 
