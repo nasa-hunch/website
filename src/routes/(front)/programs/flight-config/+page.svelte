@@ -31,12 +31,14 @@
 </main>
 
 <style lang="scss">
+	@import '$lib/utils.scss';
+
 	main {
 		padding: 1rem;
 	}
 
 	.accent {
-		color: var(--accent);
+		color: $primary;
 	}
 
 	ul {
