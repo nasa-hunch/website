@@ -15,7 +15,7 @@
 	</div>
 </header>
 
-<style>
+<style lang="scss">
 	header {
 		margin: 0px;
 		padding: 0px;

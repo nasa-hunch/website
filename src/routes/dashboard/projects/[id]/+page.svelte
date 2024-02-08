@@ -8,7 +8,7 @@
 	<h1>{data.project?.name}</h1>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		margin: 1rem;
 	}

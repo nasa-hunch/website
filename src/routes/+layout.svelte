@@ -20,7 +20,7 @@
 
 <slot />
 
-<style>
+<style lang="scss">
 	:global(body) {
 		margin: 0px;
 	}

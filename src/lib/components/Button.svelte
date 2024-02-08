@@ -1,6 +1,4 @@
 <script lang="ts">
-	// Why a custom button?
-	// Keeps everything looking clean
 	export let value = 'Button!';
 	export let type: HTMLButtonElement['type'] = 'submit';
 </script>
@@ -9,7 +7,7 @@
 	{value}
 </button>
 
-<style>
+<style lang="scss">
 	button {
 		background: transparent;
 		border: 1px solid gray;

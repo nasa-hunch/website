@@ -8,11 +8,7 @@
 </script>
 
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
-	import { inview } from 'svelte-inview';
-
 	import GalleryImageElement from './GalleryImage.svelte';
-	let showing = false;
 
 	export let galleryImages: GalleryImage[];
 	export let title = 'Gallery';
@@ -20,13 +16,7 @@
 
 <div class="gallery">
 	<h3>{title}</h3>
-	<div
-		class="items"
-		on:inview_enter={() => {
-			showing = true;
-		}}
-		use:inview
-	>
+	<div class="items">
 		{#each galleryImages as image, i}
 			<GalleryImageElement
 				options={{

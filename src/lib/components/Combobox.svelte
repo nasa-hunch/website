@@ -16,13 +16,7 @@
 	export let required = false;
 	export let autocomplete: HTMLInputElement['autocomplete'] | null = null;
 
-	let input: HTMLInputElement;
 	export let value: string = '';
-
-	let startFocus = () => (active = true);
-
-	let selectInput = () => (active = true);
-	let deselectText = () => (active = false);
 
 	$: moveText = value.length > 0 || active;
 
@@ -30,13 +24,11 @@
 	let active = false;
 
 	let selected = options[0].value;
-	$: console.log(selected);
 
 	let outerButton: HTMLButtonElement;
 	const buttonClick = (e: MouseEvent) => {
 		if (e.currentTarget == outerButton) {
 			active = true;
-			console.log('active set by button');
 		}
 	};
 </script>
@@ -51,7 +43,7 @@
 		on:click={buttonClick}
 	>
 		<input {name} hidden bind:value={selected} />
-		<input bind:this={input} {autocomplete} {required} bind:value />
+		<input {autocomplete} {required} bind:value />
 		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
 			{label}
 		</div>
@@ -87,7 +79,7 @@
 	/>
 {/if}
 
-<style>
+<style lang="scss">
 	.wrap {
 		all: unset;
 		position: relative;

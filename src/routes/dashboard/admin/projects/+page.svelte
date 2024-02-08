@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let data;
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
@@ -35,7 +35,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.wrap {
 		width: 100%;
 		height: 100%;

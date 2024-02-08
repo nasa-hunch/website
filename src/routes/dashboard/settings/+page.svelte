@@ -19,7 +19,7 @@
 	<p>Role: {titleCasedRole}</p>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		margin: 1rem;
 	}
