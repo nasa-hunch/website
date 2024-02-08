@@ -212,7 +212,7 @@ export const members: TeamMember[] = [
 		lastName: 'Hecker',
 		description: 'Flight Hardware Project Manager',
 		email: 'donald.a.hecker@nasa.gov',
-		phoneNumber: '281-244-2852',
+		phoneNumber: '(281) 244-2852',
 		img: DonaldHecker
 	}
 ];

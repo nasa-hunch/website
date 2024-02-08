@@ -5,21 +5,24 @@
 <Program program="Flight Configuration">
 	<div slot="subtitle">
 		<p>
-			The bridge between <span class="accent">design</span> and <span class="accent">flight</span>
+			Bring <span class="accent">HUNCH</span> projects to <span class="accent">life</span>.
 		</p>
 	</div>
 	<div slot="main">
 		<p>
-			<b>Flight Configuration</b> allows students to bring their projects to life. They will work with
-			NASA HUNCH Mentors to bring their selected project designs and drawings up to NASA drafting and manufacturing
+			Design is one part of the process, but there is more to it than that. The <b>Flight Configuration</b> program
+			is the next step in the process of bringing a project to the International Space Station.
+		</p>
+		<p>
+			Work with NASA HUNCH Mentors and bring project designs and drawings up to NASA drafting and manufacturing
 			standards. This includes producing completed flight drawings, documentation, and final 3D prints
 			if needed.
 		</p>
-		<p>Students participating in flight configuration may do one of the following:</p>
+		<p>Students participating in flight configuration may work one of the following:</p>
 		<ul>
-			<li>Continue to work on their project from the previous school year</li>
-			<li>Work on a new project that was chosen to move on to flight</li>
-			<li>Work on projects from organizations within NASA which must be created in a short period</li>
+			<li>Their project from the previous school year</li>
+			<li>A new project that was chosen to move on to flight</li>
+			<li>Projects from NASA organizations which must be hastily created</li>
 		</ul>
 		<p>
 			When their designs are ready for production in one of our HUNCH schools, the project will go
