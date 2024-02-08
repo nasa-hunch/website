@@ -16,9 +16,9 @@ export const actions = {
 		});
 
 		if (hasSession) {
-			cookies.delete('session');
+			/* @migration task: add path argument */ cookies.delete('session');
 		}
 
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 };

@@ -18,7 +18,7 @@ export const load = async ({ cookies }) => {
 		}
 	});
 	if (sessionCheck) {
-		throw redirect(307, '/dashboard');
+		redirect(307, '/dashboard');
 	} else {
 		return;
 	}
@@ -106,13 +106,13 @@ export const actions = {
 			}
 		});
 
-		cookies.set('session', session, {
-			secure: true,
-			sameSite: 'strict',
-			// 7 days
-			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-		});
+		/* @migration task: add path argument */ cookies.set('session', session, {
+        			secure: true,
+        			sameSite: 'strict',
+        			// 7 days
+        			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        		});
 
-		throw redirect(303, '/dashboard');
+		redirect(303, '/dashboard');
 	}
 };

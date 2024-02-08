@@ -12,7 +12,7 @@ export async function validateSession(
 	include: Prisma.UserInclude = {}
 ) {
 	if (!session) {
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 
 	const sessionInstance = await prisma.session.findFirst({
@@ -32,7 +32,7 @@ export async function validateSession(
 
 	// We have a valid session!
 	if (!user) {
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 
 	return user;

@@ -6,7 +6,7 @@ export const load = async ({ cookies }) => {
 	// if the user isn't logged in, we need to redirect them to the login page
 	const session = cookies.get('session');
 	if (!session) {
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 
 	const sessionCheck = await prisma.session.findFirst({
@@ -30,18 +30,18 @@ export const load = async ({ cookies }) => {
 
 	// We have a valid session!
 	if (!sessionCheck || !sessionCheck.user) {
-		throw redirect(303, '/login');
+		redirect(303, '/login');
 	}
 
 	const user = sessionCheck.user;
 	if (user.role == null) {
 		// we need more info from the user
-		throw redirect(303, '/more-info');
+		redirect(303, '/more-info');
 	}
 
 	if (user.orgId == null && user.role != Role.HUNCH_ADMIN) {
 		if (user.projectUser.length == 0) {
-			throw redirect(303, '/more-info');
+			redirect(303, '/more-info');
 		} else {
 			// error recovery: if the user has a projectUser but no orgId, set the orgId to the project's orgId
 			await prisma.user.update({

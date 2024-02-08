@@ -13,7 +13,7 @@ export const load = async ({ cookies }) => {
 		(user.role == Role.TEACHER && user.organization != null) ||
 		user.role == Role.HUNCH_ADMIN
 	) {
-		throw redirect(303, '/dashboard');
+		redirect(303, '/dashboard');
 	}
 
 	return {
@@ -51,7 +51,7 @@ export const actions = {
 		const code = data.get('code');
 
 		if (!code) {
-			throw error(400, 'No code provided.');
+			error(400, 'No code provided.');
 		}
 
 		const user = await validateSession(cookies.get('session'));
@@ -67,15 +67,15 @@ export const actions = {
 		});
 
 		if (!project) {
-			throw error(400, 'Invalid code.');
+			error(400, 'Invalid code.');
 		}
 
 		if (project.owner.id == user.id) {
-			throw error(400, "You can't join a project you own.");
+			error(400, "You can't join a project you own.");
 		}
 
 		if (project.users.find((u) => u.id == user.id)) {
-			throw error(400, 'You are already a member of this project.');
+			error(400, 'You are already a member of this project.');
 		}
 
 		await prisma.projectUser.create({
@@ -94,7 +94,7 @@ export const actions = {
 			}
 		});
 
-		throw redirect(303, '/dashboard');
+		redirect(303, '/dashboard');
 	},
 	rescindRole: async ({ cookies }) => {
 		const user = await validateSession(cookies.get('session'));
@@ -109,7 +109,7 @@ export const actions = {
 				}
 			});
 		} else {
-			throw error(400, 'You cannot rescind your role if you are a member of an organization.');
+			error(400, 'You cannot rescind your role if you are a member of an organization.');
 		}
 	}
 };
