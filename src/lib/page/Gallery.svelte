@@ -8,19 +8,27 @@
 </script>
 
 <script lang="ts">
+	import { fade, fly } from "svelte/transition";
+	import GalleryImageElement from "./GalleryImage.svelte";
+
+	
+	import { inview } from 'svelte-inview';
+	let showing = false;
+
 	export let galleryImages: GalleryImage[];
 	export let title = 'Gallery';
 </script>
 
 <div class="gallery">
 	<h3>{title}</h3>
-	<div class="items">
-		{#each galleryImages as image}
-			<a class="galleryImage" href={image.href} style="background-image: url({image.src})">
-				<div class="caption">
-					{image.caption}
-				</div>
-			</a>
+	<div class="items" use:inview on:inview_enter={() => {showing = true}}>
+		{#each galleryImages as image, i}
+			<GalleryImageElement options={{
+				href: image.href,
+				src: image.src,
+				caption: image.caption,
+				multiplier: (i%2) + 1
+			}}/>
 		{/each}
 	</div>
 </div>
@@ -36,57 +44,12 @@
 	}
 
 	.items {
-		width: 95%;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-
-	.galleryImage {
-		position: relative;
-		min-width: 250px;
-		width: calc(25% - 20px);
-		margin: 10px;
-		height: 250px;
-		background-size: cover;
-		background-position: center;
-		display: flex;
-		flex-direction: column;
-		justify-content: end;
-		text-decoration: none;
-		border-radius: 5px;
-		transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-	}
-	.galleryImage::after {
-		content: '';
-		position: absolute;
-		top: 0px;
-		left: 0px;
 		width: 100%;
-		height: 100%;
-		background: rgba(0, 0, 0, 0.6);
-		transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-		border-radius: 5px;
-		z-index: 3;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
 	}
 
-	.galleryImage:hover {
-		transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-	}
-
-	.galleryImage:hover::after {
-		background: rgba(221, 54, 28, 0.5);
-	}
-
-	.caption {
-		background: rgba(0, 0, 0, 0.75);
-		color: white;
-		text-decoration: none;
-		padding: 0.75rem;
-		font-size: 1.5rem;
-		z-index: 4;
-		backdrop-filter: blur(5px);
-	}
 	h3 {
 		font-size: 3rem;
 		font-family: 'Lexend Variable', sans-serif;
