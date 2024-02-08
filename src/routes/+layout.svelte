@@ -3,18 +3,18 @@
 	import '@fontsource-variable/lexend';
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import Lenis from '@studio-freight/lenis'
+	import Lenis from '@studio-freight/lenis';
 
 	onMount(() => {
-		const lenis = new Lenis()
+		const lenis = new Lenis();
 
 		function raf(time: number) {
-			lenis.raf(time)
-			requestAnimationFrame(raf)
+			lenis.raf(time);
+			requestAnimationFrame(raf);
 		}
 
-		requestAnimationFrame(raf)
-	})
+		requestAnimationFrame(raf);
+	});
 </script>
 
 <slot />

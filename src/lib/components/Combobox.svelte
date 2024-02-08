@@ -2,15 +2,13 @@
 	import { onMount } from 'svelte';
 
 	type Option = {
-		value: string | number,
-		display: string,
-	}
+		value: string | number;
+		display: string;
+	};
 	/**
 	 * Option is a option in the dropdown, includes a value and a display string
 	 */
-	export let options: Option[] = []
-
-	
+	export let options: Option[] = [];
 
 	export let name = 'Input';
 	export let label = 'Input';
@@ -21,7 +19,7 @@
 	let input: HTMLInputElement;
 	export let value: string = '';
 
-	let startFocus = () => active = true;
+	let startFocus = () => (active = true);
 
 	let selectInput = () => (active = true);
 	let deselectText = () => (active = false);
@@ -32,61 +30,62 @@
 	let active = false;
 
 	let selected = options[0].value;
-	$: console.log(selected)
-	
-	let outerButton: HTMLButtonElement
+	$: console.log(selected);
+
+	let outerButton: HTMLButtonElement;
 	const buttonClick = (e: MouseEvent) => {
-		if(e.currentTarget == outerButton) {
-			active = true
-			console.log('active set by button')
+		if (e.currentTarget == outerButton) {
+			active = true;
+			console.log('active set by button');
 		}
-	}
+	};
 </script>
 
 <div class="wrap" style="--bgColor: {bgColor}">
 	<button
 		type="button"
-		
 		class="wrap"
 		class:active
 		bind:this={outerButton}
 		on:click={buttonClick}
-		
 		tabindex="-1"
 	>
-		<input hidden {name} bind:value={selected}/>
-		<input
-			bind:this={input}		
-			bind:value
-			{required}
-			{autocomplete}
-		/>
+		<input hidden {name} bind:value={selected} />
+		<input bind:this={input} bind:value {required} {autocomplete} />
 		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
 			{label}
 		</div>
-	
-	
 	</button>
 	{#if active}
-	<div class="options">
-		{#each options as option}
-			{#if option.display.toLowerCase().includes(value.toLowerCase())}
-				<button class="option" on:click={(e) => {selected = option.value; value = option.display; active = false}} type="button">
-					{option.display}
-				</button>		
-			{/if}	
-		{/each}
-	</div>
-{/if}
+		<div class="options">
+			{#each options as option}
+				{#if option.display.toLowerCase().includes(value.toLowerCase())}
+					<button
+						class="option"
+						on:click={(e) => {
+							selected = option.value;
+							value = option.display;
+							active = false;
+						}}
+						type="button"
+					>
+						{option.display}
+					</button>
+				{/if}
+			{/each}
+		</div>
+	{/if}
 </div>
 
-
 {#if active}
-		<button class="deselect" type="button" on:mousedown={() => {active = false}}>
-
-		</button>
-	{/if}
-
+	<button
+		class="deselect"
+		type="button"
+		on:mousedown={() => {
+			active = false;
+		}}
+	/>
+{/if}
 
 <style>
 	.wrap {
@@ -99,7 +98,6 @@
 		cursor: text;
 		z-index: 2;
 		background: var(--bgColor);
-		
 	}
 	input {
 		border: 0px;
@@ -155,7 +153,6 @@
 		outline: 1px solid #02bfe7;
 		background: var(--bgColor);
 		overflow-y: auto;
-		
 	}
 	.option {
 		all: unset;

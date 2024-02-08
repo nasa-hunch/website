@@ -8,10 +8,9 @@
 </script>
 
 <script lang="ts">
-	import { fade, fly } from "svelte/transition";
-	import GalleryImageElement from "./GalleryImage.svelte";
+	import { fade, fly } from 'svelte/transition';
+	import GalleryImageElement from './GalleryImage.svelte';
 
-	
 	import { inview } from 'svelte-inview';
 	let showing = false;
 
@@ -21,14 +20,22 @@
 
 <div class="gallery">
 	<h3>{title}</h3>
-	<div class="items" use:inview on:inview_enter={() => {showing = true}}>
+	<div
+		class="items"
+		use:inview
+		on:inview_enter={() => {
+			showing = true;
+		}}
+	>
 		{#each galleryImages as image, i}
-			<GalleryImageElement options={{
-				href: image.href,
-				src: image.src,
-				caption: image.caption,
-				multiplier: (i%2) + 1
-			}}/>
+			<GalleryImageElement
+				options={{
+					href: image.href,
+					src: image.src,
+					caption: image.caption,
+					multiplier: (i % 2) + 1
+				}}
+			/>
 		{/each}
 	</div>
 </div>

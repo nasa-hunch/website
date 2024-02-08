@@ -1,38 +1,38 @@
 <script>
 	export let data;
-	import Button from "$lib/components/Button.svelte"
-	import ModelHelper from "$lib/components/ModelHelper.svelte"
-	import ModelForm from "$lib/components/ModelForm.svelte"
-	import Input from "$lib/components/Input.svelte"
+	import Button from '$lib/components/Button.svelte';
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModelForm.svelte';
+	import Input from '$lib/components/Input.svelte';
 	let openModal = false;
 </script>
 
 <ModelHelper bind:visible={openModal}>
 	<ModelForm method="post" action="?/createCategory">
 		<h2>New Category</h2>
-		<Input label="Name" bgColor="#f1f1f1" name="name"/>
-		<Input label="Icon" bgColor="#f1f1f1" name="icon"/>
-		<input type="color" name="color"/>
-		<input type="date" name="deadline"/>
-		<Button value="Create"/>
+		<Input label="Name" bgColor="#f1f1f1" name="name" />
+		<Input label="Icon" bgColor="#f1f1f1" name="icon" />
+		<input type="color" name="color" />
+		<input type="date" name="deadline" />
+		<Button value="Create" />
 	</ModelForm>
 </ModelHelper>
 
 <div class="wrap">
 	<h2>Project Categories</h2>
-	<div class="categories" >
+	<div class="categories">
 		{#each data.categories as category}
-			<a class="category" href="/dashboard/admin/projects/category/{category.id}" style="--circleBg: #{category.color}">
-				<div class="circle" >
-				</div>
+			<a
+				class="category"
+				href="/dashboard/admin/projects/category/{category.id}"
+				style="--circleBg: #{category.color}"
+			>
+				<div class="circle" />
 				<p>{category.name}</p>
-				
 			</a>
-			
 		{/each}
-		<Button value="New Category" on:click={() => openModal = true}/>
-		
-		</div>
+		<Button value="New Category" on:click={() => (openModal = true)} />
+	</div>
 </div>
 
 <style>
@@ -78,7 +78,7 @@
 		border: 1px solid var(--circleBg);
 		cursor: pointer;
 	}
-	.category p{
+	.category p {
 		font-size: 1.2rem;
 		margin: 0px;
 	}

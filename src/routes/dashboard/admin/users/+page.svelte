@@ -5,7 +5,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import { enhance } from '$app/forms';
-	import Combobox from "$lib/components/Combobox.svelte"
+	import Combobox from '$lib/components/Combobox.svelte';
 
 	export let data: PageData;
 	let showDeleteForm = false;
@@ -17,10 +17,8 @@
 		return {
 			value: item.id,
 			display: item.name
-		}
-	})
-
-
+		};
+	});
 
 	type DeleteData =
 		| {
@@ -49,14 +47,13 @@
 	</ModelForm>
 </ModelHelper>
 
-
 <ModelHelper bind:visible={verifyUserForm}>
 	<ModelForm method="post" action="?/verifyUser">
 		<h2>Verify User</h2>
-		<input hidden name="id" bind:value={selectedUserId}/>
-		<Combobox options={orgOptions} label="Organization" name="orgId"/>
-		<hr class="spacer">
-		<Button value="verify"/>
+		<input hidden name="id" bind:value={selectedUserId} />
+		<Combobox options={orgOptions} label="Organization" name="orgId" />
+		<hr class="spacer" />
+		<Button value="verify" />
 	</ModelForm>
 </ModelHelper>
 <main>
@@ -80,9 +77,12 @@
 				<td>{user.role}</td>
 				<td>
 					{#if user.role == Role.UNVERIFIED_TEACHER}
-	
-					<button on:click={() => {selectedUserId = user.id; verifyUserForm = true}}>verify</button>
-						
+						<button
+							on:click={() => {
+								selectedUserId = user.id;
+								verifyUserForm = true;
+							}}>verify</button
+						>
 					{:else if user.role != Role.HUNCH_ADMIN}
 						<button
 							on:click={() => {

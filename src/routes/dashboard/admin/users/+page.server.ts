@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 export const load = async () => {
 	const userList = await prisma.user.findMany();
-	const orgList = await prisma.organization.findMany({})
+	const orgList = await prisma.organization.findMany({});
 	return {
 		userList: userList.map((user) => ({
 			id: user.id,
@@ -22,28 +22,29 @@ export const load = async () => {
 	};
 };
 
-
 export const actions = {
-	verifyUser: formHandler(z.object({
-		id: z.coerce.number(),
-		orgId: z.coerce.number(),
-	}), async ({id, orgId}, {cookies}) => {
-		await verifySession(cookies, Role.HUNCH_ADMIN)
+	verifyUser: formHandler(
+		z.object({
+			id: z.coerce.number(),
+			orgId: z.coerce.number()
+		}),
+		async ({ id, orgId }, { cookies }) => {
+			await verifySession(cookies, Role.HUNCH_ADMIN);
 
-		await prisma.user.update({
-			where: {
-				id
-			},
-			data: {
-				role: Role.TEACHER,
-				orgId
-			}
-		})
+			await prisma.user.update({
+				where: {
+					id
+				},
+				data: {
+					role: Role.TEACHER,
+					orgId
+				}
+			});
 
-
-		return {
-			success: true,
-			message: "Teacher Verified"
+			return {
+				success: true,
+				message: 'Teacher Verified'
+			};
 		}
-	})	
-}
+	)
+};
