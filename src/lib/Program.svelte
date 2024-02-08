@@ -17,6 +17,12 @@
 	{/each} -->
 </div>
 
+<div class="mainWrap">
+	<main>
+		<slot name="main" />
+	</main>
+</div>
+
 <style lang="scss">
 	.description {
 		margin: 1rem;
@@ -33,6 +39,16 @@
 			font-weight: 700;
 			margin-bottom: 1rem;
 			text-align: center;
+		}
+	}
+
+	.mainWrap {
+		display: flex;
+		justify-content: center;
+
+		main {
+			margin: 1rem;
+			max-width: 800px;
 		}
 	}
 </style>
