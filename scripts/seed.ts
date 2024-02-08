@@ -1,6 +1,6 @@
 import { PrismaClient, Role } from '@prisma/client';
-import { promisify } from 'util';
 import crypto from 'crypto';
+import { promisify } from 'util';
 
 const pkdf2 = promisify(crypto.pbkdf2);
 

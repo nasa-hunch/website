@@ -8,7 +8,7 @@
 <div class="members">
 	{#each members as member}
 		<div class="member">
-			<img src={member.img} alt={member.firstName} />
+			<img alt={member.firstName} src={member.img} />
 			<p>{member.firstName} {member.middleInitial ?? ''} {member.lastName}</p>
 			<p>{member.description}</p>
 			{#if member.email}

@@ -2,8 +2,9 @@
 	import '@fontsource-variable/manrope';
 	import '@fontsource-variable/lexend';
 	import '../app.css';
-	import { onMount } from 'svelte';
+
 	import Lenis from '@studio-freight/lenis';
+	import { onMount } from 'svelte';
 
 	onMount(() => {
 		const lenis = new Lenis();

@@ -1,6 +1,7 @@
-import { redirect, type Cookies } from '@sveltejs/kit';
-import { prisma } from './prismaConnection';
+import { type Cookies,redirect } from '@sveltejs/kit';
+
 import type { Role } from './enums';
+import { prisma } from './prismaConnection';
 
 export const verifySession = async (cookies: Cookies, role?: Role) => {
 	const session = cookies.get('session');

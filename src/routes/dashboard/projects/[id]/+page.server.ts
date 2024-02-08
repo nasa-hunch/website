@@ -1,9 +1,11 @@
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
-import { prisma } from '$lib/prismaConnection';
-//import { Prisma, Role } from '@prisma/client';
 
-/*function filterProject(
+import { prisma } from '$lib/prismaConnection';
+
+import type { PageServerLoad } from './$types';
+//Import { Prisma, Role } from '@prisma/client';
+
+/*Function filterProject(
 	role: Role,
 	orgId: number | null,
 	id: number

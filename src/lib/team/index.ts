@@ -8,29 +8,29 @@ interface TeamMember {
 	img: string;
 }
 
-import BlakeRatcliff from './images/blake-ratcliff.jpg';
-import GeorgeKessler from './images/george-kessler.jpg';
-import BobZeek from './images/bob-zeek.jpg';
-import StacyHale from './images/stacy-hale.jpg';
-import FloGold from './images/flo-gold.jpg';
-import RoyBellard from './images/roy-bellard.jpg';
-import JenniferLeonard from './images/jennifer-leonard.jpg';
-import PhongDo from './images/phong-do.jpg';
-import LoyTrevino from './images/loy-trevino.jpg';
-import LukeSammons from './images/luke-sammons.jpg';
-import JulioZambrana from './images/julio-zambrana.jpg';
-import GladysHall from './images/gladys-hall.jpg';
-import NancyHall from './images/nancy-hall.jpg';
 import AllisonWestover from './images/alli-westover.jpg';
-import CarlosValencia from './images/carlos-valencia.jpg';
 import BillGibson from './images/bill-gibson.jpg';
-import GlennJohnson from './images/glenn-johnson.jpg';
-import LisaPassarelli from './images/lisa-passarelli.jpg';
-import YolandaSimmons from './images/yolanda-simmons.jpg';
-import MikeBennet from './images/mike-bennet.jpg';
-import GeneGordon from './images/gene-gordon.jpg';
+import BlakeRatcliff from './images/blake-ratcliff.jpg';
+import BobZeek from './images/bob-zeek.jpg';
+import CarlosValencia from './images/carlos-valencia.jpg';
 import DaveSchlichting from './images/dave-schlichting.jpg';
 import DonaldHecker from './images/donald-hecker.jpg';
+import FloGold from './images/flo-gold.jpg';
+import GeneGordon from './images/gene-gordon.jpg';
+import GeorgeKessler from './images/george-kessler.jpg';
+import GladysHall from './images/gladys-hall.jpg';
+import GlennJohnson from './images/glenn-johnson.jpg';
+import JenniferLeonard from './images/jennifer-leonard.jpg';
+import JulioZambrana from './images/julio-zambrana.jpg';
+import LisaPassarelli from './images/lisa-passarelli.jpg';
+import LoyTrevino from './images/loy-trevino.jpg';
+import LukeSammons from './images/luke-sammons.jpg';
+import MikeBennet from './images/mike-bennet.jpg';
+import NancyHall from './images/nancy-hall.jpg';
+import PhongDo from './images/phong-do.jpg';
+import RoyBellard from './images/roy-bellard.jpg';
+import StacyHale from './images/stacy-hale.jpg';
+import YolandaSimmons from './images/yolanda-simmons.jpg';
 
 // TODO: move photos to public folder
 export const members: TeamMember[] = [

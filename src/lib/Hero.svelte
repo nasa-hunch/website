@@ -6,10 +6,10 @@
 
 <header>
 	<!-- TODO: give this life on the main page -->
-	<div class="background" style="--img: url({image})" />
-	<div class="wrapper" style="--img: url({image2})">
+	<div style="--img: url({image})" class="background" />
+	<div style="--img: url({image2})" class="wrapper">
 		<div class="text">
-			<h1><img class="img" src="/logo.svg" alt="NASA Hunch Logo" />{@html title}</h1>
+			<h1><img class="img" alt="NASA Hunch Logo" src="/logo.svg" />{@html title}</h1>
 			<h2>Make for space.</h2>
 		</div>
 	</div>

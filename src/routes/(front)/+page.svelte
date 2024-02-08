@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Gallery from '$lib/page/Gallery.svelte';
-	import type { GalleryImage } from '$lib/page/Gallery.svelte';
 	import Hero from '$lib/Hero.svelte';
-	import Mission from '$lib/page/Mission.svelte';
 	import NonTransparent from '$lib/landing/images/non-transparent.png';
 	import Transparent from '$lib/landing/images/transparent.png';
+	import type { GalleryImage } from '$lib/page/Gallery.svelte';
+	import Gallery from '$lib/page/Gallery.svelte';
+	import Mission from '$lib/page/Mission.svelte';
 
 	const title = 'NASA&nbsp;Hunch';
 
@@ -61,6 +61,6 @@
 	];
 </script>
 
-<Hero {title} image={NonTransparent} image2={Transparent} />
+<Hero image={NonTransparent} image2={Transparent} {title} />
 <Mission />
 <Gallery galleryImages={gallery} title="Explore Program Categories" />

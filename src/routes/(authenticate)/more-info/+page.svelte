@@ -1,10 +1,11 @@
 <script lang="ts">
-	import Navbar from '$lib/Navbar.svelte';
+	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import { Role } from '$lib/enums';
+	import Navbar from '$lib/Navbar.svelte';
+
 	import type { PageData } from './$types';
-	import { enhance } from '$app/forms';
 
 	export let data: PageData;
 </script>
@@ -18,20 +19,20 @@
 			</h2>
 			<h3>I am a:</h3>
 			<div class="buttons">
-				<form method="post" use:enhance action="?/setRoleStudent">
+				<form action="?/setRoleStudent" method="post" use:enhance>
 					<button class="bigButton">
-						<img src="student_cap.svg" alt="student" />
+						<img alt="student" src="student_cap.svg" />
 						<p>Student</p>
 					</button>
 				</form>
-				<form method="post" use:enhance action="?/setRoleTeacher">
+				<form action="?/setRoleTeacher" method="post" use:enhance>
 					<button class="bigButton">
-						<img src="admin_shield.svg" alt="teacher" />
+						<img alt="teacher" src="admin_shield.svg" />
 						<p>Teacher/Admin</p>
 					</button>
 				</form>
 			</div>
-			<form method="post" use:enhance action="/logout">
+			<form action="/logout" method="post" use:enhance>
 				<Button value="Or Sign Out" />
 			</form>
 		{:else if data.user.orgId == null}
@@ -43,20 +44,20 @@
 					>
 					to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a>
 				</p>
-				<form method="post" use:enhance action="?/rescindRole">
+				<form action="?/rescindRole" method="post" use:enhance>
 					<p>Not a teacher? <button class="button">Rescind Your Role</button></p>
 				</form>
 			{:else if data.user.role == Role.STUDENT}
-				<form method="post" use:enhance action="?/submitJoinCode" class="joinCode">
+				<form class="joinCode" action="?/submitJoinCode" method="post" use:enhance>
 					<h1>Join a Project</h1>
 					<div class="formItem">
-						<Input name="code" label="Project Join Code" bgColor="#f1f1f1" />
+						<Input name="code" bgColor="#f1f1f1" label="Project Join Code" />
 					</div>
 					<div class="formItem">
 						<Button value="Submit" />
 					</div>
 				</form>
-				<form method="post" use:enhance action="?/rescindRole">
+				<form action="?/rescindRole" method="post" use:enhance>
 					<p>Not a student? <button class="button">Rescind Your Role</button></p>
 				</form>
 			{:else}

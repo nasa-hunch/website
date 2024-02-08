@@ -23,7 +23,7 @@
 </script>
 
 <nav>
-	<a href={'/'} class="logoLink">
+	<a class="logoLink" href="/">
 		<img alt="NASA Hunch Logo" src="/favicon.png" />
 	</a>
 	<ul class="navInner">

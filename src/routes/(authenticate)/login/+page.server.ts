@@ -1,13 +1,14 @@
-import { prisma } from '$lib/prismaConnection.js';
 import { redirect } from '@sveltejs/kit';
-import { promisify } from 'util';
 import crypto from 'crypto';
+import { promisify } from 'util';
+
+import { prisma } from '$lib/prismaConnection.js';
 
 const pkdf2 = promisify(crypto.pbkdf2);
 
 export const actions = {
 	login: async ({ request, cookies }) => {
-		//get all for the form data
+		//Get all for the form data
 		const formData = await request.formData();
 
 		const email = formData.get('email')?.toString();
@@ -20,7 +21,7 @@ export const actions = {
 			};
 		}
 
-		//pull the user from the database
+		//Pull the user from the database
 		const newEmail = email.toLowerCase();
 
 		const user = await prisma.user.findFirst({
@@ -36,7 +37,7 @@ export const actions = {
 			};
 		}
 
-		//get the salt and rehash the password
+		//Get the salt and rehash the password
 		const salt = user.salt;
 		const hash = (await pkdf2(password, salt, 1000, 100, 'sha512')).toString('hex');
 
@@ -47,7 +48,7 @@ export const actions = {
 			};
 		}
 
-		//generate a new session for the user
+		//Generate a new session for the user
 
 		const sessionToken = crypto.randomBytes(32).toString('hex');
 		await prisma.session.create({

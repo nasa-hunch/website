@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	// yes this uses javascript and is not good for js disabled browsers
-	// no I am not going to fix it because we need js for the backend anyways.
-	// it will still work but it will look bad
+	// Yes this uses javascript and is not good for js disabled browsers
+	// No I am not going to fix it because we need js for the backend anyways.
+	// It will still work but it will look bad
 
 	export let name = 'Input';
 	export let label = 'Input';
@@ -27,22 +27,22 @@
 </script>
 
 <button
-	type="button"
 	style="--bgColor: {bgColor}"
 	class="wrap"
 	class:active
-	on:click={startFocus}
 	tabindex="-1"
+	type="button"
+	on:click={startFocus}
 >
 	<input
 		bind:this={input}
 		{name}
+		{autocomplete}
+		{required}
 		on:focus={selectInput}
 		on:blur={deselectText}
 		bind:value
-		{required}
-		{autocomplete}
-		{...{ type /* asserting string input since we know the type is always a password */ }}
+		{...{ type /* Asserting string input since we know the type is always a password */ }}
 	/>
 	<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
 		{label}

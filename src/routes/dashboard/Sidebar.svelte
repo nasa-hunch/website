@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Role } from '$lib/enums';
+
 	import type { PageData } from './$types';
 
 	let projectsDropped = false;
@@ -12,37 +13,37 @@
 <nav class="nav">
 	<div class="top">
 		<div class="indent">
-			<a href="/dashboard" class="logoButton">
-				<img src="/favicon.png" alt="Nasa Hunch Logo" />
+			<a class="logoButton" href="/dashboard">
+				<img alt="Nasa Hunch Logo" src="/favicon.png" />
 			</a>
-			<a href="/dashboard" class="button">Dashboard</a>
-			<a href="/dashboard/projects" class="button">Projects</a>
+			<a class="button" href="/dashboard">Dashboard</a>
+			<a class="button" href="/dashboard/projects">Projects</a>
 			{#if projectsDropped}
 				<div class="indent" />
 			{/if}
 			{#if data.user.role == Role.HUNCH_ADMIN}
-				<a href="##" on:click={() => (adminDropped = !adminDropped)} class="button">Admin</a>
+				<a class="button" href="##" on:click={() => (adminDropped = !adminDropped)}>Admin</a>
 			{/if}
 			{#if adminDropped}
 				<div class="indent dd">
-					<a href="/dashboard/admin/users" class="button">Users</a>
+					<a class="button" href="/dashboard/admin/users">Users</a>
 				</div>
 				<div class="indent dd">
-					<a href="/dashboard/admin/projects" class="button">Projects</a>
+					<a class="button" href="/dashboard/admin/projects">Projects</a>
 				</div>
 			{/if}
 		</div>
 	</div>
 	<div class="bottom">
-		<a href="#/dashboard/notifications" class="button bottomButton">
-			<img width="30px" class="bottomIcon" src="/notifications.svg" alt="Notifications" />
+		<a class="button bottomButton" href="#/dashboard/notifications">
+			<img class="bottomIcon" alt="Notifications" src="/notifications.svg" width="30px" />
 		</a>
-		<a href="/dashboard/settings" class="button bottomButton">
-			<img width="30px" class="bottomIcon" src="/settings.svg" alt="Settings" />
+		<a class="button bottomButton" href="/dashboard/settings">
+			<img class="bottomIcon" alt="Settings" src="/settings.svg" width="30px" />
 		</a>
 		<form action="/logout" method="POST">
 			<button class="button bottomButton" type="submit">
-				<img width="30px" class="bottomIcon" src="/logout.svg" alt="Log Out" />
+				<img class="bottomIcon" alt="Log Out" src="/logout.svg" width="30px" />
 			</button>
 		</form>
 	</div>

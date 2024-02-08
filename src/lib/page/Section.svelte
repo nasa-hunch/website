@@ -15,7 +15,7 @@
 		</div>
 
 		{#if showButton}
-			<a href={buttonLink} class="button">{buttonText}</a>
+			<a class="button" href={buttonLink}>{buttonText}</a>
 		{/if}
 	</section>
 </div>

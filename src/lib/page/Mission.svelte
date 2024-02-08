@@ -6,10 +6,10 @@
 
 <div
 	class="wrap"
+	on:inview_enter={() => (inView = true)}
 	use:inview={{
 		rootMargin: '-100px'
 	}}
-	on:inview_enter={() => (inView = true)}
 >
 	<div class="inner" class:inView>
 		<h2>The mission is simple.</h2>

@@ -41,17 +41,17 @@
 	};
 </script>
 
-<div class="wrap" style="--bgColor: {bgColor}">
+<div style="--bgColor: {bgColor}" class="wrap">
 	<button
-		type="button"
+		bind:this={outerButton}
 		class="wrap"
 		class:active
-		bind:this={outerButton}
-		on:click={buttonClick}
 		tabindex="-1"
+		type="button"
+		on:click={buttonClick}
 	>
-		<input hidden {name} bind:value={selected} />
-		<input bind:this={input} bind:value {required} {autocomplete} />
+		<input {name} hidden bind:value={selected} />
+		<input bind:this={input} {autocomplete} {required} bind:value />
 		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
 			{label}
 		</div>
@@ -62,12 +62,12 @@
 				{#if option.display.toLowerCase().includes(value.toLowerCase())}
 					<button
 						class="option"
+						type="button"
 						on:click={(e) => {
 							selected = option.value;
 							value = option.display;
 							active = false;
 						}}
-						type="button"
 					>
 						{option.display}
 					</button>

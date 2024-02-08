@@ -1,12 +1,13 @@
-import { prisma } from '$lib/prismaConnection';
 import { redirect } from '@sveltejs/kit';
-import { promisify } from 'util';
 import crypto from 'crypto';
+import { promisify } from 'util';
+
+import { prisma } from '$lib/prismaConnection';
 
 const pkdf2 = promisify(crypto.pbkdf2);
 
 export const load = async ({ cookies }) => {
-	// if the user is logged in, we can skip all this stuff
+	// If the user is logged in, we can skip all this stuff
 	const session = cookies.get('session');
 	if (!session) {
 		return;
@@ -26,7 +27,7 @@ export const load = async ({ cookies }) => {
 
 export const actions = {
 	register: async ({ request, cookies }) => {
-		//get all for the form data
+		//Get all for the form data
 		const formData = await request.formData();
 
 		const firstName = formData.get('firstName')?.toString();
@@ -49,12 +50,12 @@ export const actions = {
 			};
 		}
 
-		// now we need to verify that this email is in fact one of a kind which is pretty much impossible
-		// we are just going to cast out certain groups here, so we will only check for lowercase and if the email already exsists
+		// Now we need to verify that this email is in fact one of a kind which is pretty much impossible
+		// We are just going to cast out certain groups here, so we will only check for lowercase and if the email already exsists
 
 		const newEmail = email.toLowerCase();
 
-		// check if a user with this email already exsists
+		// Check if a user with this email already exsists
 
 		const userEmailCheck = await prisma.user.findFirst({
 			where: {
@@ -69,11 +70,11 @@ export const actions = {
 			};
 		}
 
-		// now that that's done, we can create a salt and hash of the password
+		// Now that that's done, we can create a salt and hash of the password
 		const salt = crypto.randomBytes(32).toString('hex');
 		const hash = (await pkdf2(pass1, salt, 1000, 100, 'sha512')).toString('hex');
 
-		// now we can make the user!
+		// Now we can make the user!
 		const newUser = await prisma.user.create({
 			data: {
 				firstName,
@@ -95,10 +96,10 @@ export const actions = {
 			};
 		}
 
-		// creata a new session!
+		// Creata a new session!
 
 		const session = crypto.randomBytes(64).toString('hex');
-		// add session to db
+		// Add session to db
 		await prisma.session.create({
 			data: {
 				sessionText: session,

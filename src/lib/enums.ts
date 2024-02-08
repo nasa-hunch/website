@@ -1,4 +1,4 @@
-//a very much temporary solution to a very big problem
+//A very much temporary solution to a very big problem
 
 export enum Role {
 	STUDENT = 'STUDENT',

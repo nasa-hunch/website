@@ -14,7 +14,7 @@
 	<!--
 	{#each projects as project}
 		<Project {project} />
-	{/each}-->
+	{/each} -->
 </div>
 
 <style lang="scss">

@@ -1,8 +1,9 @@
+import { z } from 'zod';
+
 import { formHandler } from '$lib/bodyguard.js';
 import { Role } from '$lib/enums.js';
 import { prisma } from '$lib/prismaConnection';
 import { verifySession } from '$lib/verifySession.js';
-import { z } from 'zod';
 
 export const load = async () => {
 	const categories = await prisma.category.findMany({});

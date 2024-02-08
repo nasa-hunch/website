@@ -10,9 +10,9 @@
 	let inView = false;
 </script>
 
-<div class="wrap" use:inview on:inview_enter={() => (inView = true)}>
+<div class="wrap" on:inview_enter={() => (inView = true)} use:inview>
 	<div class="item" class:inView>
-		<div class="bg" style="background-image: url({options.src})" />
+		<div style="background-image: url({options.src})" class="bg" />
 		<a class="link" href={options.href}>
 			<div class="caption">
 				{options.caption}

@@ -1,5 +1,6 @@
-import { Role } from '$lib/enums';
 import { redirect } from '@sveltejs/kit';
+
+import { Role } from '$lib/enums';
 
 export const load = async ({ parent }) => {
 	const parentData = await parent();

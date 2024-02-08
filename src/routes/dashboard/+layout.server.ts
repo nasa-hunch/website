@@ -1,9 +1,10 @@
-import { prisma } from '$lib/prismaConnection';
-import { Role } from '$lib/enums';
 import { redirect } from '@sveltejs/kit';
 
+import { Role } from '$lib/enums';
+import { prisma } from '$lib/prismaConnection';
+
 export const load = async ({ cookies }) => {
-	// if the user isn't logged in, we need to redirect them to the login page
+	// If the user isn't logged in, we need to redirect them to the login page
 	const session = cookies.get('session');
 	if (!session) {
 		redirect(303, '/login');
@@ -35,7 +36,7 @@ export const load = async ({ cookies }) => {
 
 	const user = sessionCheck.user;
 	if (user.role == null) {
-		// we need more info from the user
+		// We need more info from the user
 		redirect(303, '/more-info');
 	}
 
@@ -43,7 +44,7 @@ export const load = async ({ cookies }) => {
 		if (user.projectUser.length == 0) {
 			redirect(303, '/more-info');
 		} else {
-			// error recovery: if the user has a projectUser but no orgId, set the orgId to the project's orgId
+			// Error recovery: if the user has a projectUser but no orgId, set the orgId to the project's orgId
 			await prisma.user.update({
 				where: {
 					id: user.id

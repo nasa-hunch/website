@@ -3,7 +3,7 @@
 	export let action: HTMLFormElement['action'] | undefined;
 </script>
 
-<form {method} {action}>
+<form {action} {method}>
 	<slot />
 </form>
 

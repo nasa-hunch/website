@@ -9,9 +9,9 @@
 
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition';
-	import GalleryImageElement from './GalleryImage.svelte';
-
 	import { inview } from 'svelte-inview';
+
+	import GalleryImageElement from './GalleryImage.svelte';
 	let showing = false;
 
 	export let galleryImages: GalleryImage[];
@@ -22,10 +22,10 @@
 	<h3>{title}</h3>
 	<div
 		class="items"
-		use:inview
 		on:inview_enter={() => {
 			showing = true;
 		}}
+		use:inview
 	>
 		{#each galleryImages as image, i}
 			<GalleryImageElement

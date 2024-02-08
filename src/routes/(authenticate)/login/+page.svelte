@@ -1,16 +1,16 @@
 <script lang="ts">
-	import type { ActionData } from './$types';
-
-	import Input from '$lib/components/Input.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import Input from '$lib/components/Input.svelte';
 	import Navbar from '$lib/Navbar.svelte';
+
+	import type { ActionData } from './$types';
 	export let form: ActionData;
 </script>
 
 <div class="wrap">
 	<Navbar />
 	<div class="contentWrap">
-		<form class="content" method="post" action="?/login">
+		<form class="content" action="?/login" method="post">
 			<h1>Login</h1>
 			<span class="inputDiv">
 				<Input name="email" label="Email" />
@@ -19,7 +19,7 @@
 				<Input name="password" label="Password" type="password" />
 			</span>
 			<span class="inputDiv">
-				<Button value="Log In" type="submit" />
+				<Button type="submit" value="Log In" />
 			</span>
 			<p>No account? <a href="/get-started">Sign Up</a></p>
 			{#if form?.success == false}

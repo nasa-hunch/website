@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Role } from '$lib/enums';
+
 	import type { PageData } from './$types';
 
 	export let data: PageData;

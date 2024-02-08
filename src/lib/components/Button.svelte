@@ -1,6 +1,6 @@
 <script lang="ts">
-	// why a custom button?
-	// keeps everything looking clean
+	// Why a custom button?
+	// Keeps everything looking clean
 	export let value = 'Button!';
 	export let type: HTMLButtonElement['type'] = 'submit';
 </script>

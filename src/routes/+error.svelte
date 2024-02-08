@@ -1,6 +1,6 @@
 <script>
-	import Navbar from '$lib/Navbar.svelte';
 	import { page } from '$app/stores';
+	import Navbar from '$lib/Navbar.svelte';
 </script>
 
 <Navbar />

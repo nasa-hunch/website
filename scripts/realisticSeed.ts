@@ -3,11 +3,11 @@ The goal of this is to seed the database in such a way that it mirrors the actua
 
 */
 
+import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
 import { Role } from '@prisma/client';
-import { faker } from '@faker-js/faker';
-import { promisify } from 'util';
 import crypto from 'crypto';
+import { promisify } from 'util';
 
 const pkdf2 = promisify(crypto.pbkdf2);
 

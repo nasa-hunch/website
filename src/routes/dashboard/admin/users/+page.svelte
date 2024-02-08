@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { Role } from '$lib/enums';
-	import type { PageData } from './$types';
-	import ModelHelper from '$lib/components/ModelHelper.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import ModelForm from '$lib/components/ModelForm.svelte';
 	import { enhance } from '$app/forms';
+	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
+	import ModelForm from '$lib/components/ModelForm.svelte';
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import { Role } from '$lib/enums';
+
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 	let showDeleteForm = false;
@@ -41,17 +42,17 @@
 </script>
 
 <ModelHelper bind:visible={showDeleteForm}>
-	<ModelForm method="post" action="?/deleteUser">
+	<ModelForm action="?/deleteUser" method="post">
 		<p>Are you sure you want to delete user #{deleteData?.id}</p>
 		<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`} />
 	</ModelForm>
 </ModelHelper>
 
 <ModelHelper bind:visible={verifyUserForm}>
-	<ModelForm method="post" action="?/verifyUser">
+	<ModelForm action="?/verifyUser" method="post">
 		<h2>Verify User</h2>
-		<input hidden name="id" bind:value={selectedUserId} />
-		<Combobox options={orgOptions} label="Organization" name="orgId" />
+		<input name="id" hidden bind:value={selectedUserId} />
+		<Combobox name="orgId" label="Organization" options={orgOptions} />
 		<hr class="spacer" />
 		<Button value="verify" />
 	</ModelForm>
