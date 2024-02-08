@@ -27,6 +27,7 @@ model Category {
   color String @db.VarChar(6)
   icon String @db.VarChar(255)
   deadline DateTime
+  projectTemplates ProjectTemplate[]
 }
 
 model Organization {
@@ -106,6 +107,21 @@ model Project {
   ownerId Int @unique
   files File[]
   joinCode Int @unique
+  projectTemplateId Int
+  projectTemplate ProjectTemplate @relation(fields: [projectTemplateId], references: [id])
+}
+
+model ProjectTemplate { 
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String @db.VarChar(255)
+  description String @db.VarChar(255)
+  deadline DateTime
+  categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  projects Project[]
+
 }
 
 // project management items

@@ -27,6 +27,9 @@
 				<div class="indent dd">
 					<a href="/dashboard/admin/users" class="button">Users</a>
 				</div>
+				<div class="indent dd">
+					<a href="/dashboard/admin/projects" class="button">Projects</a>
+				</div>
 			{/if}
 		</div>
 	</div>
