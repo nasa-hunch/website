@@ -26,7 +26,6 @@
 			font-weight: 700;
 			margin-bottom: 1rem;
 			text-align: center;
-		
 		}
 
 		h2 {

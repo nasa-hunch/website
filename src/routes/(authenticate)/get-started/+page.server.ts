@@ -107,11 +107,11 @@ export const actions = {
 		});
 
 		/* @migration task: add path argument */ cookies.set('session', session, {
-        			secure: true,
-        			sameSite: 'strict',
-        			// 7 days
-        			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-        		});
+			secure: true,
+			sameSite: 'strict',
+			// 7 days
+			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+		});
 
 		redirect(303, '/dashboard');
 	}
