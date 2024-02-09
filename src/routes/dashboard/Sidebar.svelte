@@ -22,7 +22,7 @@
 				<div class="indent" />
 			{/if}
 			{#if data.user.role == Role.HUNCH_ADMIN}
-				<a class="button" href="##" on:click={() => (adminDropped = !adminDropped)}>Admin</a>
+				<a class="button" href="/" on:click={() => (adminDropped = !adminDropped)}>Admin</a>
 			{/if}
 			{#if adminDropped}
 				<div class="indent dd">
