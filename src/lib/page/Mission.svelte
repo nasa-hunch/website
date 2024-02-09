@@ -145,6 +145,11 @@
 		font-weight: bold;
 		margin: 0px;
 	}
+
+	.card p {
+		font-size: 1.12rem;
+	}
+
 	.card h3::after {
 		content: '';
 		bottom: 0px;
