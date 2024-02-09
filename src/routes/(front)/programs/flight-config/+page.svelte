@@ -10,13 +10,14 @@
 	</div>
 	<div slot="main">
 		<p>
-			Design is one part of the process, but there is more to it than that. The <b>Flight Configuration</b> program
-			is the next step in the process of bringing a project to the International Space Station.
+			Design is one part of the process, but there is more to it than that. The <b
+				>Flight Configuration</b
+			> program is the next step in the process of bringing a project to the International Space Station.
 		</p>
 		<p>
-			Work with NASA HUNCH Mentors and bring project designs and drawings up to NASA drafting and manufacturing
-			standards. This includes producing completed flight drawings, documentation, and final 3D prints
-			if needed.
+			Work with NASA HUNCH Mentors and bring project designs and drawings up to NASA drafting and
+			manufacturing standards. This includes producing completed flight drawings, documentation, and
+			final 3D prints if needed.
 		</p>
 		<p>Students participating in flight configuration may work one of the following:</p>
 		<ul>

@@ -16,7 +16,7 @@
 
 <div class="gallery">
 	{#if title}
-	<h3>{title}</h3>
+		<h3>{title}</h3>
 	{/if}
 	<div class="items">
 		{#each galleryImages as image, i}
@@ -32,7 +32,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.gallery {
 		width: 100%;
 		box-sizing: border-box;

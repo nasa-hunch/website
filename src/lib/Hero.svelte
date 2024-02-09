@@ -12,7 +12,7 @@
 	<div style="--img: url({image}); --top: {scrollY}px" class="background" />
 	<div style="--img: url({image2})" class="wrapper">
 		<div class="text">
-			<h1><img class="img" alt="NASA Hunch Logo" src="/logo.svg" />{@html title}</h1>
+			<h1><img class="img" alt="NASA Hunch Logo" src="/logo.svg" />{title}</h1>
 			<h2>Make for space.</h2>
 		</div>
 	</div>

@@ -49,7 +49,7 @@
 	</div>
 </nav>
 
-<style>
+<style lang="scss">
 	form {
 		display: contents;
 	}

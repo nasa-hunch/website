@@ -55,7 +55,7 @@
 					<button
 						class="option"
 						type="button"
-						on:click={(e) => {
+						on:click={() => {
 							selected = option.value;
 							value = option.display;
 							active = false;

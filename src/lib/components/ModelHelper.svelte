@@ -22,7 +22,7 @@
 	</button>
 {/if}
 
-<style>
+<style lang="scss">
 	.wrap {
 		all: unset;
 		background: rgba(0, 0, 0, 0.5);

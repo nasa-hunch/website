@@ -17,7 +17,7 @@
 			action="?/register"
 			method="post"
 			use:enhance={() => {
-				return async ({ update }) => {
+				return ({ update }) => {
 					update({ reset: false });
 				};
 			}}
@@ -55,7 +55,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	form {
 		background: white;
 	}

@@ -59,23 +59,21 @@ async function main() {
 					},
 					projectTemplate: {
 						create: {
-							name: "Easy Project",
-							description: "Easy",
+							name: 'Easy Project',
+							description: 'Easy',
 							deadline: new Date(Date.now()),
 							category: {
 								create: {
-									name: "New Category",
-									color: "ff0000",
-									icon: "no",
+									name: 'New Category',
+									color: 'ff0000',
+									icon: 'no',
 									deadline: new Date(Date.now())
 								}
-							},
-							
+							}
 						}
 					}
 				}
-			},
-			
+			}
 		}
 	});
 

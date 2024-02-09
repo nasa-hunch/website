@@ -29,7 +29,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	form {
 		background: white;
 	}

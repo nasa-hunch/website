@@ -57,4 +57,3 @@
 	<p>We offer <b>8</b> different competition categories for competing:</p>
 </Section>
 <Gallery galleryImages={gallery} />
-

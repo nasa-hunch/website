@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
@@ -97,7 +96,7 @@
 	</table>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		margin: 1rem;
 		width: 100%;

@@ -1,6 +1,6 @@
 import { S3Client } from '@aws-sdk/client-s3';
 
-import { accessKeyId, accessKeySecret,r2endpoint } from '$env/static/private';
+import { accessKeyId, accessKeySecret, r2endpoint } from '$env/static/private';
 
 console.log(r2endpoint);
 

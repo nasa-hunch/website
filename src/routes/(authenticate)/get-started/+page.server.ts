@@ -110,7 +110,7 @@ export const actions = {
 		cookies.set('session', session, {
 			secure: true,
 			sameSite: 'strict',
-			path: "/",
+			path: '/',
 			// 7 days
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 		});

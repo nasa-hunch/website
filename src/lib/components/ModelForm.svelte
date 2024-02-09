@@ -7,7 +7,7 @@
 	<slot />
 </form>
 
-<style>
+<style lang="scss">
 	form {
 		width: 100%;
 		max-width: 500px;

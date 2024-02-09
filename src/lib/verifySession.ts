@@ -1,4 +1,4 @@
-import { type Cookies,redirect } from '@sveltejs/kit';
+import { type Cookies, redirect } from '@sveltejs/kit';
 
 import type { Role } from './enums';
 import { prisma } from './prismaConnection';

@@ -21,7 +21,7 @@
 	{/each}
 </div>
 
-<style>
+<style lang="scss">
 	.members {
 		display: flex;
 		flex-wrap: wrap;

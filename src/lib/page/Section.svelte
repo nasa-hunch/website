@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let title = 'Title';
 	export let showButton = false;
 	export let buttonLink = '';

@@ -11,7 +11,7 @@
 	{/each}
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		margin: 1rem;
 	}

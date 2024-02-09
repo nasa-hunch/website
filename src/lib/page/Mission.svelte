@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { inview } from 'svelte-inview';
+
 	import MdiAccountAlert from '~icons/mdi/account-alert';
 	import MdiAppleIcloud from '~icons/mdi/apple-icloud';
 	import MdiPipeWrench from '~icons/mdi/pipe-wrench';
-	import { inview } from 'svelte-inview';
 
 	let inView = false;
 </script>
@@ -40,8 +41,8 @@
 						<h3>Inspire</h3>
 					</div>
 					<p>
-						<span class="accent">NASA Hunch</span> is on a mission to inspire students through our project-based experiences. We
-						encourage students to create new innovations and discover their passions.
+						<span class="accent">NASA Hunch</span> is on a mission to inspire students through our project-based
+						experiences. We encourage students to create new innovations and discover their passions.
 					</p>
 				</div>
 			</div>

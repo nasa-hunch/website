@@ -49,7 +49,7 @@
 	</div>
 </button>
 
-<style>
+<style lang="scss">
 	.wrap {
 		all: unset;
 		position: relative;

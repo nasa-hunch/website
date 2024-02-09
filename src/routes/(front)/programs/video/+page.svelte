@@ -13,8 +13,8 @@
 			the work being done at NASA.
 		</p>
 		<p>
-			The best videos are used in NASA's outreach efforts and are shown to students across the country
-			in NASA and ACTE events.
+			The best videos are used in NASA's outreach efforts and are shown to students across the
+			country in NASA and ACTE events.
 		</p>
 		<div class="themeInfo">
 			<h2>
