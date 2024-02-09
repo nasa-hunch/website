@@ -1,4 +1,7 @@
 <script lang="ts">
+	import MdiAccountAlert from '~icons/mdi/account-alert';
+	import MdiAppleIcloud from '~icons/mdi/apple-icloud';
+	import MdiPipeWrench from '~icons/mdi/pipe-wrench';
 	import { inview } from 'svelte-inview';
 
 	let inView = false;
@@ -17,7 +20,10 @@
 			<div class="card">
 				<div class="cardInner">
 					<div class="cardTitleWrap">
-						<h3>Empower:</h3>
+						<div class="icon">
+							<MdiAccountAlert />
+						</div>
+						<h3>Empower</h3>
 					</div>
 					<p>
 						We offer students a real-world STEM experience, and drive students to learn new skills
@@ -28,7 +34,10 @@
 			<div class="card">
 				<div class="cardInner">
 					<div class="cardTitleWrap">
-						<h3>Inspire:</h3>
+						<div class="icon">
+							<MdiAppleIcloud />
+						</div>
+						<h3>Inspire</h3>
 					</div>
 					<p>
 						NASA Hunch is on a mission to inspire students through our project-based experiences. We
@@ -39,7 +48,10 @@
 			<div class="card">
 				<div class="cardInner">
 					<div class="cardTitleWrap">
-						<h3>Prepare:</h3>
+						<div class="icon">
+							<MdiPipeWrench />
+						</div>
+						<h3>Prepare</h3>
 					</div>
 					<p>
 						Participants are prepared for the real-world. Our program focuses on critical thinking
@@ -109,7 +121,18 @@
 	.cardTitleWrap {
 		display: flex;
 		flex-direction: row;
-		padding: 0px 25px;
+
+		.icon {
+			margin-right: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background: $primary;
+			color: white;
+		}
 	}
 	.card h3 {
 		display: flex;
