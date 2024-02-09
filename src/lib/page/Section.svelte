@@ -21,7 +21,6 @@
 </div>
 
 <style lang="scss">
-	@import '$lib/utils.scss';
 
 	.content {
 		width: 100%;

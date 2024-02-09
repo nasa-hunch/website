@@ -74,8 +74,7 @@
 		border: 1px solid transparent;
 	}
 	.category:hover {
-		transform: scale(1.01);
-		border: 1px solid var(--circleBg);
+		background: $semiLightBackground;
 		cursor: pointer;
 	}
 	.category p {

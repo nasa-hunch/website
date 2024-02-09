@@ -36,8 +36,6 @@
 </nav>
 
 <style lang="scss">
-	@import '$lib/utils.scss';
-
 	nav {
 		position: sticky;
 		z-index: 10000;

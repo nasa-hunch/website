@@ -9,7 +9,6 @@
 </Program>
 
 <style lang="scss">
-	@import '$lib/utils.scss';
 
 	.accent {
 		color: $primary;
