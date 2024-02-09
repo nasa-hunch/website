@@ -11,11 +11,13 @@
 	import GalleryImageElement from './GalleryImage.svelte';
 
 	export let galleryImages: GalleryImage[];
-	export let title = 'Gallery';
+	export let title: string | undefined = undefined;
 </script>
 
 <div class="gallery">
+	{#if title}
 	<h3>{title}</h3>
+	{/if}
 	<div class="items">
 		{#each galleryImages as image, i}
 			<GalleryImageElement
