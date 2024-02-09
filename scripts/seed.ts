@@ -34,6 +34,15 @@ async function main() {
 		update: {},
 		create: {
 			name: 'Cardboard',
+			users: {
+				create: {
+					email: 'admin@card.board',
+					firstName: 'Admin',
+					lastName: 'Cardboard',
+					role: Role.SCHOOL_ADMIN,
+					...(await makePassword('school_admin'))
+				}
+			},
 			projects: {
 				create: {
 					name: 'Test Project',
@@ -45,25 +54,28 @@ async function main() {
 							firstName: 'Chalk',
 							lastName: 'Board',
 							role: Role.TEACHER,
-							organization: {
-								connect: {
-									id: 1
+							...(await makePassword('password'))
+						}
+					},
+					projectTemplate: {
+						create: {
+							name: "Easy Project",
+							description: "Easy",
+							deadline: new Date(Date.now()),
+							category: {
+								create: {
+									name: "New Category",
+									color: "ff0000",
+									icon: "no",
+									deadline: new Date(Date.now())
 								}
 							},
-							...(await makePassword('password'))
+							
 						}
 					}
 				}
 			},
-			users: {
-				create: {
-					email: 'admin@card.board',
-					firstName: 'Admin',
-					lastName: 'Cardboard',
-					role: Role.SCHOOL_ADMIN,
-					...(await makePassword('school_admin'))
-				}
-			}
+			
 		}
 	});
 
