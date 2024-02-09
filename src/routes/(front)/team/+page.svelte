@@ -26,12 +26,14 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		margin-top: 1rem;
 	}
 
 	.member {
 		margin: 1rem;
 		padding: 1rem;
-		border: 1px solid #ccc;
+		border: 2px solid #ccc;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 		border-radius: 1rem;
 		width: 20rem;
 		text-align: center;
