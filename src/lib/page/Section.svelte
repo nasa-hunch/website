@@ -21,7 +21,6 @@
 </div>
 
 <style lang="scss">
-
 	.content {
 		width: 100%;
 		font-size: 18px;

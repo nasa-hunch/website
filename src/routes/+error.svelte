@@ -13,7 +13,6 @@
 </div>
 
 <style lang="scss">
-
 	.errorCode {
 		color: $primary;
 	}

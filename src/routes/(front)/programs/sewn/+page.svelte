@@ -49,7 +49,6 @@
 </Program>
 
 <style lang="scss">
-
 	.accent {
 		color: $primary;
 	}
