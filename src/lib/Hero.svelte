@@ -9,7 +9,6 @@
 <svelte:window bind:scrollY />
 
 <header>
-	<div class="whiteSquareBottom" />
 	<div style="--img: url({image}); --top: {scrollY}px" class="background" />
 	<div style="--img: url({image2})" class="wrapper">
 		<div class="text">
@@ -27,14 +26,6 @@
 		perspective: 1px;
 	}
 
-	.whiteSquareBottom {
-		position: absolute;
-		width: 100%;
-		height: 20vh;
-		bottom: 0;
-		background-color: white;
-	}
-
 	.wrapper,
 	.background {
 		width: 100%;
@@ -43,7 +34,6 @@
 		flex-direction: row;
 		align-items: end;
 		justify-content: flex-start;
-		clip-path: inset(0% 0% 0% 0% round 0 0 min(20vh, 20vw) 0);
 	}
 
 	.background {
