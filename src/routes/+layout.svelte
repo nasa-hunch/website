@@ -22,6 +22,7 @@
 
 <style lang="scss">
 	:global(body) {
+		@import '$lib/utils.scss';
 		margin: 0px;
 	}
 </style>
