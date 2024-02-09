@@ -2,11 +2,15 @@
 	export let image: string;
 	export let image2: string;
 	export let title: string;
+
+	let scrollY = 0;
 </script>
 
+<svelte:window bind:scrollY />
+
 <header>
-	<!-- TODO: give this life on the main page -->
-	<div style="--img: url({image})" class="background" />
+	<div class="whiteSquareBottom" />
+	<div style="--img: url({image}); --top: {scrollY}px" class="background" />
 	<div style="--img: url({image2})" class="wrapper">
 		<div class="text">
 			<h1><img class="img" alt="NASA Hunch Logo" src="/logo.svg" />{@html title}</h1>
@@ -20,6 +24,15 @@
 		margin: 0px;
 		padding: 0px;
 		overflow: hidden;
+		perspective: 1px;
+	}
+
+	.whiteSquareBottom {
+		position: absolute;
+		width: 100%;
+		height: 20vh;
+		bottom: 0;
+		background-color: white;
 	}
 
 	.wrapper,
@@ -45,6 +58,7 @@
 		background-attachment: fixed;
 		background-position: center;
 		background-repeat: no-repeat;
+		transform: translateY(calc(var(--top) / 2));
 	}
 
 	.wrapper::before {

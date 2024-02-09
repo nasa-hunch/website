@@ -15,7 +15,7 @@
 	}}
 >
 	<div class="inner" class:inView>
-		<h2>The mission is simple.</h2>
+		<h2>The mission is <span class="accent">clear</span>.</h2>
 		<div class="cards">
 			<div class="card">
 				<div class="cardInner">
@@ -40,7 +40,7 @@
 						<h3>Inspire</h3>
 					</div>
 					<p>
-						NASA Hunch is on a mission to inspire students through our project-based experiences. We
+						<span class="accent">NASA Hunch</span> is on a mission to inspire students through our project-based experiences. We
 						encourage students to create new innovations and discover their passions.
 					</p>
 				</div>
@@ -66,6 +66,10 @@
 
 <style lang="scss">
 	@import '$lib/utils.scss';
+
+	.accent {
+		color: $primary;
+	}
 
 	.wrap {
 		width: 100%;
