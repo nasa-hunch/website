@@ -6,7 +6,7 @@
 	import Gallery from '$lib/page/Gallery.svelte';
 	import Mission from '$lib/page/Mission.svelte';
 
-	const title = 'NASA&nbsp;Hunch';
+	const title = 'NASA Hunch';
 
 	// Set the image gallery
 	let gallery: GalleryImage[] = [
