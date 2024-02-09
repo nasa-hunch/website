@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Gallery from '$lib/page/Gallery.svelte';
+	import Gallery, { type GalleryImage } from '$lib/page/Gallery.svelte';
 	import Section from '$lib/page/Section.svelte';
 	let gallery: GalleryImage[] = [
 		{
