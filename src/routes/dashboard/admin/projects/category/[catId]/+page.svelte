@@ -3,7 +3,10 @@
 </script>
 
 <div class="wrap">
-	<h1>{data.category?.name}</h1>
+	<div class="header">
+		<h1>{data.category?.name}</h1>
+	</div>
+	
 </div>
 
 <style lang="scss">
@@ -14,6 +17,13 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: start;
+	}
+	.header {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: $gray-lighter;
 	}
 	
 </style>
