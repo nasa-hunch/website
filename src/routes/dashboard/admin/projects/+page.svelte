@@ -74,7 +74,7 @@
 		border: 1px solid transparent;
 	}
 	.category:hover {
-		background: $semiLightBackground;
+		background: $background3;
 		cursor: pointer;
 	}
 	.category p {

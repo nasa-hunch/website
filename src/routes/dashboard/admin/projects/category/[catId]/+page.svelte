@@ -23,7 +23,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: $gray-lighter;
+		background: $background2;
 	}
 	
 </style>

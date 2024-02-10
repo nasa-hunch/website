@@ -48,7 +48,7 @@
 	}
 
 	.themeInfo {
-		background-color: $lightBackground;
+		background-color: $background;
 		padding: 1em;
 		margin-top: 1em;
 		border-radius: 1em;
