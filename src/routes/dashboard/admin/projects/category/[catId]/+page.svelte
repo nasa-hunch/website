@@ -1,11 +1,11 @@
 <script lang="ts">
 	import dayjs from 'dayjs';
-	import Button from "$lib/components/Button.svelte"
-	export let data;
-	import ModelHelper from "$lib/components/ModelHelper.svelte"
-	import ModelForm from "$lib/components/ModelForm.svelte"
-	import Input from "$lib/components/Input.svelte"
 
+	import Button from '$lib/components/Button.svelte';
+	export let data;
+	import Input from '$lib/components/Input.svelte';
+	import ModelForm from '$lib/components/ModelForm.svelte';
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
 
 	let creatingProject = false;
 
@@ -17,22 +17,21 @@
 		const totalTime = endTimestamp - startTimestamp;
 		const currentTime = endTimestamp - currentTimestamp;
 
-		const percent = (totalTime - currentTime)/totalTime
-		const maxPercent = Math.min(100, Math.max(percent, 0))
-		console.log(maxPercent)
-		
+		const percent = (totalTime - currentTime) / totalTime;
+		const maxPercent = Math.min(100, Math.max(percent, 0));
+		console.log(maxPercent);
+
 		return maxPercent;
-		
-	}
+	};
 </script>
 
 <ModelHelper bind:visible={creatingProject}>
-	<ModelForm method="post" action="?/createProject">
+	<ModelForm action="?/createProject" method="post">
 		<h2>Creating Project</h2>
-		<Input name="name" label="Name" bgColor="#f1f1f1"/>
-		<Input name="desc" label="Description" bgColor="#f1f1f1"/>
-		<input type="date" name="deadline"/>
-		<Button value="create"/>
+		<Input name="name" bgColor="#f1f1f1" label="Name" />
+		<Input name="desc" bgColor="#f1f1f1" label="Description" />
+		<input name="deadline" type="date" />
+		<Button value="create" />
 	</ModelForm>
 </ModelHelper>
 
@@ -42,21 +41,25 @@
 	</div>
 	<div class="projectWrap">
 		{#each data.category.projectTemplates as project}
-		{@const percentDone = calculatePercentDone(project.createdAt, project.deadline)}
+			{@const percentDone = calculatePercentDone(project.createdAt, project.deadline)}
 			<div class="project">
 				<div class="projectTitle">
 					{project.name}
 				</div>
-				
-				<div class="deadline" style="color: rgba({percentDone/100 * 255}, 0, 0)">
-					Deadline: {dayjs(project.deadline).format("MMM D, YYYY")}
+
+				<div style="color: rgba({(percentDone / 100) * 255}, 0, 0)" class="deadline">
+					Deadline: {dayjs(project.deadline).format('MMM D, YYYY')}
 				</div>
 			</div>
 		{/each}
-		<Button value="New Project" type="button" on:click={() => {creatingProject = true}}/>
+		<Button
+			type="button"
+			value="New Project"
+			on:click={() => {
+				creatingProject = true;
+			}}
+		/>
 	</div>
-	
-	
 </div>
 
 <style lang="scss">
@@ -110,6 +113,4 @@
 	h2 {
 		text-align: center;
 	}
-
-	
 </style>
