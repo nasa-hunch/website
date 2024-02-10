@@ -1,9 +1,13 @@
 <script lang="ts">
 	import dayjs from 'dayjs';
-
+	import Button from "$lib/components/Button.svelte"
 	export let data;
+	import ModelHelper from "$lib/components/ModelHelper.svelte"
+	import ModelForm from "$lib/components/ModelForm.svelte"
+	import Input from "$lib/components/Input.svelte"
 
 
+	let creatingProject = false;
 
 	const calculatePercentDone = (startDay: Date, endDay: Date) => {
 		const startTimestamp = dayjs(startDay).unix();
@@ -22,6 +26,16 @@
 	}
 </script>
 
+<ModelHelper bind:visible={creatingProject}>
+	<ModelForm method="post" action="?/createProject">
+		<h2>Creating Project</h2>
+		<Input name="name" label="Name" bgColor="#f1f1f1"/>
+		<Input name="desc" label="Description" bgColor="#f1f1f1"/>
+		<input type="date" name="deadline"/>
+		<Button value="create"/>
+	</ModelForm>
+</ModelHelper>
+
 <div class="wrap">
 	<div class="header">
 		<h1>{data.category?.name}</h1>
@@ -39,7 +53,9 @@
 				</div>
 			</div>
 		{/each}
+		<Button value="New Project" type="button" on:click={() => {creatingProject = true}}/>
 	</div>
+	
 	
 </div>
 
@@ -63,6 +79,7 @@
 		padding-top: 20px;
 		display: flex;
 		width: 90%;
+		flex-direction: column;
 	}
 	.projectTitle {
 		width: 100%;
@@ -82,12 +99,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: start;
+		margin-bottom: 15px;
 	}
 	.deadline {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: end;
+	}
+	h2 {
+		text-align: center;
 	}
 
 	
