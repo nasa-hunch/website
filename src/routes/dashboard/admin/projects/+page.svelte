@@ -65,7 +65,7 @@
 		padding: 15px;
 		box-sizing: border-box;
 		margin-bottom: 10px;
-		background: #f1f1f1;
+		background: $background-alt;
 		display: flex;
 		flex-direction: row;
 		align-items: center;

@@ -16,5 +16,6 @@
 		height: 100vh;
 		display: flex;
 		overflow: auto;
+		background: $background;
 	}
 </style>
