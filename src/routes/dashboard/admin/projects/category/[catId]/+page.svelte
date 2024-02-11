@@ -42,7 +42,7 @@
 	<div class="projectWrap">
 		{#each data.category.projectTemplates as project}
 			{@const percentDone = calculatePercentDone(project.createdAt, project.deadline)}
-			<div class="project">
+			<a class="project" href="/dashboard/admin/projects/category/{data.category.id}/{project.id}">
 				<div class="projectTitle">
 					{project.name}
 				</div>
@@ -50,7 +50,7 @@
 				<div style="color: rgba({(percentDone / 100) * 255}, 0, 0)" class="deadline">
 					Deadline: {dayjs(project.deadline).format('MMM D, YYYY')}
 				</div>
-			</div>
+			</a>
 		{/each}
 		<Button
 			type="button"
@@ -89,10 +89,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: start;
-		background: $background-alt;
 		font-size: 1.2rem;
 	}
 	.project {
+		all: unset;
 		border-radius: 5px;
 		width: 100%;
 		background: $background-alt;
@@ -103,6 +103,11 @@
 		align-items: center;
 		justify-content: start;
 		margin-bottom: 15px;
+		cursor: pointer;
+		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
+	}
+	.project:hover {
+		background: $background2;
 	}
 	.deadline {
 		width: 100%;
