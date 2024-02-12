@@ -1,53 +1,51 @@
 <script lang="ts">
-	interface Link {
-		name: string;
-		href: string;
-		special?: boolean;
-	}
+    interface Link {
+        name: string;
+        href: string;
+        special?: boolean;
+    }
 
-	const link = (name: string, href: string, special?: boolean): Link => {
-		return {
-			name,
-			href: `/${href}`,
-			special
-		};
-	};
+    const link = (name: string, href: string, special?: boolean): Link => {
+        return {
+            name,
+            href: `/${href}`,
+            special
+        };
+    };
 
-	const links = [
-		link('Partners', 'partners'),
-		link('Programs', 'programs'),
-		link('Team', 'team'),
-		link('Connect', 'connect'),
-		link('Get Started', 'get-started', true)
-	];
+    const links = [
+        link('Partners', 'partners'),
+        link('Programs', 'programs'),
+        link('Team', 'team'),
+        link('Connect', 'connect'),
+        link('Get Started', 'get-started', true)
+    ];
 </script>
 
 <nav>
-	<a class="logoLink" href="/">
-		<img alt="NASA Hunch Logo" src="/favicon.png" />
-	</a>
-	<ul class="navInner">
-		{#each links as link}
-			<li class="navbutton {link.special ? 'specialButton' : 'navRegularLink'}">
-				<a href={link.href}>{link.name}</a>
-			</li>
-		{/each}
-	</ul>
+    <a class="logoLink" href="/">
+        <img alt="NASA Hunch Logo" src="/favicon.png" />
+    </a>
+    <ul class="navInner">
+        {#each links as link}
+            <li class="navbutton {link.special ? 'specialButton' : 'navRegularLink'}">
+                <a href={link.href}>{link.name}</a>
+            </li>
+        {/each}
+    </ul>
 </nav>
 
 <style lang="scss">
-	nav {
-		position: sticky;
-		z-index: 10000;
-		width: 100%;
-		top: 0;
-		min-height: 100px;
-		max-height: 100px;
-		background: #f1f1f1;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+    nav {
+        position: sticky;
+        z-index: 10000;
+        width: 100%;
+        top: 0;
+        background: #f1f1f1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
 	.logoLink {
 		height: 100%;
