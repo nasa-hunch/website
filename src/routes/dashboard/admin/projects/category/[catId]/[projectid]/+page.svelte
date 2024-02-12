@@ -2,9 +2,7 @@
 	export let data;
 </script>
 
-<div class="wrap">
-
-</div>
+<div class="wrap" />
 
 <style lang="scss">
 	.wrap {

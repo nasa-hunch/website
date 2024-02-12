@@ -7,14 +7,19 @@
 		<div class="headerInner">
 			<h1>{data.projectTemplate.name}</h1>
 			<nav class="nav">
-				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}">Description</a>
-				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}">Description</a>
-				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}">Description</a>
+				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}"
+					>Description</a
+				>
+				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}"
+					>Description</a
+				>
+				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}"
+					>Description</a
+				>
 			</nav>
 		</div>
-		
 	</div>
-	<slot/>
+	<slot />
 </div>
 
 <style lang="scss">
@@ -47,10 +52,9 @@
 			text-decoration: none;
 			font-size: 1.1rem;
 			transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
-			
 
 			&::after {
-				content: "";
+				content: '';
 				position: absolute;
 				left: 0px;
 				bottom: 0px;
@@ -69,7 +73,5 @@
 				}
 			}
 		}
-
-		
 	}
 </style>
