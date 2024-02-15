@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 static/logo.svg",
 		"dev": "cross-env NODE_ENV=development vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -37,6 +38,8 @@
 		"@types/fluent-ffmpeg": "^2.1.23",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
+		"@vite-pwa/assets-generator": "^0.2.4",
+		"@vite-pwa/sveltekit": "^0.3.0",
 		"cross-env": "^7.0.3",
 		"dotenv-cli": "^7.3.0",
 		"eslint": "^8.28.0",
