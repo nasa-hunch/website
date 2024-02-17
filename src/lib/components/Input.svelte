@@ -101,6 +101,6 @@
 		color: black;
 	}
 	.active {
-		border: 1px solid #02bfe7;
+		border: 1px solid $secondary;
 	}
 </style>

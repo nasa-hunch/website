@@ -132,7 +132,7 @@
 		color: black;
 	}
 	.active {
-		outline: 1px solid #02bfe7;
+		outline: 1px solid $secondary;
 		border-radius: 3px 3px 0px 0px;
 	}
 	.options {
@@ -142,7 +142,7 @@
 		display: flex;
 		flex-direction: column;
 		max-height: 300px;
-		outline: 1px solid #02bfe7;
+		outline: 1px solid $secondary;
 		background: var(--bgColor);
 		overflow-y: auto;
 	}
