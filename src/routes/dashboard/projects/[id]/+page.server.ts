@@ -40,7 +40,6 @@ import type { PageServerLoad } from './$types';
 }*/
 
 export const load: PageServerLoad = async ({ params, parent }) => {
-	const { user } = await parent();
 	const id = parseInt(params.id);
 
 	const project = await prisma.project.findFirst({
