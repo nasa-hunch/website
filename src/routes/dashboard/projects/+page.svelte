@@ -22,7 +22,10 @@
 
 <style lang="scss">
 	main {
-		margin: 1rem;
+		width: 100%;
+		display: flex;
+		align-items: start;
+		justify-content: center;
 	}
 	.createNewPrompt {
 		display: flex;
