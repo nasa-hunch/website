@@ -1,30 +1,32 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
-	import Button from "$lib/components/Button.svelte";
+	import { enhance } from '$app/forms';
+	import Button from '$lib/components/Button.svelte';
 
 	export let data;
 </script>
 
 <div class="wrap">
-	<form class="content" method="post" action="?/updateDesc" use:enhance>
-		<textarea name="description" placeholder="Description" bind:value={data.projectTemplate.description}></textarea>
+	<form class="content" action="?/updateDesc" method="post" use:enhance>
+		<textarea
+			name="description"
+			placeholder="Description"
+			bind:value={data.projectTemplate.description}
+		/>
 		<div class="ButtonWrap">
 			<div class="innerButtonWrap">
-				<Button value="Save"/>
+				<Button value="Save" />
 			</div>
 		</div>
-		
 	</form>
 </div>
 
 <style lang="scss">
 	.wrap {
 		width: 100%;
-		
+
 		display: flex;
 		align-items: start;
 		justify-content: center;
-
 	}
 
 	.content {
