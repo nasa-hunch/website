@@ -60,7 +60,6 @@ model User {
   organization Organization? @relation(fields: [orgId], references: [id])
   orgId Int?
   projectUser ProjectUser[]
-  ownedProjects Project[]
   inbox Notification[] @relation("reciever")
   outbox Notification[] @relation("sender")
 }
@@ -89,6 +88,7 @@ model ProjectUser {
   updatedAt DateTime @updatedAt
   userId Int
   projectId Int
+  owner Boolean @default(false)
   user User @relation(fields: [userId], references: [id])
   project Project @relation("users", fields: [projectId], references: [id])
   permission ProjectUserPermission
@@ -103,8 +103,6 @@ model Project {
   organization Organization @relation(fields: [orgId], references: [id])
   orgId Int
   users ProjectUser[] @relation("users")
-  owner User @relation(fields: [ownerId], references: [id])
-  ownerId Int @unique
   files File[]
   joinCode Int @unique
   projectTemplateId Int
