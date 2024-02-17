@@ -5,13 +5,13 @@
 </script>
 
 <main>
-	{#each [...data.user.projectUser.map((user) => user.project), ...data.user.ownedProjects] as project}
-		<a class="project" href="/dashboard/projects/{project.id}">
-			<p>{project.name}</p>
+	{#each data.user.projectUser as projectUser}
+		<a class="project" href="/dashboard/projects/{projectUser.project.id}">
+			<p>{projectUser.project.name}</p>
 		</a>
 	{/each}
 	<div class="createNewPrompt">
-		{#if [...data.user.projectUser.map((user) => user.project), ...data.user.ownedProjects].length < 1}
+		{#if data.user.projectUser.length < 1}
 			<p>Hmmm, looks like nothing is here yet. </p>
 		{:else}
 			<p>Not what you are looking for? </p>
@@ -22,7 +22,10 @@
 
 <style lang="scss">
 	main {
-		margin: 1rem;
+		width: 100%;
+		display: flex;
+		align-items: start;
+		justify-content: center;
 	}
 	.createNewPrompt {
 		display: flex;

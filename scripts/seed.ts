@@ -1,4 +1,4 @@
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient, ProjectUserPermission, Role } from '@prisma/client';
 import crypto from 'crypto';
 import { promisify } from 'util';
 
@@ -48,13 +48,20 @@ async function main() {
 					name: 'Test Project',
 					description: 'This is a test project.',
 					joinCode: 123456,
-					owner: {
+					users: {
 						create: {
-							email: 'teacher@card.board',
-							firstName: 'Chalk',
-							lastName: 'Board',
-							role: Role.TEACHER,
-							...(await makePassword('password'))
+							user: {
+								create: {
+									email: 'teacher@card.board',
+									firstName: 'Chalk',
+									lastName: 'Board',
+									role: Role.TEACHER,
+									...(await makePassword('password'))
+
+								}
+							},
+							permission: ProjectUserPermission.NEEDS_APPROVAL,
+							owner: true,
 						}
 					},
 					projectTemplate: {
