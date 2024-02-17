@@ -37,15 +37,16 @@ export const members: TeamMember[] = [
 	{
 		firstName: 'Blake',
 		lastName: 'Ratcliff',
-		description: 'HUNCH Program Manager',
+		description: 'Program Manager',
 		email: 'steven.b.ratcliff@nasa.gov',
 		phoneNumber: '(832) 795-8581',
 		img: BlakeRatcliff
 	},
 	{
 		firstName: 'Geroge',
+		middleInitial: 'J',
 		lastName: 'Kessler',
-		description: 'HUNCH Director of Projects',
+		description: 'Director of Projects',
 		email: 'george.j.kessler@nasa.gov',
 		phoneNumber: '(713) 213-6487',
 		img: GeorgeKessler
@@ -60,8 +61,9 @@ export const members: TeamMember[] = [
 	},
 	{
 		firstName: 'Stacy',
+		middleInitial: 'L',
 		lastName: 'Hale',
-		description: 'HUNCH Founder and Projects Manager',
+		description: 'Founder and Projects Manager',
 		email: 'stacy.l.hale@nasa.gov',
 		phoneNumber: '(832) 226-3963',
 		img: StacyHale
@@ -110,7 +112,7 @@ export const members: TeamMember[] = [
 	{
 		firstName: 'Luke',
 		lastName: 'Sammons',
-		description: 'HUNCH Technician',
+		description: 'Technician',
 		img: LukeSammons
 	},
 	{
@@ -163,7 +165,7 @@ export const members: TeamMember[] = [
 	{
 		firstName: 'Glenn',
 		lastName: 'Johnson',
-		description: 'Design & Prototype',
+		description: 'Design & Prototyping',
 		email: 'glenn.f.johnson@nasa.gov',
 		phoneNumber: '(281) 755-2823',
 		img: GlennJohnson
@@ -195,14 +197,14 @@ export const members: TeamMember[] = [
 	{
 		firstName: 'Gene',
 		lastName: 'Gordon',
-		description: 'NASA HUNCH Mentor',
+		description: 'Mentor',
 		email: 'gene@nanoracks.com',
 		img: GeneGordon
 	},
 	{
 		firstName: 'Dave',
 		lastName: 'Schlichting',
-		description: 'NASA HUNCH Mentor',
+		description: 'Mentor',
 		email: 'dave@nanoracks.com',
 		img: DaveSchlichting
 	},
