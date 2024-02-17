@@ -43,7 +43,7 @@ export const members: TeamMember[] = [
 		img: BlakeRatcliff
 	},
 	{
-		firstName: 'Geroge',
+		firstName: 'George',
 		middleInitial: 'J',
 		lastName: 'Kessler',
 		description: 'Director of Projects',
