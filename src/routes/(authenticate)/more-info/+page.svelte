@@ -39,7 +39,7 @@
 			{#if data.user.role == Role.UNVERIFIED_TEACHER}
 				<h1>Awaiting Verification</h1>
 				<p>
-					Please email a completed copy of the <a href="/connect#statement_of_work"
+					Please email a completed copy of the <a href="/forms/statement-of-work"
 						>Statement of Work</a
 					>
 					to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a>

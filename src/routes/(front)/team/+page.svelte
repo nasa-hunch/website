@@ -3,10 +3,8 @@
 	import { members } from '$lib/team';
 </script>
 
-<Section title="Our Team" />
-
-<main>
-	<p class="description">
+<Section title="Our Team">
+	<p>
 		We are a team of <span class="highlight">dedicated</span>
 		individuals who are passionate
 		about the education and success of our program. We are
@@ -14,7 +12,9 @@
 		<span class="highlight">best</span> possible experience for
 		our students and are always looking for ways to improve.
 	</p>
+</Section>
 
+<main>
 	<div class="members">
 		{#each members as member}
 			<div class="member">
@@ -68,13 +68,6 @@
 			color: $primary;
 			font-weight: 700;
 		}
-	}
-
-	.description {
-		text-align: center;
-		margin: 1rem;
-		margin-top: 3rem;
-		max-width: 40rem;
 	}
 
 	main {
