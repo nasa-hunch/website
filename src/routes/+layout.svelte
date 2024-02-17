@@ -16,7 +16,14 @@
 
 		requestAnimationFrame(raf);
 	});
+
+	import { pwaInfo } from 'virtual:pwa-info';
+	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
+
+<svelte:head>
+	{@html webManifest}
+</svelte:head>
 
 <slot />
 
