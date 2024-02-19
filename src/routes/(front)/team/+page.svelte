@@ -44,7 +44,7 @@
 
 	.member {
 		margin: 1rem;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 		border-radius: 1rem;
 		width: 20rem;
 		text-align: center;
