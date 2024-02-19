@@ -54,7 +54,7 @@ export const members: TeamMember[] = [
 	{
 		firstName: 'Bob',
 		lastName: 'Zeek',
-		description: 'MSFC Project Resource Manage and Co-Founder',
+		description: 'MSFC Project Resource Manager and Co-Founder',
 		email: 'robert.c.zeek@nasa.gov',
 		phoneNumber: '(256) 542-7219',
 		img: BobZeek
@@ -141,7 +141,7 @@ export const members: TeamMember[] = [
 	{
 		firstName: 'Allison',
 		lastName: 'Westover',
-		description: 'Culinary Project Manager Design and Prototype Engineer',
+		description: 'Culinary Project Manager, Design and Prototype Engineer',
 		email: 'allison.r.westover@nasa.gov',
 		phoneNumber: '(281) 898-2486',
 		img: AllisonWestover
