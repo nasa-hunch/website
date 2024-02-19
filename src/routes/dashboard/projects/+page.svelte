@@ -3,14 +3,15 @@
 	import TextButton from '$lib/components/TextButton.svelte';
 	import type { PageData } from '../$types';
 	export let data: PageData;
-
+	import ComboBox from "$lib/components/Combobox.svelte"
 	let creatingProject = false;
 
 </script>
 
 <ModelHelper bind:visible={creatingProject}>
-	<form>
+	<form method="post" action="?/createProject">
 		<div>
+			<ComboBox options={[[], () => 1, () => ""]}/>
 		</div>
 
 	</form>

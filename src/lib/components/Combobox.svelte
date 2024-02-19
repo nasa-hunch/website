@@ -1,4 +1,8 @@
-<script lang="ts">
+
+
+<script lang="ts" generics="K">
+	import { Options } from 'svelte-preprocess/dist/types';
+
 	import { onMount } from 'svelte';
 
 	type Option = {
@@ -8,7 +12,13 @@
 	/**
 	 * Option is a option in the dropdown, includes a value and a display string
 	 */
-	export let options: Option[] = [];
+
+	type ComboOptions<T> = [T[], (input: T) => number, (input: T) => string];
+	export let options: ComboOptions<K>;
+
+	
+	let getItemString = options[2];
+	let getItemId = options[1];
 
 	export let name = 'Input';
 	export let label = 'Input';
@@ -23,7 +33,7 @@
 	onMount(() => (value = value));
 	let active = false;
 
-	let selected = options[0].value;
+	let selected = options[1](options[0][0]);
 
 	let outerButton: HTMLButtonElement;
 	const buttonClick = (e: MouseEvent) => {
@@ -50,18 +60,18 @@
 	</button>
 	{#if active}
 		<div class="options">
-			{#each options as option}
-				{#if option.display.toLowerCase().includes(value.toLowerCase())}
+			{#each options[0] as option, i}
+				{#if options[2](option).toLowerCase().includes(value.toLowerCase())}
 					<button
 						class="option"
 						type="button"
 						on:click={() => {
-							selected = option.value;
-							value = option.display;
+							selected = getItemId(option);
+							value = getItemString(option);
 							active = false;
 						}}
 					>
-						{option.display}
+						{getItemString(option)}
 					</button>
 				{/if}
 			{/each}
@@ -143,19 +153,42 @@
 		flex-direction: column;
 		max-height: 300px;
 		outline: 1px solid $secondary;
+		padding: 5px;
+		box-sizing: border-box;
 		background: var(--bgColor);
 		overflow-y: auto;
+
+	
+		&::-webkit-scrollbar {
+			width: 12px;
+		}
+		&::-webkit-scrollbar-track-piece,
+		&::-webkit-scrollbar-track {
+			background: $background;
+			background-clip: content-box;  
+		}
+		&::-webkit-scrollbar-thumb {
+			background: $background2;
+			background-clip: content-box; 
+    		border: 3px solid transparent;
+			border-radius: 7px;
+			
+		}
+
+		
 	}
+	
 	.option {
 		all: unset;
 		height: 100%;
 		padding: 5px 10px;
 		box-sizing: border-box;
-		background: var(--bgColor);
+		background: $background;
 		cursor: pointer;
+		border-radius: 5px;
 	}
 	.option:hover {
-		opacity: 0.5;
+		background: $background2;
 	}
 	.deselect {
 		all: unset;

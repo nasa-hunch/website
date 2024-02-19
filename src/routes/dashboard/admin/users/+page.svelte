@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
+	import type ComboOptions from "$lib/components/Combobox.svelte"
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
 	import { Role } from '$lib/enums';
@@ -13,12 +14,6 @@
 	let verifyUserForm = false;
 	let selectedUserId = 0;
 
-	const orgOptions = data.orgList.map((item) => {
-		return {
-			value: item.id,
-			display: item.name
-		};
-	});
 
 	type DeleteData =
 		| {
@@ -38,6 +33,9 @@
 			lastName
 		};
 	};
+
+	
+
 </script>
 
 <ModelHelper bind:visible={showDeleteForm}>
@@ -51,7 +49,7 @@
 	<ModelForm action="?/verifyUser" method="post">
 		<h2>Verify User</h2>
 		<input name="id" hidden bind:value={selectedUserId} />
-		<Combobox name="orgId" label="Organization" options={orgOptions} />
+		<Combobox name="orgId" label="Organization" options={[data.orgList, (orgItem) => orgItem.id, (orgItem) => orgItem.name.toString()]} />
 		<hr class="spacer" />
 		<Button value="verify" />
 	</ModelForm>
