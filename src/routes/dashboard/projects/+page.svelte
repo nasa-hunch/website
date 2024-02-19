@@ -1,20 +1,34 @@
 <script lang="ts">
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from "$lib/components/ModelForm.svelte"
 	import TextButton from '$lib/components/TextButton.svelte';
-	import type { PageData } from '../$types';
-	export let data: PageData;
+	export let data;
 	import ComboBox from "$lib/components/Combobox.svelte"
 	let creatingProject = false;
+
+	let selectedCategory: number;
+
+	let projectOptions = data.possibleProjects;
+	console.log(projectOptions)
+
+	$: if(selectedCategory) {
+		projectOptions = data.possibleProjects.filter((item) => item.categoryId == selectedCategory)
+	}
+	
 
 </script>
 
 <ModelHelper bind:visible={creatingProject}>
-	<form method="post" action="?/createProject">
+	<ModelForm method="post" action="?/createProject">
 		<div>
-			<ComboBox options={[[], () => 1, () => ""]}/>
+			<ComboBox options={[data.categories, (category) => category.id, (category) => category.name]} label="Project Category" bind:selected={selectedCategory}/>
+			<hr class="spacer">
+			{#if projectOptions && projectOptions.length > 0}
+				<ComboBox options={[projectOptions, (project) => project.id, (project) => project.name]} label="Project"/>
+			{/if}
 		</div>
-
-	</form>
+	</ModelForm>
+	
 </ModelHelper>
 
 <main>
@@ -48,5 +62,9 @@
 		
 
 		
+	}
+	.spacer {
+		background: transparent;
+		border: 1px solid transparent;
 	}
 </style>

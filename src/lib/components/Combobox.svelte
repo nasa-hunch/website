@@ -1,9 +1,11 @@
 
 
 <script lang="ts" generics="K">
+	import type { Mouse } from '@playwright/test';
+
 	import { Options } from 'svelte-preprocess/dist/types';
 
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 
 	type Option = {
 		value: string | number;
@@ -33,7 +35,7 @@
 	onMount(() => (value = value));
 	let active = false;
 
-	let selected = options[1](options[0][0]);
+	export let selected = options[1](options[0][0]);
 
 	let outerButton: HTMLButtonElement;
 	const buttonClick = (e: MouseEvent) => {
@@ -41,13 +43,16 @@
 			active = true;
 		}
 	};
+
+	
+	
 </script>
 
-<div style="--bgColor: {bgColor}" class="wrap">
+<div style="--bgColor: {bgColor}" class="wrap" class:active>
 	<button
 		bind:this={outerButton}
 		class="wrap"
-		class:active
+		
 		tabindex="-1"
 		type="button"
 		on:click={buttonClick}
@@ -61,7 +66,7 @@
 	{#if active}
 		<div class="options">
 			{#each options[0] as option, i}
-				{#if options[2](option).toLowerCase().includes(value.toLowerCase())}
+				{#if getItemString(option).toLowerCase().includes(value.toLowerCase())}
 					<button
 						class="option"
 						type="button"
@@ -83,6 +88,7 @@
 	<button
 		class="deselect"
 		type="button"
+
 		on:mousedown={() => {
 			active = false;
 		}}
@@ -110,6 +116,7 @@
 		width: 100%;
 		font-family: 'Lexend Variable', sans-serif;
 		background: transparent;
+		z-index: -1;
 	}
 
 	.labelBase {
@@ -141,9 +148,14 @@
 		padding: 0px 5px;
 		color: black;
 	}
-	.active {
+	.active > button {
 		outline: 1px solid $secondary;
 		border-radius: 3px 3px 0px 0px;
+		
+	}
+
+	.active {
+		z-index: 1000;
 	}
 	.options {
 		position: absolute;
@@ -157,6 +169,7 @@
 		box-sizing: border-box;
 		background: var(--bgColor);
 		overflow-y: auto;
+		z-index: 1000;
 
 	
 		&::-webkit-scrollbar {

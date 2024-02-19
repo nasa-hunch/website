@@ -5,6 +5,7 @@
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
 	import { Role } from '$lib/enums';
+	import { addToast } from '$lib/toasts/toaster';
 
 	import type { PageData } from './$types';
 
@@ -33,6 +34,21 @@
 			lastName
 		};
 	};
+
+	export let form;
+	$: if(form) {
+		if(form.success) {
+			addToast({
+				type: "success",
+				message: form.message || "Action Success!"
+			})
+		} else {
+			addToast({
+				type: "error",
+				message: form.message || "Action Failed!"
+			})
+		}
+	}
 	
 
 </script>
