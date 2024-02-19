@@ -12,6 +12,7 @@
 			color: $primary;
 			margin-left: 5px;
 			padding: 0px 2px;
+			z-index: 5;
 			
 			&::after {
 				content: "";
@@ -27,6 +28,7 @@
 
 			&:hover::after {
 				transform: scaleX(1);
+				z-index: -1;
 			}
 		}
 </style>

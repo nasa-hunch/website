@@ -1,8 +1,20 @@
 <script lang="ts">
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
 	import type { PageData } from '../$types';
 	export let data: PageData;
+
+	let creatingProject = false;
+
 </script>
+
+<ModelHelper bind:visible={creatingProject}>
+	<form>
+		<div>
+		</div>
+
+	</form>
+</ModelHelper>
 
 <main>
 	{#each data.user.projectUser as projectUser}
@@ -16,7 +28,7 @@
 		{:else}
 			<p>Not what you are looking for? </p>
 		{/if}
-		<TextButton>Create a new project?</TextButton>
+		<TextButton on:click={() => {creatingProject = true}}>Create a new project?</TextButton>
 	</div>
 </main>
 
