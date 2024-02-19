@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Section from '$lib/page/Section.svelte';
 	import { members } from '$lib/team';
+	import MdiPhone from '~icons/mdi/phone';
+	import MdiEmail from "~icons/mdi/email";
+	import MdiAccountCircle from "~icons/mdi/account-circle";
 </script>
 
 <Section title="Our Team">
@@ -21,12 +24,27 @@
 				<img alt={member.firstName} src={member.img} />
 				<div class="content">
 					<h2>{member.firstName} {member.middleInitial ? `${member.middleInitial + "."}` : ""} {member.lastName}</h2>
-					<p>{member.description}</p>
+					<div class="memberAttr">
+						<div class="icon">
+							<MdiAccountCircle />
+						</div>
+						<p>{member.description}</p>
+					</div>
 					{#if member.email}
+					<div class="memberAttr">
+						<div class="icon">
+							<MdiEmail />
+						</div>
 						<p><a href="mailto:{member.email}">{member.email}</a></p>
+					</div>
 					{/if}
 					{#if member.phoneNumber}
-						<p>{member.phoneNumber}</p>
+						<div class="memberAttr">
+							<div class="icon">
+								<MdiPhone />
+							</div>
+							<p>{member.phoneNumber}</p>
+						</div>
 					{/if}
 				</div>
 			</div>
@@ -50,6 +68,18 @@
 		text-align: center;
 		background-color: rgba(0, 0, 0, 0.01);
 	}
+
+	.memberAttr {
+		display: flex;
+	}
+
+	.icon {
+			margin-right: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: $primary;
+		}
 
 	img {
 		width: 100%;
