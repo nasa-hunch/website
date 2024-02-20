@@ -57,11 +57,10 @@ async function main() {
 									lastName: 'Board',
 									role: Role.TEACHER,
 									...(await makePassword('password'))
-
 								}
 							},
 							permission: ProjectUserPermission.NEEDS_APPROVAL,
-							owner: true,
+							owner: true
 						}
 					},
 					projectTemplate: {

@@ -1,24 +1,9 @@
-
-
-<script lang="ts" generics="K">
-	import type { Mouse } from '@playwright/test';
-
-	import { Options } from 'svelte-preprocess/dist/types';
-
-	import { createEventDispatcher, onMount } from 'svelte';
-
-	type Option = {
-		value: string | number;
-		display: string;
-	};
-	/**
-	 * Option is a option in the dropdown, includes a value and a display string
-	 */
+<script generics="K" lang="ts">
+	import { onMount } from 'svelte';
 
 	type ComboOptions<T> = [T[], (input: T) => number, (input: T) => string];
 	export let options: ComboOptions<K>;
 
-	
 	let getItemString = options[2];
 	let getItemId = options[1];
 
@@ -43,20 +28,10 @@
 			active = true;
 		}
 	};
-
-	
-	
 </script>
 
 <div style="--bgColor: {bgColor}" class="wrap" class:active>
-	<button
-		bind:this={outerButton}
-		class="wrap"
-		
-		tabindex="-1"
-		type="button"
-		on:click={buttonClick}
-	>
+	<button bind:this={outerButton} class="wrap" tabindex="-1" type="button" on:click={buttonClick}>
 		<input {name} hidden bind:value={selected} />
 		<input {autocomplete} {required} bind:value />
 		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
@@ -65,7 +40,7 @@
 	</button>
 	{#if active}
 		<div class="options">
-			{#each options[0] as option, i}
+			{#each options[0] as option}
 				{#if getItemString(option).toLowerCase().includes(value.toLowerCase())}
 					<button
 						class="option"
@@ -88,7 +63,6 @@
 	<button
 		class="deselect"
 		type="button"
-
 		on:mousedown={() => {
 			active = false;
 		}}
@@ -151,7 +125,6 @@
 	.active > button {
 		outline: 1px solid $secondary;
 		border-radius: 3px 3px 0px 0px;
-		
 	}
 
 	.active {
@@ -171,26 +144,22 @@
 		overflow-y: auto;
 		z-index: 1000;
 
-	
 		&::-webkit-scrollbar {
 			width: 12px;
 		}
 		&::-webkit-scrollbar-track-piece,
 		&::-webkit-scrollbar-track {
 			background: $background;
-			background-clip: content-box;  
+			background-clip: content-box;
 		}
 		&::-webkit-scrollbar-thumb {
 			background: $background2;
-			background-clip: content-box; 
-    		border: 3px solid transparent;
+			background-clip: content-box;
+			border: 3px solid transparent;
 			border-radius: 7px;
-			
 		}
-
-		
 	}
-	
+
 	.option {
 		all: unset;
 		height: 100%;

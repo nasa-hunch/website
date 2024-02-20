@@ -5,8 +5,9 @@
 
 	import Lenis from '@studio-freight/lenis';
 	import { onMount } from 'svelte';
-	import { addToast, resetToasts } from '$lib/toasts/toaster';
 	import { pwaInfo } from 'virtual:pwa-info';
+
+	import { addToast, resetToasts } from '$lib/toasts/toaster';
 	import Toaster from '$lib/toasts/Toaster.svelte';
 
 	onMount(() => {
@@ -20,18 +21,15 @@
 		requestAnimationFrame(raf);
 	});
 
-	
-	resetToasts()
-		onMount(() => {
-			addToast({
-			message: "NOT OFFICIAL WEBSITE",
-			type: "warn",
+	resetToasts();
+	onMount(() => {
+		addToast({
+			message: 'NOT OFFICIAL WEBSITE',
+			type: 'warn',
 			life: 3000
-		})
-	})
-	
-	
-	
+		});
+	});
+
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
 
@@ -39,8 +37,7 @@
 	{@html webManifest}
 </svelte:head>
 
-
-<Toaster/>
+<Toaster />
 <slot />
 
 <style lang="scss">

@@ -17,5 +17,9 @@ test('user can register', async ({ page }) => {
 
 	await page.waitForURL('/dashboard');
 
-	await expect(page.locator('text=Welcome to NASA Hunch! To verify your identity, we need to know a little more about you.')).toBeVisible();
+	await expect(
+		page.locator(
+			'text=Welcome to NASA Hunch! To verify your identity, we need to know a little more about you.'
+		)
+	).toBeVisible();
 });

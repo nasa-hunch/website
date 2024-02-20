@@ -1,19 +1,18 @@
 <script lang="ts">
+	import MdiAccountCircle from '~icons/mdi/account-circle';
+	import MdiEmail from '~icons/mdi/email';
+	import MdiPhone from '~icons/mdi/phone';
 	import Section from '$lib/page/Section.svelte';
 	import { members } from '$lib/team';
-	import MdiPhone from '~icons/mdi/phone';
-	import MdiEmail from "~icons/mdi/email";
-	import MdiAccountCircle from "~icons/mdi/account-circle";
 </script>
 
 <Section title="Our Team">
 	<p>
 		We are a team of <span class="highlight">dedicated</span>
-		individuals who are passionate
-		about the education and success of our program. We are
-		committed to providing the
-		<span class="highlight">best</span> possible experience for
-		our students and are always looking for ways to improve.
+		individuals who are passionate about the education and success of our program. We are committed to
+		providing the
+		<span class="highlight">best</span> possible experience for our students and are always looking for
+		ways to improve.
 	</p>
 </Section>
 
@@ -23,7 +22,11 @@
 			<div class="member">
 				<img alt={member.firstName} src={member.img} />
 				<div class="content">
-					<h2>{member.firstName} {member.middleInitial ? `${member.middleInitial + "."}` : ""} {member.lastName}</h2>
+					<h2>
+						{member.firstName}
+						{member.middleInitial ? `${member.middleInitial + '.'}` : ''}
+						{member.lastName}
+					</h2>
 					<div class="memberAttr">
 						<div class="icon">
 							<MdiAccountCircle />
@@ -31,12 +34,12 @@
 						<p>{member.description}</p>
 					</div>
 					{#if member.email}
-					<div class="memberAttr">
-						<div class="icon">
-							<MdiEmail />
+						<div class="memberAttr">
+							<div class="icon">
+								<MdiEmail />
+							</div>
+							<p><a href="mailto:{member.email}">{member.email}</a></p>
 						</div>
-						<p><a href="mailto:{member.email}">{member.email}</a></p>
-					</div>
 					{/if}
 					{#if member.phoneNumber}
 						<div class="memberAttr">
@@ -74,12 +77,12 @@
 	}
 
 	.icon {
-			margin-right: 10px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: $primary;
-		}
+		margin-right: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: $primary;
+	}
 
 	img {
 		width: 100%;
@@ -93,7 +96,7 @@
 	.content {
 		text-align: left;
 		padding: 1rem;
-		
+
 		h2 {
 			color: $primary;
 			font-weight: 700;
@@ -105,7 +108,7 @@
 		flex-direction: column;
 		align-items: center;
 	}
-	
+
 	.highlight {
 		color: $primary;
 		font-weight: 700;
