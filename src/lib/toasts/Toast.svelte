@@ -90,10 +90,6 @@
 		min-width: 200px;
 	}
 
-	h3 {
-		margin: 5px 0px;
-	}
-
 	p {
 		margin: 0px;
 		width: 100%;
@@ -109,10 +105,6 @@
 		align-items: end;
 		justify-content: end;
 		padding-left: 10px;
-	}
-
-	.close img {
-		width: 30px;
 	}
 
 	@keyframes closeBar {

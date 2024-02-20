@@ -63,16 +63,11 @@ export const actions = {
 			},
 			include: {
 				users: true,
-				owner: true
 			}
 		});
 
 		if (!project) {
 			error(400, 'Invalid code.');
-		}
-
-		if (project.owner.id == user.id) {
-			error(400, "You can't join a project you own.");
 		}
 
 		if (project.users.find((u) => u.id == user.id)) {
