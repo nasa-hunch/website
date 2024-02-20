@@ -29,7 +29,7 @@ export const test = baseTest.extend<object, { workerStorageState: string }>({
 				baseURL: 'http://localhost:3000'
 			});
 
-			// Perform authentication steps. Replace these actions with your own.
+			// Perform authentication steps.
 			await page.goto('/get-started');
 			await page.waitForSelector('body.started', { timeout: 5000 });
 
