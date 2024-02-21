@@ -10,6 +10,7 @@
 	import toast, { Toaster } from "svelte-french-toast"
 
 	onMount(() => {
+		document.body.classList.add('started');
 
 		toast('This is the unofficial website.')
 
