@@ -9,8 +9,8 @@ test('user can register', async ({ page }) => {
 	await page.locator('input[name="firstName"]').fill('Test');
 	await page.locator('input[name="lastName"]').fill('User');
 	await page.locator('input[name="email"]').fill(`test${crypto.randomUUID()}@nasa.hunch`);
-	await page.locator('input[name="password"]').fill('password');
-	await page.locator('input[name="confirmPassword"]').fill('password');
+	await page.locator('input[name="auth1"]').fill('password');
+	await page.locator('input[name="auth2"]').fill('password');
 	await page.locator('button[type="submit"]').click();
 
 	await expect(page.locator('text=Error')).not.toBeVisible();
