@@ -2,9 +2,7 @@ import { error } from '@sveltejs/kit';
 
 import { prisma } from '$lib/prismaConnection';
 
-import type { PageServerLoad } from './$types';
-
-export const load: PageServerLoad = async ({ params, parent }) => {
+export const load = async ({ params, parent }) => {
 
 	const parentData = await parent()
 	const id = parseInt(params.id);
@@ -27,6 +25,11 @@ export const load: PageServerLoad = async ({ params, parent }) => {
 			id: id
 		}
 	})
+
+	if (!project || project == null) {
+		error(404, 'Project not found');
+	}
+
 
 	return {
 		project
