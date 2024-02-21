@@ -38,7 +38,7 @@
 		if (form.success) {
 			toast.success(form.message || 'Action Success!')
 		} else {
-			toast.error(message: form.message || 'Action Failed!')
+			toast.error(form.message || 'Action Failed!')
 		}
 	}
 </script>
