@@ -68,6 +68,7 @@
 	"type": "module",
 	"dependencies": {
 		"dayjs": "^1.11.10",
+		"svelte-french-toast": "^1.2.0",
 		"svelte-preprocess": "^5.1.3"
 	}
 }

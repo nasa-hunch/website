@@ -4,7 +4,7 @@
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
 	import { Role } from '$lib/enums';
-	import { addToast } from '$lib/toasts/toaster';
+	import { toast } from 'svelte-french-toast';
 
 	import type { PageData } from './$types';
 
@@ -36,15 +36,9 @@
 	export let form;
 	$: if (form) {
 		if (form.success) {
-			addToast({
-				type: 'success',
-				message: form.message || 'Action Success!'
-			});
+			toast.success(form.message || 'Action Success!')
 		} else {
-			addToast({
-				type: 'error',
-				message: form.message || 'Action Failed!'
-			});
+			toast.error(message: form.message || 'Action Failed!')
 		}
 	}
 </script>

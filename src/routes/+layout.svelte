@@ -7,10 +7,12 @@
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
 
-	import { addToast, resetToasts } from '$lib/toasts/toaster';
-	import Toaster from '$lib/toasts/Toaster.svelte';
+	import toast, { Toaster } from "svelte-french-toast"
 
 	onMount(() => {
+
+		toast('unofficial website.')
+
 		const lenis = new Lenis();
 
 		function raf(time: number) {
@@ -21,23 +23,16 @@
 		requestAnimationFrame(raf);
 	});
 
-	resetToasts();
-	onMount(() => {
-		addToast({
-			message: 'NOT OFFICIAL WEBSITE',
-			type: 'warn',
-			life: 3000
-		});
-	});
-
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
 
 <svelte:head>
 	{@html webManifest}
 </svelte:head>
+<div class="toasts">
+	<Toaster />
+</div>
 
-<Toaster />
 <slot />
 
 <style lang="scss">

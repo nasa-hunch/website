@@ -38,7 +38,7 @@
 <style lang="scss">
 	nav {
 		position: sticky;
-		z-index: 10000;
+		z-index: 1000;
 		width: 100%;
 		top: 0;
 		background: #f1f1f1;
