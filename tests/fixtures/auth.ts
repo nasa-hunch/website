@@ -44,7 +44,7 @@ export const test = baseTest.extend<object, { workerStorageState: string }>({
 
 			await expect(page.locator('text=Error')).not.toBeVisible();
 
-			await page.waitForURL('/dashboard');
+			await page.waitForURL('/more-info');
 
 			// End of authentication steps.
 

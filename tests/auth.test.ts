@@ -15,7 +15,7 @@ test('user can register', async ({ page }) => {
 
 	await expect(page.locator('text=Error')).not.toBeVisible();
 
-	await page.waitForURL('/dashboard');
+	await page.waitForURL('/more-info');
 
 	await expect(
 		page.locator(
