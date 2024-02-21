@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
+
 	export let method: HTMLFormElement['method'] | undefined;
 	export let action: HTMLFormElement['action'] | undefined;
 </script>
 
-<form {action} {method}>
+<form {action} {method} use:enhance>
 	<slot />
 </form>
 
