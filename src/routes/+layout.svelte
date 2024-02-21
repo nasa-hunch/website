@@ -3,7 +3,7 @@
 	import '@fontsource-variable/lexend';
 	import '../app.css';
 
-	import Lenis from '@studio-freight/lenis';
+	// import Lenis from '@studio-freight/lenis';
 	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
 
@@ -13,15 +13,15 @@
 
 		toast('unofficial website.')
 
-		const lenis = new Lenis();
+		/* const lenis = new Lenis();
 
 		function raf(time: number) {
 			lenis.raf(time);
 			requestAnimationFrame(raf);
 		}
 
-		requestAnimationFrame(raf);
-	});
+		requestAnimationFrame(raf); */
+	}); 
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
