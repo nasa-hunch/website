@@ -61,6 +61,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		margin-top: 1rem;
+		align-items: left;
 	}
 
 	.member {
