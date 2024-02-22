@@ -5,6 +5,7 @@
 	import Section from '$lib/page/Section.svelte';
 	import { members } from '$lib/team';
 </script>
+<main>
 
 <Section title="Our Team">
 	<p>
@@ -16,7 +17,6 @@
 	</p>
 </Section>
 
-<main>
 	<div class="members">
 		{#each members as member}
 			<div class="member">
@@ -56,6 +56,7 @@
 </main>
 
 <style lang="scss">
+	
 	.members {
 		display: flex;
 		flex-wrap: wrap;
@@ -113,5 +114,12 @@
 	.highlight {
 		color: $primary;
 		font-weight: 700;
+	}
+
+	@media screen and (min-width: 1400px) {
+		main {
+			max-width: 80%;
+			margin: auto;
+		}
 	}
 </style>

@@ -5,7 +5,8 @@
 	import volunteer from '$lib/partners/images/volunteer.jpg';
 </script>
 
-<Section title="Get Involved" />
+<main>
+<Section title="Get Involved with NASA Hunch" />
 
 <div class="getInvolved">
 	<div class="item">
@@ -37,6 +38,21 @@
 	</div>
 </div>
 
+<div class="quotes">
+<blockquote>
+	<p>Working with several machines, using Mastercam software and making flight hardware for the ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to teach other students what I knew about machining and engineering. This, without a doubt, helped me get my job at Sam Houston.</p>
+	<footer>Lily England, <cite>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite></footer>
+</blockquote>
+<blockquote>
+	<p>I had the opportunity of a lifetime to be able to work on projects that are now onboard the International Space Station and used at various NASA facilities in the US which have truly been influential accomplishments for me, other students and to the space program. Given my invaluable experience, regardless of the career path that you pick or the interest that you may have, the HUNCH program instills students with the knowledge and expertise that will lead to a promising future.</p>
+	<footer>Owen Theeck, <cite>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite></footer>
+</blockquote>
+<blockquote>
+	<p>I had the opportunity of a lifetime to be able to work on projects that are now onboard the International Space Station and used at various NASA facilities in the US which have truly been influential accomplishments for me, other students and to the space program. Given my invaluable experience, regardless of the career path that you pick or the interest that you may have, the HUNCH program instills students with the knowledge and expertise that will lead to a promising future.</p>
+	<footer>Owen Theeck, <cite>Aviation Business Administration student at Embry-Riddle Aeronautical University</cite></footer>
+</blockquote>
+</div>
+</main>
 <style lang="scss">
 	.getInvolved {
 		display: flex;
@@ -63,5 +79,14 @@
 
 	.item .content {
 		padding: 1em;
+	}
+
+
+
+	@media screen and (min-width: 1400px) {
+		main {
+			max-width: 80%;
+			margin: auto;
+		}
 	}
 </style>

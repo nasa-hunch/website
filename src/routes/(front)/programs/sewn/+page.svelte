@@ -17,8 +17,8 @@
 			not only safe but clean and comfortable aboard their stay.
 		</p>
 		<p>
-			Much of the output goes to items for training purposes. By creating high fidelity training
-			goods, the Astronaut Crew can have a more realistic simulation while they are on the ground.
+			Most items are for training purposes. By creating these training
+			goods, the Astronauts have a realistic simulation while they are on the ground.
 			These products range from items designed through Design and Prototyping and flown up to the
 			International Space Station, to items that already exist aboard the International Space
 			Station such as Cargo Bags. This range of items allows schools with different skill levels to

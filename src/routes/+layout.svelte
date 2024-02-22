@@ -34,7 +34,9 @@
 	<Toaster />
 </div>
 
+<div class="body">
 <slot />
+</div>
 
 <style lang="scss">
 	:global(body) {

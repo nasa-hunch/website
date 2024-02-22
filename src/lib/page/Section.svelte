@@ -36,7 +36,6 @@
 	}
 
 	section {
-		max-width: 900px;
 		width: 100%;
 
 		display: flex;
@@ -53,7 +52,7 @@
 
 	section h3 {
 		text-align: left;
-		font-size: 3rem;
+		font-size: 2.5rem;
 		font-family: 'Lexend Variable', sans-serif;
 		font-weight: 500;
 		margin: 0px;

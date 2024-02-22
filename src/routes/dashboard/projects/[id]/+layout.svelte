@@ -10,7 +10,7 @@
 				<a href="/dashboard/projects/{data.project.id}"
 					>Checklist</a
 				>
-				<a href="/dashboard/projects/{data.project.id}"
+				<a href="/dashboard/projects/{data.project.id}/files"
 					>Files</a
 				>
 				<a href="/dashboard/projects/{data.project.id}"
