@@ -3,6 +3,10 @@
 	import mentor from '$lib/partners/images/mentor.jpg';
 	import partner from '$lib/partners/images/partner.jpg';
 	import volunteer from '$lib/partners/images/volunteer.jpg';
+	import lee from "$lib/partners/images/lee-hansen-1.jpg";
+	import ian from "$lib/partners/images/Ian.jpg";
+	import lily from "$lib/partners/images/Lily-England.jpg";
+	import owen from "$lib/partners/images/OwenTheeck.jpg";
 </script>
 
 <main>
@@ -40,6 +44,7 @@
 
 <div class="quotes">
 <blockquote>
+	<img src={owen} alt="Photo of Lily England"/>
 	<p>Working with several machines, using Mastercam software and making flight hardware for the ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to teach other students what I knew about machining and engineering. This, without a doubt, helped me get my job at Sam Houston.</p>
 	<footer>Lily England, <cite>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite></footer>
 </blockquote>
@@ -80,7 +85,6 @@
 	.item .content {
 		padding: 1em;
 	}
-
 
 
 	@media screen and (min-width: 1400px) {
