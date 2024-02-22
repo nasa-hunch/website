@@ -1,21 +1,52 @@
 <script lang="ts">
 	
     export let data;
+    export let form;
     import { enhance } from "$app/forms";
+    import { toast } from "svelte-french-toast"
     
     let fileUploadButton: HTMLButtonElement;
 	let fileBox: HTMLInputElement
 
-    
+    let uploadResolve: (value?: unknown) => void, uploadReject: (value?: unknown) => void;
+    let uploadPromise = new Promise((resolve, reject) => {
+        uploadResolve = resolve;
+        uploadReject = reject
+    })
 
+    $: if(form) {
+        if(form.success) {
+            console.log(form.message)
+            uploadResolve()
+        } else {
+            console.log(form.message)
+            uploadReject()
+        }
+    }
 
     const dropHandler = async (e: DragEvent) => {
 		e.preventDefault();
+        dragging = false;
 		if(!e.dataTransfer) {
 			return;
 		}
-		fileBox.files = e.dataTransfer.files;
-		fileUploadButton.click()
+        fileBox.files = e.dataTransfer.files;
+        fileUploadButton.click()
+
+        console.log("preping toast")
+
+        uploadPromise = new Promise((resolve, reject) => {
+            uploadResolve = resolve;
+            uploadReject = reject
+        })
+
+        toast.promise(uploadPromise, {
+            loading: "Uploading File...",
+            success: "File uploaded!",
+            error: "Could not upload file."
+        })
+		
+		
 		
 	}
 	const dragOverHandler = (e: Event) => {
@@ -31,7 +62,7 @@
 
 </script>
 
-<form hidden method="post" action="?/uploadFile" use:enhance>
+<form hidden method="post" action="?/uploadFile" enctype="multipart/form-data" use:enhance>
 	<input type="file" bind:this={fileBox} name="file"/>
 	<button bind:this={fileUploadButton}></button>
 </form>
@@ -73,6 +104,8 @@
         border-right: 1px solid $background3;
         position: relative;
         z-index: 2;
+        padding: 5px;
+        box-sizing: border-box;
     }
     .fileView {
         height: 100%;
