@@ -2,6 +2,7 @@
 	
     export let data;
     export let form;
+
     import { enhance } from "$app/forms";
     import { toast } from "svelte-french-toast"
     
@@ -15,6 +16,7 @@
     })
 
     $: if(form) {
+        console.log(form)
         if(form.success) {
             console.log(form.message)
             uploadResolve()
@@ -22,6 +24,7 @@
             console.log(form.message)
             uploadReject()
         }
+        form = null;
     }
 
     const dropHandler = async (e: DragEvent) => {
@@ -42,8 +45,8 @@
 
         toast.promise(uploadPromise, {
             loading: "Uploading File...",
-            success: "File uploaded!",
-            error: "Could not upload file."
+            success: form?.message || "File uploaded!",
+            error: form?.message || "Could not upload file."
         })
 		
 		
