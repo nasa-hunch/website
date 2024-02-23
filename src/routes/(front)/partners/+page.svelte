@@ -43,59 +43,73 @@
 	</div>
 
 	<div class="quotes">
-		<blockquote>
+		<div class="quote">
 			<img alt="Lily England" src={lily} />
+		<blockquote>
 			<p>
-				Working with several machines, using Mastercam software and making flight hardware for the
+				"Working with several machines, using Mastercam software and making flight hardware for the
 				ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to teach
 				other students what I knew about machining and engineering. This, without a doubt, helped me
-				get my job at Sam Houston.
+				get my job at Sam Houston."
 			</p>
+			<br>
 			<footer>
-				Lily England, <cite
+				<p>Lily England</p><cite
 					>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite
 				>
 			</footer>
 		</blockquote>
-		<blockquote>
+		</div>
+		<div class="quote">
 			<img alt="Owen Theeck" src={owen} />
+		<blockquote>
 			<p>
-				I had the opportunity of a lifetime to be able to work on projects that are now onboard the
+				"I had the opportunity of a lifetime to be able to work on projects that are now onboard the
 				International Space Station and used at various NASA facilities in the US which have truly
 				been influential accomplishments for me, other students and to the space program. Given my
 				invaluable experience, regardless of the career path that you pick or the interest that you
 				may have, the HUNCH program instills students with the knowledge and expertise that will
-				lead to a promising future.
+				lead to a promising future."
 			</p>
+			<br>
 			<footer>
-				Owen Theeck, <cite
-					>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite
-				>
+				<p>Owen Theeck</p>
+				<cite>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite>
 			</footer>
 		</blockquote>
-		<blockquote>
+		</div>
+		<div class="quote">
 			<img alt="Lee Hansen" src={lee} />
+		<blockquote>
 			<p>
-				Working with the HUNCH program throughout high school helped not only to improve my sewing
+				"Working with the HUNCH program throughout high school helped not only to improve my sewing
 				skills but also to better understand project management and work flow over long term
 				projects. Learning the responsibilities as well as technical skills made my college
-				experience even more rewarding.
+				experience even more rewarding."
 			</p>
+			<br>
 			<footer>
-				Lee Hansen, <cite>Softgoods Specialist</cite>
+				<p>Lee Hansen</p>
+				<cite>Softgoods Specialist</cite>
 			</footer>
 		</blockquote>
-		<blockquote>
+		</div>
+		<div class="quote">
 			<img alt="Ian West" src={ian} />
-			<p>
-				Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH
-				offers for students to get real world experience. Now I get to program and machine every
-				day.
-			</p>
-			<footer>
-				Ian West, <cite>HUNCH Intern</cite>
-			</footer>
-		</blockquote>
+			<blockquote>
+				<p>
+					"Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH
+					offers for students to get real world experience. Now I get to program and machine every
+					day."
+				</p>
+			<br>
+
+				<footer>
+					<p>Ian West</p>
+					<cite>HUNCH Intern</cite>
+				</footer>
+			</blockquote>
+		</div>
 	</div>
 </main>
 
@@ -125,6 +139,39 @@
 
 	.item .content {
 		padding: 1em;
+	}
+
+	.quotes {
+		gap: 1.5rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.quote {
+		display: flex;
+		align-items: center;
+	}
+	
+	.quote img {
+		height: 100%;
+		width: 10rem;
+		border-radius: 50%;
+	}
+
+	.quote blockquote footer {
+		text-align: right;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.quote blockquote footer p {
+		color: $primary;
+	}
+
+	.quote p {
+		margin: 0;
 	}
 
 	@media screen and (min-width: 1400px) {
