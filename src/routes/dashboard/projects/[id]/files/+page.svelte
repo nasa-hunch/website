@@ -1,10 +1,31 @@
 <script lang="ts">
 	export let data;
 	export let form;
-
-	import { toast } from 'svelte-french-toast';
+    
+    import IconImage from "~icons/mdi/image"
+    import IconFile from '~icons/mdi/file'
+    
+    import { toast } from 'svelte-french-toast';
 
 	import { enhance } from '$app/forms';
+	import type { ComponentType, SvelteComponent  } from "svelte";
+
+    console.log(typeof IconImage)
+
+    const extensionIcons: {[key: string]: ComponentType  } = {
+        "png": IconImage,
+        "jpg": IconImage,
+    }
+
+    const extensionSupport = (file: string) => {
+
+        const fileParts = file.split('.')
+        const ext = fileParts[fileParts.length - 1].toLowerCase()
+
+        return extensionIcons[ext] || (IconFile as ComponentType)
+    }
+
+	
 
 	let fileUploadButton: HTMLButtonElement;
 	let fileBox: HTMLInputElement;
@@ -67,7 +88,6 @@
 </form>
 
 <div class="wrap">
-	<div class="fileExplorer">
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="fileList"
@@ -78,34 +98,44 @@
 		>
 			{#each data.files as file}
 				<div class="file">
+                    <div class="icon">
+                        <svelte:component this={extensionSupport(file.name)} />
+                    </div>
 					{file.name}
 				</div>
 			{/each}
 		</div>
-		<div class="fileView" />
-	</div>
 </div>
 
 <style lang="scss">
-	.fileExplorer {
-		width: 100%;
-		height: 100%;
-		background: $background2;
-		border-radius: 5px;
-		margin-top: 20px;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: row;
-	}
 	.fileList {
-		min-width: 200px;
-		min-height: 200px;
-		border-right: 1px solid $background3;
+		width: 100%;
+        height: 100%;
+        margin-top: 20px;
+        background: $background-alt;
 		position: relative;
 		z-index: 2;
-		padding: 5px;
+		padding: 10px;
+        border-radius: 10px;
+        overflow-x: hidden;
 		box-sizing: border-box;
 	}
+    .file {
+        text-wrap: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding: 10px 5px;
+        font-size: 1.1rem;
+        border-bottom: 1px solid $background2;
+
+        .icon {
+            margin-right: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 	.fileView {
 		height: 100%;
 		width: 100%;
@@ -113,7 +143,7 @@
 	.uploadFileThing::after {
 		position: absolute;
 		content: '';
-		background: $primary;
+		background: $background;
 		top: 0px;
 		left: 0px;
 		height: 100%;
