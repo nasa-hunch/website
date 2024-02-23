@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Section from '$lib/page/Section.svelte';
 	import ian from '$lib/partners/images/Ian.jpg';
-	import lee from '$lib/partners/images/lee-hansen-1.jpg';
-	import lily from '$lib/partners/images/Lily-England.jpg';
+	import lee from '$lib/partners/images/Lee.jpg';
+	import lily from '$lib/partners/images/Lily.jpg';
 	import mentor from '$lib/partners/images/mentor.jpg';
-	import owen from '$lib/partners/images/OwenTheeck.jpg';
+	import owen from '$lib/partners/images/Owen.jpg';
 	import partner from '$lib/partners/images/partner.jpg';
 	import volunteer from '$lib/partners/images/volunteer.jpg';
 </script>
@@ -44,7 +44,7 @@
 
 	<div class="quotes">
 		<blockquote>
-			<img alt="Lily England" src={owen} />
+			<img alt="Lily England" src={lily} />
 			<p>
 				Working with several machines, using Mastercam software and making flight hardware for the
 				ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to teach
@@ -58,6 +58,7 @@
 			</footer>
 		</blockquote>
 		<blockquote>
+			<img alt="Owen Theeck" src={owen} />
 			<p>
 				I had the opportunity of a lifetime to be able to work on projects that are now onboard the
 				International Space Station and used at various NASA facilities in the US which have truly
@@ -73,17 +74,27 @@
 			</footer>
 		</blockquote>
 		<blockquote>
+			<img alt="Lee Hansen" src={lee} />
 			<p>
-				I had the opportunity of a lifetime to be able to work on projects that are now onboard the
-				International Space Station and used at various NASA facilities in the US which have truly
-				been influential accomplishments for me, other students and to the space program. Given my
-				invaluable experience, regardless of the career path that you pick or the interest that you
-				may have, the HUNCH program instills students with the knowledge and expertise that will
-				lead to a promising future.
+				Working with the HUNCH program throughout high school helped not only to improve my sewing
+				skills but also to better understand project management and work flow over long term
+				projects. Learning the responsibilities as well as technical skills made my college
+				experience even more rewarding.
 			</p>
 			<footer>
-				Owen Theeck, <cite
-					>Aviation Business Administration student at Embry-Riddle Aeronautical University</cite
+				Lee Hansen, <cite
+					>Softgoods Specialist</cite
+				>
+			</footer>
+		</blockquote>
+		<blockquote>
+			<img alt="Ian West" src={ian} />
+			<p>
+				Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH offers for students to get real world experience. Now I get to program and machine every day.
+			</p>
+			<footer>
+				Ian West, <cite
+					>HUNCH Intern</cite
 				>
 			</footer>
 		</blockquote>
