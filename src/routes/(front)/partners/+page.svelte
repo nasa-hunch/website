@@ -74,7 +74,7 @@
 			<br>
 			<footer>
 				<p>Owen Theeck</p>
-				<cite>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite>
+				<cite>Aviation Business Administration student at Embry-Riddle Aeronautical University</cite>
 			</footer>
 		</blockquote>
 		</div>
@@ -145,17 +145,24 @@
 		gap: 1.5rem;
 		display: flex;
 		flex-direction: column;
+		margin: 1rem 2rem;
 	}
 
 	.quote {
 		display: flex;
 		align-items: center;
+		/* MAYBE
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+		padding: 1rem;
+		border-radius: 1rem;
+		*/
 	}
 	
 	.quote img {
 		height: 100%;
 		width: 10rem;
 		border-radius: 50%;
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	}
 
 	.quote blockquote footer {
