@@ -17,12 +17,12 @@
 			not only safe but clean and comfortable aboard their stay.
 		</p>
 		<p>
-			Most items are for training purposes. By creating these training
-			goods, the Astronauts have a realistic simulation while they are on the ground.
-			These products range from items designed through Design and Prototyping and flown up to the
-			International Space Station, to items that already exist aboard the International Space
-			Station such as Cargo Bags. This range of items allows schools with different skill levels to
-			all participate so that no one is denied the chance to create.
+			Most items are for training purposes. By creating these training goods, the Astronauts have a
+			realistic simulation while they are on the ground. These products range from items designed
+			through Design and Prototyping and flown up to the International Space Station, to items that
+			already exist aboard the International Space Station such as Cargo Bags. This range of items
+			allows schools with different skill levels to all participate so that no one is denied the
+			chance to create.
 		</p>
 		<p>Some items include:</p>
 		<ul>

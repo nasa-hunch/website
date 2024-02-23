@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms';
 
 	export let method: HTMLFormElement['method'] | undefined;
 	export let action: HTMLFormElement['action'] | undefined;

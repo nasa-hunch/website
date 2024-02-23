@@ -62,7 +62,7 @@ export const actions = {
 				joinCode: parseInt(code.toString())
 			},
 			include: {
-				users: true,
+				users: true
 			}
 		});
 

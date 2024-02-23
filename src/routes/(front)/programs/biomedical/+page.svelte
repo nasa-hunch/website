@@ -8,8 +8,8 @@
 	</div>
 	<div slot="main">
 		<p>
-			The sky is <b>not</b> the limit when thinking of <span class="accent">solutions</span> to keep astronauts safe & healthy
-			in the <span class="accent">hazardous</span> environment of space.
+			The sky is <b>not</b> the limit when thinking of <span class="accent">solutions</span> to keep
+			astronauts safe & healthy in the <span class="accent">hazardous</span> environment of space.
 		</p>
 	</div>
 </Program>

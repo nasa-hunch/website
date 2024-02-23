@@ -3,8 +3,7 @@ import { error } from '@sveltejs/kit';
 import { prisma } from '$lib/prismaConnection';
 
 export const load = async ({ params, parent }) => {
-
-	const parentData = await parent()
+	const parentData = await parent();
 	const id = parseInt(params.id);
 
 	const projectUser = await prisma.projectUser.findFirst({
@@ -14,7 +13,7 @@ export const load = async ({ params, parent }) => {
 				projectId: id
 			}
 		}
-	})
+	});
 
 	if (!projectUser || projectUser == null) {
 		error(404, 'Project not found');
@@ -24,12 +23,11 @@ export const load = async ({ params, parent }) => {
 		where: {
 			id: id
 		}
-	})
+	});
 
 	if (!project || project == null) {
 		error(404, 'Project not found');
 	}
-
 
 	return {
 		project

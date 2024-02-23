@@ -5,17 +5,17 @@
 	import Section from '$lib/page/Section.svelte';
 	import { members } from '$lib/team';
 </script>
-<main>
 
-<Section title="Our Team">
-	<p>
-		We are a team of <span class="highlight">dedicated</span>
-		individuals who are passionate about the education and success of our program. We are committed to
-		providing the
-		<span class="highlight">best</span> possible experience for our students and are always looking for
-		ways to improve.
-	</p>
-</Section>
+<main>
+	<Section title="Our Team">
+		<p>
+			We are a team of <span class="highlight">dedicated</span>
+			individuals who are passionate about the education and success of our program. We are committed
+			to providing the
+			<span class="highlight">best</span> possible experience for our students and are always looking
+			for ways to improve.
+		</p>
+	</Section>
 
 	<div class="members">
 		{#each members as member}
@@ -56,7 +56,6 @@
 </main>
 
 <style lang="scss">
-	
 	.members {
 		display: flex;
 		flex-wrap: wrap;

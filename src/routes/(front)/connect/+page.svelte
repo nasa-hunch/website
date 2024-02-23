@@ -12,6 +12,7 @@
 		</ul>
 	</Section>
 </main>
+
 <style>
 	@media screen and (min-width: 1400px) {
 		main {

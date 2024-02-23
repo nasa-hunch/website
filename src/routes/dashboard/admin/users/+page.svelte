@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { toast } from 'svelte-french-toast';
+
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
 	import { Role } from '$lib/enums';
-	import { toast } from 'svelte-french-toast';
 
 	import type { PageData } from './$types';
 
@@ -36,9 +37,9 @@
 	export let form;
 	$: if (form) {
 		if (form.success) {
-			toast.success(form.message || 'Action Success!')
+			toast.success(form.message || 'Action Success!');
 		} else {
-			toast.error(form.message || 'Action Failed!')
+			toast.error(form.message || 'Action Failed!');
 		}
 	}
 </script>

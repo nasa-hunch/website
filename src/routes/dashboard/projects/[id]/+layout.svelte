@@ -7,25 +7,16 @@
 		<div class="headerInner">
 			<h1>{data.project.name}</h1>
 			<nav class="nav">
-				<a href="/dashboard/projects/{data.project.id}"
-					>Checklist</a
-				>
-				<a href="/dashboard/projects/{data.project.id}/files"
-					>Files</a
-				>
-				<a href="/dashboard/projects/{data.project.id}"
-					>Members</a
-				>
-				<a href="/dashboard/projects/{data.project.id}"
-					>Submission</a
-				>
+				<a href="/dashboard/projects/{data.project.id}">Checklist</a>
+				<a href="/dashboard/projects/{data.project.id}/files">Files</a>
+				<a href="/dashboard/projects/{data.project.id}">Members</a>
+				<a href="/dashboard/projects/{data.project.id}">Submission</a>
 			</nav>
 		</div>
 	</div>
 	<div class="content">
 		<slot />
 	</div>
-	
 </div>
 
 <style lang="scss">

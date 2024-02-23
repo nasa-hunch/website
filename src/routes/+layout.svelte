@@ -5,14 +5,13 @@
 
 	import Lenis from '@studio-freight/lenis';
 	import { onMount } from 'svelte';
+	import toast, { Toaster } from 'svelte-french-toast';
 	import { pwaInfo } from 'virtual:pwa-info';
-
-	import toast, { Toaster } from "svelte-french-toast"
 
 	onMount(() => {
 		document.body.classList.add('started');
 
-		toast('This is the unofficial website.')
+		toast('This is the unofficial website.');
 
 		const lenis = new Lenis();
 
@@ -22,7 +21,7 @@
 		}
 
 		requestAnimationFrame(raf);
-	}); 
+	});
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
@@ -35,7 +34,7 @@
 </div>
 
 <div class="body">
-<slot />
+	<slot />
 </div>
 
 <style lang="scss">
