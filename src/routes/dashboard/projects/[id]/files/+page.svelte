@@ -1,31 +1,27 @@
 <script lang="ts">
 	export let data;
 	export let form;
-    
-    import IconImage from "~icons/mdi/image"
-    import IconFile from '~icons/mdi/file'
-    
-    import { toast } from 'svelte-french-toast';
 
+	import type { ComponentType, SvelteComponent } from 'svelte';
+	import { toast } from 'svelte-french-toast';
+
+	import IconFile from '~icons/mdi/file';
+	import IconImage from '~icons/mdi/image';
 	import { enhance } from '$app/forms';
-	import type { ComponentType, SvelteComponent  } from "svelte";
 
-    console.log(typeof IconImage)
+	console.log(typeof IconImage);
 
-    const extensionIcons: {[key: string]: ComponentType  } = {
-        "png": IconImage,
-        "jpg": IconImage,
-    }
+	const extensionIcons: { [key: string]: ComponentType } = {
+		png: IconImage,
+		jpg: IconImage
+	};
 
-    const extensionSupport = (file: string) => {
+	const extensionSupport = (file: string) => {
+		const fileParts = file.split('.');
+		const ext = fileParts[fileParts.length - 1].toLowerCase();
 
-        const fileParts = file.split('.')
-        const ext = fileParts[fileParts.length - 1].toLowerCase()
-
-        return extensionIcons[ext] || (IconFile as ComponentType)
-    }
-
-	
+		return extensionIcons[ext] || (IconFile as ComponentType);
+	};
 
 	let fileUploadButton: HTMLButtonElement;
 	let fileBox: HTMLInputElement;
@@ -88,54 +84,54 @@
 </form>
 
 <div class="wrap">
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div
-			class="fileList"
-			class:uploadFileThing={dragging}
-			on:drop={dropHandler}
-			on:dragover={dragOverHandler}
-			on:dragleave={stopDragOver}
-		>
-			{#each data.files as file}
-				<div class="file">
-                    <div class="icon">
-                        <svelte:component this={extensionSupport(file.name)} />
-                    </div>
-					{file.name}
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div
+		class="fileList"
+		class:uploadFileThing={dragging}
+		on:drop={dropHandler}
+		on:dragover={dragOverHandler}
+		on:dragleave={stopDragOver}
+	>
+		{#each data.files as file}
+			<div class="file">
+				<div class="icon">
+					<svelte:component this={extensionSupport(file.name)} />
 				</div>
-			{/each}
-		</div>
+				{file.name}
+			</div>
+		{/each}
+	</div>
 </div>
 
 <style lang="scss">
 	.fileList {
 		width: 100%;
-        height: 100%;
-        margin-top: 20px;
-        background: $background-alt;
+		height: 100%;
+		margin-top: 20px;
+		background: $background-alt;
 		position: relative;
 		z-index: 2;
 		padding: 10px;
-        border-radius: 10px;
-        overflow-x: hidden;
+		border-radius: 10px;
+		overflow-x: hidden;
 		box-sizing: border-box;
 	}
-    .file {
-        text-wrap: nowrap;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        padding: 10px 5px;
-        font-size: 1.1rem;
-        border-bottom: 1px solid $background2;
+	.file {
+		text-wrap: nowrap;
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		padding: 10px 5px;
+		font-size: 1.1rem;
+		border-bottom: 1px solid $background2;
 
-        .icon {
-            margin-right: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
+		.icon {
+			margin-right: 5px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
 	.fileView {
 		height: 100%;
 		width: 100%;
