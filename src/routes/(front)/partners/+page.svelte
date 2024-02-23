@@ -82,20 +82,18 @@
 				experience even more rewarding.
 			</p>
 			<footer>
-				Lee Hansen, <cite
-					>Softgoods Specialist</cite
-				>
+				Lee Hansen, <cite>Softgoods Specialist</cite>
 			</footer>
 		</blockquote>
 		<blockquote>
 			<img alt="Ian West" src={ian} />
 			<p>
-				Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH offers for students to get real world experience. Now I get to program and machine every day.
+				Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH
+				offers for students to get real world experience. Now I get to program and machine every
+				day.
 			</p>
 			<footer>
-				Ian West, <cite
-					>HUNCH Intern</cite
-				>
+				Ian West, <cite>HUNCH Intern</cite>
 			</footer>
 		</blockquote>
 	</div>
