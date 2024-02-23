@@ -44,7 +44,7 @@
 
 	<div class="quotes">
 		<blockquote>
-			<img alt="Photo of Lily England" src={owen} />
+			<img alt="Lily England" src={owen} />
 			<p>
 				Working with several machines, using Mastercam software and making flight hardware for the
 				ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to teach

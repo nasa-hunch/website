@@ -13,7 +13,7 @@
 	</Section>
 </main>
 
-<style>
+<style lang="scss">
 	@media screen and (min-width: 1400px) {
 		main {
 			max-width: 80%;

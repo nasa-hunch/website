@@ -27,7 +27,7 @@
 		form = null;
 	}
 
-	const dropHandler = async (e: DragEvent) => {
+	const dropHandler = (e: DragEvent) => {
 		e.preventDefault();
 		dragging = false;
 		if (!e.dataTransfer) {
