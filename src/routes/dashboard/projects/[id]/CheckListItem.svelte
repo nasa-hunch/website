@@ -1,4 +1,12 @@
 <script lang="ts">
+
+	import DoneIcon from "~icons/mdi/done"
+	import DeleteIcon from "~icons/mdi/delete-outline"
+	import AddPersonIcon from "~icons/mdi/person-add-outline"
+
+	import IconButton from "$lib/components/IconButton.svelte";
+	
+
 	type CheckListItem = {
 		id: number;
 		createdAt: Date;
@@ -12,9 +20,23 @@
 </script>
 
 <div class="checkListItem">
-	<h3>
-		{data.name}
-	</h3>
+	<div class="left">
+		<h3>
+			{data.name}
+		</h3>
+	</div>
+	<div class="right">
+		<IconButton>
+			<DoneIcon/>
+		</IconButton>
+		<IconButton>
+			<AddPersonIcon/>
+		</IconButton>
+		<IconButton>
+			<DeleteIcon/>
+		</IconButton>
+	</div>
+	
 </div>
 
 <style lang="scss">
@@ -26,9 +48,27 @@
 		background: $background-alt;
 		display: flex;
 		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+	}
+	.left {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: start;
+	}
+	.right {
+		display: flex;
+		flex-direction: row;
 	}
 
 	h3 {
+		all: unset;
+		font-size: 1.2rem;
 		margin: 0px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

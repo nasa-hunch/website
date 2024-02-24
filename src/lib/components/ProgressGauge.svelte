@@ -2,7 +2,7 @@
 	import * as d3 from 'd3';
 
 	/**
-	 * Whole Number, ex: 55 = 55%
+	 * %, ex: 0.12 = 12%
 	 */
 	export let percentDone = 55;
 	export let fill = '#0c0c0c';
@@ -24,7 +24,7 @@
 			innerRadius: width / 2 - strokeWidth,
 			outerRadius: width / 2,
 			startAngle: 0,
-			endAngle: (percentDone / 100) * (Math.PI * 2)
+			endAngle: (percentDone) * (Math.PI * 2)
 		});
 	}
 

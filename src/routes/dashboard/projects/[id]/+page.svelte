@@ -13,6 +13,7 @@
 
 	import type { PageData } from './$types';
 	import CheckListItem from './CheckListItem.svelte';
+	import IconButton from '$lib/components/IconButton.svelte';
 
 	export let data: PageData;
 	export let form;
@@ -23,7 +24,7 @@
 	});
 
 	onMount(() => {
-		percentDone.set(12);
+		percentDone.set(data.checkedItems.length / data.numberOfItems);
 	});
 
 	let creatingItem = false;
@@ -76,14 +77,14 @@
 			<ProgressGauge fill="var(--green)" percentDone={$percentDone} strokeWidth={4} />
 		</div>
 		<h1>Check List</h1>
-		<button
-			class="iconButton"
-			on:click={() => {
+		<div class="iconButtonWrap">
+			<IconButton on:click={() => {
 				creatingItem = true;
-			}}
-		>
-			<AddItemIcon />
-		</button>
+			}}>
+				<AddItemIcon/>
+			</IconButton>
+		</div>
+		
 	</div>
 
 	<div class="items">
@@ -108,10 +109,6 @@
 		align-items: center;
 		justify-content: center;
 		margin-top: 25px;
-
-		* {
-			margin: 0px;
-		}
 	}
 	.progress {
 		display: flex;
@@ -121,23 +118,10 @@
 		margin: 0px 20px;
 		padding-top: 5px;
 	}
-	.iconButton {
-		all: unset;
-		cursor: pointer;
-		padding: 5px;
-		height: 100%;
-		box-sizing: border-box;
-		margin: 0px 10px;
-		aspect-ratio: 1/1;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
-
-		&:hover {
-			background: $background2;
-		}
+	
+	.iconButtonWrap {
+		margin-left: 20px;
+		height: 40px;
 	}
 
 	hr {

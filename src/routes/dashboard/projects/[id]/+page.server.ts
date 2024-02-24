@@ -26,6 +26,7 @@ export const load = async ({ parent }) => {
 	});
 
 	return {
+		numberOfItems: checkableItems.length,
 		checkedItems,
 		uncheckedItems
 	};
