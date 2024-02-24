@@ -5,7 +5,7 @@
 	export let action: HTMLFormElement['action'] | undefined;
 </script>
 
-<form {action} {method} on:submit use:enhance>
+<form {action} {method} on:submit on:reset use:enhance>
 	<slot />
 </form>
 

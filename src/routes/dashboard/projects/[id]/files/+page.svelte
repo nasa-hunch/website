@@ -45,12 +45,15 @@
 	$: if (form) {
 		console.log(form);
 		if (form.success) {
+
 			console.log(form.message);
 			uploadResolve();
 		} else {
+			
 			console.log(form.message);
 			uploadReject();
 		}
+		doingFileDelete = false;
 		form = null;
 	}
 
@@ -96,8 +99,8 @@
 		doingFileDelete = true;
 	};
 
-	const deleteFileSubmit = () => {
-		doingFileDelete = false;
+	const deleteFileSubmit = (e: SubmitEvent) => {
+		
 
 		uploadPromise = new Promise((resolve, reject) => {
 			uploadResolve = resolve;
@@ -109,6 +112,7 @@
 			success: form?.message || 'File Deleted!',
 			error: form?.message || 'Could not delete file.'
 		});
+
 	};
 
 	const fileNameChange = () => {
@@ -136,7 +140,7 @@
 			<input name="fileId" hidden value={doingFileDeleteOnId} />
 			<h2>Are you sure?</h2>
 			<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
-			<Button value="Confirm" />
+			<Button type="submit" value="Confirm" />
 		</div>
 	</ModelForm>
 </ModelHelper>
