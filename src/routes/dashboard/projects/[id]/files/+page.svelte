@@ -17,6 +17,7 @@
 	import IconDownload from '~icons/mdi/download';
 	import IconTrash from '~icons/mdi/delete-outline';
 	import { enhance } from '$app/forms';
+	import InTextInput from '$lib/components/InTextInput.svelte';
 
 	console.log(typeof IconImage);
 
@@ -111,6 +112,19 @@
 		});
 	}
 
+	const fileNameChange = () => {
+		uploadPromise = new Promise((resolve, reject) => {
+			uploadResolve = resolve;
+			uploadReject = reject;
+		});
+
+		toast.promise(uploadPromise, {
+			loading: 'Updating File...',
+			success: form?.message || 'File Updated!',
+			error: form?.message || 'Could not update file.'
+		});
+	}
+
 </script>
 
 <form action="?/uploadFile" enctype="multipart/form-data" hidden method="post" use:enhance>
@@ -155,7 +169,10 @@
 					<div class="icon">
 						<svelte:component this={extensionSupport(file.name)} />
 					</div>
-					{file.name}
+					<InTextInput name="fileName" value={file.name} action="?/renameFile" on:submit={fileNameChange}>
+						<input name="fileId" value={file.id}/>
+					</InTextInput>
+					
 				</th>
 				<td> 
 					{file.size}
@@ -266,4 +283,6 @@
 		align-items: center;
 		justify-content: center;
 	}
+	
+	
 </style>

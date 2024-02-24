@@ -112,5 +112,60 @@ export const actions = {
 			message: "File Deleted!"
 		}
 		
+	}),
+	renameFile: formHandler(z.object({
+		fileId: z.coerce.number(),
+		fileName: z.string()
+	}), async ({fileId, fileName}, {cookies, params}) => {
+
+		const user = await verifySession(cookies)
+
+		const projectUser = await prisma.projectUser.findFirst({
+			where: {
+				AND: {
+					projectId: parseInt(params.id),
+					userId: user.id
+				}
+			}
+		})
+
+		if(projectUser?.permission != ProjectUserPermission.EDITOR) {
+			return {
+				success: false,
+				message: "No Permissions"
+			}
+		}
+
+		const fileCheck = await prisma.file.findFirst({
+			where: {
+				AND: {
+					id: fileId,
+					projectId: projectUser.projectId
+				}
+			}
+		})
+
+		if(!fileCheck) {
+			return {
+				success: false,
+				message: "No file exists"
+			}
+		}
+
+		await prisma.file.update({
+			where: {
+				id: fileCheck.id
+			},
+			data: {
+				name: fileName
+			}
+		})
+
+		return {
+			success: true,
+			message: "File Updated"
+		}
+
+
 	})
 };
