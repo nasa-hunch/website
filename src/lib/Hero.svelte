@@ -12,7 +12,11 @@
 	<div style="--img: url({image}); --top: {scrollY}px" class="background" />
 	<div style="--img: url({image2})" class="wrapper">
 		<div class="text">
-			<h1><img class="img" alt="NASA Hunch Logo" src="/logo.svg" />{title}</h1>
+			<img class="imgMobile" alt="NASA Hunch Logo" src="/logo.svg" />
+			<h1>
+				<img class="img" alt="NASA Hunch Logo" src="/logo.svg" />
+				{title}
+			</h1>
 			<h2>Make for space.</h2>
 		</div>
 	</div>
@@ -94,5 +98,59 @@
 		margin: 0;
 		margin-bottom: 3rem;
 		margin-left: 8.4rem;
+	}
+
+	.imgMobile {
+		display: none;
+	}
+
+	@media (max-width: 900px) {
+		.wrapper {
+			height: calc(100vh - 50px);
+		}
+
+		.background {
+			height: calc(100vh - 50px);
+		}
+
+		.text {
+			margin-left: 1rem;
+		}
+
+		.img {
+			width: 5rem;
+			margin-right: 0.5rem;
+		}
+
+		h1 {
+			font-size: 5rem;
+		}
+
+		h2 {
+			font-size: 2rem;
+			margin-left: 6.4rem;
+		}
+	}
+
+	@media (max-width: 550px) {
+		.img {
+			display: none;
+		}
+
+		h1 {
+			font-size: 4rem;
+			margin-left: 1.4rem;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+			margin-left: 1.5rem;
+		}
+
+		.imgMobile {
+			display: block;
+			width: 5rem;
+			margin-left: 1.5rem;
+		}
 	}
 </style>
