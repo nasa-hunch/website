@@ -6,12 +6,16 @@
 	import { toast } from 'svelte-french-toast';
 	import localizedFormat from "dayjs/plugin/localizedFormat"
 	import dayjs from "dayjs"
+	import ModelHelper from "$lib/components/ModelHelper.svelte"
+	import ModelForm from "$lib/components/ModelForm.svelte"
+	import Button from "$lib/components/Button.svelte"
 	dayjs.extend(localizedFormat)
 
 
 	import IconFile from '~icons/mdi/file';
 	import IconImage from '~icons/mdi/image';
 	import IconDownload from '~icons/mdi/download';
+	import IconTrash from '~icons/mdi/delete-outline';
 	import { enhance } from '$app/forms';
 
 	console.log(typeof IconImage);
@@ -81,12 +85,50 @@
 	const stopDragOver = () => {
 		dragging = false;
 	};
+
+	let doingFileDelete = false;
+	let doingFileDeleteOn: string;
+	let doingFileDeleteOnId: number;
+	const deleteFile = (id: number, fileName: string) => {
+		doingFileDeleteOnId = id;
+		doingFileDeleteOn = fileName;
+		doingFileDelete = true;
+	}
+
+	const deleteFileSubmit = () => {
+
+		doingFileDelete = false;
+
+		uploadPromise = new Promise((resolve, reject) => {
+			uploadResolve = resolve;
+			uploadReject = reject;
+		});
+
+		toast.promise(uploadPromise, {
+			loading: 'Deleting File...',
+			success: form?.message || 'File Deleted!',
+			error: form?.message || 'Could not delete file.'
+		});
+	}
+
 </script>
 
 <form action="?/uploadFile" enctype="multipart/form-data" hidden method="post" use:enhance>
 	<input bind:this={fileBox} name="file" type="file" />
 	<button bind:this={fileUploadButton} />
 </form>
+
+<ModelHelper bind:visible={doingFileDelete}>
+	<ModelForm method="post" action="?/deleteFile" on:submit={deleteFileSubmit}>
+		<div class="deleteForm">
+			<input hidden name="fileId" value={doingFileDeleteOnId}/>
+			<h2>Are you sure?</h2>
+			<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
+			<Button value="Confirm"></Button>
+		</div>
+		
+	</ModelForm>
+</ModelHelper>
 
 <div class="wrap">
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -128,6 +170,9 @@
 					<a href="{file.link}" class="iconButton">
 						<IconDownload/>
 					</a>
+					<button class="iconButton" on:click={() => {deleteFile(file.id, file.name)}}>
+						<IconTrash/>
+					</button>
 				</td>
 				
 			</tr>
@@ -212,5 +257,13 @@
 	}
 	.iconButton:hover {
 		background: $background2;
+	}
+	.deleteForm {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

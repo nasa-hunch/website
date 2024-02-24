@@ -38,6 +38,7 @@ export const uploadFile = async (request: Request, projectId: number) => {
 		data: {
 			projectId: projectId,
 			name: uploadFile.name,
+			key: key,
 			link: `${mediaurl}/${key}`,
 			size: uploadFile.size
 		}
