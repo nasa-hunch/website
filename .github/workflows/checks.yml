@@ -54,9 +54,12 @@ jobs:
         run: pnpm run build
       - name: Deploy database
         run: pnpm run db:deploy
-      - name: Install Playwright Dependencies
-        run: npx playwright install-deps
       - name: Install Playwright
-        run: npx playwright install
+        run: npx playwright install --with-deps
       - name: Run Tests
         run: pnpm run test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
