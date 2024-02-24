@@ -16,7 +16,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		csrf: {
-			checkOrigin: process.env.NODE_ENV != 'development'
+			checkOrigin: process.env.NODE_ENV != 'development' && !process.env.CI
 		}
 	}
 };
