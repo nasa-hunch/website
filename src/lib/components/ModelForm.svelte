@@ -16,6 +16,6 @@
 		padding: 25px;
 		border-radius: 5px;
 		box-sizing: border-box;
-		background: #f1f1f1;
+		background: $background;
 	}
 </style>

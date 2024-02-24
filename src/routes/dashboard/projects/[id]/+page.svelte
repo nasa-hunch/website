@@ -5,6 +5,12 @@
 	import { tweened } from 'svelte/motion';
 	import { onMount } from 'svelte';
 
+	import ModelForm from "$lib/components/ModelForm.svelte"
+	import ModelHelper from "$lib/components/ModelHelper.svelte"
+	import AddItemIcon from "~icons/mdi/plus"
+	import Input from "$lib/components/Input.svelte"
+	import Button from "$lib/components/Button.svelte"
+
 	export let data: PageData;
 
 	let percentDone = tweened(0, {
@@ -15,15 +21,36 @@
 	onMount(() => {
 		percentDone.set(12)
 	})
+
+	let creatingItem = false;
 </script>
+
+<ModelHelper bind:visible={creatingItem}>
+	<ModelForm method="post" action="?/createItem">
+		<h2>Creating Item</h2>
+		<Input label="Name"/>
+		<hr>
+		<Button value="Create"/>
+	</ModelForm>
+</ModelHelper>
 
 <main>
 	<div class="title">
-		<h1>Check List</h1>
 		<div class="progress">
 			<ProgressGauge percentDone={$percentDone} fill="var(--green)" strokeWidth={4}/>
 		</div>
-		
+		<h1>Check List</h1>
+		<button class="iconButton" on:click={() => {
+			creatingItem = true;
+		}}>
+			<AddItemIcon />
+		</button>
+	</div>
+
+	<div class="items">
+		{#if data.uncheckedItems.length < 1}
+			<h2>Nothing to do!</h2>
+		{/if}
 	</div>
 	
 	
@@ -38,12 +65,40 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
+		margin-top: 25px;
+		
+		* {
+			margin: 0px;
+		}
 	}
 	.progress {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		height: 100%;
-		margin-left: 20px;
+		margin: 0px 20px;
+		padding-top: 5px;
+	}
+	.iconButton {
+		all: unset;
+		cursor: pointer;
+		padding: 5px;
+		height: 100%;
+		box-sizing: border-box;
+		margin: 0px 10px;
+		aspect-ratio: 1/1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
+
+		&:hover {
+			background: $background2;
+		}
+	}
+
+	hr {
+		border: 0px;
 	}
 </style>

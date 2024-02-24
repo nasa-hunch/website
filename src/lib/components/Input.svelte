@@ -7,7 +7,7 @@
 
 	export let name = 'Input';
 	export let label = 'Input';
-	export let bgColor = '#ffffff';
+	export let bgColor = '#f8f8f8';
 	export let type: 'password' | 'email' | undefined = undefined;
 	export let required = false;
 	export let autocomplete: HTMLInputElement['autocomplete'] | null = null;
