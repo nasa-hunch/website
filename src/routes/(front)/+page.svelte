@@ -63,4 +63,4 @@
 
 <Hero image={NonTransparent} image2={Transparent} {title} />
 <Mission />
-<Gallery galleryImages={gallery} title="Explore Program Categories" />
+<Gallery galleryImages={gallery} title="Explore Our Programs" />

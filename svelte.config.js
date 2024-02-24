@@ -7,7 +7,7 @@ const config = {
 	preprocess: [
 		preprocess({
 			scss: {
-				prependData: `@import './src/style/app.scss';`
+				prependData: `@use 'sass:color';\n@import './src/style/app.scss';`
 			}
 		}),
 		vitePreprocess()
@@ -16,7 +16,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		csrf: {
-			checkOrigin: process.env.NODE_ENV != 'development'
+			checkOrigin: process.env.NODE_ENV != 'development' && !process.env.CI
 		}
 	}
 };

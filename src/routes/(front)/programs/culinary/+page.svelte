@@ -8,21 +8,72 @@
 	</div>
 	<div slot="main">
 		<p>
-			The Astronaut Culinary Challenge develops food items for the Astronauts aboard the
-			International Space Station from a general theme idea. Each year there is a new theme given
-			out to the schools where the students create new dishes taking into account food processing
-			procedure and nutritional requirements so that their items will meet the standards of the NASA
-			Johnson Space Center Food Lab. With the growing culinary program we’re excited to bring in a
-			wider range of students and show how research into space isn’t limited to only STEM fields, as
-			well as educating students in researching and presenting their work in a professional
-			environment.
+			Every year, NASA HUNCH Culinary students create food to be eaten by astronauts on the International Space Station.
+			Students are challenged to create a recipe that meets the nutritional requirements of the astronauts and is shelf-stable for at least 6 months.
 		</p>
-		<h2>2023-2024 Theme: <b>Savory Breakfast Item that includes a Vegetable</b>.</h2>
+		<div class="project">
+			<h3>2023-2024 Theme</h3>
+			<h2>
+				<span class="accent">Savory Breakfast Item that includes a Vegetable</span>.
+			</h2>
+
+			<h4>Requirements</h4>
+
+			<h5>Nutritional Guidelines:</h5>
+			<ul>
+				<li>Calories: 150 - 350</li>
+				<li>Fat: 12 grams or less</li>
+				<li>Saturated Fat: 4 grams or less</li>
+				<li>Sodium: 250mg or less</li>
+				<li>Dietary Fiber: 1 gram or more</li>
+			</ul>
+
+			<p>
+				Must <b>not</b> contain raw fish, shellfish, or undercooked meats.
+			</p>
+			<p>
+				Sauces and dressings must <b>not</b> contain raw eggs or egg whites.
+			</p>
+			<p>
+				<b>NO</b> alcohol, including cooking wine, brandy, etc.
+			</p>
+
+			<h5>Processing Requirements</h5>
+
+			<p>
+				Products to avoid:
+			</p>
+			<ul>
+				<li>Bread</li>
+			</ul>
+
+			<p>
+				Products which work well:
+			</p>
+
+			<ul>
+				<li>Savory Oats</li>
+				<li>Crustless Quiche</li>
+				<li>Garden Frittata</li>
+				<li>Sweet Potato</li>
+				<li>Bacon Hash</li>
+			</ul>
+		</div>
 	</div>
 </Program>
 
 <style lang="scss">
 	.accent {
 		color: $primary;
+	}
+
+	.project {
+		padding: 1rem;
+		border-radius: 1rem;
+		background-color: lightgray;
+
+		h2, h3 {
+			text-align: center;
+		}
 	}
 </style>
