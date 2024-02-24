@@ -6,6 +6,7 @@ const config: PlaywrightTestConfig = {
 		port: 3000,
 		reuseExistingServer: true
 	},
+	reporter: 'html',
 	testDir: 'tests',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/
 };
