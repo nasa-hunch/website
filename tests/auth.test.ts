@@ -1,3 +1,5 @@
+import crypto from 'node:crypto';
+
 import { expect, test } from '@playwright/test';
 
 test('user can register', async ({ page }) => {

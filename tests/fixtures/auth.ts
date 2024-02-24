@@ -1,5 +1,6 @@
+import crypto from 'node:crypto';
+
 import { expect, test as baseTest } from '@playwright/test';
-import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 
