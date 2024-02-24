@@ -1,34 +1,38 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms';
 
 	export let value: string;
-	export let action: string
-	export let name: string = "InTextInput"
+	export let action: string;
+	export let name: string = 'InTextInput';
 	export let disableFormMode = false;
 
 	let buttonElement: HTMLButtonElement;
 
 	const submitForm = () => {
-		if(disableFormMode) {
+		if (disableFormMode) {
 			return;
 		}
-		buttonElement.click()
-	}
-	
+		buttonElement.click();
+	};
 </script>
 
-<form method="post" {action} use:enhance={() => {
-	return ({ update }) => {
-		update({ reset: false });
-	};
-}} on:submit class="wrap">
-	<input on:change on:input on:change={submitForm} class="inTextInput" {name} bind:value/>
+<form
+	class="wrap"
+	{action}
+	method="post"
+	on:submit
+	use:enhance={() => {
+		return ({ update }) => {
+			update({ reset: false });
+		};
+	}}
+>
+	<input {name} class="inTextInput" on:change on:input on:change={submitForm} bind:value />
 	<div hidden>
-		<slot/>
+		<slot />
 	</div>
-	<button bind:this={buttonElement} hidden type="submit"/>
+	<button bind:this={buttonElement} hidden type="submit" />
 </form>
-
 
 <style lang="scss">
 	.wrap {

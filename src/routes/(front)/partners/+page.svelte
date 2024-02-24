@@ -45,54 +45,57 @@
 	<div class="quotes">
 		<div class="quote">
 			<img alt="Lily England" src={lily} />
-		<blockquote>
-			<p>
-				"Working with several machines, using Mastercam software and making flight hardware for the
-				ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to teach
-				other students what I knew about machining and engineering. This, without a doubt, helped me
-				get my job at Sam Houston."
-			</p>
-			<br>
-			<footer>
-				<p>Lily England</p><cite
-					>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite
-				>
-			</footer>
-		</blockquote>
+			<blockquote>
+				<p>
+					"Working with several machines, using Mastercam software and making flight hardware for
+					the ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to
+					teach other students what I knew about machining and engineering. This, without a doubt,
+					helped me get my job at Sam Houston."
+				</p>
+				<br />
+				<footer>
+					<p>Lily England</p>
+					<cite
+						>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite
+					>
+				</footer>
+			</blockquote>
 		</div>
 		<div class="quote">
 			<img alt="Owen Theeck" src={owen} />
-		<blockquote>
-			<p>
-				"I had the opportunity of a lifetime to be able to work on projects that are now onboard the
-				International Space Station and used at various NASA facilities in the US which have truly
-				been influential accomplishments for me, other students and to the space program. Given my
-				invaluable experience, regardless of the career path that you pick or the interest that you
-				may have, the HUNCH program instills students with the knowledge and expertise that will
-				lead to a promising future."
-			</p>
-			<br>
-			<footer>
-				<p>Owen Theeck</p>
-				<cite>Aviation Business Administration student at Embry-Riddle Aeronautical University</cite>
-			</footer>
-		</blockquote>
+			<blockquote>
+				<p>
+					"I had the opportunity of a lifetime to be able to work on projects that are now onboard
+					the International Space Station and used at various NASA facilities in the US which have
+					truly been influential accomplishments for me, other students and to the space program.
+					Given my invaluable experience, regardless of the career path that you pick or the
+					interest that you may have, the HUNCH program instills students with the knowledge and
+					expertise that will lead to a promising future."
+				</p>
+				<br />
+				<footer>
+					<p>Owen Theeck</p>
+					<cite
+						>Aviation Business Administration student at Embry-Riddle Aeronautical University</cite
+					>
+				</footer>
+			</blockquote>
 		</div>
 		<div class="quote">
 			<img alt="Lee Hansen" src={lee} />
-		<blockquote>
-			<p>
-				"Working with the HUNCH program throughout high school helped not only to improve my sewing
-				skills but also to better understand project management and work flow over long term
-				projects. Learning the responsibilities as well as technical skills made my college
-				experience even more rewarding."
-			</p>
-			<br>
-			<footer>
-				<p>Lee Hansen</p>
-				<cite>Softgoods Specialist</cite>
-			</footer>
-		</blockquote>
+			<blockquote>
+				<p>
+					"Working with the HUNCH program throughout high school helped not only to improve my
+					sewing skills but also to better understand project management and work flow over long
+					term projects. Learning the responsibilities as well as technical skills made my college
+					experience even more rewarding."
+				</p>
+				<br />
+				<footer>
+					<p>Lee Hansen</p>
+					<cite>Softgoods Specialist</cite>
+				</footer>
+			</blockquote>
 		</div>
 		<div class="quote">
 			<img alt="Ian West" src={ian} />
@@ -102,7 +105,7 @@
 					offers for students to get real world experience. Now I get to program and machine every
 					day."
 				</p>
-			<br>
+				<br />
 
 				<footer>
 					<p>Ian West</p>
@@ -157,7 +160,7 @@
 		border-radius: 1rem;
 		*/
 	}
-	
+
 	.quote img {
 		height: 100%;
 		width: 10rem;

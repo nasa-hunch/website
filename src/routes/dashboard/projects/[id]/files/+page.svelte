@@ -2,20 +2,20 @@
 	export let data;
 	export let form;
 
-	import type { ComponentType, SvelteComponent } from 'svelte';
+	import dayjs from 'dayjs';
+	import localizedFormat from 'dayjs/plugin/localizedFormat';
+	import type { ComponentType } from 'svelte';
 	import { toast } from 'svelte-french-toast';
-	import localizedFormat from "dayjs/plugin/localizedFormat"
-	import dayjs from "dayjs"
-	import ModelHelper from "$lib/components/ModelHelper.svelte"
-	import ModelForm from "$lib/components/ModelForm.svelte"
-	import Button from "$lib/components/Button.svelte"
-	dayjs.extend(localizedFormat)
 
+	import Button from '$lib/components/Button.svelte';
+	import ModelForm from '$lib/components/ModelForm.svelte';
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	dayjs.extend(localizedFormat);
 
+	import IconTrash from '~icons/mdi/delete-outline';
+	import IconDownload from '~icons/mdi/download';
 	import IconFile from '~icons/mdi/file';
 	import IconImage from '~icons/mdi/image';
-	import IconDownload from '~icons/mdi/download';
-	import IconTrash from '~icons/mdi/delete-outline';
 	import { enhance } from '$app/forms';
 	import InTextInput from '$lib/components/InTextInput.svelte';
 
@@ -94,10 +94,9 @@
 		doingFileDeleteOnId = id;
 		doingFileDeleteOn = fileName;
 		doingFileDelete = true;
-	}
+	};
 
 	const deleteFileSubmit = () => {
-
 		doingFileDelete = false;
 
 		uploadPromise = new Promise((resolve, reject) => {
@@ -110,7 +109,7 @@
 			success: form?.message || 'File Deleted!',
 			error: form?.message || 'Could not delete file.'
 		});
-	}
+	};
 
 	const fileNameChange = () => {
 		uploadPromise = new Promise((resolve, reject) => {
@@ -123,8 +122,7 @@
 			success: form?.message || 'File Updated!',
 			error: form?.message || 'Could not update file.'
 		});
-	}
-
+	};
 </script>
 
 <form action="?/uploadFile" enctype="multipart/form-data" hidden method="post" use:enhance>
@@ -133,68 +131,74 @@
 </form>
 
 <ModelHelper bind:visible={doingFileDelete}>
-	<ModelForm method="post" action="?/deleteFile" on:submit={deleteFileSubmit}>
+	<ModelForm action="?/deleteFile" method="post" on:submit={deleteFileSubmit}>
 		<div class="deleteForm">
-			<input hidden name="fileId" value={doingFileDeleteOnId}/>
+			<input name="fileId" hidden value={doingFileDeleteOnId} />
 			<h2>Are you sure?</h2>
 			<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
-			<Button value="Confirm"></Button>
+			<Button value="Confirm" />
 		</div>
-		
 	</ModelForm>
 </ModelHelper>
 
 <div class="wrap">
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<table
 		class="fileList"
 		class:uploadFileThing={dragging}
 		on:drop={dropHandler}
 		on:dragover={dragOverHandler}
 		on:dragleave={stopDragOver}
-	>	
-	<thead>
-		<tr>
-			<th scope="col">Name</th>
-			<th scope="col">Size</th>
-			<th scope="col">Modified</th>
-			<th scope="col">Deliverable</th>
-			<th scope="col">Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		{#each data.files as file}
-			<tr class="file">
-				<th scope="row" class="name">
-					<div class="icon">
-						<svelte:component this={extensionSupport(file.name)} />
-					</div>
-					<InTextInput name="fileName" value={file.name} action="?/renameFile" on:submit={fileNameChange}>
-						<input name="fileId" value={file.id}/>
-					</InTextInput>
-					
-				</th>
-				<td> 
-					{file.size}
-				</td>
-				<td> 
-					{dayjs(file.updatedAt).format("MM/DD/YYYY h:mm A")}
-				</td>
-				<td> 
-					{file.size}
-				</td>
-				<td class="actionsRow"> 
-					<a href="{file.link}" class="iconButton">
-						<IconDownload/>
-					</a>
-					<button class="iconButton" on:click={() => {deleteFile(file.id, file.name)}}>
-						<IconTrash/>
-					</button>
-				</td>
-				
+	>
+		<thead>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Size</th>
+				<th scope="col">Modified</th>
+				<th scope="col">Deliverable</th>
+				<th scope="col">Actions</th>
 			</tr>
-		{/each}
-	</tbody>
+		</thead>
+		<tbody>
+			{#each data.files as file}
+				<tr class="file">
+					<th class="name" scope="row">
+						<div class="icon">
+							<svelte:component this={extensionSupport(file.name)} />
+						</div>
+						<InTextInput
+							name="fileName"
+							action="?/renameFile"
+							value={file.name}
+							on:submit={fileNameChange}
+						>
+							<input name="fileId" value={file.id} />
+						</InTextInput>
+					</th>
+					<td>
+						{file.size}
+					</td>
+					<td>
+						{dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
+					</td>
+					<td>
+						{file.size}
+					</td>
+					<td class="actionsRow">
+						<a class="iconButton" href={file.link}>
+							<IconDownload />
+						</a>
+						<button
+							class="iconButton"
+							on:click={() => {
+								deleteFile(file.id, file.name);
+							}}
+						>
+							<IconTrash />
+						</button>
+					</td>
+				</tr>
+			{/each}
+		</tbody>
 	</table>
 </div>
 
@@ -213,7 +217,7 @@
 	}
 	.file {
 		text-wrap: nowrap;
-		
+
 		align-items: center;
 		justify-content: start;
 		padding: 10px 5px;
@@ -260,7 +264,7 @@
 		align-items: center;
 		justify-content: start;
 	}
-	
+
 	.iconButton {
 		all: unset;
 		cursor: pointer;
@@ -270,7 +274,6 @@
 		height: 100%;
 		padding: 5px;
 		border-radius: 50%;
-		
 	}
 	.iconButton:hover {
 		background: $background2;
@@ -283,6 +286,4 @@
 		align-items: center;
 		justify-content: center;
 	}
-	
-	
 </style>

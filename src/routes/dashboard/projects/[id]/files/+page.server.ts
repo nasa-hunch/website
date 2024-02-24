@@ -47,125 +47,125 @@ export const actions = {
 
 		return await uploadFile(request, projectUser.projectId);
 	},
-	deleteFile: formHandler(z.object({
-		fileId: z.coerce.number()
-	}), async ({fileId}, {cookies, params}) => {
-
-		const user = await verifySession(cookies)
-		const projectUser = await prisma.projectUser.findFirst({
-			where: {
-				AND: {
-					projectId: parseInt(params.id),
-					userId: user.id
+	deleteFile: formHandler(
+		z.object({
+			fileId: z.coerce.number()
+		}),
+		async ({ fileId }, { cookies, params }) => {
+			const user = await verifySession(cookies);
+			const projectUser = await prisma.projectUser.findFirst({
+				where: {
+					AND: {
+						projectId: parseInt(params.id),
+						userId: user.id
+					}
 				}
-			}
-		})
+			});
 
-		if(projectUser?.permission != ProjectUserPermission.EDITOR) {
-			return {
-				success: false,
-				message: "No Permissions"
+			if (projectUser?.permission != ProjectUserPermission.EDITOR) {
+				return {
+					success: false,
+					message: 'No Permissions'
+				};
 			}
-		}
 
-		const fileCheck = await prisma.file.findFirst({
-			where: {
-				AND: {
-					id: fileId,
-					projectId: projectUser.projectId
+			const fileCheck = await prisma.file.findFirst({
+				where: {
+					AND: {
+						id: fileId,
+						projectId: projectUser.projectId
+					}
 				}
-			}
-		})
+			});
 
-		if(!fileCheck) {
-			return {
-				success: false,
-				message: "No file exists"
+			if (!fileCheck) {
+				return {
+					success: false,
+					message: 'No file exists'
+				};
 			}
-		}
 
-		await prisma.file.delete({
-			where: {
-				id: fileId
+			await prisma.file.delete({
+				where: {
+					id: fileId
+				}
+			});
+
+			//If we don't have a key, we can assume the file is not in s3
+			if (!fileCheck.key) {
+				return {
+					success: true,
+					message: 'File Deleted!'
+				};
 			}
-		})
 
-		
-		//If we don't have a key, we can assume the file is not in s3
-		if(!fileCheck.key) {
+			//However, if we DO have a key, the file is in s3 and we need to get rid of it.
+			await S3.send(
+				new DeleteObjectCommand({
+					Bucket: bucket,
+					Key: fileCheck.key
+				})
+			);
+
 			return {
 				success: true,
-				message: "File Deleted!"
-			}
+				message: 'File Deleted!'
+			};
 		}
+	),
+	renameFile: formHandler(
+		z.object({
+			fileId: z.coerce.number(),
+			fileName: z.string()
+		}),
+		async ({ fileId, fileName }, { cookies, params }) => {
+			const user = await verifySession(cookies);
 
-		//However, if we DO have a key, the file is in s3 and we need to get rid of it. 
-		await S3.send(
-			new DeleteObjectCommand({
-				Bucket: bucket,
-				Key: fileCheck.key,
-			})
-		);
-
-		return {
-			success: true,
-			message: "File Deleted!"
-		}
-		
-	}),
-	renameFile: formHandler(z.object({
-		fileId: z.coerce.number(),
-		fileName: z.string()
-	}), async ({fileId, fileName}, {cookies, params}) => {
-
-		const user = await verifySession(cookies)
-
-		const projectUser = await prisma.projectUser.findFirst({
-			where: {
-				AND: {
-					projectId: parseInt(params.id),
-					userId: user.id
+			const projectUser = await prisma.projectUser.findFirst({
+				where: {
+					AND: {
+						projectId: parseInt(params.id),
+						userId: user.id
+					}
 				}
-			}
-		})
+			});
 
-		if(projectUser?.permission != ProjectUserPermission.EDITOR) {
-			return {
-				success: false,
-				message: "No Permissions"
+			if (projectUser?.permission != ProjectUserPermission.EDITOR) {
+				return {
+					success: false,
+					message: 'No Permissions'
+				};
 			}
-		}
 
-		const fileCheck = await prisma.file.findFirst({
-			where: {
-				AND: {
-					id: fileId,
-					projectId: projectUser.projectId
+			const fileCheck = await prisma.file.findFirst({
+				where: {
+					AND: {
+						id: fileId,
+						projectId: projectUser.projectId
+					}
 				}
-			}
-		})
+			});
 
-		if(!fileCheck) {
+			if (!fileCheck) {
+				return {
+					success: false,
+					message: 'No file exists'
+				};
+			}
+
+			await prisma.file.update({
+				where: {
+					id: fileCheck.id
+				},
+				data: {
+					name: fileName
+				}
+			});
+
 			return {
-				success: false,
-				message: "No file exists"
-			}
+				success: true,
+				message: 'File Updated'
+			};
 		}
-
-		await prisma.file.update({
-			where: {
-				id: fileCheck.id
-			},
-			data: {
-				name: fileName
-			}
-		})
-
-		return {
-			success: true,
-			message: "File Updated"
-		}
-
-
-	})
+	)
 };
