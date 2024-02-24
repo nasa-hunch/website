@@ -1,11 +1,15 @@
 <script lang="ts">
+
 	export let data;
+
+	
 </script>
 
 <div class="wrap">
 	<div class="header">
 		<div class="headerInner">
 			<h1>{data.project.name}</h1>
+			
 			<nav class="nav">
 				<a href="/dashboard/projects/{data.project.id}">Checklist</a>
 				<a href="/dashboard/projects/{data.project.id}/files">Files</a>
