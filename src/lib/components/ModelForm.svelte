@@ -17,5 +17,6 @@
 		border-radius: 5px;
 		box-sizing: border-box;
 		background: $background;
+		text-align: center;
 	}
 </style>

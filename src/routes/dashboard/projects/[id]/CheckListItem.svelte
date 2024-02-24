@@ -3,6 +3,14 @@
 	import DoneIcon from '~icons/mdi/done';
 	import AddPersonIcon from '~icons/mdi/person-add-outline';
 	import IconButton from '$lib/components/IconButton.svelte';
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModelForm.svelte';
+	import Button from "$lib/components/Button.svelte"
+
+	import type { ActionData } from './$types';
+	import toast from 'svelte-french-toast';
+
+
 
 	type CheckListItem = {
 		id: number;
@@ -14,7 +22,33 @@
 		checkedById: number | null;
 	};
 	export let data: CheckListItem;
+	export let resolvePromise: (value?: unknown) => void;
+	export let rejectPromise: (value?: unknown) => void;
+
+	let deleting = false;
+
+
+	let deleteSubmitHelper = () => {
+		toast.promise(new Promise((resolve, reject) => {
+			resolvePromise = resolve;
+			rejectPromise = reject;
+		}), {
+			loading: 'Deleting Item',
+			success: 'Item Deleted!',
+			error: 'Item could not be deleted.'
+		});
+	}
+	
 </script>
+
+<ModelHelper bind:visible={deleting}>
+	<ModelForm method="post" action="?/deleteToDoItem" on:submit={deleteSubmitHelper} on:reset={() => {deleting = false}}>
+		<h2>Delete Item</h2>
+		<p>Are you sure you want to delete <b>{data.name}</b></p>
+		<input hidden name="itemId" value={data.id}/>
+		<Button value="Delete"/>
+	</ModelForm>
+</ModelHelper>
 
 <div class="checkListItem">
 	<div class="left">
@@ -29,7 +63,7 @@
 		<IconButton>
 			<AddPersonIcon />
 		</IconButton>
-		<IconButton>
+		<IconButton on:click={() => {deleting = true}}>
 			<DeleteIcon />
 		</IconButton>
 	</div>

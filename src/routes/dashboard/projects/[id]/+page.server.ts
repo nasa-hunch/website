@@ -39,7 +39,7 @@ export const actions = {
 		if (projectUser.permission != ProjectUserPermission.EDITOR) {
 			return {
 				success: false,
-				message: 'No Perms'
+				message: 'No Permissions'
 			};
 		}
 
@@ -55,5 +55,41 @@ export const actions = {
 			success: true,
 			message: 'Item Created!'
 		};
+	}),
+	deleteToDoItem: formHandler(z.object({
+		itemId: z.coerce.number()
+	}), async({itemId}, {cookies, params}) => {
+		const projectUser = await verifyProjectUser(cookies, params.id);
+
+		if (projectUser.permission != ProjectUserPermission.EDITOR) {
+			return {
+				success: false,
+				message: 'No Permissions'
+			};
+		}
+
+		const toDoItem = await prisma.toDoItem.findFirst({
+			where: {
+				id: itemId
+			}
+		})
+
+		if(toDoItem?.projectId != projectUser.projectId) {
+			return {
+				success: false,
+				message: 'No Item'
+			};
+		}
+
+		await prisma.toDoItem.delete({
+			where: {
+				id: itemId,
+			}
+		})
+
+		return {
+			success: true,
+			message: "Deleted!"
+		}
 	})
 };
