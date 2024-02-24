@@ -231,10 +231,6 @@
 			justify-content: center;
 		}
 	}
-	.fileView {
-		height: 100%;
-		width: 100%;
-	}
 	.uploadFileThing::after {
 		position: absolute;
 		content: '';
