@@ -2,12 +2,12 @@
 	import '@fontsource-variable/manrope';
 	import '@fontsource-variable/lexend';
 
-	import Navbar from '$lib/Navbar.svelte';
-
 	import Lenis from '@studio-freight/lenis';
 	import { onMount } from 'svelte';
 	import toast from 'svelte-french-toast';
-	
+
+	import Navbar from '$lib/Navbar.svelte';
+
 	onMount(() => {
 		document.body.classList.add('started');
 

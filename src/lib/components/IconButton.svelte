@@ -1,7 +1,6 @@
 <button class="iconButton" on:click>
-	<slot/>
+	<slot />
 </button>
-
 
 <style lang="scss">
 	.iconButton {

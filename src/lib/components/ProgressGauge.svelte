@@ -24,7 +24,7 @@
 			innerRadius: width / 2 - strokeWidth,
 			outerRadius: width / 2,
 			startAngle: 0,
-			endAngle: (percentDone) * (Math.PI * 2)
+			endAngle: percentDone * (Math.PI * 2)
 		});
 	}
 

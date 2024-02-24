@@ -6,6 +6,7 @@
 
 	import AddItemIcon from '~icons/mdi/plus';
 	import Button from '$lib/components/Button.svelte';
+	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
@@ -13,7 +14,6 @@
 
 	import type { PageData } from './$types';
 	import CheckListItem from './CheckListItem.svelte';
-	import IconButton from '$lib/components/IconButton.svelte';
 
 	export let data: PageData;
 	export let form;
@@ -78,13 +78,14 @@
 		</div>
 		<h1>Check List</h1>
 		<div class="iconButtonWrap">
-			<IconButton on:click={() => {
-				creatingItem = true;
-			}}>
-				<AddItemIcon/>
+			<IconButton
+				on:click={() => {
+					creatingItem = true;
+				}}
+			>
+				<AddItemIcon />
 			</IconButton>
 		</div>
-		
 	</div>
 
 	<div class="items">
@@ -92,8 +93,7 @@
 			<h2>Nothing to do!</h2>
 		{:else}
 			{#each data.uncheckedItems as item}
-				<CheckListItem data={item}/>
-				
+				<CheckListItem data={item} />
 			{/each}
 		{/if}
 	</div>
@@ -118,7 +118,7 @@
 		margin: 0px 20px;
 		padding-top: 5px;
 	}
-	
+
 	.iconButtonWrap {
 		margin-left: 20px;
 		height: 40px;

@@ -34,8 +34,6 @@
 		height: 100%;
 		margin: 0px;
 		cursor: pointer;
-
-		
 	}
 	.customBox {
 		position: absolute;
@@ -53,7 +51,7 @@
 			position: absolute;
 			border-radius: 50%;
 			opacity: 0.25;
-			content: "";
+			content: '';
 			top: 0px;
 			left: 0px;
 			height: 100%;
@@ -77,14 +75,14 @@
 	}
 	.wrap .checkbox:checked ~ .check {
 		opacity: 1;
-		
+
 		border-radius: 50%;
 		transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.25s;
 	}
 	.wrap .checkbox:checked ~ .customBox {
 		border-radius: 50%;
 		border: 1px solid var(--green);
-		
+
 		&::after {
 			transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.25s;
 			background: var(--green);

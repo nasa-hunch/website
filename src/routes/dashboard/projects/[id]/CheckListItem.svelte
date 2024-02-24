@@ -1,11 +1,8 @@
 <script lang="ts">
-
-	import DoneIcon from "~icons/mdi/done"
-	import DeleteIcon from "~icons/mdi/delete-outline"
-	import AddPersonIcon from "~icons/mdi/person-add-outline"
-
-	import IconButton from "$lib/components/IconButton.svelte";
-	
+	import DeleteIcon from '~icons/mdi/delete-outline';
+	import DoneIcon from '~icons/mdi/done';
+	import AddPersonIcon from '~icons/mdi/person-add-outline';
+	import IconButton from '$lib/components/IconButton.svelte';
 
 	type CheckListItem = {
 		id: number;
@@ -27,16 +24,15 @@
 	</div>
 	<div class="right">
 		<IconButton>
-			<DoneIcon/>
+			<DoneIcon />
 		</IconButton>
 		<IconButton>
-			<AddPersonIcon/>
+			<AddPersonIcon />
 		</IconButton>
 		<IconButton>
-			<DeleteIcon/>
+			<DeleteIcon />
 		</IconButton>
 	</div>
-	
 </div>
 
 <style lang="scss">
@@ -50,7 +46,6 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-
 	}
 	.left {
 		height: 100%;
