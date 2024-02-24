@@ -7,6 +7,9 @@ const config: PlaywrightTestConfig = {
 		port: 3000,
 		reuseExistingServer: true
 	},
+	use: {
+		trace: 'on-first-retry'
+	},
 	reporter: 'html',
 	testDir: 'tests',
 	testMatch: /(.+\.)?(test|spec)\.[jt]s/
