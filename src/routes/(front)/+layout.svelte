@@ -3,6 +3,25 @@
 	import '@fontsource-variable/lexend';
 
 	import Navbar from '$lib/Navbar.svelte';
+
+	import Lenis from '@studio-freight/lenis';
+	import { onMount } from 'svelte';
+	import toast from 'svelte-french-toast';
+	
+	onMount(() => {
+		document.body.classList.add('started');
+
+		toast('This is the unofficial website.');
+
+		const lenis = new Lenis();
+
+		function raf(time: number) {
+			lenis.raf(time);
+			requestAnimationFrame(raf);
+		}
+
+		requestAnimationFrame(raf);
+	});
 </script>
 
 <Navbar />

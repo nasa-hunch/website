@@ -12,6 +12,7 @@
 	import ProgressGauge from '$lib/components/ProgressGauge.svelte';
 
 	import type { PageData } from './$types';
+	import CheckListItem from './CheckListItem.svelte';
 
 	export let data: PageData;
 	export let form;
@@ -90,7 +91,8 @@
 			<h2>Nothing to do!</h2>
 		{:else}
 			{#each data.uncheckedItems as item}
-				<p>{item.name}</p>
+				<CheckListItem data={item}/>
+				
 			{/each}
 		{/if}
 	</div>

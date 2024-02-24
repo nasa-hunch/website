@@ -3,25 +3,10 @@
 	import '@fontsource-variable/lexend';
 	import '../app.css';
 
-	import Lenis from '@studio-freight/lenis';
-	import { onMount } from 'svelte';
-	import toast, { Toaster } from 'svelte-french-toast';
+	
+	import { Toaster } from 'svelte-french-toast';
 	import { pwaInfo } from 'virtual:pwa-info';
-
-	onMount(() => {
-		document.body.classList.add('started');
-
-		toast('This is the unofficial website.');
-
-		const lenis = new Lenis();
-
-		function raf(time: number) {
-			lenis.raf(time);
-			requestAnimationFrame(raf);
-		}
-
-		requestAnimationFrame(raf);
-	});
+	
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
