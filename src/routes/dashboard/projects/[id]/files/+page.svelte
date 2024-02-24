@@ -4,9 +4,14 @@
 
 	import type { ComponentType, SvelteComponent } from 'svelte';
 	import { toast } from 'svelte-french-toast';
+	import localizedFormat from "dayjs/plugin/localizedFormat"
+	import dayjs from "dayjs"
+	dayjs.extend(localizedFormat)
+
 
 	import IconFile from '~icons/mdi/file';
 	import IconImage from '~icons/mdi/image';
+	import IconDownload from '~icons/mdi/download';
 	import { enhance } from '$app/forms';
 
 	console.log(typeof IconImage);
@@ -85,22 +90,50 @@
 
 <div class="wrap">
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div
+	<table
 		class="fileList"
 		class:uploadFileThing={dragging}
 		on:drop={dropHandler}
 		on:dragover={dragOverHandler}
 		on:dragleave={stopDragOver}
-	>
+	>	
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Size</th>
+			<th scope="col">Modified</th>
+			<th scope="col">Deliverable</th>
+			<th scope="col">Actions</th>
+		</tr>
+	</thead>
+	<tbody>
 		{#each data.files as file}
-			<div class="file">
-				<div class="icon">
-					<svelte:component this={extensionSupport(file.name)} />
-				</div>
-				{file.name}
-			</div>
+			<tr class="file">
+				<th scope="row" class="name">
+					<div class="icon">
+						<svelte:component this={extensionSupport(file.name)} />
+					</div>
+					{file.name}
+				</th>
+				<td> 
+					{file.size}
+				</td>
+				<td> 
+					{dayjs(file.updatedAt).format("MM/DD/YYYY h:mm A")}
+				</td>
+				<td> 
+					{file.size}
+				</td>
+				<td class="actionsRow"> 
+					<a href="{file.link}" class="iconButton">
+						<IconDownload/>
+					</a>
+				</td>
+				
+			</tr>
 		{/each}
-	</div>
+	</tbody>
+	</table>
 </div>
 
 <style lang="scss">
@@ -118,7 +151,7 @@
 	}
 	.file {
 		text-wrap: nowrap;
-		display: flex;
+		
 		align-items: center;
 		justify-content: start;
 		padding: 10px 5px;
@@ -147,5 +180,37 @@
 		opacity: 0.5;
 		z-index: 1;
 		border-radius: 5px 0px 0px 5px;
+	}
+	.name {
+		display: flex;
+		flex-direction: row;
+		overflow-x: hidden;
+	}
+	td {
+		text-align: left;
+	}
+	tr {
+		text-align: left;
+	}
+
+	.actionsRow {
+		display: flex;
+		align-items: center;
+		justify-content: start;
+	}
+	
+	.iconButton {
+		all: unset;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		padding: 5px;
+		border-radius: 50%;
+		
+	}
+	.iconButton:hover {
+		background: $background2;
 	}
 </style>

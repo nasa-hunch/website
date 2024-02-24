@@ -75,7 +75,7 @@
 
 	.project {
 		all: unset;
-		aspect-ratio: 3/2;
+		height: 180px;
 		background: $background2;
 		border-radius: 10px;
 		padding: 25px;
