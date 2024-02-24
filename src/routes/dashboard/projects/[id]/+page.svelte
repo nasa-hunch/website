@@ -1,16 +1,17 @@
 <script lang="ts">
-	import ProgressGauge from '$lib/components/ProgressGauge.svelte';
-	import { cubicInOut } from 'svelte/easing';
-	import type { PageData } from './$types';
-	import { tweened } from 'svelte/motion';
 	import { onMount } from 'svelte';
-
-	import ModelForm from "$lib/components/ModelForm.svelte"
-	import ModelHelper from "$lib/components/ModelHelper.svelte"
-	import AddItemIcon from "~icons/mdi/plus"
-	import Input from "$lib/components/Input.svelte"
-	import Button from "$lib/components/Button.svelte"
+	import { cubicInOut } from 'svelte/easing';
+	import { tweened } from 'svelte/motion';
 	import toast from 'svelte-french-toast';
+
+	import AddItemIcon from '~icons/mdi/plus';
+	import Button from '$lib/components/Button.svelte';
+	import Input from '$lib/components/Input.svelte';
+	import ModelForm from '$lib/components/ModelForm.svelte';
+	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ProgressGauge from '$lib/components/ProgressGauge.svelte';
+
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 	export let form;
@@ -18,67 +19,68 @@
 	let percentDone = tweened(0, {
 		duration: 1000,
 		easing: cubicInOut
-	})
+	});
 
 	onMount(() => {
-		percentDone.set(12)
-	})
+		percentDone.set(12);
+	});
 
 	let creatingItem = false;
-
-
 
 	let resolvePromise: (value?: unknown) => void, rejectPromise: (value?: unknown) => void;
 	let generalPromise = new Promise((resolve, reject) => {
 		resolvePromise = resolve;
 		rejectPromise = reject;
-	})
+	});
 
 	const resetPromise = () => {
 		generalPromise = new Promise((resolve, reject) => {
 			resolvePromise = resolve;
 			rejectPromise = reject;
-		})
-	}
+		});
+	};
 
-	$: if(form) {
-		if(form.success) {
-			resolvePromise()
+	$: if (form) {
+		if (form.success) {
+			resolvePromise();
 		} else {
-			rejectPromise()
+			rejectPromise();
 		}
-		creatingItem = false
+		creatingItem = false;
 		form = null;
 	}
 
 	const submitNewItem = () => {
-		resetPromise()
+		resetPromise();
 		toast.promise(generalPromise, {
 			loading: 'Creating Item',
 			success: 'Item created!',
 			error: 'Item could not be created.'
 		});
-	}
+	};
 </script>
 
 <ModelHelper bind:visible={creatingItem}>
-	<ModelForm method="post" action="?/createItem" on:submit={submitNewItem}>
+	<ModelForm action="?/createItem" method="post" on:submit={submitNewItem}>
 		<h2>Creating Item</h2>
-		<Input label="Name" name="name"/>
-		<hr>
-		<Button value="Create"/>
+		<Input name="name" label="Name" />
+		<hr />
+		<Button value="Create" />
 	</ModelForm>
 </ModelHelper>
 
 <main>
 	<div class="title">
 		<div class="progress">
-			<ProgressGauge percentDone={$percentDone} fill="var(--green)" strokeWidth={4}/>
+			<ProgressGauge fill="var(--green)" percentDone={$percentDone} strokeWidth={4} />
 		</div>
 		<h1>Check List</h1>
-		<button class="iconButton" on:click={() => {
-			creatingItem = true;
-		}}>
+		<button
+			class="iconButton"
+			on:click={() => {
+				creatingItem = true;
+			}}
+		>
 			<AddItemIcon />
 		</button>
 	</div>
@@ -92,8 +94,6 @@
 			{/each}
 		{/if}
 	</div>
-	
-	
 </main>
 
 <style lang="scss">
@@ -106,7 +106,7 @@
 		align-items: center;
 		justify-content: center;
 		margin-top: 25px;
-		
+
 		* {
 			margin: 0px;
 		}

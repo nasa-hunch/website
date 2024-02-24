@@ -85,7 +85,7 @@ export const actions = {
 				};
 			}
 
-			console.log("starting delete")
+			console.log('starting delete');
 
 			await prisma.file.delete({
 				where: {

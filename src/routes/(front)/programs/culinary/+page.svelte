@@ -8,8 +8,9 @@
 	</div>
 	<div slot="main">
 		<p>
-			Every year, NASA HUNCH Culinary students create food to be eaten by astronauts on the International Space Station.
-			Students are challenged to create a recipe that meets the nutritional requirements of the astronauts and is shelf-stable for at least 6 months.
+			Every year, NASA HUNCH Culinary students create food to be eaten by astronauts on the
+			International Space Station. Students are challenged to create a recipe that meets the
+			nutritional requirements of the astronauts and is shelf-stable for at least 6 months.
 		</p>
 		<div class="project">
 			<h3>2023-2024 Theme</h3>
@@ -40,16 +41,12 @@
 
 			<h5>Processing Requirements</h5>
 
-			<p>
-				Products to avoid:
-			</p>
+			<p>Products to avoid:</p>
 			<ul>
 				<li>Bread</li>
 			</ul>
 
-			<p>
-				Products which work well:
-			</p>
+			<p>Products which work well:</p>
 
 			<ul>
 				<li>Savory Oats</li>
@@ -72,7 +69,8 @@
 		border-radius: 1rem;
 		background-color: lightgray;
 
-		h2, h3 {
+		h2,
+		h3 {
 			text-align: center;
 		}
 	}

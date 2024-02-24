@@ -36,7 +36,6 @@
 	}));
 
 	$: activeTab = tabs.find((t) => t.active);
-	
 </script>
 
 <Program program="Hardware">
@@ -47,9 +46,8 @@
 	</div>
 	<div slot="main">
 		<p>
-			Hardware is in high demand aboard NASA. Students participating in this program
-			work with this demand to create hardware that is space-ready, requested
-			by various NASA departments.
+			Hardware is in high demand aboard NASA. Students participating in this program work with this
+			demand to create hardware that is space-ready, requested by various NASA departments.
 		</p>
 
 		<h2>Cycle through the <span class="accent">engineering process</span>.</h2>

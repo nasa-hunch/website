@@ -45,11 +45,9 @@
 	$: if (form) {
 		console.log(form);
 		if (form.success) {
-
 			console.log(form.message);
 			uploadResolve();
 		} else {
-			
 			console.log(form.message);
 			uploadReject();
 		}
@@ -100,8 +98,6 @@
 	};
 
 	const deleteFileSubmit = (e: SubmitEvent) => {
-		
-
 		uploadPromise = new Promise((resolve, reject) => {
 			uploadResolve = resolve;
 			uploadReject = reject;
@@ -112,7 +108,6 @@
 			success: form?.message || 'File Deleted!',
 			error: form?.message || 'Could not delete file.'
 		});
-
 	};
 
 	const fileNameChange = () => {
