@@ -7,7 +7,10 @@
 
 <div class="wrap">
 	<Sidebar {data} />
-	<slot />
+	<div class="content">
+		<slot />
+	</div>
+	
 </div>
 
 <style lang="scss">
@@ -17,5 +20,10 @@
 		display: flex;
 		overflow: auto;
 		background: $background;
+	}
+	.content {
+		width: 100%;
+		height: 100%;
+		overflow-y: auto;
 	}
 </style>
