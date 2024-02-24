@@ -1,5 +1,9 @@
+import { z } from "zod";
+
+import { formHandler } from "$lib/bodyguard.js";
+import { ProjectUserPermission } from "$lib/enums.js";
 import { prisma } from "$lib/prismaConnection"
-import { verifySession } from "$lib/verifySession.js";
+import { verifyProjectUser } from "$lib/verifyProjectUser.js";
 
 
 export const load = async ({parent}) => {
@@ -32,7 +36,28 @@ export const load = async ({parent}) => {
 }
 
 export const actions = {
-	createItem: async ({cookies, params}) => {
-		verifySession(cookies)
-	}
+	createItem: formHandler(z.object({name: z.string()}), async ({name}, {cookies, params}) => {
+		const projectUser = await verifyProjectUser(cookies, params.id)
+
+		if(projectUser.permission != ProjectUserPermission.EDITOR) {
+			return {
+				success: false,
+				message: "No Perms"
+			}
+		}
+
+		await prisma.toDoItem.create({
+			data: {
+				name,
+				projectId: parseInt(params.id),
+				checked: false
+			}
+		})
+
+		return {
+			success: true,
+			message: "Item Created!"
+		}
+		
+	})
 }

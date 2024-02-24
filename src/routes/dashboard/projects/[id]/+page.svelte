@@ -10,8 +10,10 @@
 	import AddItemIcon from "~icons/mdi/plus"
 	import Input from "$lib/components/Input.svelte"
 	import Button from "$lib/components/Button.svelte"
+	import toast from 'svelte-french-toast';
 
 	export let data: PageData;
+	export let form;
 
 	let percentDone = tweened(0, {
 		duration: 1000,
@@ -23,12 +25,46 @@
 	})
 
 	let creatingItem = false;
+
+
+
+	let resolvePromise: (value?: unknown) => void, rejectPromise: (value?: unknown) => void;
+	let generalPromise = new Promise((resolve, reject) => {
+		resolvePromise = resolve;
+		rejectPromise = reject;
+	})
+
+	const resetPromise = () => {
+		generalPromise = new Promise((resolve, reject) => {
+			resolvePromise = resolve;
+			rejectPromise = reject;
+		})
+	}
+
+	$: if(form) {
+		if(form.success) {
+			resolvePromise()
+		} else {
+			rejectPromise()
+		}
+		creatingItem = false
+		form = null;
+	}
+
+	const submitNewItem = () => {
+		resetPromise()
+		toast.promise(generalPromise, {
+			loading: 'Creating Item',
+			success: 'Item created!',
+			error: 'Item could not be created.'
+		});
+	}
 </script>
 
 <ModelHelper bind:visible={creatingItem}>
-	<ModelForm method="post" action="?/createItem">
+	<ModelForm method="post" action="?/createItem" on:submit={submitNewItem}>
 		<h2>Creating Item</h2>
-		<Input label="Name"/>
+		<Input label="Name" name="name"/>
 		<hr>
 		<Button value="Create"/>
 	</ModelForm>
@@ -50,6 +86,10 @@
 	<div class="items">
 		{#if data.uncheckedItems.length < 1}
 			<h2>Nothing to do!</h2>
+		{:else}
+			{#each data.uncheckedItems as item}
+				<p>{item.name}</p>
+			{/each}
 		{/if}
 	</div>
 	
