@@ -87,6 +87,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	    padding: 10px;
+		text-align: center;
 	}
 
 	.navRegularLink a {
