@@ -40,6 +40,7 @@
 			align-items: center;
 			justify-content: space-between;
 			width: 100%;
+			font-size: 1.4rem;
 		}
 	}
 </style>
