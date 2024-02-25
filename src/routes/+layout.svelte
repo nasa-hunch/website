@@ -30,7 +30,7 @@
 		margin: 0px;
 
 		--green: #158547;
-		--background-alt: #e6e6e6
+		--background-alt: #e6e6e6;
 	}
 
 	:global(*) {

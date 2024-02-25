@@ -1,18 +1,20 @@
 <script lang="ts">
-	import Input from '$lib/components/Input.svelte';
-	import Button from '$lib/components/Button.svelte';
-import type { PageData } from './$types';
 	import toast from 'svelte-french-toast';
+
 	import { enhance } from '$app/forms';
+	import Button from '$lib/components/Button.svelte';
+	import Input from '$lib/components/Input.svelte';
+
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 	export let form;
 
-	$: if(form) {
-		if(form.success) {
-			toast.success(form.message || "Success!")
+	$: if (form) {
+		if (form.success) {
+			toast.success(form.message || 'Success!');
 		} else {
-			toast.error(form.message || "error.")
+			toast.error(form.message || 'error.');
 		}
 	}
 
@@ -25,31 +27,40 @@ import type { PageData } from './$types';
 	<div class="wrap">
 		<h1>Settings</h1>
 
-		<form class="accountInfo" action="?/updateAccountInfo" method="post" use:enhance={() => {
-			return ({ update }) => {
-				update({ reset: false });
-			};
-		}}>
+		<form
+			class="accountInfo"
+			action="?/updateAccountInfo"
+			method="post"
+			use:enhance={() => {
+				return ({ update }) => {
+					update({ reset: false });
+				};
+			}}
+		>
 			<div class="header">
-				<h2>Account Information</h2> <p class="role">{titleCasedRole}</p>
+				<h2>Account Information</h2>
+				<p class="role">{titleCasedRole}</p>
 			</div>
-			
 
-			<Input value={data.user.firstName} label="First Name" name="firstName" bgColor="var(--background-alt)"/>
-			<hr>
-			<Input value={data.user.lastName} label="Last Name" name="lastName" bgColor="var(--background-alt)"/>
-			<hr>
-			<Input value={data.user.email} label="Email" name="email" bgColor="var(--background-alt)"/>
-			<hr>
-			<Button value="Save Information"/>
-			
-
+			<Input
+				name="firstName"
+				bgColor="var(--background-alt)"
+				label="First Name"
+				value={data.user.firstName}
+			/>
+			<hr />
+			<Input
+				name="lastName"
+				bgColor="var(--background-alt)"
+				label="Last Name"
+				value={data.user.lastName}
+			/>
+			<hr />
+			<Input name="email" bgColor="var(--background-alt)" label="Email" value={data.user.email} />
+			<hr />
+			<Button value="Save Information" />
 		</form>
-	
-
-		
 	</div>
-	
 </main>
 
 <style lang="scss">
@@ -88,7 +99,7 @@ import type { PageData } from './$types';
 			border-radius: 3px;
 
 			&::after {
-				content: "";
+				content: '';
 				top: 0px;
 				left: 0px;
 				height: 100%;
@@ -100,7 +111,5 @@ import type { PageData } from './$types';
 				border-radius: 3px;
 			}
 		}
-
-		
 	}
 </style>

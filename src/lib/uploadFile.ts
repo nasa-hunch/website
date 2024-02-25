@@ -42,13 +42,12 @@ export const uploadFile = async (request: Request, projectId?: number) => {
 			link: `${mediaurl}/${key}`,
 			size: uploadFile.size
 		}
-	});	
-	
+	});
+
 	return {
 		success: true,
-		message: "File Uploaded",
+		message: 'File Uploaded',
 		key,
 		link: `${mediaurl}/${key}`
-
 	};
 };

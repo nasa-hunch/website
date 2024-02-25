@@ -55,6 +55,7 @@ model User {
   email String @db.VarChar(255) @unique
   hash String @db.VarChar(1000)
   salt String @db.VarChar(255)
+  pfp String?
   role Role?
   sessions Session[]
   organization Organization? @relation(fields: [orgId], references: [id])

@@ -22,9 +22,9 @@
 		easing: cubicInOut
 	});
 
-	$: if(percentDone) {
-		if(data.numberOfItems == 0) {
-			percentDone.set(1)
+	$: if (percentDone) {
+		if (data.numberOfItems == 0) {
+			percentDone.set(1);
 		} else {
 			percentDone.set(data.checkedItems.length / data.numberOfItems);
 		}
