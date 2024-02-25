@@ -93,10 +93,10 @@
 			<h2>Nothing to do!</h2>
 		{:else}
 			{#each data.uncheckedItems as item}
-				<CheckListItem data={item} bind:resolvePromise={resolvePromise} bind:rejectPromise={rejectPromise}/>
+				<CheckListItem data={item} bind:resolvePromise bind:rejectPromise />
 			{/each}
 			{#each data.checkedItems as item}
-				<CheckListItem data={item} bind:resolvePromise={resolvePromise} bind:rejectPromise={rejectPromise}/>
+				<CheckListItem data={item} bind:resolvePromise bind:rejectPromise />
 			{/each}
 		{/if}
 	</div>

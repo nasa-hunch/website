@@ -3,16 +3,15 @@
 	import '@fontsource-variable/lexend';
 	import '../app.css';
 
+	import { onMount } from 'svelte';
 	import { Toaster } from 'svelte-french-toast';
 	import { pwaInfo } from 'virtual:pwa-info';
-	import { onMount } from 'svelte';
-
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 
 	onMount(() => {
 		document.body.classList.add('started');
-	})
+	});
 </script>
 
 <svelte:head>
@@ -26,15 +25,12 @@
 	<slot />
 </div>
 
-
 <style lang="scss">
-    :global(body) {
-        margin: 0px;
-    }
+	:global(body) {
+		margin: 0px;
+	}
 
-    :global(*) {
-        box-sizing: border-box;
-    }
-
-    
+	:global(*) {
+		box-sizing: border-box;
+	}
 </style>

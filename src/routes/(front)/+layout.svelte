@@ -6,8 +6,8 @@
 	import { onMount } from 'svelte';
 	import toast from 'svelte-french-toast';
 
-	import Navbar from '$lib/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import Navbar from '$lib/Navbar.svelte';
 
 	onMount(() => {
 		toast('This is the unofficial website.');
@@ -28,7 +28,7 @@
 <div class="content">
 	<slot />
 </div>
-<Footer/>
+<Footer />
 
 <style lang="scss">
 	:global(body) {

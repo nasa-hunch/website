@@ -3,7 +3,7 @@
 </script>
 
 {#if href}
-	<a {href} class="iconButton" on:click>
+	<a class="iconButton" {href} on:click>
 		<slot />
 	</a>
 {:else}
@@ -11,7 +11,6 @@
 		<slot />
 	</button>
 {/if}
-
 
 <style lang="scss">
 	.iconButton {

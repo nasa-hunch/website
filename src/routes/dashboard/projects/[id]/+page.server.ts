@@ -56,79 +56,85 @@ export const actions = {
 			message: 'Item Created!'
 		};
 	}),
-	deleteToDoItem: formHandler(z.object({
-		itemId: z.coerce.number()
-	}), async({itemId}, {cookies, params}) => {
-		const projectUser = await verifyProjectUser(cookies, params.id);
+	deleteToDoItem: formHandler(
+		z.object({
+			itemId: z.coerce.number()
+		}),
+		async ({ itemId }, { cookies, params }) => {
+			const projectUser = await verifyProjectUser(cookies, params.id);
 
-		if (projectUser.permission != ProjectUserPermission.EDITOR) {
+			if (projectUser.permission != ProjectUserPermission.EDITOR) {
+				return {
+					success: false,
+					message: 'No Permissions'
+				};
+			}
+
+			const toDoItem = await prisma.toDoItem.findFirst({
+				where: {
+					id: itemId
+				}
+			});
+
+			if (toDoItem?.projectId != projectUser.projectId) {
+				return {
+					success: false,
+					message: 'No Item'
+				};
+			}
+
+			await prisma.toDoItem.delete({
+				where: {
+					id: itemId
+				}
+			});
+
 			return {
-				success: false,
-				message: 'No Permissions'
+				success: true,
+				message: 'Deleted!'
 			};
 		}
+	),
+	completeToDoItem: formHandler(
+		z.object({
+			itemId: z.coerce.number()
+		}),
+		async ({ itemId }, { cookies, params }) => {
+			const projectUser = await verifyProjectUser(cookies, params.id);
 
-		const toDoItem = await prisma.toDoItem.findFirst({
-			where: {
-				id: itemId
+			if (projectUser.permission != ProjectUserPermission.EDITOR) {
+				return {
+					success: false,
+					message: 'No Permissions'
+				};
 			}
-		})
 
-		if(toDoItem?.projectId != projectUser.projectId) {
+			const toDoItem = await prisma.toDoItem.findFirst({
+				where: {
+					id: itemId
+				}
+			});
+
+			if (toDoItem?.projectId != projectUser.projectId) {
+				return {
+					success: false,
+					message: 'No Item'
+				};
+			}
+
+			await prisma.toDoItem.update({
+				where: {
+					id: itemId
+				},
+				data: {
+					checked: !toDoItem.checked
+				}
+			});
+
 			return {
-				success: false,
-				message: 'No Item'
+				success: true,
+				message: 'Deleted!'
 			};
 		}
-
-		await prisma.toDoItem.delete({
-			where: {
-				id: itemId,
-			}
-		})
-
-		return {
-			success: true,
-			message: "Deleted!"
-		}
-	}),
-	completeToDoItem: formHandler(z.object({
-		itemId: z.coerce.number()
-	}), async({itemId}, {cookies, params}) => {
-		const projectUser = await verifyProjectUser(cookies, params.id);
-
-		if (projectUser.permission != ProjectUserPermission.EDITOR) {
-			return {
-				success: false,
-				message: 'No Permissions'
-			};
-		}
-
-		const toDoItem = await prisma.toDoItem.findFirst({
-			where: {
-				id: itemId
-			}
-		})
-
-		if(toDoItem?.projectId != projectUser.projectId) {
-			return {
-				success: false,
-				message: 'No Item'
-			};
-		}
-
-		await prisma.toDoItem.update({
-			where: {
-				id: itemId,
-			},
-			data: {
-				checked: !toDoItem.checked
-			}
-		})
-
-		return {
-			success: true,
-			message: "Deleted!"
-		}
-	})
+	)
 };

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Footer from "$lib/components/Footer.svelte"
+	import Footer from '$lib/components/Footer.svelte';
 </script>
 
-<slot/>
+<slot />
 
-<Footer/>
+<Footer />
