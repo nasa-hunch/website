@@ -7,6 +7,7 @@
 	import toast from 'svelte-french-toast';
 
 	import Navbar from '$lib/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 
 	onMount(() => {
 		document.body.classList.add('started');
@@ -29,6 +30,7 @@
 <div class="content">
 	<slot />
 </div>
+<Footer/>
 
 <style lang="scss">
 	:global(body) {

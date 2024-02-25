@@ -1,6 +1,17 @@
-<button class="iconButton" on:click>
-	<slot />
-</button>
+<script lang="ts">
+	export let href: string;
+</script>
+
+{#if href}
+	<a {href} class="iconButton" on:click>
+		<slot />
+	</a>
+{:else}
+	<button class="iconButton" on:click>
+		<slot />
+	</button>
+{/if}
+
 
 <style lang="scss">
 	.iconButton {
