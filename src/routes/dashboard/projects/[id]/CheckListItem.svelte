@@ -72,6 +72,20 @@
 		);
 	};
 
+	const assigneeSubmitHelper = () => {
+		toast.promise(
+			new Promise((resolve, reject) => {
+				resolvePromise = resolve;
+				rejectPromise = reject;
+			}),
+			{
+				loading: 'Adding assignee',
+				success: 'Assignee added!',
+				error: 'Assignee could not be added'
+			}
+		)
+	}
+
 	let searchBox: FloatingComboBox<UserLike>;
 
 	const startAddPerson = (e: MouseEvent) => {
@@ -107,7 +121,7 @@
 	bind:this={searchBox}
 >
 	{#each filteredData as user}
-		<form action="?/addAssignee" method="post" use:enhance>
+		<form action="?/addAssignee" method="post" use:enhance on:submit={assigneeSubmitHelper} on:reset={() => selectingUser = false}>
 			<input hidden name="itemId" value={data.id}/>
 			<input hidden name="projectUserId" value={user.id}/>
 			<button class="assigneeButton">
@@ -125,7 +139,7 @@
 			method="post"
 			on:submit={completeSubmitHelper}
 			on:reset={() => {
-				deleting = false;
+				completing = false;
 			}}
 		>
 			<h2>Complete Item</h2>
