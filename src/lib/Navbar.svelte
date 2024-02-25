@@ -81,6 +81,7 @@
 	.navInner li a {
 		text-decoration: none;
 		margin: 0px;
+		box-sizing: border-box;
 		font-size: 1.5rem;
 		width: 100%;
 		height: 100%;
