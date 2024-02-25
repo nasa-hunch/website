@@ -6,6 +6,7 @@
 
 	import AddItemIcon from '~icons/mdi/plus';
 	import Button from '$lib/components/Button.svelte';
+	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';

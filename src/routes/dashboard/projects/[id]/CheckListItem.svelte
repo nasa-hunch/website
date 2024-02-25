@@ -6,9 +6,11 @@
 	import DoneIcon from '~icons/mdi/done';
 	import AddPersonIcon from '~icons/mdi/person-add-outline';
 	import Button from '$lib/components/Button.svelte';
+	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import type { unknown } from 'zod';
 
 	type CheckListItem = {
 		id: number;
@@ -53,6 +55,17 @@
 			}
 		);
 	};
+
+	let searchBox: FloatingComboBox<number>;
+
+	const startAddPerson = (e: MouseEvent) => {
+		console.log("adding person")
+		searchBox.propagateClick(e)
+		
+		selectingUser = true;
+	};
+
+	let selectingUser = false;
 </script>
 
 <ModelHelper bind:visible={deleting}>
@@ -70,6 +83,12 @@
 		<Button value="Delete" />
 	</ModelForm>
 </ModelHelper>
+
+<FloatingComboBox
+	data={[[1, 2], () => 0, () => '']}
+	bind:showSelector={selectingUser}
+	bind:this={searchBox}
+/>
 
 {#if completing}
 	<ModelHelper bind:visible={completing}>
@@ -112,8 +131,8 @@
 			{/if}
 		</IconButton>
 
-		<IconButton>
-			<AddPersonIcon />
+		<IconButton on:click={startAddPerson}>
+			<AddPersonIcon/>
 		</IconButton>
 		<IconButton
 			on:click={() => {

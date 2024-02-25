@@ -22,6 +22,9 @@ export const load = async ({ params, parent }) => {
 	const project = await prisma.project.findFirst({
 		where: {
 			id: id
+		},
+		include: {
+			users: true
 		}
 	});
 
