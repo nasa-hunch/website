@@ -91,5 +91,44 @@ export const actions = {
 			success: true,
 			message: "Deleted!"
 		}
+	}),
+	completeToDoItem: formHandler(z.object({
+		itemId: z.coerce.number()
+	}), async({itemId}, {cookies, params}) => {
+		const projectUser = await verifyProjectUser(cookies, params.id);
+
+		if (projectUser.permission != ProjectUserPermission.EDITOR) {
+			return {
+				success: false,
+				message: 'No Permissions'
+			};
+		}
+
+		const toDoItem = await prisma.toDoItem.findFirst({
+			where: {
+				id: itemId
+			}
+		})
+
+		if(toDoItem?.projectId != projectUser.projectId) {
+			return {
+				success: false,
+				message: 'No Item'
+			};
+		}
+
+		await prisma.toDoItem.update({
+			where: {
+				id: itemId,
+			},
+			data: {
+				checked: !toDoItem.checked
+			}
+		})
+
+		return {
+			success: true,
+			message: "Deleted!"
+		}
 	})
 };

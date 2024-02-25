@@ -89,10 +89,13 @@
 	</div>
 
 	<div class="items">
-		{#if data.uncheckedItems.length < 1}
+		{#if data.numberOfItems < 1}
 			<h2>Nothing to do!</h2>
 		{:else}
 			{#each data.uncheckedItems as item}
+				<CheckListItem data={item} bind:resolvePromise={resolvePromise} bind:rejectPromise={rejectPromise}/>
+			{/each}
+			{#each data.checkedItems as item}
 				<CheckListItem data={item} bind:resolvePromise={resolvePromise} bind:rejectPromise={rejectPromise}/>
 			{/each}
 		{/if}
