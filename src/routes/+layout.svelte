@@ -28,6 +28,8 @@
 <style lang="scss">
 	:global(body) {
 		margin: 0px;
+
+		--green: #158547;
 	}
 
 	:global(*) {

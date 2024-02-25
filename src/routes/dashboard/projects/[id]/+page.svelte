@@ -24,9 +24,7 @@
 		easing: cubicInOut
 	});
 
-	onMount(() => {
-		percentDone.set(data.checkedItems.length / data.numberOfItems);
-	});
+	$: percentDone.set(data.checkedItems.length / data.numberOfItems);
 
 	let creatingItem = false;
 

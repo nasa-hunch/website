@@ -5,7 +5,7 @@
 	 * %, ex: 0.12 = 12%
 	 */
 	export let percentDone = 55;
-	export let fill = '#0c0c0c';
+	export let fill = 'var(--green)';
 	export let height = 30;
 	export let width = 30;
 	export let strokeWidth = 3;
