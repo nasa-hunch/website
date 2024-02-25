@@ -40,15 +40,6 @@
 			align-items: center;
 			justify-content: space-between;
 			width: 100%;
-
-			.link {
-				margin: 0px 0.5rem;
-			}
 		}
-	}
-
-	.copyright-container {
-		width: 100%;
-		text-align: center;
 	}
 </style>

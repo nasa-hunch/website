@@ -9,6 +9,7 @@
 </script>
 
 <svelte:head>
+	<!-- svelte -->
 	{@html github}
 </svelte:head>
 

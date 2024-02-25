@@ -97,7 +97,7 @@
 		doingFileDelete = true;
 	};
 
-	const deleteFileSubmit = (e: SubmitEvent) => {
+	const deleteFileSubmit = () => {
 		uploadPromise = new Promise((resolve, reject) => {
 			uploadResolve = resolve;
 			uploadReject = reject;
