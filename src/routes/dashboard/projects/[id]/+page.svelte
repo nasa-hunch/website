@@ -96,8 +96,10 @@
 			<h2>Nothing to do!</h2>
 		{:else}
 			{#each data.uncheckedItems as item}
+			{@debug item}
 				<CheckListItem
 					data={item}
+					
 					projectUsers={data.project.users}
 					bind:resolvePromise
 					bind:rejectPromise

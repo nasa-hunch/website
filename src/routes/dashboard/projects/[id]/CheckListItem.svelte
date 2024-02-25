@@ -11,6 +11,13 @@
 	import IconButton from '$lib/components/IconButton.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import Assignees from './Assignees.svelte';
+
+	type ProjectUserLike = {
+		user: {
+				pfp: string
+		}
+	}
 
 	type CheckListItem = {
 		id: number;
@@ -20,6 +27,14 @@
 		checked: boolean;
 		projectId: number;
 		checkedById: number | null;
+		assignees: {
+			projectUser: {
+				user: {
+					pfp: string | null;
+				};
+			}
+		}[]
+		
 	};
 
 	type UserLike = {
@@ -164,6 +179,7 @@
 		<h3>
 			{data.name}
 		</h3>
+		<Assignees assignees={data.assignees}/>
 	</div>
 	<div class="right">
 		<IconButton

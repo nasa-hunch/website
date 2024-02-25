@@ -11,6 +11,23 @@ export const load = async ({ parent }) => {
 	const checkableItems = await prisma.toDoItem.findMany({
 		where: {
 			projectId: parentData.project.id
+		},
+		include: {
+			assignees: {
+				include: {
+					projectUser: {
+						include: {
+							user: {
+								select: {
+									firstName: true,
+									lastName: true,
+									pfp: true
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	});
 
