@@ -178,6 +178,7 @@
 
 	.quote blockquote footer p {
 		color: $primary;
+		font-weight: bold;
 	}
 
 	.quote p {
