@@ -137,11 +137,13 @@ export const actions = {
 			};
 		}
 	),
-	addAssignee: formHandler(z.object({
-		projectUserId: z.coerce.number(),
-		itemId: z.coerce.number()
-	}), async({projectUserId, itemId}, {cookies, params}) => {
-		const projectUser = await verifyProjectUser(cookies, params.id);
+	addAssignee: formHandler(
+		z.object({
+			projectUserId: z.coerce.number(),
+			itemId: z.coerce.number()
+		}),
+		async ({ projectUserId, itemId }, { cookies, params }) => {
+			const projectUser = await verifyProjectUser(cookies, params.id);
 
 			if (projectUser.permission != ProjectUserPermission.EDITOR) {
 				return {
@@ -167,13 +169,13 @@ export const actions = {
 				where: {
 					id: projectUserId
 				}
-			})
+			});
 
-			if(userCheck?.projectId != projectUser.projectId) {
+			if (userCheck?.projectId != projectUser.projectId) {
 				return {
 					success: false,
-					message: "How did we get here."
-				}
+					message: 'How did we get here.'
+				};
 			}
 
 			//Assignee check
@@ -185,13 +187,13 @@ export const actions = {
 						toDoItemId: toDoItem.id
 					}
 				}
-			})
+			});
 
-			if(assigneeCheck) {
+			if (assigneeCheck) {
 				return {
 					success: true,
-					message: "User already existed"
-				}
+					message: 'User already existed'
+				};
 			}
 
 			//Add the assignee
@@ -200,13 +202,12 @@ export const actions = {
 					userId: userCheck.id,
 					toDoItemId: toDoItem.id
 				}
-			})
+			});
 
 			return {
 				success: true,
-				message: "Updated"
-			}
-
-			
-	})
+				message: 'Updated'
+			};
+		}
+	)
 };

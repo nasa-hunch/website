@@ -21,8 +21,8 @@
 
 	export function propagateClick(e: MouseEvent) {
 		holder.hidden = false;
-		holder.style.left = `${e.clientX - 250}px`
-		holder.style.top = `${e.clientY}px`
+		holder.style.left = `${e.clientX - 250}px`;
+		holder.style.top = `${e.clientY}px`;
 		if (searchBox) {
 			searchBox.focus();
 		}
@@ -32,11 +32,7 @@
 {#if showSelector}
 	<button class="outside" on:click|self={close} />
 {/if}
-<div
-	bind:this={holder}
-	class="selector"
-	hidden={!showSelector}
->
+<div bind:this={holder} class="selector" hidden={!showSelector}>
 	<input bind:this={searchBox} placeholder="Search" bind:value={searchInput} />
 	<slot {filteredData} />
 </div>

@@ -5,13 +5,12 @@
 	import DeleteIcon from '~icons/mdi/delete-outline';
 	import DoneIcon from '~icons/mdi/done';
 	import AddPersonIcon from '~icons/mdi/person-add-outline';
+	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
-	import type { unknown } from 'zod';
-	import { enhance } from '$app/forms';
 
 	type CheckListItem = {
 		id: number;
@@ -31,12 +30,12 @@
 		projectId: number;
 		owner: boolean;
 		user: {
-			firstName: string,
-			lastName: string
-		}
-	}
+			firstName: string;
+			lastName: string;
+		};
+	};
 
-	export let projectUsers: UserLike[] = []
+	export let projectUsers: UserLike[] = [];
 	export let data: CheckListItem;
 	export let resolvePromise: (value?: unknown) => void;
 	export let rejectPromise: (value?: unknown) => void;
@@ -83,15 +82,15 @@
 				success: 'Assignee added!',
 				error: 'Assignee could not be added'
 			}
-		)
-	}
+		);
+	};
 
 	let searchBox: FloatingComboBox<UserLike>;
 
 	const startAddPerson = (e: MouseEvent) => {
-		console.log("adding person")
-		searchBox.propagateClick(e)
-		
+		console.log('adding person');
+		searchBox.propagateClick(e);
+
 		selectingUser = true;
 	};
 
@@ -115,21 +114,27 @@
 </ModelHelper>
 
 <FloatingComboBox
+	bind:this={searchBox}
 	data={[projectUsers, (item) => item.id, (item) => `${item.user.firstName} ${item.user.lastName}`]}
 	bind:showSelector={selectingUser}
 	let:filteredData
-	bind:this={searchBox}
 >
 	{#each filteredData as user}
-		<form action="?/addAssignee" method="post" use:enhance on:submit={assigneeSubmitHelper} on:reset={() => selectingUser = false}>
-			<input hidden name="itemId" value={data.id}/>
-			<input hidden name="projectUserId" value={user.id}/>
+		<form
+			action="?/addAssignee"
+			method="post"
+			on:submit={assigneeSubmitHelper}
+			on:reset={() => (selectingUser = false)}
+			use:enhance
+		>
+			<input name="itemId" hidden value={data.id} />
+			<input name="projectUserId" hidden value={user.id} />
 			<button class="assigneeButton">
-				{user.user.firstName} {user.user.lastName}
+				{user.user.firstName}
+				{user.user.lastName}
 			</button>
 		</form>
 	{/each}
-
 </FloatingComboBox>
 
 {#if completing}
@@ -174,7 +179,7 @@
 		</IconButton>
 
 		<IconButton on:click={startAddPerson}>
-			<AddPersonIcon/>
+			<AddPersonIcon />
 		</IconButton>
 		<IconButton
 			on:click={() => {

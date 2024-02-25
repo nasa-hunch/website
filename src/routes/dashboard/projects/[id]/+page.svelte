@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { cubicInOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
 	import toast from 'svelte-french-toast';
 
 	import AddItemIcon from '~icons/mdi/plus';
 	import Button from '$lib/components/Button.svelte';
-	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
@@ -92,10 +90,20 @@
 			<h2>Nothing to do!</h2>
 		{:else}
 			{#each data.uncheckedItems as item}
-				<CheckListItem data={item} projectUsers={data.project.users} bind:resolvePromise bind:rejectPromise />
+				<CheckListItem
+					data={item}
+					projectUsers={data.project.users}
+					bind:resolvePromise
+					bind:rejectPromise
+				/>
 			{/each}
 			{#each data.checkedItems as item}
-				<CheckListItem data={item} projectUsers={data.project.users} bind:resolvePromise bind:rejectPromise />
+				<CheckListItem
+					data={item}
+					projectUsers={data.project.users}
+					bind:resolvePromise
+					bind:rejectPromise
+				/>
 			{/each}
 		{/if}
 	</div>
