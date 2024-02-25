@@ -5,7 +5,7 @@ import { bucket, mediaurl } from '$env/static/private';
 import { prisma } from '$lib/prismaConnection';
 import { S3 } from '$lib/s3.js';
 
-export const uploadFile = async (request: Request, projectId: number) => {
+export const uploadFile = async (request: Request, projectId?: number) => {
 	const formData = await request.formData();
 	const uploadFile: File = formData.get('file') as File;
 	const key = crypto.randomBytes(32).toString('hex') + '/' + uploadFile.name;
@@ -42,10 +42,13 @@ export const uploadFile = async (request: Request, projectId: number) => {
 			link: `${mediaurl}/${key}`,
 			size: uploadFile.size
 		}
-	});
-
+	});	
+	
 	return {
 		success: true,
-		message: 'File Uploaded'
+		message: "File Uploaded",
+		key,
+		link: `${mediaurl}/${key}`
+
 	};
 };

@@ -132,8 +132,8 @@ model File {
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
   key String? @db.VarChar(255)
-  project Project @relation(fields: [projectId], references: [id])
-  projectId Int
+  project Project? @relation(fields: [projectId], references: [id])
+  projectId Int?
   link String @db.VarChar(255)
   size Int @default(0)
 }
