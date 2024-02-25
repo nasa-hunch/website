@@ -136,5 +136,77 @@ export const actions = {
 				message: 'Deleted!'
 			};
 		}
-	)
+	),
+	addAssignee: formHandler(z.object({
+		projectUserId: z.coerce.number(),
+		itemId: z.coerce.number()
+	}), async({projectUserId, itemId}, {cookies, params}) => {
+		const projectUser = await verifyProjectUser(cookies, params.id);
+
+			if (projectUser.permission != ProjectUserPermission.EDITOR) {
+				return {
+					success: false,
+					message: 'No Permissions'
+				};
+			}
+
+			const toDoItem = await prisma.toDoItem.findFirst({
+				where: {
+					id: itemId
+				}
+			});
+
+			if (toDoItem?.projectId != projectUser.projectId) {
+				return {
+					success: false,
+					message: 'No Item'
+				};
+			}
+
+			const userCheck = await prisma.projectUser.findFirst({
+				where: {
+					id: projectUserId
+				}
+			})
+
+			if(userCheck?.projectId != projectUser.projectId) {
+				return {
+					success: false,
+					message: "How did we get here."
+				}
+			}
+
+			//Assignee check
+
+			const assigneeCheck = await prisma.toDoAssignee.findFirst({
+				where: {
+					AND: {
+						userId: userCheck.id,
+						toDoItemId: toDoItem.id
+					}
+				}
+			})
+
+			if(assigneeCheck) {
+				return {
+					success: true,
+					message: "User already existed"
+				}
+			}
+
+			//Add the assignee
+			await prisma.toDoAssignee.create({
+				data: {
+					userId: userCheck.id,
+					toDoItemId: toDoItem.id
+				}
+			})
+
+			return {
+				success: true,
+				message: "Updated"
+			}
+
+			
+	})
 };

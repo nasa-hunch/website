@@ -11,6 +11,7 @@
 	import ModelForm from '$lib/components/ModelForm.svelte';
 	import ModelHelper from '$lib/components/ModelHelper.svelte';
 	import type { unknown } from 'zod';
+	import { enhance } from '$app/forms';
 
 	type CheckListItem = {
 		id: number;
@@ -21,6 +22,21 @@
 		projectId: number;
 		checkedById: number | null;
 	};
+
+	type UserLike = {
+		id: number;
+		createdAt: Date;
+		updatedAt: Date;
+		userId: number;
+		projectId: number;
+		owner: boolean;
+		user: {
+			firstName: string,
+			lastName: string
+		}
+	}
+
+	export let projectUsers: UserLike[] = []
 	export let data: CheckListItem;
 	export let resolvePromise: (value?: unknown) => void;
 	export let rejectPromise: (value?: unknown) => void;
@@ -56,7 +72,7 @@
 		);
 	};
 
-	let searchBox: FloatingComboBox<number>;
+	let searchBox: FloatingComboBox<UserLike>;
 
 	const startAddPerson = (e: MouseEvent) => {
 		console.log("adding person")
@@ -85,10 +101,22 @@
 </ModelHelper>
 
 <FloatingComboBox
-	data={[[1, 2], () => 0, () => '']}
+	data={[projectUsers, (item) => item.id, (item) => `${item.user.firstName} ${item.user.lastName}`]}
 	bind:showSelector={selectingUser}
+	let:filteredData
 	bind:this={searchBox}
-/>
+>
+	{#each filteredData as user}
+		<form action="?/addAssignee" method="post" use:enhance>
+			<input hidden name="itemId" value={data.id}/>
+			<input hidden name="projectUserId" value={user.id}/>
+			<button class="assigneeButton">
+				{user.user.firstName} {user.user.lastName}
+			</button>
+		</form>
+	{/each}
+
+</FloatingComboBox>
 
 {#if completing}
 	<ModelHelper bind:visible={completing}>
@@ -193,5 +221,23 @@
 			border-radius: 5px;
 			z-index: -1;
 		}
+	}
+
+	.assigneeButton {
+		position: relative;
+		all: unset;
+		cursor: pointer;
+		text-align: center;
+		padding: 7px 10px;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		width: 100%;
+		border-radius: 3px;
+		transition: all cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.05s;
+	}
+	.assigneeButton:hover {
+		background: rgba(0, 0, 0, 0.15);
 	}
 </style>

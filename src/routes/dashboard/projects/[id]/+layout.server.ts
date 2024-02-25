@@ -24,7 +24,16 @@ export const load = async ({ params, parent }) => {
 			id: id
 		},
 		include: {
-			users: true
+			users: {
+				include: {
+					user: {
+						select: {
+							firstName: true,
+							lastName: true
+						}
+					}
+				}
+			}
 		}
 	});
 
