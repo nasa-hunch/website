@@ -131,16 +131,17 @@
 			align-items: center;
 			justify-content: center;
 			width: 50px;
-			height: 50px;
+			height: auto;
 			border-radius: 50%;
 			background: $primary;
 			color: white;
 		}
 	}
 	.card h3 {
+		width: 100%;
 		display: flex;
 		position: relative;
-		font-size: 2rem;
+		font-size: 1.8rem;
 		font-weight: bold;
 		margin: 0px;
 	}
@@ -151,7 +152,7 @@
 
 	.card h3::after {
 		content: '';
-		bottom: 0px;
+		bottom: -5px;
 		left: 0px;
 		position: absolute;
 		height: 2px;
