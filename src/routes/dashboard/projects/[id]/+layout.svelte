@@ -10,7 +10,7 @@
 			<nav class="nav">
 				<a href="/dashboard/projects/{data.project.id}">Checklist</a>
 				<a href="/dashboard/projects/{data.project.id}/files">Files</a>
-				<a href="/dashboard/projects/{data.project.id}">Members</a>
+				<a href="/dashboard/projects/{data.project.id}/members">Members</a>
 				<a href="/dashboard/projects/{data.project.id}">Submission</a>
 			</nav>
 		</div>

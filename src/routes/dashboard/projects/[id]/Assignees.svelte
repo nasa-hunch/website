@@ -24,10 +24,16 @@
 		height: 32px;
 		width: 32px;
 		border-radius: 50%;
+		margin: 0px;
+		padding: 0px;
 
 		img {
 			height: 32px;
 			width: 32px;
+			max-height: 32px;
+			max-width: 32px;
+			margin: 0px;
+			padding: 0px;
 			border-radius: 50%;
 		}
 	}
