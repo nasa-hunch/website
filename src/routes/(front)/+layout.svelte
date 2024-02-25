@@ -10,8 +10,6 @@
 	import Footer from '$lib/components/Footer.svelte';
 
 	onMount(() => {
-		document.body.classList.add('started');
-
 		toast('This is the unofficial website.');
 
 		const lenis = new Lenis();

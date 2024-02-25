@@ -5,10 +5,14 @@
 
 	import { Toaster } from 'svelte-french-toast';
 	import { pwaInfo } from 'virtual:pwa-info';
-	import Footer from '$lib/components/Footer.svelte';
+	import { onMount } from 'svelte';
 
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+
+	onMount(() => {
+		document.body.classList.add('started');
+	})
 </script>
 
 <svelte:head>
