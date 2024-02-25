@@ -112,6 +112,6 @@
 
 	.tabInfo {
 		padding: 1rem;
-		background-color: color.lighten(lightgray, 20%);
+		background-color: color.adjust(lightgray, $lightness: 20%);
 	}
 </style>
