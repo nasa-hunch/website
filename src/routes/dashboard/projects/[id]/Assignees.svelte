@@ -1,20 +1,19 @@
 <script lang="ts">
 	type Assignees = {
 		projectUser: {
-				user: {
-					pfp: string | null;
-				};
-			}
-		}[]
+			user: {
+				pfp: string | null;
+			};
+		};
+	}[];
 
 	export let assignees: Assignees;
 </script>
 
-
 <div class="wrap">
 	{#each assignees as assignee}
 		<div class="person">
-			<img src={assignee.projectUser.user.pfp} alt="assignee identifier"/>
+			<img alt="assignee identifier" src={assignee.projectUser.user.pfp} />
 		</div>
 	{/each}
 </div>
