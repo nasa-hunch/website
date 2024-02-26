@@ -43,15 +43,15 @@
 	</div>
 	<div class="right">
 		<IconButton formData={{ action: '?/makeViewer', method: 'post' }}>
-			<input hidden name="memberId" value={memberData.id} />
+			<input name="memberId" hidden value={memberData.id} />
 			<MakeViewer />
 		</IconButton>
 		<IconButton formData={{ action: '?/makeEditor', method: 'post' }}>
-			<input hidden name="memberId" value={memberData.id} />
+			<input name="memberId" hidden value={memberData.id} />
 			<MakeEditor />
 		</IconButton>
 		<IconButton formData={{ action: '?/makeNone', method: 'post' }}>
-			<input hidden name="memberId" value={memberData.id} />
+			<input name="memberId" hidden value={memberData.id} />
 			<MakeUnverified />
 		</IconButton>
 		<IconButton>
