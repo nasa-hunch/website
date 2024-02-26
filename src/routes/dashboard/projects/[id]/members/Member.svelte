@@ -54,7 +54,8 @@
 			<input name="memberId" hidden value={memberData.id} />
 			<MakeUnverified />
 		</IconButton>
-		<IconButton>
+		<IconButton formData={{ action: '?/kickMember', method: 'post' }}>
+			<input name="memberId" hidden value={memberData.id} />
 			<RemoveMember />
 		</IconButton>
 	</div>

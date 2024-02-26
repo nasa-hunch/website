@@ -12,7 +12,7 @@
 <img
 	style="width: {size}; height: {size}; margin-right: {marginRight}"
 	alt="{user.firstName} {user.lastName}"
-	src={user.pfp || '/defaultPfp.svg'}
+	src={user.pfp || '/defaultUser.svg'}
 />
 
 <style lang="scss">

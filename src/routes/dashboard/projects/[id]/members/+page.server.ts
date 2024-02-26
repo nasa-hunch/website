@@ -72,5 +72,54 @@ export const actions = {
 				params
 			);
 		}
+	),
+	kickMember: formHandler(
+		z.object({
+			memberId: z.coerce.number()
+		}),
+		async ({ memberId }, { cookies, params }) => {
+			const projectUser = await verifyProjectUser(cookies, params.id);
+
+			if (!projectUser.owner) {
+				return {
+					success: false,
+					message: 'No Permissions'
+				};
+			}
+
+			const projectUserToDelete = await prisma.projectUser.findFirst({
+				where: {
+					AND: {
+						projectId: parseInt(params.id),
+						id: memberId
+					}
+				}
+			});
+
+			if (!projectUserToDelete) {
+				return {
+					success: false,
+					message: 'How did we get here?'
+				};
+			}
+
+			if (projectUser.id == projectUserToDelete.id) {
+				return {
+					success: false,
+					message: "Can't remove yourself."
+				};
+			}
+
+			await prisma.projectUser.delete({
+				where: {
+					id: projectUserToDelete.id
+				}
+			});
+
+			return {
+				success: true,
+				message: 'User Removed'
+			};
+		}
 	)
 };
