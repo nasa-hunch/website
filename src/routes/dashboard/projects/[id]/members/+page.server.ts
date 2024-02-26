@@ -1,9 +1,13 @@
 import { redirect } from '@sveltejs/kit';
+import { z } from 'zod';
 
-import { Role } from '$lib/enums';
+import { formHandler } from '$lib/bodyguard.js';
+import { ProjectUserPermission, Role } from '$lib/enums';
 import { prisma } from '$lib/prismaConnection.js';
 import { verifyProjectUser } from '$lib/verifyProjectUser.js';
 import { verifySession } from '$lib/verifySession.js';
+
+import { updateMemberRole } from './changeRoleHelper.js';
 
 export const load = async ({ cookies, params }) => {
 	const user = await verifySession(cookies);
@@ -39,5 +43,34 @@ export const actions = {
 			success: true,
 			message: 'Code Refreshed'
 		};
-	}
+	},
+	makeViewer: formHandler(
+		z.object({
+			memberId: z.coerce.number()
+		}),
+		async ({ memberId }, { cookies, params }) => {
+			return await updateMemberRole(memberId, ProjectUserPermission.VIEWER, cookies, params);
+		}
+	),
+	makeEditor: formHandler(
+		z.object({
+			memberId: z.coerce.number()
+		}),
+		async ({ memberId }, { cookies, params }) => {
+			return await updateMemberRole(memberId, ProjectUserPermission.EDITOR, cookies, params);
+		}
+	),
+	makeNone: formHandler(
+		z.object({
+			memberId: z.coerce.number()
+		}),
+		async ({ memberId }, { cookies, params }) => {
+			return await updateMemberRole(
+				memberId,
+				ProjectUserPermission.NEEDS_APPROVAL,
+				cookies,
+				params
+			);
+		}
+	)
 };
