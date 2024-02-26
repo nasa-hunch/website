@@ -25,9 +25,10 @@
 	};
 
 	export let memberData: Data;
-
-	const role = memberData.permission as unknown as ProjectUserPermission;
-	const titleCasedRole =
+	let role = memberData.permission as unknown as ProjectUserPermission;
+	$: role = memberData.permission as unknown as ProjectUserPermission;
+	let titleCasedRole: string;
+	$: titleCasedRole =
 		role.toLowerCase().substring(0, 1).toUpperCase() + role.toLowerCase().substring(1);
 </script>
 
@@ -42,15 +43,19 @@
 	</div>
 	<div class="right">
 		<IconButton formData={{ action: '?/makeViewer', method: 'post' }}>
+			<input name="memberId" hidden value={memberData.id} />
 			<MakeViewer />
 		</IconButton>
-		<IconButton>
+		<IconButton formData={{ action: '?/makeEditor', method: 'post' }}>
+			<input name="memberId" hidden value={memberData.id} />
 			<MakeEditor />
 		</IconButton>
-		<IconButton>
+		<IconButton formData={{ action: '?/makeNone', method: 'post' }}>
+			<input name="memberId" hidden value={memberData.id} />
 			<MakeUnverified />
 		</IconButton>
-		<IconButton>
+		<IconButton formData={{ action: '?/kickMember', method: 'post' }}>
+			<input name="memberId" hidden value={memberData.id} />
 			<RemoveMember />
 		</IconButton>
 	</div>

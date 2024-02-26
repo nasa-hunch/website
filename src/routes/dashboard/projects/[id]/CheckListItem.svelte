@@ -26,6 +26,8 @@
 			projectUser: {
 				user: {
 					pfp: string | null;
+					firstName: string,
+					lastName: string
 				};
 			};
 		}[];

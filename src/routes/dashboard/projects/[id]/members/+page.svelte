@@ -10,6 +10,16 @@
 	import Member from './Member.svelte';
 
 	let showingInvite = false;
+	export let form;
+
+	$: if (form) {
+		if (form.success) {
+			toast.success(form.message || 'success');
+		} else {
+			toast.error(form.message || 'error!');
+		}
+	}
+
 	export let data;
 
 	const copyCode = async () => {
@@ -48,7 +58,7 @@
 	</div>
 	<div class="members">
 		{#each data.project.users as member}
-			<Member memberData={member} />
+			<Member bind:memberData={member} />
 		{/each}
 	</div>
 </div>

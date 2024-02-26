@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+
 	/**
 	 * Href and formData are not compatible, use one or the other.
 	 */
@@ -20,7 +22,7 @@
 		<slot />
 	</a>
 {:else if formData}
-	<form class="formButton" action={formData.action} method={formData.method}>
+	<form class="formButton" action={formData.action} method={formData.method} use:enhance>
 		<button class="iconButton" on:click>
 			<slot />
 		</button>
