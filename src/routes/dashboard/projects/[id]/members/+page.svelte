@@ -5,6 +5,7 @@
 	import ModelForm from "$lib/components/ModelForm.svelte";
 	import TextButton from "$lib/components/TextButton.svelte"
 	import toast from "svelte-french-toast";
+	import Member from "./Member.svelte"
 
 	let showingInvite = false;
 	export let data;
@@ -36,6 +37,12 @@
 		<IconButton on:click={() => {showingInvite = true}}>
 			<AddUserIcon/>
 		</IconButton>
+	</div>
+	<div class="members">
+		{#each data.project.users as member}
+			<Member memberData={member}></Member>
+				
+		{/each}
 	</div>
 	
 </div>
