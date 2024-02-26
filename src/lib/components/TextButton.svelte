@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let type: HTMLButtonElement["type"] = "button";
+	export let type: HTMLButtonElement['type'] = 'button';
 </script>
 
 <button class="textButton" {type} on:click><slot /></button>

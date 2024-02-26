@@ -1,64 +1,60 @@
 <script lang="ts">
-	import type { ProjectUserPermission } from "$lib/enums";
-	import Pfp from "$lib/components/Pfp.svelte"
-	import IconButton from "$lib/components/IconButton.svelte";
-
-	//icons
-	import MakeViewer from "~icons/mdi/visibility-outline"
-	import MakeEditor from "~icons/mdi/edit-outline"
-	import MakeUnverified from "~icons/mdi/close"
-	import RemoveMember from "~icons/mdi/person-remove-outline"
+	import MakeUnverified from '~icons/mdi/close';
+	import MakeEditor from '~icons/mdi/edit-outline';
+	import RemoveMember from '~icons/mdi/person-remove-outline';
+	//Icons
+	import MakeViewer from '~icons/mdi/visibility-outline';
+	import IconButton from '$lib/components/IconButton.svelte';
+	import Pfp from '$lib/components/Pfp.svelte';
+	import type { ProjectUserPermission } from '$lib/enums';
 
 	type Data = {
 		user: {
 			firstName: string;
-        	lastName: string;
-			pfp: string | null
-		},
+			lastName: string;
+			pfp: string | null;
+		};
 		id: number;
 		createdAt: Date;
 		updatedAt: Date;
 		userId: number;
 		projectId: number;
 		owner: boolean;
-		//this is terrible, but necessary because of a lack of prisma esm support
+		//This is terrible, but necessary because of a lack of prisma esm support
 		permission: unknown;
-	}
+	};
 
-	
-
-	export let memberData: Data
-
+	export let memberData: Data;
 
 	const role = memberData.permission as unknown as ProjectUserPermission;
-	const titleCasedRole = role.toLowerCase().substring(0, 1).toUpperCase() + role.toLowerCase().substring(1);
+	const titleCasedRole =
+		role.toLowerCase().substring(0, 1).toUpperCase() + role.toLowerCase().substring(1);
 </script>
 
 <div class="member">
 	<div class="left">
-		<Pfp user={memberData.user} size="28px" marginRight="8px"/>
-		{memberData.user.firstName} {memberData.user.lastName}
+		<Pfp marginRight="8px" size="28px" user={memberData.user} />
+		{memberData.user.firstName}
+		{memberData.user.lastName}
 		<div class="role">
 			{titleCasedRole}
 		</div>
-
 	</div>
 	<div class="right">
-		<IconButton formData={{action: "?/makeViewer", method: "post"}}>
-			<MakeViewer/>
+		<IconButton formData={{ action: '?/makeViewer', method: 'post' }}>
+			<MakeViewer />
 		</IconButton>
 		<IconButton>
-			<MakeEditor/>
+			<MakeEditor />
 		</IconButton>
 		<IconButton>
-			<MakeUnverified/>
+			<MakeUnverified />
 		</IconButton>
 		<IconButton>
-			<RemoveMember/>
+			<RemoveMember />
 		</IconButton>
 	</div>
 </div>
-
 
 <style lang="scss">
 	.member {
@@ -89,7 +85,7 @@
 		border-radius: 5px;
 
 		&::after {
-			content: "";
+			content: '';
 			position: absolute;
 			top: 0px;
 			left: 0px;
@@ -101,7 +97,6 @@
 			opacity: 0.25;
 		}
 	}
-	
 
 	.right {
 		display: flex;

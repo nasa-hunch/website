@@ -14,34 +14,30 @@ export const load = async ({ cookies, params }) => {
 	}
 };
 
-
 export const actions = {
-	refreshCode: async({cookies, params}) => {
+	refreshCode: async ({ cookies, params }) => {
 		const user = await verifySession(cookies);
 		await verifyProjectUser(cookies, params.id);
 
 		if (user.role != Role.TEACHER) {
 			return {
 				success: false,
-				message: "Not a teacher"
-			}
+				message: 'Not a teacher'
+			};
 		}
 
 		await prisma.project.update({
 			where: {
 				id: parseInt(params.id)
-			}, data: {
+			},
+			data: {
 				joinCode: 1e7 + Math.floor(Math.random() * 9e7)
 			}
-		})
+		});
 
 		return {
 			success: true,
-			message: "Code Refreshed"
-		}
-
-		
-
-
+			message: 'Code Refreshed'
+		};
 	}
-}
+};
