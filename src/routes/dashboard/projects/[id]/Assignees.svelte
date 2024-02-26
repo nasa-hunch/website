@@ -13,8 +13,9 @@
 		};
 	}[];
 
-	import Pfp from '$lib/components/Pfp.svelte';
 	import toast from 'svelte-french-toast';
+
+	import Pfp from '$lib/components/Pfp.svelte';
 	export let assignees: Assignees;
 
 	export let resolvePromise: (value?: unknown) => void;
@@ -38,16 +39,16 @@
 <div class="wrap">
 	{#each assignees as assignee, i}
 		<form
-			class="person"
 			style="z-index: {i}"
-			method="post"
+			class="person"
 			action="?/removeAssignee"
+			method="post"
 			on:submit={assigneeRemoveHelper}
 			use:enhance
 		>
-			<input hidden name="assigneeId" value={assignee.id} />
+			<input name="assigneeId" hidden value={assignee.id} />
 			<button class="submit">
-				<Pfp user={assignee.projectUser.user} marginRight="0px" size="32px" />
+				<Pfp marginRight="0px" size="32px" user={assignee.projectUser.user} />
 			</button>
 		</form>
 	{/each}
