@@ -23,7 +23,9 @@
 		projectId: number;
 		checkedById: number | null;
 		assignees: {
+			id: number,
 			projectUser: {
+				id: number,
 				user: {
 					pfp: string | null;
 					firstName: string,
@@ -175,7 +177,7 @@
 		<h3>
 			{data.name}
 		</h3>
-		<Assignees assignees={data.assignees} />
+		<Assignees assignees={data.assignees} bind:resolvePromise bind:rejectPromise />
 	</div>
 	<div class="right">
 		<IconButton

@@ -226,5 +226,54 @@ export const actions = {
 				message: 'Updated'
 			};
 		}
+	),
+	removeAssignee: formHandler(
+		z.object({
+			assigneeId: z.coerce.number(),
+		}),
+		async ({ assigneeId }, { cookies, params }) => {
+			const projectUser = await verifyProjectUser(cookies, params.id);
+
+			if (projectUser.permission != ProjectUserPermission.EDITOR) {
+				return {
+					success: false,
+					message: 'No Permissions'
+				};
+			}
+
+			const assigneeCheck = await prisma.toDoAssignee.findFirst({
+				where: {
+					AND: {
+						id: assigneeId,
+						projectUser: {
+							projectId: parseInt(params.id)
+						}
+					}
+				}
+			})
+
+			if(!assigneeCheck) {
+				return {
+					success: false,
+					message: "No Assignee"
+				}
+			}
+			
+
+			
+
+
+			//Add the assignee
+			await prisma.toDoAssignee.delete({
+				where: {
+					id: assigneeCheck.id
+				}
+			});
+
+			return {
+				success: true,
+				message: 'Updated'
+			};
+		}
 	)
 };
