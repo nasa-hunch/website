@@ -56,10 +56,6 @@
 		&:hover {
 			background: $background2;
 		}
-		h3 {
-			all: unset;
-			font-size: 1.25rem;
-		}
 	}
 
 	.project:hover {
