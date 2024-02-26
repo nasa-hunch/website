@@ -1,6 +1,13 @@
 <script lang="ts">
 	import type { ProjectUserPermission } from "$lib/enums";
 	import Pfp from "$lib/components/Pfp.svelte"
+	import IconButton from "$lib/components/IconButton.svelte";
+
+	//icons
+	import MakeViewer from "~icons/mdi/visibility-outline"
+	import MakeEditor from "~icons/mdi/edit-outline"
+	import MakeUnverified from "~icons/mdi/close"
+	import RemoveMember from "~icons/mdi/person-remove-outline"
 
 	type Data = {
 		user: {
@@ -28,10 +35,27 @@
 </script>
 
 <div class="member">
-	<Pfp user={memberData.user} size="24px" marginRight="10px"/>
-	{memberData.user.firstName} {memberData.user.lastName}
-	<div class="role">
-		{titleCasedRole}
+	<div class="left">
+		<Pfp user={memberData.user} size="28px" marginRight="8px"/>
+		{memberData.user.firstName} {memberData.user.lastName}
+		<div class="role">
+			{titleCasedRole}
+		</div>
+
+	</div>
+	<div class="right">
+		<IconButton>
+			<MakeViewer/>
+		</IconButton>
+		<IconButton>
+			<MakeEditor/>
+		</IconButton>
+		<IconButton>
+			<MakeUnverified/>
+		</IconButton>
+		<IconButton>
+			<RemoveMember/>
+		</IconButton>
 	</div>
 </div>
 
@@ -41,13 +65,19 @@
 		width: 100%;
 		display: flex;
 		align-items: center;
-		justify-content: start;
+		justify-content: space-between;
 		font-size: 1.1rem;
 		padding: 10px;
 		box-sizing: border-box;
 		background: $background-alt;
 		border-radius: 5px;
 		margin-top: 10px;
+	}
+
+	.left {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 	}
 
 	.role {
@@ -70,5 +100,13 @@
 			z-index: -1;
 			opacity: 0.25;
 		}
+	}
+	
+
+	.right {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: end;
 	}
 </style>
