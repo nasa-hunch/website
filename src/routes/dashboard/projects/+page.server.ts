@@ -53,7 +53,7 @@ export const actions = {
 				};
 			}
 
-			const joinCode = 1e6 + Math.floor(Math.random() * 9e6);
+			const joinCode = 1e7 + Math.floor(Math.random() * 9e7);
 
 			await prisma.project.create({
 				data: {

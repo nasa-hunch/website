@@ -1,4 +1,8 @@
-<button class="textButton" type="button" on:click><slot /></button>
+<script lang="ts">
+	export let type: HTMLButtonElement["type"] = "button";
+</script>
+
+<button class="textButton" {type} on:click><slot /></button>
 
 <style lang="scss">
 	.textButton {
