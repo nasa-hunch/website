@@ -200,5 +200,9 @@
 		.quote blockquote footer {
 			flex-direction: column;
 		}
+
+		.getInvolved {
+			flex-direction: column;
+		}
 	}
 </style>
