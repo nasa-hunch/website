@@ -191,4 +191,18 @@
 			margin: auto;
 		}
 	}
+
+	@media screen and (max-width: 900px) {
+		.quote img {
+			display: none;
+		}
+
+		.quote blockquote footer {
+			flex-direction: column;
+		}
+
+		.getInvolved {
+			flex-direction: column;
+		}
+	}
 </style>
