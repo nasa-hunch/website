@@ -20,5 +20,6 @@
 		border-radius: 100%;
 		aspect-ratio: 1/1;
 		background: $background;
+		object-fit: cover;
 	}
 </style>
