@@ -23,13 +23,13 @@
 		projectId: number;
 		checkedById: number | null;
 		assignees: {
-			id: number,
+			id: number;
 			projectUser: {
-				id: number,
+				id: number;
 				user: {
 					pfp: string | null;
-					firstName: string,
-					lastName: string
+					firstName: string;
+					lastName: string;
 				};
 			};
 		}[];

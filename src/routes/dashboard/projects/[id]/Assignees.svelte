@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms';
 
 	type Assignees = {
 		id: number;
 		projectUser: {
-			id: number,
+			id: number;
 			user: {
 				pfp: string | null;
-				firstName: string
-				lastName: string
+				firstName: string;
+				lastName: string;
 			};
 		};
 	}[];
 
-	import Pfp from "$lib/components/Pfp.svelte"
-	import toast from "svelte-french-toast";
+	import Pfp from '$lib/components/Pfp.svelte';
+	import toast from 'svelte-french-toast';
 	export let assignees: Assignees;
 
 	export let resolvePromise: (value?: unknown) => void;
@@ -37,14 +37,18 @@
 
 <div class="wrap">
 	{#each assignees as assignee, i}
-	
-		<form class="person" style="z-index: {i}" method="post" action="?/removeAssignee" on:submit={assigneeRemoveHelper} use:enhance>
-			<input hidden name="assigneeId" value={assignee.id}/>
+		<form
+			class="person"
+			style="z-index: {i}"
+			method="post"
+			action="?/removeAssignee"
+			on:submit={assigneeRemoveHelper}
+			use:enhance
+		>
+			<input hidden name="assigneeId" value={assignee.id} />
 			<button class="submit">
-				<Pfp user={assignee.projectUser.user} marginRight="0px" size="32px"/>
+				<Pfp user={assignee.projectUser.user} marginRight="0px" size="32px" />
 			</button>
-
-			
 		</form>
 	{/each}
 </div>
@@ -59,10 +63,7 @@
 		padding: 0px;
 		margin-left: -16px;
 		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
-
 	}
-
-	
 
 	.wrap {
 		height: 100%;
@@ -83,7 +84,6 @@
 					opacity: 0.25;
 				}
 			}
-			
 		}
 	}
 

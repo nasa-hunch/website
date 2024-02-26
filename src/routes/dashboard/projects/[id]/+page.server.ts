@@ -229,7 +229,7 @@ export const actions = {
 	),
 	removeAssignee: formHandler(
 		z.object({
-			assigneeId: z.coerce.number(),
+			assigneeId: z.coerce.number()
 		}),
 		async ({ assigneeId }, { cookies, params }) => {
 			const projectUser = await verifyProjectUser(cookies, params.id);
@@ -250,18 +250,14 @@ export const actions = {
 						}
 					}
 				}
-			})
+			});
 
-			if(!assigneeCheck) {
+			if (!assigneeCheck) {
 				return {
 					success: false,
-					message: "No Assignee"
-				}
+					message: 'No Assignee'
+				};
 			}
-			
-
-			
-
 
 			//Add the assignee
 			await prisma.toDoAssignee.delete({
