@@ -1,5 +1,17 @@
 <script lang="ts">
+	/**
+	 * href and formData are not compatible, use one or the other.
+	 */
 	export let href: string | undefined = undefined;
+
+
+	/**
+	 * href and formData are not compatible, use one or the other.
+	 */
+	export let formData: {
+		method: HTMLFormElement["method"],
+		action: HTMLFormElement["action"]
+	} | undefined = undefined;
 </script>
 
 {#if href}
@@ -7,9 +19,17 @@
 		<slot />
 	</a>
 {:else}
-	<button class="iconButton" on:click>
-		<slot />
-	</button>
+	{#if formData}
+		<form class="formButton" method={formData.method} action={formData.action}>
+			<button class="iconButton" on:click>
+				<slot />
+			</button>
+		</form>
+	{:else}
+		<button class="iconButton" on:click>
+			<slot />
+		</button>
+	{/if}
 {/if}
 
 <style lang="scss">
@@ -33,8 +53,14 @@
 
 		svg {
 			height: 100%;
-			background: purple;
 		}
+	}
+
+	.formButton {
+		all: unset;
+		cursor: pointer;
+		aspect-ratio: 1/1;
+		height: 100%;
 	}
 
 	:global(.iconButton svg) {

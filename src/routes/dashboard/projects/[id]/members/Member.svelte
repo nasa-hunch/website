@@ -44,7 +44,7 @@
 
 	</div>
 	<div class="right">
-		<IconButton>
+		<IconButton formData={{action: "?/makeViewer", method: "post"}}>
 			<MakeViewer/>
 		</IconButton>
 		<IconButton>
