@@ -25,8 +25,8 @@
 	};
 
 	export let memberData: Data;
-
-	const role = memberData.permission as unknown as ProjectUserPermission;
+	let role = memberData.permission as unknown as ProjectUserPermission;
+	$: role = memberData.permission as unknown as ProjectUserPermission;
 	let titleCasedRole: string;
 	$: titleCasedRole =
 		role.toLowerCase().substring(0, 1).toUpperCase() + role.toLowerCase().substring(1);

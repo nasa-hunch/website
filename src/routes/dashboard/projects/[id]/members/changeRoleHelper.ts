@@ -31,7 +31,7 @@ export const updateMemberRole = async (
 
 	if (!updatingProjectUser) {
 		return {
-			success: true,
+			success: false,
 			message: 'No user.'
 		};
 	}
