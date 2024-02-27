@@ -20,5 +20,34 @@ export const actions = {
 			success: true,
 			message: 'Vote Changed!'
 		};
+	},
+	submit: async ({ cookies, params }) => {
+		await verifyProjectUser(cookies, params.id);
+
+		const allUsers = await prisma.projectUser.findMany({
+			where: {
+				AND: {
+					projectId: parseInt(params.id),
+					voteSubmit: false
+				}
+			}
+		});
+
+		if (allUsers.length > 0) {
+			return {
+				success: false,
+				message: 'Missing votes'
+			};
+		}
+
+		await prisma.project.update({
+			where: {
+				id: parseInt(params.id)
+			},
+			data: {
+				submitted: true,
+				submissionDate: new Date()
+			}
+		});
 	}
 };

@@ -1,19 +1,17 @@
 <script lang="ts">
-	import Section from '$lib/page/Section.svelte';
+	// Import images
+	import ccw2018 from '$lib/connect/images/CULINARY CHALLENGE WINNER 2018.jpg';
+	import ccw2019 from '$lib/connect/images/CULINARY CHALLENGE WINNER 2019.jpg';
 	import culinary from '$lib/connect/images/culinary1.jpg';
-
-	// import images
-	import ccw2018 from "$lib/connect/images/CULINARY CHALLENGE WINNER 2018.jpg";
-	import ccw2019 from "$lib/connect/images/CULINARY CHALLENGE WINNER 2019.jpg";
-	import media2018 from "$lib/connect/images/MEDIA CHALLENGE WINNER 2018.jpg";
-	
+	import media2018 from '$lib/connect/images/MEDIA CHALLENGE WINNER 2018.jpg';
+	import Section from '$lib/page/Section.svelte';
 </script>
 
 <main>
 	<Section title="History of Hunch">
 		<div class="history">
 			<div class="image">
-				<img src={culinary} alt="Culinary Team" />
+				<img alt="Culinary Team" src={culinary} />
 			</div>
 			<div class="text">
 				<p>
@@ -37,9 +35,7 @@
 		</div>
 	</Section>
 
-	<Section title="Latest From Hunch">
-		
-	</Section>
+	<Section title="Latest From Hunch" />
 </main>
 
 <style lang="scss">

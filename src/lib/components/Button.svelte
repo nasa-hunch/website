@@ -1,9 +1,10 @@
 <script lang="ts">
 	export let value = 'Button!';
 	export let type: HTMLButtonElement['type'] = 'submit';
+	export let disabled = false;
 </script>
 
-<button {type} on:click>
+<button {disabled} {type} on:click>
 	{value}
 </button>
 
@@ -17,6 +18,9 @@
 		box-sizing: border-box;
 		font-size: 1.2rem;
 		cursor: pointer;
+	}
+	button:disabled {
+		opacity: 0.25;
 	}
 	button:focus,
 	button:hover,

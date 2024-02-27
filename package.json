@@ -70,6 +70,7 @@
 	"type": "module",
 	"dependencies": {
 		"dayjs": "^1.11.10",
+		"svelte-confetti": "^1.3.2",
 		"svelte-french-toast": "^1.2.0",
 		"svelte-highlight": "^7.6.0",
 		"svelte-preprocess": "^5.1.3"

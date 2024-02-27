@@ -50,7 +50,11 @@
 		</div>
 		<p>
 			All group members must vote to submit, then and only then will the submit button be enabled.
+			Once a project has been submitted, it will no longer be editable. All submissions are final.
 		</p>
+		<form action="?/submit" method="post" use:enhance>
+			<Button disabled={votedYes.length != users.length} value="Submit Project" />
+		</form>
 	</div>
 
 	<div class="panel">
@@ -79,7 +83,7 @@
 			</div>
 		</div>
 		<form action="?/voteSubmit" method="post" use:enhance>
-			<Button value="Vote Submit" />
+			<Button value="Change Vote" />
 		</form>
 	</div>
 </div>

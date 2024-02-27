@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 
 import { prisma } from '$lib/prismaConnection';
 
@@ -40,6 +40,10 @@ export const load = async ({ params, parent }) => {
 
 	if (!project || project == null) {
 		error(404, 'Project not found');
+	}
+
+	if (project.submitted) {
+		throw redirect(303, '/dashboard/congrats');
 	}
 
 	return {
