@@ -11,7 +11,7 @@
 				<a href="/dashboard/projects/{data.project.id}">Checklist</a>
 				<a href="/dashboard/projects/{data.project.id}/files">Files</a>
 				<a href="/dashboard/projects/{data.project.id}/members">Members</a>
-				<a href="/dashboard/projects/{data.project.id}">Submission</a>
+				<a href="/dashboard/projects/{data.project.id}/submission">Submission</a>
 			</nav>
 		</div>
 	</div>
