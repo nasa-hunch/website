@@ -141,13 +141,14 @@
 </ModelHelper>
 
 <div class="wrap">
+	<p>Drag and drop files to upload.</p>
 	<table
 		class="fileList"
 		class:uploadFileThing={dragging}
 		on:drop={dropHandler}
 		on:dragover={dragOverHandler}
 		on:dragleave={stopDragOver}
-	>
+	>	
 		<thead>
 			<tr>
 				<th scope="col">Name</th>
