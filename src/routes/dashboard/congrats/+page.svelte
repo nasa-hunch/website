@@ -4,9 +4,9 @@
 
 <div class="confettiHolder">
 	<Confetti
-		amount="200"
+		amount={200}
 		delay={[500, 2000]}
-		duration="5000"
+		duration={5000}
 		fallDistance="100vh"
 		infinite
 		x={[-5, 5]}
