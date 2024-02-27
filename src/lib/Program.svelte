@@ -60,6 +60,7 @@
 		flex-direction: row;
 		align-items: start;
 		justify-content: center;
+		flex-wrap: wrap;
 	}
 
 	.projects {
