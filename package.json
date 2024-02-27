@@ -5,7 +5,7 @@
 	"scripts": {
 		"generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 static/logo.svg",
 		"dev": "cross-env NODE_ENV=development vite dev",
-		"build": "npx prisma generate && vite build",
+		"build": "npx prisma generate && npx prisma migrate deploy && vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
