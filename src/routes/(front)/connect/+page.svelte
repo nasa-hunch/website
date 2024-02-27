@@ -31,7 +31,9 @@
 		</div>
 	</Section>
 
-	<Section title="Follow Hunch">bla</Section>
+	<Section title="Latest From Hunch">
+		
+	</Section>
 </main>
 
 <style lang="scss">
