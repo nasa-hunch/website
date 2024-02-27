@@ -34,4 +34,8 @@
 	:global(body) {
 		margin: 0px;
 	}
+
+	.content {
+		min-height: calc(100vh - 100px - 75px);
+	}
 </style>

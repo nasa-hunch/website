@@ -27,6 +27,7 @@
 <style lang="scss">
 	footer {
 		padding: 1rem 3rem;
+		height: 75px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
