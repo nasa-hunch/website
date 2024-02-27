@@ -1,13 +1,19 @@
 <script lang="ts">
 	import Section from '$lib/page/Section.svelte';
 	import culinary from '$lib/connect/images/culinary1.jpg';
+
+	// import images
+	import ccw2018 from "$lib/connect/images/CULINARY CHALLENGE WINNER 2018.jpg";
+	import ccw2019 from "$lib/connect/images/CULINARY CHALLENGE WINNER 2019.jpg";
+	import media2018 from "$lib/connect/images/MEDIA CHALLENGE WINNER 2018.jpg";
+	
 </script>
 
 <main>
 	<Section title="History of Hunch">
 		<div class="history">
 			<div class="image">
-				<img src={culinary} />
+				<img src={culinary} alt="Culinary Team" />
 			</div>
 			<div class="text">
 				<p>
