@@ -6,6 +6,7 @@
 	import Program from '$lib/Program.svelte';
 
 	let code = `<span class="accent">Develop</span> in the <span class="accent">horizon</span> of space.`;
+	export let data;
 </script>
 
 <svelte:head>
@@ -13,7 +14,7 @@
 	{@html github}
 </svelte:head>
 
-<Program program="Software">
+<Program program="Software" projectTemplates={data.projects}>
 	<div slot="subtitle">
 		<span class="accent">Develop</span> in the <span class="accent">horizon</span> of space.
 	</div>
