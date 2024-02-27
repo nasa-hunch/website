@@ -24,6 +24,7 @@
 	.content {
 		width: 100%;
 		font-size: 18px;
+		padding-top: 1.3rem;
 	}
 
 	.sectionOuter {
