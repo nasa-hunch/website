@@ -92,6 +92,7 @@ model ProjectUser {
   owner Boolean @default(false)
   user User @relation(fields: [userId], references: [id])
   project Project @relation("users", fields: [projectId], references: [id])
+  voteSubmit Boolean @default(false)
   permission ProjectUserPermission
   assignments ToDoAssignee[]
   checkedToDoItems ToDoItem[]
@@ -111,6 +112,8 @@ model Project {
   projectTemplateId Int
   projectTemplate ProjectTemplate @relation(fields: [projectTemplateId], references: [id])
   toDoItems ToDoItem[]
+  submissionDate DateTime?
+  submitted Boolean @default(false)
 }
 
 model ProjectTemplate { 
@@ -161,3 +164,4 @@ model ToDoAssignee {
   userId Int
   projectUser ProjectUser @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
