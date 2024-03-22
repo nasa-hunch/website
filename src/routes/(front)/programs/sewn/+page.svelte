@@ -6,7 +6,7 @@
 <Program program="Softgoods" projectTemplates={data.projects}>
 	<div slot="subtitle">
 		<p>
-			Sew <span class="accent">life</span> into flight-worthy projects.
+			Sew with the <span class="accent">stars</span>.
 		</p>
 	</div>
 	<div slot="main">

@@ -75,6 +75,11 @@
 
 	.memberAttr {
 		display: flex;
+
+		p {
+			word-wrap: break-word;
+			width: 90%;
+		}
 	}
 
 	.icon {

@@ -12,13 +12,13 @@
 	</div>
 	<div class="center">&copy; 2024 All Rights Reserved.</div>
 	<div class="right">
-		<IconButton href="/">
+		<IconButton href="https://twitter.com/nasahunch">
 			<Twitter />
 		</IconButton>
-		<IconButton href="/">
+		<IconButton href="https://www.facebook.com/nasahunch/">
 			<Facebook />
 		</IconButton>
-		<IconButton href="/">
+		<IconButton href="https://www.youtube.com/channel/UCFwf6s0Ya1uTRjJnZqeA7gA">
 			<Youtube />
 		</IconButton>
 	</div>
@@ -32,6 +32,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+		border-top: 2px solid black;
 
 		div.right {
 			display: flex;

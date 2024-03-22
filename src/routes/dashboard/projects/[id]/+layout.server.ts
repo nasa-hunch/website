@@ -1,6 +1,7 @@
 import { error, redirect } from '@sveltejs/kit';
 
 import { prisma } from '$lib/prismaConnection';
+import { Role } from '$lib/enums';
 
 export const load = async ({ params, parent }) => {
 	const parentData = await parent();
@@ -15,7 +16,7 @@ export const load = async ({ params, parent }) => {
 		}
 	});
 
-	if (!projectUser || projectUser == null) {
+	if ((!projectUser || projectUser == null) && parentData.user.role != Role.HUNCH_ADMIN) {
 		error(404, 'Project not found');
 	}
 

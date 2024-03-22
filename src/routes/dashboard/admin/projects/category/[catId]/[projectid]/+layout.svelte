@@ -8,13 +8,13 @@
 			<h1>{data.projectTemplate.name}</h1>
 			<nav class="nav">
 				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}"
-					>Description</a
+					>Info</a
 				>
-				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}"
-					>Description</a
+				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}/participants"
+					>Participants ({data.projectUserCount})</a
 				>
-				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}"
-					>Description</a
+				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}/submissions"
+					>Submissions ({data.projectCount})</a
 				>
 			</nav>
 		</div>

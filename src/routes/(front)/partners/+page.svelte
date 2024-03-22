@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Section from '$lib/page/Section.svelte';
-	import ian from '$lib/partners/images/Ian.jpg';
-	import lee from '$lib/partners/images/Lee.jpg';
-	import lily from '$lib/partners/images/Lily.jpg';
-	import mentor from '$lib/partners/images/mentor.jpg';
-	import owen from '$lib/partners/images/Owen.jpg';
-	import partner from '$lib/partners/images/partner.jpg';
-	import volunteer from '$lib/partners/images/volunteer.jpg';
+	import Ian from '$lib/partners/images/Ian.jpg';
+	import Lee from '$lib/partners/images/Lee.jpg';
+	import Lily from '$lib/partners/images/Lily.jpg';
+	import Mentor from '$lib/partners/images/mentor.jpg';
+	import Owen from '$lib/partners/images/Owen.jpg';
+	import Partner from '$lib/partners/images/partner.jpg';
+	import Volunteer from '$lib/partners/images/volunteer.jpg';
 </script>
 
 <main>
@@ -14,7 +14,7 @@
 
 	<div class="getInvolved">
 		<div class="item">
-			<img alt="Partner" src={partner} />
+			<img alt="Partner" src={Partner} />
 			<div class="content">
 				<h2>Partner with Us</h2>
 				<p>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<div class="item">
-			<img alt="Mentor" src={mentor} />
+			<img alt="Mentor" src={Mentor} />
 			<div class="content">
 				<h2>Mentor a Team</h2>
 				<p>
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<div class="item">
-			<img alt="Volunteer" src={volunteer} />
+			<img alt="Volunteer" src={Volunteer} />
 			<div class="content">
 				<h2>Volunteer</h2>
 				<p>Volunteer your time at a local HUNCH event near you! It’ll be fun!</p>
@@ -44,7 +44,7 @@
 
 	<div class="quotes">
 		<div class="quote">
-			<img alt="Lily England" src={lily} />
+			<img alt="Lily England" src={Lily} />
 			<blockquote>
 				<p>
 					"Working with several machines, using Mastercam software and making flight hardware for
@@ -62,7 +62,7 @@
 			</blockquote>
 		</div>
 		<div class="quote">
-			<img alt="Owen Theeck" src={owen} />
+			<img alt="Owen Theeck" src={Owen} />
 			<blockquote>
 				<p>
 					"I had the opportunity of a lifetime to be able to work on projects that are now onboard
@@ -82,7 +82,7 @@
 			</blockquote>
 		</div>
 		<div class="quote">
-			<img alt="Lee Hansen" src={lee} />
+			<img alt="Lee Hansen" src={Lee} />
 			<blockquote>
 				<p>
 					"Working with the HUNCH program throughout high school helped not only to improve my
@@ -98,7 +98,7 @@
 			</blockquote>
 		</div>
 		<div class="quote">
-			<img alt="Ian West" src={ian} />
+			<img alt="Ian West" src={Ian} />
 			<blockquote>
 				<p>
 					"Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH

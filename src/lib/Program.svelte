@@ -27,20 +27,20 @@
 			</div>
 			<div class="projects">
 				<h2>Projects</h2>
+				{#if projectTemplates.length > 0}
 				{#each projectTemplates as project}
 					<a href="/projects/{project.id}" class="project">
 						<h3>{project.name}</h3>
 						<p>{project.description}</p>
 					</a>
 				{/each}
+				{:else}
+					<p><i>No projects yet</i></p>
+				{/if}
 			</div>		
 		</div>
 	</div>
 </div>
-
-
-
-
 
 <style lang="scss">
 
@@ -49,6 +49,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-bottom: 1rem;
 	}
 	
 	.inner {
@@ -85,6 +86,7 @@
 			box-sizing: border-box;
 			background: $background2;
 			border-radius: 5px;
+			transition: background 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 
 			h3 {
 				margin: 0px;

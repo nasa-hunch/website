@@ -15,16 +15,17 @@
 			</div>
 			<div class="text">
 				<p>
-					16 years ago, NASA HUNCH (High Schools United with NASA to Create Hardware) was founded as
-					a means of giving high school students new educational experiences by producing hardware
-					training items for the International Space Station. Today, the program has grown from the
-					first 3 schools in 2003 to well over 200 schools all across the country participating in a
-					wide variety of projects, ranging from industrial sewing to an astronaut Culinary
-					Challenge.
+					16 years ago, NASA HUNCH was founded as
+					a means of giving high school students new educational experiences by producing <b>hardware
+					training items</b> for the International Space Station. Today, the program has grown from the
+					<i>three</i> schools in 2003 to well over <i>two hundred</i> schools all across the country participating in a
+					wide variety of projects, ranging from 
+					<a href="/programs/sewn">industrial sewing</a> 
+					to <a href="/programs/culinary">designing food for astronauts</a>.
 				</p>
 				<br />
 				<p>
-					We mainly work to improve the lives of the International Space Station crew from
+					We work to improve the lives of the International Space Station crew from
 					day-to-day personal items or tools to updating parts of the station itself from their
 					original designs. HUNCH fills a unique niche for the International Space Station, as well
 					as providing high quality training and flight parts to other NASA programs and partners,
@@ -36,6 +37,8 @@
 	</Section>
 
 	<Section title="Latest From Hunch" />
+
+	<!-- TODO: blogging -->
 </main>
 
 <style lang="scss">

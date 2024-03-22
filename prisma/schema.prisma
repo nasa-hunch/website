@@ -164,4 +164,3 @@ model ToDoAssignee {
   userId Int
   projectUser ProjectUser @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
