@@ -7,7 +7,7 @@
 		<p>
 			This is a form for schools to fill out to participate in the NASA Hunch program. If you are a
 			school that is interested in participating in the program, please fill out this form. (<a
-				href="/forms/statement-of-work.pdf">PDF Version</a
+				href="/forms/statement-of-work.pdf" target="_blank">PDF Version</a
 			>)
 		</p>
 		<p>
