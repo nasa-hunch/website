@@ -10,7 +10,11 @@
 	<div class="left">
 		<img alt="NASA Hunch Logo" src="/favicon.png" />
 	</div>
-	<div class="center">&copy; 2024 All Rights Reserved.</div>
+	<div class="center">
+		&copy;
+		{new Date().getFullYear()} NASA HUNCH.
+		All Rights Reserved.
+	</div>
 	<div class="right">
 		<IconButton href="https://twitter.com/nasahunch">
 			<Twitter />
