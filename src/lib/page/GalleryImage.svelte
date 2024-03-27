@@ -10,7 +10,7 @@
 	let inView = false;
 </script>
 
-<div class="wrap" on:inview_enter={() => (inView = true)} use:inview>
+<div class="wrap" on:inview_enter={() => (inView = true)} use:inview={{ unobserveOnEnter: true }}>
 	<div class="item" class:inView>
 		<div style="background-image: url({options.src})" class="bg" />
 		<a class="link" href={options.href}>
