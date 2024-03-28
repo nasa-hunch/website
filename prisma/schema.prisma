@@ -63,6 +63,7 @@ model User {
   projectUser ProjectUser[]
   inbox Notification[] @relation("reciever")
   outbox Notification[] @relation("sender")
+  blogPosts BlogPost[]
 }
 
 model Notification {
@@ -163,4 +164,16 @@ model ToDoAssignee {
   toDoItem ToDoItem @relation(fields: [toDoItemId], references: [id], onDelete: Cascade)
   userId Int
   projectUser ProjectUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model BlogPost {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title String @db.VarChar(255)
+  slug String @db.VarChar(255)
+  summary String
+  content String @db.Text
+  authorId Int
+  author User @relation(fields: [authorId], references: [id])
 }
