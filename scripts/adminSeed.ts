@@ -1,11 +1,11 @@
 /* 
-The goal of this is to seed the database in such a way that it mirrors the actual use case to measure performance and QOL features. 
-
+	Seeds the database to mirror actual usage to measure performance, QOL features,
+	and provide mock data for the dashboard. This script is not intended to be run 
+	in production, and is only for development purposes.
 */
 
 import { faker } from '@faker-js/faker';
-import { PrismaClient } from '@prisma/client';
-import { Role } from '@prisma/client';
+import { type Prisma,PrismaClient, Role } from '@prisma/client';
 import crypto from 'crypto';
 import { promisify } from 'util';
 
@@ -14,6 +14,13 @@ const pkdf2 = promisify(crypto.pbkdf2);
 interface PasswordData {
 	hash: string;
 	salt: string;
+}
+
+const prisma = new PrismaClient();
+
+// If there are more than 100 orgs, the seed will fail
+if (await prisma.organization.count() > 100) {
+	throw new Error('There are already more than 100 organizations in the database. Aborting seed.');
 }
 
 const startTime = Date.now();
@@ -27,23 +34,9 @@ async function makePassword(password: string): Promise<PasswordData> {
 	return { hash, salt };
 }
 
-const prisma = new PrismaClient();
+const orgs: Prisma.OrganizationCreateManyInput[] = [];
 
-const orgs: {
-	name: string;
-}[] = [];
-
-const users: {
-	firstName: string;
-	lastName: string;
-	email: string;
-	hash: string;
-	salt: string;
-	role: Role | null;
-	orgId: number | null;
-}[] = [];
-
-//250 orgs
+// 250 orgs
 for (let i = 0; i < 250; i++) {
 	orgs.push({
 		name: `${faker.word.adjective()}-${faker.word.noun()}`
@@ -53,19 +46,20 @@ for (let i = 0; i < 250; i++) {
 console.log(`Orgs generated in ${Date.now() - recentStartTime}ms`);
 recentStartTime = Date.now();
 
-//2,500 users
-for (let i = 0; i < 2500; i++) {
+// 2500 users
+const users: Prisma.UserCreateManyInput[] = await Promise.all(Array.from({ length: 2500 }, async () => {
 	const firstName = faker.person.firstName();
 	const lastName = faker.person.lastName();
-	users.push({
-		firstName: firstName,
-		lastName: lastName,
-		email: faker.internet.email({ firstName, lastName }),
+	const email = faker.internet.email({ firstName, lastName });
+	return {
+		firstName,
+		lastName,
+		email,
 		role: Role[Object.keys(Role)[Math.floor(Math.random() * Object.keys(Role).length)]],
 		orgId: Math.ceil(Math.random() * 250),
 		...(await makePassword('password'))
-	});
-}
+	};
+}));
 
 console.log(`Users generated in ${Date.now() - recentStartTime}ms`);
 recentStartTime = Date.now();

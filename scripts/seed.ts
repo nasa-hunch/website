@@ -40,7 +40,7 @@ async function main() {
 					firstName: 'Admin',
 					lastName: 'Cardboard',
 					role: Role.SCHOOL_ADMIN,
-					...(await makePassword('school_admin'))
+					...(await makePassword('password'))
 				}
 			},
 			projects: {
@@ -91,7 +91,7 @@ async function main() {
 			firstName: 'Admin',
 			lastName: 'NASA',
 			role: Role.HUNCH_ADMIN,
-			...(await makePassword('hunch_admin'))
+			...(await makePassword('password'))
 		}
 	});
 
