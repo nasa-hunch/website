@@ -7,6 +7,37 @@
 	import Owen from '$lib/partners/images/Owen.jpg';
 	import Partner from '$lib/partners/images/partner.jpg';
 	import Volunteer from '$lib/partners/images/volunteer.jpg';
+
+	const quotes = [
+		{
+			image: Lily,
+			quote:
+				'"Working with several machines, using Mastercam software and making flight hardware for the ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to teach other students what I knew about machining and engineering. This, without a doubt, helped me get my job at Sam Houston."',
+			footer: 'Lily England',
+			cite: 'Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University'
+		},
+		{
+			image: Owen,
+			quote:
+				'"I had the opportunity of a lifetime to be able to work on projects that are now onboard the International Space Station and used at various NASA facilities in the US which have truly been influential accomplishments for me, other students and to the space program. Given my invaluable experience, regardless of the career path that you pick or the interest that you may have, the HUNCH program instills students with the knowledge and expertise that will lead to a promising future."',
+			footer: 'Owen Theeck',
+			cite: 'Aviation Business Administration student at Embry-Riddle Aeronautical University'
+		},
+		{
+			image: Lee,
+			quote:
+				'"Working with the HUNCH program throughout high school helped not only to improve my sewing skills but also to better understand project management and work flow over long term projects. Learning the responsibilities as well as technical skills made my college experience even more rewarding."',
+			footer: 'Lee Hansen',
+			cite: 'Softgoods Specialist'
+		},
+		{
+			image: Ian,
+			quote:
+				'"Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH offers for students to get real world experience. Now I get to program and machine every day."',
+			footer: 'Ian West',
+			cite: 'HUNCH Intern'
+		}
+	];
 </script>
 
 <main>
@@ -43,76 +74,19 @@
 	</div>
 
 	<div class="quotes">
-		<div class="quote">
-			<img alt="Lily England" src={Lily} />
-			<blockquote>
-				<p>
-					"Working with several machines, using Mastercam software and making flight hardware for
-					the ISS was life changing. Also, as an intern and mentor, it gave me the opportunity to
-					teach other students what I knew about machining and engineering. This, without a doubt,
-					helped me get my job at Sam Houston."
-				</p>
-				<br />
-				<footer>
-					<p>Lily England</p>
-					<cite
-						>Lab Coordinator for the Engineering Technology Dept. at Sam Houston State University</cite
-					>
-				</footer>
-			</blockquote>
-		</div>
-		<div class="quote">
-			<img alt="Owen Theeck" src={Owen} />
-			<blockquote>
-				<p>
-					"I had the opportunity of a lifetime to be able to work on projects that are now onboard
-					the International Space Station and used at various NASA facilities in the US which have
-					truly been influential accomplishments for me, other students and to the space program.
-					Given my invaluable experience, regardless of the career path that you pick or the
-					interest that you may have, the HUNCH program instills students with the knowledge and
-					expertise that will lead to a promising future."
-				</p>
-				<br />
-				<footer>
-					<p>Owen Theeck</p>
-					<cite
-						>Aviation Business Administration student at Embry-Riddle Aeronautical University</cite
-					>
-				</footer>
-			</blockquote>
-		</div>
-		<div class="quote">
-			<img alt="Lee Hansen" src={Lee} />
-			<blockquote>
-				<p>
-					"Working with the HUNCH program throughout high school helped not only to improve my
-					sewing skills but also to better understand project management and work flow over long
-					term projects. Learning the responsibilities as well as technical skills made my college
-					experience even more rewarding."
-				</p>
-				<br />
-				<footer>
-					<p>Lee Hansen</p>
-					<cite>Softgoods Specialist</cite>
-				</footer>
-			</blockquote>
-		</div>
-		<div class="quote">
-			<img alt="Ian West" src={Ian} />
-			<blockquote>
-				<p>
-					"Interning for HUNCH gave me that edge I needed to land this job. I appreciate what HUNCH
-					offers for students to get real world experience. Now I get to program and machine every
-					day."
-				</p>
-				<br />
-
-				<footer>
-					<p>Ian West</p>
-					<cite>HUNCH Intern</cite>
-				</footer>
-			</blockquote>
-		</div>
+		{#each quotes as { image, quote, footer, cite }}
+			<div class="quote">
+				<img alt={footer} src={image} />
+				<blockquote>
+					<p>{quote}</p>
+					<br />
+					<footer>
+						<p>{footer}</p>
+						<cite>{cite}</cite>
+					</footer>
+				</blockquote>
+			</div>
+		{/each}
 	</div>
 </main>
 
