@@ -185,9 +185,9 @@ model TeamMember {
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
   role String @db.VarChar(255)
-  email String @db.VarChar(255)
+  email String? @db.VarChar(255)
   pfp String
-  phone String @db.VarChar(255)
+  phone String? @db.VarChar(255)
   projects Project[]
 }
 
