@@ -205,7 +205,10 @@ export async function main(client: PrismaClient) {
     }
 
     await client.teamMember.createMany({ data: members.map(member => ({
-        ...member,
+        role: member.role,
+		email: member.email,
+		phone: member.phone,
+		pfp: member.pfp,
         name: `${member.firstName} ${member.middleInitial ? member.middleInitial + ' ' : ''}${member.lastName}`,
     })) });
 }
