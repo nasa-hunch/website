@@ -2,12 +2,12 @@ import { DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { z } from 'zod';
 
 import { bucket } from '$env/static/private';
-import { formHandler } from '$lib/bodyguard.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { ProjectUserPermission } from '$lib/enums.js';
-import { prisma } from '$lib/prismaConnection';
-import { S3 } from '$lib/s3.js';
-import { uploadFile } from '$lib/uploadFile.js';
-import { verifySession } from '$lib/verifySession.js';
+import { prisma } from '$lib/server/prisma/prismaConnection';
+import { S3 } from '$lib/server/s3.js';
+import { uploadFile } from '$lib/server/uploadFile.js';
+import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async ({ parent }) => {
 	const parentData = await parent();

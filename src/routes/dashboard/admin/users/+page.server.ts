@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { formHandler } from '$lib/bodyguard.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { Role } from '$lib/enums.js';
-import { prisma } from '$lib/prismaConnection';
-import { verifySession } from '$lib/verifySession.js';
+import { prisma } from '$lib/server/prisma/prismaConnection';
+import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async () => {
 	const userList = await prisma.user.findMany();

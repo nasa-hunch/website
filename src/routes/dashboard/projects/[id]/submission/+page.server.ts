@@ -1,5 +1,5 @@
-import { prisma } from '$lib/prismaConnection.js';
-import { verifyProjectUser } from '$lib/verifyProjectUser.js';
+import { prisma } from '$lib/server/prisma/prismaConnection.js';
+import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
 
 export const load = () => {};
 

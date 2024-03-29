@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { formHandler } from '$lib/bodyguard.js';
-import { prisma } from '$lib/prismaConnection.js';
-import { uploadFile } from '$lib/uploadFile';
-import { verifySession } from '$lib/verifySession.js';
+import { formHandler } from '$lib/server/bodyguard.js';
+import { prisma } from '$lib/server/prisma/prismaConnection.js';
+import { uploadFile } from '$lib/server/uploadFile';
+import { verifySession } from '$lib/server/verifySession.js';
 
 export const actions = {
 	updateAccountInfo: formHandler(

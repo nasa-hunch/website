@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { formHandler } from '$lib/bodyguard.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { ProjectUserPermission } from '$lib/enums.js';
-import { prisma } from '$lib/prismaConnection';
-import { verifyProjectUser } from '$lib/verifyProjectUser.js';
+import { prisma } from '$lib/server/prisma/prismaConnection';
+import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
 
 export const load = async ({ parent }) => {
 	const parentData = await parent();

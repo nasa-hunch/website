@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 
 import { Role } from '$lib/enums';
-import { prisma } from '$lib/prismaConnection';
+import { prisma } from '$lib/server/prisma/prismaConnection';
 
 export const load = async ({ cookies }) => {
 	// If the user isn't logged in, we need to redirect them to the login page

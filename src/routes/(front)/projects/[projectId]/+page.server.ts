@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 
-import { prisma } from "$lib/prismaConnection";
+import { prisma } from "$lib/server/prisma/prismaConnection";
 
 export const load = async({params}) => {
 	const projectTemplate = await prisma.projectTemplate.findFirst({

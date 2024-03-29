@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { formHandler } from '$lib/bodyguard';
+import { formHandler } from '$lib/server/bodyguard';
 import { Role } from '$lib/enums';
-import { prisma } from '$lib/prismaConnection';
-import { verifySession } from '$lib/verifySession';
+import { prisma } from '$lib/server/prisma/prismaConnection';
+import { verifySession } from '$lib/server/verifySession';
 
 export const actions = {
 	createProject: formHandler(

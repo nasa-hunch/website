@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 
-import { prisma } from '$lib/prismaConnection.js';
+import { prisma } from '$lib/server/prisma/prismaConnection.js';
 
 export const actions = {
 	default: async ({ cookies }) => {

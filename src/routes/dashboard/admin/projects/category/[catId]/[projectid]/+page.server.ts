@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { formHandler } from '$lib/bodyguard.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { Role } from '$lib/enums.js';
-import { prisma } from '$lib/prismaConnection.js';
-import { verifySession } from '$lib/verifySession.js';
+import { prisma } from '$lib/server/prisma/prismaConnection.js';
+import { verifySession } from '$lib/server/verifySession.js';
 
 export const actions = {
 	updateDesc: formHandler(

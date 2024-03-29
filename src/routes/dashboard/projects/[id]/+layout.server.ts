@@ -1,6 +1,6 @@
 import { error, redirect } from '@sveltejs/kit';
 
-import { prisma } from '$lib/prismaConnection';
+import { prisma } from '$lib/server/prisma/prismaConnection';
 import { Role } from '$lib/enums';
 
 export const load = async ({ params, parent }) => {

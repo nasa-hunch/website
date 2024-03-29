@@ -1,4 +1,4 @@
-import { prisma } from '$lib/prismaConnection.js';
+import { prisma } from '$lib/server/prisma/prismaConnection.js';
 
 export const load = async ({ parent }) => {
 	const parentData = await parent();

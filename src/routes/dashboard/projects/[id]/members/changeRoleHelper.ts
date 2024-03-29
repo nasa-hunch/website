@@ -1,8 +1,8 @@
 import type { Cookies } from '@sveltejs/kit';
 
 import type { ProjectUserPermission } from '$lib/enums';
-import { prisma } from '$lib/prismaConnection';
-import { verifyProjectUser } from '$lib/verifyProjectUser';
+import { prisma } from '$lib/server/prisma/prismaConnection';
+import { verifyProjectUser } from '$lib/server/verifyProjectUser';
 
 import type { RouteParams } from './$types';
 

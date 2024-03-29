@@ -1,11 +1,11 @@
 import { redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 
-import { formHandler } from '$lib/bodyguard.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { ProjectUserPermission, Role } from '$lib/enums';
-import { prisma } from '$lib/prismaConnection.js';
-import { verifyProjectUser } from '$lib/verifyProjectUser.js';
-import { verifySession } from '$lib/verifySession.js';
+import { prisma } from '$lib/server/prisma/prismaConnection.js';
+import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
+import { verifySession } from '$lib/server/verifySession.js';
 
 import { updateMemberRole } from './changeRoleHelper.js';
 

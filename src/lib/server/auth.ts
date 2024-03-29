@@ -1,7 +1,7 @@
 import type { Prisma } from '@prisma/client';
 import { redirect } from '@sveltejs/kit';
 
-import { prisma } from '$lib/prismaConnection';
+import { prisma } from '$lib/server/prisma/prismaConnection';
 
 /**
  * Validates a session and returns the user if it is valid.

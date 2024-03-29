@@ -1,6 +1,6 @@
 import { type Cookies, redirect } from '@sveltejs/kit';
 
-import { prisma } from './prismaConnection';
+import { prisma } from './prisma/prismaConnection';
 
 export const verifyProjectUser = async (cookies: Cookies, projectId: string) => {
 	if (!cookies.get('session')) {

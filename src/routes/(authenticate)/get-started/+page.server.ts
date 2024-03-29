@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 import { promisify } from 'util';
 
-import { prisma } from '$lib/prismaConnection';
+import { prisma } from '$lib/server/prisma/prismaConnection';
 
 const pkdf2 = promisify(crypto.pbkdf2);
 
