@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Section from '$lib/page/Section.svelte';
-	import Ian from '$lib/partners/images/Ian.jpg';
-	import Lee from '$lib/partners/images/Lee.jpg';
-	import Lily from '$lib/partners/images/Lily.jpg';
-	import Mentor from '$lib/partners/images/mentor.jpg';
-	import Owen from '$lib/partners/images/Owen.jpg';
-	import Partner from '$lib/partners/images/partner.jpg';
-	import Volunteer from '$lib/partners/images/volunteer.jpg';
+	import Ian from '$lib/media/Ian.jpg';
+	import Lee from '$lib/media/Lee.jpg';
+	import Lily from '$lib/media/Lily.jpg';
+	import Mentor from '$lib/media/mentor.jpg';
+	import Owen from '$lib/media/Owen.jpg';
+	import Partner from '$lib/media/partner.jpg';
+	import Volunteer from '$lib/media/volunteer.jpg';
 
 	const quotes = [
 		{
