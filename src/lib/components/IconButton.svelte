@@ -51,10 +51,6 @@
 		&:hover {
 			background: $background2;
 		}
-
-		svg {
-			height: 100%;
-		}
 	}
 
 	.formButton {

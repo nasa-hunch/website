@@ -3,7 +3,8 @@
 	import MdiEmail from '~icons/mdi/email';
 	import MdiPhone from '~icons/mdi/phone';
 	import Section from '$lib/page/Section.svelte';
-	import { members } from '$lib/team';
+
+	export let data;
 </script>
 
 <main>
@@ -18,20 +19,18 @@
 	</Section>
 
 	<div class="members">
-		{#each members as member}
+		{#each data.members as member}
 			<div class="member">
-				<img alt={member.firstName} src={member.img} />
+				<img alt={member.name} src={member.pfp} />
 				<div class="content">
 					<h2>
-						{member.firstName}
-						{member.middleInitial ? `${member.middleInitial + '.'}` : ''}
-						{member.lastName}
+						{member.name}
 					</h2>
 					<div class="memberAttr">
 						<div class="icon">
 							<MdiAccountCircle />
 						</div>
-						<p>{member.description}</p>
+						<p>{member.role}</p>
 					</div>
 					{#if member.email}
 						<div class="memberAttr">
@@ -41,12 +40,12 @@
 							<p><a href="mailto:{member.email}">{member.email}</a></p>
 						</div>
 					{/if}
-					{#if member.phoneNumber}
+					{#if member.phone}
 						<div class="memberAttr">
 							<div class="icon">
 								<MdiPhone />
 							</div>
-							<p>{member.phoneNumber}</p>
+							<p>{member.phone}</p>
 						</div>
 					{/if}
 				</div>
