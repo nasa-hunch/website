@@ -18,6 +18,13 @@ interface PasswordData {
 	salt: string;
 }
 
+async function makePassword(password: string): Promise<PasswordData> {
+	const salt = crypto.randomBytes(32).toString('hex');
+	const hash = (await pkdf2(password, salt, 1000, 100, 'sha512')).toString('hex');
+
+	return { hash, salt };
+}
+
 const prisma = new PrismaClient();
 
 async function main() {
@@ -29,13 +36,6 @@ async function main() {
 	const startTime = Date.now();
 	let recentStartTime = Date.now();
 	console.log('Starting Realistic Seed, this may take a moment.');
-
-	async function makePassword(password: string): Promise<PasswordData> {
-		const salt = crypto.randomBytes(32).toString('hex');
-		const hash = (await pkdf2(password, salt, 1000, 100, 'sha512')).toString('hex');
-
-		return { hash, salt };
-	}
 
 	const orgs: Prisma.OrganizationCreateManyInput[] = [];
 

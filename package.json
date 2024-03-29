@@ -18,7 +18,7 @@
 		"studio": "dotenv -e .env.test prisma studio",
 		"db:deploy": "prisma migrate deploy",
 		"seed:faux": "tsx scripts/seed/fakeUsers.ts",
-		"seed:hunch2024": "tsx scripts/seed/hunch2024.ts",
+		"seed:hunch2024": "tsx scripts/seed/hunch2024/index.ts",
 		"seed": "npm run seed:hunch2024 && npm run seed:faux",
 		"s3devdata": "tsx scripts/s3.ts",
 		"deploy": "pnpm install && prisma migrate deploy && prisma generate && pnpm run build"
