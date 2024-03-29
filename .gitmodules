@@ -1,0 +1,3 @@
+[submodule "scripts/seed/assets"]
+	path = scripts/seed/assets
+	url = https://github.com/nasa-hunch/website-seed-assets.git
