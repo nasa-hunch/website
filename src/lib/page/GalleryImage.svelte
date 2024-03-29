@@ -33,7 +33,7 @@
 		width: 100%;
 		height: 100%;
 		position: relative;
-		opacity: 0;
+		opacity: 0.01;
 
 		&.inView {
 			animation: fadeIn 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
