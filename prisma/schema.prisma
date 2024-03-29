@@ -190,3 +190,12 @@ model TeamMember {
   phone String @db.VarChar(255)
   projects Project[]
 }
+
+model Parter {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String @db.VarChar(255)
+  logo String @db.VarChar(255)
+  website String @db.VarChar(255)
+}
