@@ -191,7 +191,7 @@ model TeamMember {
   projects Project[]
 }
 
-model Parter {
+model Partner {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

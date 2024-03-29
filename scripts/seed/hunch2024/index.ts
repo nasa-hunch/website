@@ -10,10 +10,13 @@
 import { PrismaClient, ProjectUserPermission, Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
+import * as partners from './partners';
 
 const prisma = new PrismaClient();
 
 async function main() {
+	await partners.main(prisma);
+
 	const org = await prisma.organization.findFirst({ where: { id: 1 } });
 
 	if (org && org.name != 'Cardboard') {
