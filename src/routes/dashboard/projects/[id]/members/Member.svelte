@@ -2,7 +2,7 @@
 	import MakeUnverified from '~icons/mdi/close';
 	import MakeEditor from '~icons/mdi/edit-outline';
 	import RemoveMember from '~icons/mdi/person-remove-outline';
-	//Icons
+	// Icons
 	import MakeViewer from '~icons/mdi/visibility-outline';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
@@ -20,7 +20,7 @@
 		userId: number;
 		projectId: number;
 		owner: boolean;
-		//This is terrible, but necessary because of a lack of prisma esm support
+		// This is terrible, but necessary because of a lack of prisma esm support
 		permission: unknown;
 	};
 

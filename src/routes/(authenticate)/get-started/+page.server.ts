@@ -1,10 +1,8 @@
 import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
-import { promisify } from 'util';
 
+import { makePassword } from '$lib/server/password';
 import { prisma } from '$lib/server/prisma/prismaConnection';
-
-const pkdf2 = promisify(crypto.pbkdf2);
 
 export const load = async ({ cookies }) => {
 	// If the user is logged in, we can skip all this stuff
@@ -27,7 +25,7 @@ export const load = async ({ cookies }) => {
 
 export const actions = {
 	register: async ({ request, cookies }) => {
-		//Get all for the form data
+		// Get all for the form data
 		const formData = await request.formData();
 
 		const firstName = formData.get('firstName')?.toString();
@@ -70,18 +68,13 @@ export const actions = {
 			};
 		}
 
-		// Now that that's done, we can create a salt and hash of the password
-		const salt = crypto.randomBytes(32).toString('hex');
-		const hash = (await pkdf2(pass1, salt, 1000, 100, 'sha512')).toString('hex');
-
 		// Now we can make the user!
 		const newUser = await prisma.user.create({
 			data: {
 				firstName,
 				lastName,
 				email: newEmail,
-				hash,
-				salt,
+				...await makePassword(pass1),
 				createdAt: new Date(Date.now()),
 				updatedAt: new Date(Date.now()),
 				role: null,

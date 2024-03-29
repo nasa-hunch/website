@@ -195,7 +195,7 @@ export const actions = {
 				};
 			}
 
-			//Assignee check
+			// Assignee check
 
 			const assigneeCheck = await prisma.toDoAssignee.findFirst({
 				where: {
@@ -213,7 +213,7 @@ export const actions = {
 				};
 			}
 
-			//Add the assignee
+			// Add the assignee
 			await prisma.toDoAssignee.create({
 				data: {
 					userId: userCheck.id,
@@ -259,7 +259,7 @@ export const actions = {
 				};
 			}
 
-			//Add the assignee
+			// Add the assignee
 			await prisma.toDoAssignee.delete({
 				where: {
 					id: assigneeCheck.id

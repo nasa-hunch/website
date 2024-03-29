@@ -93,7 +93,7 @@ export const actions = {
 				}
 			});
 
-			//If we don't have a key, we can assume the file is not in s3
+			// If we don't have a key, we can assume the file is not in s3
 			if (!fileCheck.key) {
 				return {
 					success: true,
@@ -101,7 +101,7 @@ export const actions = {
 				};
 			}
 
-			//However, if we DO have a key, the file is in s3 and we need to get rid of it.
+			// However, if we DO have a key, the file is in s3 and we need to get rid of it.
 			await S3.send(
 				new DeleteObjectCommand({
 					Bucket: bucket,
