@@ -1,3 +1,12 @@
+/* 
+	This script is not intended to be run 
+	in production, and is only for development purposes.
+
+	Seeds the database to represent all NASA HUNCH data from
+	the 2023-2024 year period. Used for mocking real data
+	used in the NASA HUNCH program.
+*/
+
 import { PrismaClient, ProjectUserPermission, Role } from '@prisma/client';
 import crypto from 'crypto';
 import { promisify } from 'util';

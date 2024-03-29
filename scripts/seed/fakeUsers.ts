@@ -1,7 +1,9 @@
 /* 
-	Seeds the database to mirror actual usage to measure performance, QOL features,
-	and provide mock data for the dashboard. This script is not intended to be run 
+	This script is not intended to be run 
 	in production, and is only for development purposes.
+
+	Seeds the database to mirror actual usage to measure performance, QOL features,
+	and provide mock data for the dashboard. Makes a bunch of fake users and organizations.
 */
 
 import { faker } from '@faker-js/faker';
