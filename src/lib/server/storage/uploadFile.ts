@@ -3,7 +3,7 @@ import crypto from 'crypto';
 
 import { bucket, mediaurl } from '$env/static/private';
 import { prisma } from '$lib/server/prisma/prismaConnection';
-import { S3 } from '$lib/server/s3.js';
+import { S3 } from '$lib/server/storage/s3.js';
 
 export const uploadFile = async (request: Request, projectId?: number) => {
 	const formData = await request.formData();

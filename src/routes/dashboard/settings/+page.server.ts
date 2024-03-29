@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
-import { uploadFile } from '$lib/server/uploadFile';
+import { uploadFile } from '$lib/server/storage/uploadFile';
 import { verifySession } from '$lib/server/verifySession.js';
 
 export const actions = {
