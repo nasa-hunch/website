@@ -104,7 +104,7 @@ model Project {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
-  description String @db.VarChar(255)
+  description String @db.Text
   organization Organization @relation(fields: [orgId], references: [id])
   orgId Int
   users ProjectUser[] @relation("users")
@@ -115,6 +115,7 @@ model Project {
   toDoItems ToDoItem[]
   submissionDate DateTime?
   submitted Boolean @default(false)
+  contactTeamMembers TeamMember[]
 }
 
 model ProjectTemplate { 
@@ -176,4 +177,16 @@ model BlogPost {
   content String @db.Text
   authorId Int
   author User @relation(fields: [authorId], references: [id])
+}
+
+model TeamMember {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String @db.VarChar(255)
+  role String @db.VarChar(255)
+  email String @db.VarChar(255)
+  pfp String
+  phone String @db.VarChar(255)
+  projects Project[]
 }
