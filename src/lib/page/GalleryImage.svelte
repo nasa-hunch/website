@@ -42,7 +42,7 @@
 
 	@keyframes fadeIn {
 		from {
-			opacity: 0;
+			opacity: 0.01;
 		}
 		to {
 			opacity: 1;

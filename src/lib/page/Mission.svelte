@@ -80,7 +80,7 @@
 		width: 90%;
 		display: flex;
 		flex-direction: column;
-		opacity: 0;
+		opacity: 0.01;
 
 		&.inView {
 			animation: fadeIn 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
@@ -89,7 +89,7 @@
 
 	@keyframes fadeIn {
 		from {
-			opacity: 0;
+			opacity: 0.01;
 		}
 		to {
 			opacity: 1;
