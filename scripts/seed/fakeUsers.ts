@@ -8,22 +8,8 @@
 
 import { faker } from '@faker-js/faker';
 import { type Prisma,PrismaClient, Role } from '@prisma/client';
-import crypto from 'crypto';
-import { promisify } from 'util';
 
-const pkdf2 = promisify(crypto.pbkdf2);
-
-interface PasswordData {
-	hash: string;
-	salt: string;
-}
-
-async function makePassword(password: string): Promise<PasswordData> {
-	const salt = crypto.randomBytes(32).toString('hex');
-	const hash = (await pkdf2(password, salt, 1000, 100, 'sha512')).toString('hex');
-
-	return { hash, salt };
-}
+import { makePassword } from '../../src/lib/server/password';
 
 const prisma = new PrismaClient();
 
