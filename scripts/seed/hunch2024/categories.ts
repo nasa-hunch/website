@@ -115,15 +115,51 @@ const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 	},
 	{
 		color: 'FED18C',
-		name: 'Culinary'
+		name: 'Culinary',
+        projectTemplates: {
+            create: [
+                {
+                    name: 'Savory Breakfast Item that includes a Vegetable',
+                    description: block(`Create a savory breakfast item that includes a
+                    vegetable.`),
+                    deadline: deadline()
+                }
+            ]
+        }
 	},
 	{
 		color: '80DED9',
-		name: 'Biomedical Science'
+		name: 'Biomedical Science',
+        projectTemplates: {
+            create: [
+                {
+                    name: 'Biofilms and Keeping Water Clean',
+                    description: block(`Microbial growth, biofilm formation, stress response,
+                    and pathogenicity are affected by microgravity. Increased resistance to
+                    antibiotics in bacteria isolated from the ISS has often been reported.
+                    Enterococcus faecalis and Staphylococcus spp. isolates from the ISS have
+                    been shown to harbor plasmid-encoded transfer genes.`),
+                    deadline: deadline()
+                }
+            ]
+        }
 	},
 	{
 		color: 'F1C8DB',
-		name: 'Flight Configuration'
+		name: 'Flight Configuration',
+        projectTemplates: {
+            create: [
+                {
+                    name: 'Cardboard School - Lunar Lander',
+                    description: block(`Cardboard School designed a lunar lander that
+                    NASA HUNCH will use to test the feasibility of landing on the Moon.
+                    This team has been working on this project for the past year,
+                    but is no longer able to continue. NASA HUNCH is looking for a
+                    team to take over the project and complete the lunar lander.`),
+                    deadline: deadline()
+                }
+            ]
+        }
 	}
 ];
 
