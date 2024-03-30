@@ -19,8 +19,6 @@
 	import { enhance } from '$app/forms';
 	import InTextInput from '$lib/components/InTextInput.svelte';
 
-	console.log(typeof IconImage);
-
 	const extensionIcons: { [key: string]: ComponentType } = {
 		png: IconImage,
 		jpg: IconImage
@@ -43,12 +41,9 @@
 	});
 
 	$: if (form) {
-		console.log(form);
 		if (form.success) {
-			console.log(form.message);
 			uploadResolve();
 		} else {
-			console.log(form.message);
 			uploadReject();
 		}
 		doingFileDelete = false;
@@ -63,8 +58,6 @@
 		}
 		fileBox.files = e.dataTransfer.files;
 		fileUploadButton.click();
-
-		console.log('preping toast');
 
 		uploadPromise = new Promise((resolve, reject) => {
 			uploadResolve = resolve;

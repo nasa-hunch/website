@@ -19,7 +19,6 @@
 
 		const percent = (totalTime - currentTime) / totalTime;
 		const maxPercent = Math.min(100, Math.max(percent, 0));
-		console.log(maxPercent);
 
 		return maxPercent;
 	};

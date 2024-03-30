@@ -8,8 +8,6 @@ import { verifySession } from '$lib/server/verifySession.js';
 export const load = async () => {
 	const possibleProjects = await prisma.projectTemplate.findMany({});
 
-	console.log(possibleProjects);
-
 	return {
 		possibleProjects
 	};

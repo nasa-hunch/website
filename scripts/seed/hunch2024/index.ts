@@ -17,10 +17,6 @@ import * as teams from './teams';
 const prisma = new PrismaClient();
 
 async function main() {
-	await categories.main(prisma);
-	await partners.main(prisma);
-	await teams.main(prisma);
-
 	const org = await prisma.organization.findFirst({ where: { id: 1 } });
 
 	if (org && org.name != 'Cardboard') {
@@ -28,6 +24,10 @@ async function main() {
 			'Organization with id 1 already exists and is not Cardboard. Are you sure this is the right database?'
 		);
 	}
+
+	await categories.main(prisma);
+	await partners.main(prisma);
+	await teams.main(prisma);
 
 	console.log('Seeding database...');
 
@@ -66,13 +66,8 @@ async function main() {
 						}
 					},
 					projectTemplate: {
-						create: {
-							name: 'Easy Project',
-							description: 'Easy',
-							deadline: new Date(Date.now()),
-							category: {
-								connect: { id: 1 }
-							}
+						connect: {
+							id: 1
 						}
 					}
 				}

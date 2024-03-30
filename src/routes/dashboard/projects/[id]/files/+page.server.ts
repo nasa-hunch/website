@@ -36,8 +36,6 @@ export const actions = {
 			}
 		});
 
-		console.log(projectUser);
-
 		if (projectUser?.permission != ProjectUserPermission.EDITOR) {
 			return {
 				success: false,
@@ -84,8 +82,6 @@ export const actions = {
 					message: 'No file exists'
 				};
 			}
-
-			console.log('starting delete');
 
 			await prisma.file.delete({
 				where: {

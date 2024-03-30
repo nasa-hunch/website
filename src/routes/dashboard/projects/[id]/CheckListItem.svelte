@@ -101,7 +101,6 @@
 	let searchBox: FloatingComboBox<UserLike>;
 
 	const startAddPerson = (e: MouseEvent) => {
-		console.log('adding person');
 		searchBox.propagateClick(e);
 
 		selectingUser = true;
