@@ -39,6 +39,7 @@
 <div class="wrap">
 	<header>
 		<h1>
+			<!-- TODO: actually get this to send to server -->
 			<input bind:this={colorInput} type="color" hidden value={"#" + data.category.color} />
 			<button class="colorInput" style="background: #{data.category.color}" on:click={() => colorInput.click()} />
 			<input type="text" placeholder="Category name" value={data.category.name} />
