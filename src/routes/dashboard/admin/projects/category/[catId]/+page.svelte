@@ -22,6 +22,8 @@
 
 		return maxPercent;
 	};
+
+	let colorInput: HTMLInputElement;
 </script>
 
 <ModelHelper bind:visible={creatingProject}>
@@ -35,9 +37,13 @@
 </ModelHelper>
 
 <div class="wrap">
-	<div class="header">
-		<h1>{data.category?.name}</h1>
-	</div>
+	<header>
+		<h1>
+			<input bind:this={colorInput} type="color" hidden value={"#" + data.category.color} />
+			<button class="colorInput" style="background: #{data.category.color}" on:click={() => colorInput.click()} />
+			<input type="text" placeholder="Category name" value={data.category.name} />
+		</h1>
+	</header>
 	<div class="projectWrap">
 		{#each data.category.projectTemplates as project}
 			{@const percentDone = calculatePercentDone(project.createdAt, project.deadline)}
@@ -62,6 +68,18 @@
 </div>
 
 <style lang="scss">
+	.colorInput {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		margin-right: 10px;
+		border: 2px solid black;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
 	.wrap {
 		width: 100%;
 		height: 100%;
@@ -70,7 +88,7 @@
 		align-items: center;
 		justify-content: start;
 	}
-	.header {
+	header {
 		width: 100%;
 		display: flex;
 		align-items: center;
@@ -113,6 +131,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: end;
+	}
+	h1 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		input[type="text"] {
+			font-size: 1.5rem;
+			margin-right: 10px;
+			text-align: center;
+		}
 	}
 	h2 {
 		text-align: center;
