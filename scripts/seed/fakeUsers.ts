@@ -35,11 +35,18 @@ async function main() {
 	console.log(`Orgs generated in ${Date.now() - recentStartTime}ms`);
 	recentStartTime = Date.now();
 
+	const emails: string[] = [];
+
 	// 2500 users
 	const users: Prisma.UserCreateManyInput[] = await Promise.all(Array.from({ length: 2500 }, async () => {
-		const firstName = faker.person.firstName();
-		const lastName = faker.person.lastName();
-		const email = faker.internet.email({ firstName, lastName });
+		let firstName: string;
+		let lastName: string;
+		let email: string;
+		do {
+			firstName = faker.person.firstName();
+			lastName = faker.person.lastName();
+			email = faker.internet.email({ firstName, lastName });
+		} while (emails.includes(email));
 		return {
 			firstName,
 			lastName,
