@@ -22,17 +22,14 @@
 				<div class="indent" />
 			{/if}
 			{#if data.user.role == Role.HUNCH_ADMIN}
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<a class="button" on:click={() => (adminDropped = !adminDropped)}>Admin</a>
+				<button class="button" on:click={() => (adminDropped = !adminDropped)}>Admin</button>
 			{/if}
 			{#if adminDropped}
 				<div class="indent dd">
 					<a class="button" href="/dashboard/admin/users">Users</a>
 				</div>
 				<div class="indent dd">
-					<a class="button" href="/dashboard/admin/projects">Projects</a>
+					<a class="button" href="/dashboard/admin/projects">Categories</a>
 				</div>
 			{/if}
 		</div>
@@ -113,6 +110,7 @@
 		width: 100%;
 	}
 	.button {
+		text-align: left;
 		border: 0px;
 		outline: 0px;
 		box-sizing: border-box;

@@ -6,6 +6,7 @@
 	import Input from '$lib/components/Input.svelte';
 
 	import type { PageData } from './$types';
+	import { snakeCaseToTitleCase } from '$lib/case';
 
 	export let data: PageData;
 	export let form;
@@ -21,12 +22,7 @@
 		}
 	}
 
-	$: titleCasedRole =
-		// snake_case to title case
-		data.user.role
-			.split('_')
-			.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-			.join(' ');
+	$: titleCasedRole = snakeCaseToTitleCase(data.user.role);
 
 	const dropHandler = (e: DragEvent) => {
 		e.preventDefault();

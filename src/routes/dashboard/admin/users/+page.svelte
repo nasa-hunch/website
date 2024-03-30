@@ -8,6 +8,7 @@
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
+	import { snakeCaseToTitleCase } from '$lib/case';
 
 	export let data: PageData;
 	let showDeleteForm = false;
@@ -69,12 +70,12 @@
 
 	<table>
 		<tr class="headRow">
-			<th>id</th>
-			<th>email</th>
-			<th>first name</th>
-			<th>last name</th>
-			<th>role</th>
-			<th>actions</th>
+			<th>ID</th>
+			<th>Email</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Role</th>
+			<th>Actions</th>
 		</tr>
 		{#each data.userList as user}
 			<tr>
@@ -82,7 +83,7 @@
 				<td>{user.email}</td>
 				<td>{user.firstName}</td>
 				<td>{user.lastName}</td>
-				<td>{user.role}</td>
+				<td>{user.role ? snakeCaseToTitleCase(user.role) : "Unknown"}</td>
 				<td>
 					{#if user.role == Role.UNVERIFIED_TEACHER}
 						<button
