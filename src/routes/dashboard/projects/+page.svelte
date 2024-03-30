@@ -1,26 +1,29 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
 	export let data;
 	import ComboBox from '$lib/components/Combobox.svelte';
 	import { Role } from '$lib/enums';
-	let creatingProject = false;
+	import { page } from '$app/stores';
+	import { pushState } from '$app/navigation';
 </script>
 
-<ModelHelper bind:visible={creatingProject}>
-	<ModelForm action="?/createProject" method="post">
-		<h2>Creating Project</h2>
-		<ComboBox
-			name="projectId"
-			label="Project"
-			options={[data.possibleProjects, (project) => project.id, (project) => project.name]}
-		/>
-		<hr class="spacer" />
-		<Button value="Create" />
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'creatingProject'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/createProject" method="post">
+			<h2>Creating Project</h2>
+			<ComboBox
+				name="projectId"
+				label="Project"
+				options={[data.possibleProjects, (project) => project.id, (project) => project.name]}
+			/>
+			<hr class="spacer" />
+			<Button value="Create" />
+		</ModelForm>
+	</Modal>
+{/if}
 
 <main>
 	<h1>Projects</h1>
@@ -41,7 +44,9 @@
 		{#if data.user.role == Role.TEACHER || data.user.role == Role.SCHOOL_ADMIN}
 			<TextButton
 				on:click={() => {
-					creatingProject = true;
+					pushState('', {
+						modal: 'creatingProject'
+					})
 				}}>Create a new project?</TextButton
 			>
 		{/if}

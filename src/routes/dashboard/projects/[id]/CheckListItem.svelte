@@ -10,9 +10,11 @@
 	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 
 	import Assignees from './Assignees.svelte';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	type CheckListItem = {
 		id: number;
@@ -52,9 +54,6 @@
 	export let data: CheckListItem;
 	export let resolvePromise: (value?: unknown) => void;
 	export let rejectPromise: (value?: unknown) => void;
-
-	let deleting = false;
-	let completing = false;
 
 	let deleteSubmitHelper = () => {
 		toast.promise(
@@ -109,21 +108,21 @@
 	let selectingUser = false;
 </script>
 
-<ModelHelper bind:visible={deleting}>
-	<ModelForm
-		action="?/deleteToDoItem"
-		method="post"
-		on:submit={deleteSubmitHelper}
-		on:reset={() => {
-			deleting = false;
-		}}
-	>
-		<h2>Delete Item</h2>
-		<p>Are you sure you want to delete <b>{data.name}</b></p>
-		<input name="itemId" hidden value={data.id} />
-		<Button value="Delete" />
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'deleteItem'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm
+			action="?/deleteToDoItem"
+			method="post"
+			on:submit={deleteSubmitHelper}
+			on:reset={() => history.back()}
+		>
+			<h2>Delete Item</h2>
+			<p>Are you sure you want to delete <b>{data.name}</b></p>
+			<input name="itemId" hidden value={data.id} />
+			<Button value="Delete" />
+		</ModelForm>
+	</Modal>
+{/if}
 
 <FloatingComboBox
 	bind:this={searchBox}
@@ -149,15 +148,13 @@
 	{/each}
 </FloatingComboBox>
 
-{#if completing}
-	<ModelHelper bind:visible={completing}>
+{#if $page.state.modal === 'completeItem'}
+	<Modal on:close={() => history.back()}>
 		<ModelForm
 			action="?/completeToDoItem"
 			method="post"
 			on:submit={completeSubmitHelper}
-			on:reset={() => {
-				completing = false;
-			}}
+			on:reset={() => history.back()}
 		>
 			<h2>Complete Item</h2>
 			<p>
@@ -168,7 +165,7 @@
 			<input name="itemId" hidden value={data.id} />
 			<Button value="Update" />
 		</ModelForm>
-	</ModelHelper>
+	</Modal>
 {/if}
 
 <div class="checkListItem" class:checked={data.checked}>
@@ -181,7 +178,9 @@
 	<div class="right">
 		<IconButton
 			on:click={() => {
-				completing = true;
+				pushState('', {
+					modal: 'completeItem'
+				})
 			}}
 		>
 			{#if !data.checked}
@@ -196,7 +195,9 @@
 		</IconButton>
 		<IconButton
 			on:click={() => {
-				deleting = true;
+				pushState('', {
+					modal: 'deleteItem'
+				})
 			}}
 		>
 			<DeleteIcon />

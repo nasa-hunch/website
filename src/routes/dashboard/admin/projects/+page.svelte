@@ -3,20 +3,23 @@
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
-	let openModal = false;
+	import Modal from '$lib/components/Modal.svelte';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 </script>
 
-<ModelHelper bind:visible={openModal}>
-	<ModelForm action="?/createCategory" method="post">
-		<h2>New Category</h2>
-		<Input name="name" bgColor="#f1f1f1" label="Name" />
-		<Input name="icon" bgColor="#f1f1f1" label="Icon" />
-		<input name="color" type="color" />
-		<input name="deadline" type="date" />
-		<Button value="Create" />
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'createCategory'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/createCategory" method="post">
+			<h2>New Category</h2>
+			<Input name="name" bgColor="#f1f1f1" label="Name" />
+			<Input name="icon" bgColor="#f1f1f1" label="Icon" />
+			<input name="color" type="color" />
+			<input name="deadline" type="date" />
+			<Button value="Create" />
+		</ModelForm>
+	</Modal>
+{/if}
 
 <div class="wrap">
 	<h2>Project Categories</h2>
@@ -31,7 +34,9 @@
 				<p>{category.name}</p>
 			</a>
 		{/each}
-		<Button value="New Category" on:click={() => (openModal = true)} />
+		<Button value="New Category" on:click={() => pushState('', {
+			modal: 'createCategory'
+		})} />
 	</div>
 </div>
 

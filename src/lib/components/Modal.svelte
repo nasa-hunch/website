@@ -1,26 +1,27 @@
 <script lang="ts">
-	export let visible = false;
+	import { createEventDispatcher } from "svelte";
+
+	const dispatch = createEventDispatcher<{ close: void }>();
+
 	let buttonElement: HTMLButtonElement;
 
 	let clickHelper = (e: MouseEvent) => {
 		if (e.target == buttonElement) {
-			visible = false;
+			dispatch('close');
 		}
 	};
 
 	let keyHelper = (e: KeyboardEvent) => {
 		if (e.key == 'Escape') {
-			visible = false;
+			dispatch('close')
 		}
 	};
 </script>
 
 <svelte:window on:keydown={keyHelper} />
-{#if visible}
-	<button bind:this={buttonElement} class="wrap" on:mousedown={clickHelper}>
-		<slot />
-	</button>
-{/if}
+<button bind:this={buttonElement} class="wrap" on:mousedown={clickHelper}>
+	<slot />
+</button>
 
 <style lang="scss">
 	.wrap {

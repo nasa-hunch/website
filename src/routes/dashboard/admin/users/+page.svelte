@@ -5,15 +5,15 @@
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
-	let showDeleteForm = false;
 
-	let verifyUserForm = false;
 	let selectedUserId = 0;
 
 	type DeleteData =
@@ -27,7 +27,9 @@
 	let deleteData: DeleteData;
 
 	let deletePerson = (id: number, firstName: string, lastName: string) => {
-		showDeleteForm = true;
+		pushState('', {
+			modal: 'deleteUser'
+		})
 		deleteData = {
 			id,
 			firstName,
@@ -45,26 +47,30 @@
 	}
 </script>
 
-<ModelHelper bind:visible={showDeleteForm}>
-	<ModelForm action="?/deleteUser" method="post">
-		<p>Are you sure you want to delete user #{deleteData?.id}</p>
-		<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`} />
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'deleteUser'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/deleteUser" method="post">
+			<p>Are you sure you want to delete user #{deleteData?.id}</p>
+			<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`} />
+		</ModelForm>
+	</Modal>
+{/if}
 
-<ModelHelper bind:visible={verifyUserForm}>
-	<ModelForm action="?/verifyUser" method="post">
-		<h2>Verify User</h2>
-		<input name="id" hidden bind:value={selectedUserId} />
-		<Combobox
-			name="orgId"
-			label="Organization"
-			options={[data.orgList, (orgItem) => orgItem.id, (orgItem) => orgItem.name.toString()]}
-		/>
-		<hr class="spacer" />
-		<Button value="verify" />
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'verifyUser'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/verifyUser" method="post">
+			<h2>Verify User</h2>
+			<input name="id" hidden bind:value={selectedUserId} />
+			<Combobox
+				name="orgId"
+				label="Organization"
+				options={[data.orgList, (orgItem) => orgItem.id, (orgItem) => orgItem.name.toString()]}
+			/>
+			<hr class="spacer" />
+			<Button value="verify" />
+		</ModelForm>
+	</Modal>
+{/if}
 <main>
 	<h1>User Management Panel</h1>
 
@@ -89,7 +95,9 @@
 						<button
 							on:click={() => {
 								selectedUserId = user.id;
-								verifyUserForm = true;
+								pushState('', {
+									modal: 'verifyUser'
+								});
 							}}>verify</button
 						>
 					{:else if user.role != Role.HUNCH_ADMIN}

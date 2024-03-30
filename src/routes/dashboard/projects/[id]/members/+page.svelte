@@ -4,12 +4,13 @@
 	import AddUserIcon from '~icons/mdi/person-add-outline';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
 
 	import Member from './Member.svelte';
+	import { page } from '$app/stores';
+	import { pushState } from '$app/navigation';
 
-	let showingInvite = false;
 	export let form;
 
 	$: if (form) {
@@ -32,25 +33,29 @@
 	};
 </script>
 
-<ModelHelper bind:visible={showingInvite}>
-	<ModelForm action="?/refreshCode" method="post">
-		<div class="inviteCode">
-			<p>Send project invite:</p>
-			<span class="projectCode"
-				><input disabled value={data.project.joinCode} />
-				<button type="button" on:click={copyCode}>Copy</button></span
-			>
-			<p>You may also<TextButton type="submit">refresh your join code</TextButton></p>
-		</div>
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'invite'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/refreshCode" method="post">
+			<div class="inviteCode">
+				<p>Send project invite:</p>
+				<span class="projectCode"
+					><input disabled value={data.project.joinCode} />
+					<button type="button" on:click={copyCode}>Copy</button></span
+				>
+				<p>You may also<TextButton type="submit">refresh your join code</TextButton></p>
+			</div>
+		</ModelForm>
+	</Modal>
+{/if}
 
 <div class="wrap">
 	<div class="title">
 		<h2>Members</h2>
 		<IconButton
 			on:click={() => {
-				showingInvite = true;
+				pushState('', {
+					modal: 'invite'
+				})
 			}}
 		>
 			<AddUserIcon />

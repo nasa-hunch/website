@@ -9,7 +9,7 @@
 
 	import Button from '$lib/components/Button.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	dayjs.extend(localizedFormat);
 
 	import IconTrash from '~icons/mdi/delete-outline';
@@ -18,6 +18,8 @@
 	import IconImage from '~icons/mdi/image';
 	import { enhance } from '$app/forms';
 	import InTextInput from '$lib/components/InTextInput.svelte';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	const extensionIcons: { [key: string]: ComponentType } = {
 		png: IconImage,
@@ -81,13 +83,12 @@
 		dragging = false;
 	};
 
-	let doingFileDelete = false;
 	let doingFileDeleteOn: string;
 	let doingFileDeleteOnId: number;
 	const deleteFile = (id: number, fileName: string) => {
 		doingFileDeleteOnId = id;
 		doingFileDeleteOn = fileName;
-		doingFileDelete = true;
+		pushState('', { modal: 'deleteFile' });
 	};
 
 	const deleteFileSubmit = () => {
@@ -122,16 +123,18 @@
 	<button bind:this={fileUploadButton} />
 </form>
 
-<ModelHelper bind:visible={doingFileDelete}>
-	<ModelForm action="?/deleteFile" method="post" on:submit={deleteFileSubmit}>
-		<div class="deleteForm">
-			<input name="fileId" hidden value={doingFileDeleteOnId} />
-			<h2>Are you sure?</h2>
-			<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
-			<Button type="submit" value="Confirm" />
-		</div>
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'deleteFile'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/deleteFile" method="post" on:submit={deleteFileSubmit}>
+			<div class="deleteForm">
+				<input name="fileId" hidden value={doingFileDeleteOnId} />
+				<h2>Are you sure?</h2>
+				<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
+				<Button type="submit" value="Confirm" />
+			</div>
+		</ModelForm>
+	</Modal>
+{/if}
 
 <div class="wrap">
 	<p>Drag and drop files to upload.</p>

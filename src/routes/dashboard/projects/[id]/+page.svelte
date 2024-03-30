@@ -8,11 +8,13 @@
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	import ProgressGauge from '$lib/components/ProgressGauge.svelte';
 
 	import type { PageData } from './$types';
 	import CheckListItem from './CheckListItem.svelte';
+	import { pushState, replaceState } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
 	export let form;
@@ -29,8 +31,6 @@
 			percentDone.set(data.checkedItems.length / data.numberOfItems);
 		}
 	}
-
-	let creatingItem = false;
 
 	let resolvePromise: (value?: unknown) => void, rejectPromise: (value?: unknown) => void;
 	let generalPromise = new Promise((resolve, reject) => {
@@ -51,7 +51,9 @@
 		} else {
 			rejectPromise();
 		}
-		creatingItem = false;
+		replaceState('', {
+			modal: null
+		})
 		form = null;
 	}
 
@@ -65,14 +67,16 @@
 	};
 </script>
 
-<ModelHelper bind:visible={creatingItem}>
-	<ModelForm action="?/createItem" method="post" on:submit={submitNewItem}>
-		<h2>Creating Item</h2>
-		<Input name="name" label="Name" />
-		<hr />
-		<Button value="Create" />
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'createItem'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/createItem" method="post" on:submit={submitNewItem}>
+			<h2>Creating Item</h2>
+			<Input name="name" label="Name" />
+			<hr />
+			<Button value="Create" />
+		</ModelForm>
+	</Modal>
+{/if}
 
 <main>
 	<div class="title">
@@ -83,7 +87,9 @@
 		<div class="iconButtonWrap">
 			<IconButton
 				on:click={() => {
-					creatingItem = true;
+					pushState('', {
+						modal: 'createItem'
+					});
 				}}
 			>
 				<AddItemIcon />

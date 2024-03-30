@@ -5,9 +5,9 @@
 	export let data;
 	import Input from '$lib/components/Input.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ModelHelper from '$lib/components/Modal.svelte';
-
-	let creatingProject = false;
+	import Modal from '$lib/components/Modal.svelte';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	const calculatePercentDone = (startDay: Date, endDay: Date) => {
 		const startTimestamp = dayjs(startDay).unix();
@@ -26,15 +26,17 @@
 	let colorInput: HTMLInputElement;
 </script>
 
-<ModelHelper bind:visible={creatingProject}>
-	<ModelForm action="?/createProject" method="post">
-		<h2>Creating Project</h2>
-		<Input name="name" bgColor="#f1f1f1" label="Name" />
-		<Input name="desc" bgColor="#f1f1f1" label="Description" />
-		<input name="deadline" type="date" />
-		<Button value="create" />
-	</ModelForm>
-</ModelHelper>
+{#if $page.state.modal === 'createProject'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/createProject" method="post">
+			<h2>Creating Project</h2>
+			<Input name="name" bgColor="#f1f1f1" label="Name" />
+			<Input name="desc" bgColor="#f1f1f1" label="Description" />
+			<input name="deadline" type="date" />
+			<Button value="create" />
+		</ModelForm>
+	</Modal>
+{/if}
 
 <div class="wrap">
 	<header>
@@ -62,7 +64,9 @@
 			type="button"
 			value="New Project"
 			on:click={() => {
-				creatingProject = true;
+				pushState('', {
+					modal: 'createProject'
+				})
 			}}
 		/>
 	</div>
