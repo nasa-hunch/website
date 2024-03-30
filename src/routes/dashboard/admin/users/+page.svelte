@@ -4,8 +4,8 @@
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
-	import ModelForm from '$lib/components/ModelForm.svelte';
-	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ModelHelper from '$lib/components/Modal.svelte';
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';

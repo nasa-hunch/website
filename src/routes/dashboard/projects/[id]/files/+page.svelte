@@ -8,8 +8,8 @@
 	import { toast } from 'svelte-french-toast';
 
 	import Button from '$lib/components/Button.svelte';
-	import ModelForm from '$lib/components/ModelForm.svelte';
-	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ModelHelper from '$lib/components/Modal.svelte';
 	dayjs.extend(localizedFormat);
 
 	import IconTrash from '~icons/mdi/delete-outline';

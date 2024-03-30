@@ -3,8 +3,8 @@
 
 	import AddUserIcon from '~icons/mdi/person-add-outline';
 	import IconButton from '$lib/components/IconButton.svelte';
-	import ModelForm from '$lib/components/ModelForm.svelte';
-	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ModelHelper from '$lib/components/Modal.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
 
 	import Member from './Member.svelte';

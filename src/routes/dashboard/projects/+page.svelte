@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import ModelForm from '$lib/components/ModelForm.svelte';
-	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ModelHelper from '$lib/components/Modal.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
 	export let data;
 	import ComboBox from '$lib/components/Combobox.svelte';

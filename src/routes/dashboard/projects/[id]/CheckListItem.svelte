@@ -9,8 +9,8 @@
 	import Button from '$lib/components/Button.svelte';
 	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
-	import ModelForm from '$lib/components/ModelForm.svelte';
-	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ModelHelper from '$lib/components/Modal.svelte';
 
 	import Assignees from './Assignees.svelte';
 

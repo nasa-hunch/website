@@ -4,8 +4,8 @@
 	import Button from '$lib/components/Button.svelte';
 	export let data;
 	import Input from '$lib/components/Input.svelte';
-	import ModelForm from '$lib/components/ModelForm.svelte';
-	import ModelHelper from '$lib/components/ModelHelper.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ModelHelper from '$lib/components/Modal.svelte';
 
 	let creatingProject = false;
 
