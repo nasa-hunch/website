@@ -22,8 +22,11 @@
 	}
 
 	$: titleCasedRole =
-		data.user.role.toLowerCase().substring(0, 1).toUpperCase() +
-		data.user.role.toLowerCase().substring(1);
+		// snake_case to title case
+		data.user.role
+			.split('_')
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+			.join(' ');
 
 	const dropHandler = (e: DragEvent) => {
 		e.preventDefault();
