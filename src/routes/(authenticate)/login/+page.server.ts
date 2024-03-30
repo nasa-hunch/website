@@ -35,7 +35,7 @@ export const actions = {
 			};
 		}
 
-		if (await checkPassword(user.hash, user.salt, password)) {
+		if (!await checkPassword(user.hash, user.salt, password)) {
 			return {
 				success: false,
 				message: 'Email or password is incorrect.'
