@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Navbar from '$lib/Navbar.svelte';
@@ -10,7 +11,7 @@
 <div class="wrap">
 	<Navbar />
 	<div class="contentWrap">
-		<form class="content" action="?/login" method="post">
+		<form class="content" action="?/login" method="post" use:enhance>
 			<h1>Login</h1>
 			<span class="inputDiv">
 				<Input name="email" label="Email" />
