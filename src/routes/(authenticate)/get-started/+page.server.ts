@@ -74,7 +74,7 @@ export const actions = {
 				firstName,
 				lastName,
 				email: newEmail,
-				...await makePassword(pass1),
+				...(await makePassword(pass1)),
 				createdAt: new Date(Date.now()),
 				updatedAt: new Date(Date.now()),
 				role: null,

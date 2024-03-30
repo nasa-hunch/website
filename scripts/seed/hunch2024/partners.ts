@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-import { githubURL } from "./url";
+import { githubURL } from './url';
 
 export interface Partner {
 	name: string;
@@ -126,14 +126,13 @@ const partners: Partner[] = [
 	}
 ].map((x) => ({ ...x, logo: `${githubURL}/partners/${x.logo}` }));
 
-
 export async function main(client: PrismaClient) {
-    if (await client.partner.count() > 0) {
-        console.log('Partners already seeded, skipping...');
-        return;
-    }
+	if ((await client.partner.count()) > 0) {
+		console.log('Partners already seeded, skipping...');
+		return;
+	}
 
-    await client.partner.createMany({
-        data: partners
-    });
+	await client.partner.createMany({
+		data: partners
+	});
 }

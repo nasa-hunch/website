@@ -2,11 +2,11 @@
 	import toast from 'svelte-french-toast';
 
 	import { enhance } from '$app/forms';
+	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
 
 	import type { PageData } from './$types';
-	import { snakeCaseToTitleCase } from '$lib/case';
 
 	export let data: PageData;
 	export let form;

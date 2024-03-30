@@ -10,11 +10,13 @@
 				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}"
 					>Info</a
 				>
-				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}/participants"
-					>Participants ({data.projectUserCount})</a
+				<a
+					href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate
+						.id}/participants">Participants ({data.projectUserCount})</a
 				>
-				<a href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate.id}/submissions"
-					>Submissions ({data.projectCount})</a
+				<a
+					href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate
+						.id}/submissions">Submissions ({data.projectCount})</a
 				>
 			</nav>
 		</div>

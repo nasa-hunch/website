@@ -12,8 +12,7 @@
 	</div>
 	<div class="center">
 		&copy;
-		{new Date().getFullYear()} NASA HUNCH.
-		All Rights Reserved.
+		{new Date().getFullYear()} NASA HUNCH. All Rights Reserved.
 	</div>
 	<div class="right">
 		<IconButton href="https://twitter.com/nasahunch">

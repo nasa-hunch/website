@@ -2,11 +2,10 @@
 	export let program: string;
 
 	export let projectTemplates: {
-		id: number,
-		name: string
-		description: string
-	}[] = []
-
+		id: number;
+		name: string;
+		description: string;
+	}[] = [];
 </script>
 
 <div class="wrap">
@@ -28,22 +27,21 @@
 			<div class="projects">
 				<h2>Projects</h2>
 				{#if projectTemplates.length > 0}
-				{#each projectTemplates as project}
-					<a href="/projects/{project.id}" class="project">
-						<h3>{project.name}</h3>
-						<p>{project.description}</p>
-					</a>
-				{/each}
+					{#each projectTemplates as project}
+						<a class="project" href="/projects/{project.id}">
+							<h3>{project.name}</h3>
+							<p>{project.description}</p>
+						</a>
+					{/each}
 				{:else}
 					<p><i>No projects yet</i></p>
 				{/if}
-			</div>		
+			</div>
 		</div>
 	</div>
 </div>
 
 <style lang="scss">
-
 	.wrap {
 		width: 100%;
 		display: flex;
@@ -51,7 +49,7 @@
 		justify-content: center;
 		margin-bottom: 1rem;
 	}
-	
+
 	.inner {
 		width: 90%;
 	}
@@ -71,7 +69,7 @@
 		justify-content: start;
 		width: 100%;
 		margin: 0px 25px;
-		padding: 0px 25px; 
+		padding: 0px 25px;
 		box-sizing: border-box;
 		border-radius: 5px;
 		max-width: 350px;
@@ -114,9 +112,7 @@
 		}
 	}
 
-
 	.description {
-
 		h1 {
 			font-size: 4rem;
 			font-weight: 700;
@@ -131,6 +127,4 @@
 			text-align: center;
 		}
 	}
-
-	
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { toast } from 'svelte-french-toast';
 
+	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
 	import ModelForm from '$lib/components/ModelForm.svelte';
@@ -8,7 +9,6 @@
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
-	import { snakeCaseToTitleCase } from '$lib/case';
 
 	export let data: PageData;
 	let showDeleteForm = false;
@@ -83,7 +83,7 @@
 				<td>{user.email}</td>
 				<td>{user.firstName}</td>
 				<td>{user.lastName}</td>
-				<td>{user.role ? snakeCaseToTitleCase(user.role) : "Unknown"}</td>
+				<td>{user.role ? snakeCaseToTitleCase(user.role) : 'Unknown'}</td>
 				<td>
 					{#if user.role == Role.UNVERIFIED_TEACHER}
 						<button

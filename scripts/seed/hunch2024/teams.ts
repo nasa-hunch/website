@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-import { githubURL } from "./url";
+import { githubURL } from './url';
 
 interface TeamMember {
 	firstName: string;
@@ -196,19 +196,23 @@ const members: TeamMember[] = [
 		phone: '(281) 244-2852',
 		pfp: 'donald-hecker.jpg'
 	}
-].map(x => ({ ...x, pfp: `${githubURL}/team/${x.pfp}` }))
+].map((x) => ({ ...x, pfp: `${githubURL}/team/${x.pfp}` }));
 
 export async function main(client: PrismaClient) {
-    if (await client.teamMember.count() > 0) {
-        console.log('Team members already seeded, skipping...');
-        return;
-    }
+	if ((await client.teamMember.count()) > 0) {
+		console.log('Team members already seeded, skipping...');
+		return;
+	}
 
-    await client.teamMember.createMany({ data: members.map(member => ({
-        role: member.role,
-		email: member.email,
-		phone: member.phone,
-		pfp: member.pfp,
-        name: `${member.firstName} ${member.middleInitial ? member.middleInitial + ' ' : ''}${member.lastName}`,
-    })) });
+	await client.teamMember.createMany({
+		data: members.map((member) => ({
+			role: member.role,
+			email: member.email,
+			phone: member.phone,
+			pfp: member.pfp,
+			name: `${member.firstName} ${member.middleInitial ? member.middleInitial + ' ' : ''}${
+				member.lastName
+			}`
+		}))
+	});
 }

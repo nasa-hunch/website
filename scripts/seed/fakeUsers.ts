@@ -7,7 +7,7 @@
 */
 
 import { faker } from '@faker-js/faker';
-import { type Prisma,PrismaClient, Role } from '@prisma/client';
+import { type Prisma, PrismaClient, Role } from '@prisma/client';
 
 import { makePassword } from '../../src/lib/server/password';
 
@@ -15,8 +15,10 @@ const prisma = new PrismaClient();
 
 async function main() {
 	// If there are more than 100 orgs, the seed will fail
-	if (await prisma.organization.count() > 100) {
-		throw new Error('There are already more than 100 organizations in the database. Aborting seed.');
+	if ((await prisma.organization.count()) > 100) {
+		throw new Error(
+			'There are already more than 100 organizations in the database. Aborting seed.'
+		);
 	}
 
 	const startTime = Date.now();
@@ -38,24 +40,26 @@ async function main() {
 	const emails: string[] = [];
 
 	// 2500 users
-	const users: Prisma.UserCreateManyInput[] = await Promise.all(Array.from({ length: 2500 }, async () => {
-		let firstName: string;
-		let lastName: string;
-		let email: string;
-		do {
-			firstName = faker.person.firstName();
-			lastName = faker.person.lastName();
-			email = faker.internet.email({ firstName, lastName });
-		} while (emails.includes(email));
-		return {
-			firstName,
-			lastName,
-			email,
-			role: Role[Object.keys(Role)[Math.floor(Math.random() * Object.keys(Role).length)]],
-			orgId: Math.ceil(Math.random() * 250),
-			...(await makePassword('password'))
-		};
-	}));
+	const users: Prisma.UserCreateManyInput[] = await Promise.all(
+		Array.from({ length: 2500 }, async () => {
+			let firstName: string;
+			let lastName: string;
+			let email: string;
+			do {
+				firstName = faker.person.firstName();
+				lastName = faker.person.lastName();
+				email = faker.internet.email({ firstName, lastName });
+			} while (emails.includes(email));
+			return {
+				firstName,
+				lastName,
+				email,
+				role: Role[Object.keys(Role)[Math.floor(Math.random() * Object.keys(Role).length)]],
+				orgId: Math.ceil(Math.random() * 250),
+				...(await makePassword('password'))
+			};
+		})
+	);
 
 	console.log(`Users generated in ${Date.now() - recentStartTime}ms`);
 	recentStartTime = Date.now();

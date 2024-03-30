@@ -15,21 +15,21 @@
 			</div>
 			<div class="text">
 				<p>
-					16 years ago, NASA HUNCH was founded as
-					a means of giving high school students new educational experiences by producing <b>hardware
-					training items</b> for the International Space Station. Today, the program has grown from the
-					<i>three</i> schools in 2003 to well over <i>two hundred</i> schools all across the country participating in a
-					wide variety of projects, ranging from 
-					<a href="/programs/sewn">industrial sewing</a> 
+					16 years ago, NASA HUNCH was founded as a means of giving high school students new
+					educational experiences by producing <b>hardware training items</b> for the International
+					Space Station. Today, the program has grown from the
+					<i>three</i> schools in 2003 to well over <i>two hundred</i> schools all across the
+					country participating in a wide variety of projects, ranging from
+					<a href="/programs/sewn">industrial sewing</a>
 					to <a href="/programs/culinary">designing food for astronauts</a>.
 				</p>
 				<br />
 				<p>
-					We work to improve the lives of the International Space Station crew from
-					day-to-day personal items or tools to updating parts of the station itself from their
-					original designs. HUNCH fills a unique niche for the International Space Station, as well
-					as providing high quality training and flight parts to other NASA programs and partners,
-					by covering a wide range of topics. Through HUNCH, students have a unique opportunity to
+					We work to improve the lives of the International Space Station crew from day-to-day
+					personal items or tools to updating parts of the station itself from their original
+					designs. HUNCH fills a unique niche for the International Space Station, as well as
+					providing high quality training and flight parts to other NASA programs and partners, by
+					covering a wide range of topics. Through HUNCH, students have a unique opportunity to
 					learn skills and have a real-world contribution to NASA’s space missions. Join Us!
 				</p>
 			</div>

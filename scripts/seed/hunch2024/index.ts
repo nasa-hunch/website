@@ -10,9 +10,9 @@
 import { PrismaClient, ProjectUserPermission, Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
+import * as categories from './categories';
 import * as partners from './partners';
 import * as teams from './teams';
-import * as categories from './categories';
 
 const prisma = new PrismaClient();
 

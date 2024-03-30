@@ -1,7 +1,7 @@
 import { error, redirect } from '@sveltejs/kit';
 
-import { validateSession } from '$lib/server/auth.js';
 import { ProjectUserPermission, Role } from '$lib/enums';
+import { validateSession } from '$lib/server/auth.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 
 export const load = async ({ cookies }) => {

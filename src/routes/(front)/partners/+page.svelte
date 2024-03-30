@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Section from '$lib/page/Section.svelte';
 	import Ian from '$lib/media/Ian.jpg';
 	import Lee from '$lib/media/Lee.jpg';
 	import Lily from '$lib/media/Lily.jpg';
@@ -7,6 +6,7 @@
 	import Owen from '$lib/media/Owen.jpg';
 	import Partner from '$lib/media/partner.jpg';
 	import Volunteer from '$lib/media/volunteer.jpg';
+	import Section from '$lib/page/Section.svelte';
 
 	const quotes = [
 		{

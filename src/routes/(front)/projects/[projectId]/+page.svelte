@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
 	export let data;
 </script>
@@ -9,7 +7,6 @@
 		<h1>{data.projectTemplate.name}</h1>
 	</div>
 </div>
-
 
 <style lang="scss">
 	.content {

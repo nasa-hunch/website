@@ -148,7 +148,7 @@
 		on:drop={dropHandler}
 		on:dragover={dragOverHandler}
 		on:dragleave={stopDragOver}
-	>	
+	>
 		<thead>
 			<tr>
 				<th scope="col">Name</th>
