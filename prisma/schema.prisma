@@ -123,7 +123,7 @@ model ProjectTemplate {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
-  description String @db.VarChar(255)
+  description String
   deadline DateTime
   categoryId Int
   category Category @relation(fields: [categoryId], references: [id])
