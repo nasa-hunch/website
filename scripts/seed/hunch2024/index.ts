@@ -12,14 +12,12 @@ import { PrismaClient, ProjectUserPermission, Role } from '@prisma/client';
 import { makePassword } from '../../../src/lib/server/password';
 import * as partners from './partners';
 import * as teams from './teams';
+import * as categories from './categories';
 
 const prisma = new PrismaClient();
 
-const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
-
-const MONTH = 1000 * 60 * 60 * 24 * 30;
-
 async function main() {
+	await categories.main(prisma);
 	await partners.main(prisma);
 	await teams.main(prisma);
 
@@ -32,55 +30,6 @@ async function main() {
 	}
 
 	console.log('Seeding database...');
-
-	await prisma.category.createMany({
-		data: [
-			{
-				id: 1,
-				color: 'ff0000',
-				name: 'Design & Prototype',
-			},
-			{
-				id: 2,
-				color: '3F88C5',
-				name: 'Software',
-			},
-			{
-				id: 3,
-				color: 'E94F37',
-				name: 'Hardware',
-			},
-			{
-				id: 4,
-				color: '44BBA4',
-				name: 'Sewn Flight Articles',
-			},
-			{
-				id: 5,
-				color: 'FFF275',
-				name: 'Video & Media',
-			},
-			{
-				id: 6,
-				color: 'FED18C',
-				name: 'Culinary',
-			},
-			{
-				id: 7,
-				color: '80DED9',
-				name: 'Biomedical Science',
-			},
-			{
-				id: 8,
-				color: 'F1C8DB',
-				name: 'Flight Configuration',
-			},
-		].map((category, i) => ({
-			...category,
-			icon: 'no',
-			deadline: new Date(Date.now() + random(i / 2 * MONTH, i * MONTH)),
-		})),
-	});
 
 	await prisma.organization.upsert({
 		where: { id: 1, name: 'Cardboard' },
