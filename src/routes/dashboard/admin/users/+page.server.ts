@@ -1,24 +1,27 @@
 import { z } from 'zod';
 
-import { formHandler } from '$lib/server/bodyguard.js';
 import { Role } from '$lib/enums.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async () => {
-	const userList = await prisma.user.findMany();
+	const userList = await prisma.user.findMany({
+		select: {
+			id: true,
+			createdAt: true,
+			updatedAt: true,
+			firstName: true,
+			lastName: true,
+			email: true,
+			role: true,
+			orgId: true
+		}
+	});
+
 	const orgList = await prisma.organization.findMany({});
 	return {
-		userList: userList.map((user) => ({
-			id: user.id,
-			createdAt: user.createdAt,
-			updatedAt: user.updatedAt,
-			firstName: user.firstName,
-			lastName: user.lastName,
-			email: user.email,
-			role: user.role,
-			orgId: user.orgId
-		})),
+		userList,
 		orgList
 	};
 };

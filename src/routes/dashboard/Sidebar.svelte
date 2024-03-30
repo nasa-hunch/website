@@ -3,10 +3,6 @@
 
 	import type { PageData } from './$types';
 
-	let projectsDropped = false;
-
-	let adminDropped = false;
-
 	export let data: PageData;
 </script>
 
@@ -17,20 +13,11 @@
 				<img alt="Nasa Hunch Logo" src="/favicon.png" />
 			</a>
 			<a class="button" href="/dashboard">Dashboard</a>
-			<a class="button" href="/dashboard/projects">Projects</a>
-			{#if projectsDropped}
-				<div class="indent" />
-			{/if}
 			{#if data.user.role == Role.HUNCH_ADMIN}
-				<button class="button" on:click={() => (adminDropped = !adminDropped)}>Admin</button>
-			{/if}
-			{#if adminDropped}
-				<div class="indent dd">
-					<a class="button" href="/dashboard/admin/users">Users</a>
-				</div>
-				<div class="indent dd">
-					<a class="button" href="/dashboard/admin/projects">Categories</a>
-				</div>
+				<a class="button" href="/dashboard/admin/users">Users</a>
+				<a class="button" href="/dashboard/admin/projects">Categories</a>
+			{:else}
+				<a class="button" href="/dashboard/projects">Projects</a>
 			{/if}
 		</div>
 	</div>
@@ -82,18 +69,6 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: start;
-	}
-	.dd {
-		position: relative;
-	}
-	.dd::after {
-		content: '';
-		position: absolute;
-		height: 100%;
-		left: 10px;
-		top: 0px;
-		width: 1px;
-		background: rgb(161, 161, 161);
 	}
 	.bottom {
 		padding-bottom: 20px;
