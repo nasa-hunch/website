@@ -12,6 +12,10 @@
 				>
 				<a
 					href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate
+						.id}/files">Files</a
+				>
+				<a
+					href="/dashboard/admin/projects/category/{data.category.id}/{data.projectTemplate
 						.id}/participants">Participants ({data.projectUserCount})</a
 				>
 				<a

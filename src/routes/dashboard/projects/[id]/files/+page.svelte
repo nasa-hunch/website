@@ -20,6 +20,7 @@
 	import InTextInput from '$lib/components/InTextInput.svelte';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import DragDropUpload from '$lib/components/DragDropUpload.svelte';
 
 	const extensionIcons: { [key: string]: ComponentType } = {
 		png: IconImage,
@@ -33,9 +34,6 @@
 		return extensionIcons[ext] || (IconFile as ComponentType);
 	};
 
-	let fileUploadButton: HTMLButtonElement;
-	let fileBox: HTMLInputElement;
-
 	let uploadResolve: (value?: unknown) => void, uploadReject: (value?: unknown) => void;
 	let uploadPromise = new Promise((resolve, reject) => {
 		uploadResolve = resolve;
@@ -43,46 +41,16 @@
 	});
 
 	$: if (form) {
+		console.log(form)
 		if (form.success) {
 			uploadResolve();
 		} else {
 			uploadReject();
 		}
-		doingFileDelete = false;
 		form = null;
 	}
 
-	const dropHandler = (e: DragEvent) => {
-		e.preventDefault();
-		dragging = false;
-		if (!e.dataTransfer) {
-			return;
-		}
-		fileBox.files = e.dataTransfer.files;
-		fileUploadButton.click();
-
-		uploadPromise = new Promise((resolve, reject) => {
-			uploadResolve = resolve;
-			uploadReject = reject;
-		});
-
-		toast.promise(uploadPromise, {
-			loading: 'Uploading File...',
-			success: form?.message || 'File uploaded!',
-			error: form?.message || 'Could not upload file.'
-		});
-	};
-	const dragOverHandler = (e: Event) => {
-		dragging = true;
-		e.preventDefault();
-	};
-
-	let dragging = false;
-
-	const stopDragOver = () => {
-		dragging = false;
-	};
-
+	
 	let doingFileDeleteOn: string;
 	let doingFileDeleteOnId: number;
 	const deleteFile = (id: number, fileName: string) => {
@@ -90,6 +58,19 @@
 		doingFileDeleteOn = fileName;
 		pushState('', { modal: 'deleteFile' });
 	};
+
+	const startFileUpload = () => {
+		uploadPromise = new Promise((resolve, reject) => {
+			uploadResolve = resolve;
+			uploadReject = reject;
+		});
+
+		toast.promise(uploadPromise, {
+			loading: 'Deleting File...',
+			success: form?.message || 'File Deleted!',
+			error: form?.message || 'Could not delete file.'
+		});
+	}
 
 	const deleteFileSubmit = () => {
 		uploadPromise = new Promise((resolve, reject) => {
@@ -118,11 +99,6 @@
 	};
 </script>
 
-<form action="?/uploadFile" enctype="multipart/form-data" hidden method="post" use:enhance>
-	<input bind:this={fileBox} name="file" type="file" />
-	<button bind:this={fileUploadButton} />
-</form>
-
 {#if $page.state.modal === 'deleteFile'}
 	<Modal on:close={() => history.back()}>
 		<ModelForm action="?/deleteFile" method="post" on:submit={deleteFileSubmit}>
@@ -138,12 +114,9 @@
 
 <div class="wrap">
 	<p>Drag and drop files to upload.</p>
-	<table
+	<DragDropUpload on:startUpload={startFileUpload} action="?/uploadFile">
+		<table
 		class="fileList"
-		class:uploadFileThing={dragging}
-		on:drop={dropHandler}
-		on:dragover={dragOverHandler}
-		on:dragleave={stopDragOver}
 	>
 		<thead>
 			<tr>
@@ -196,6 +169,8 @@
 			{/each}
 		</tbody>
 	</table>
+	</DragDropUpload>
+	
 </div>
 
 <style lang="scss">

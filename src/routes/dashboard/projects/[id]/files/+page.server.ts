@@ -36,12 +36,16 @@ export const actions = {
 			}
 		});
 
+		console.log("preparing")
+
 		if (projectUser?.permission != ProjectUserPermission.EDITOR) {
 			return {
 				success: false,
 				message: 'No Permissions'
 			};
 		}
+
+		console.log("falling upload file")
 
 		return await uploadFile(request, projectUser.projectId);
 	},

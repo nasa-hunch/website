@@ -10,6 +10,8 @@ export const uploadFile = async (request: Request, projectId?: number) => {
 	const uploadFile: File = formData.get('file') as File;
 	const key = crypto.randomBytes(32).toString('hex') + '/' + uploadFile.name;
 
+	console.log("Upload Triggered")
+
 	if (uploadFile.size > 10e6) {
 		return {
 			success: false,
@@ -25,6 +27,8 @@ export const uploadFile = async (request: Request, projectId?: number) => {
 			message: 'No file sent.'
 		};
 	}
+
+	
 
 	await S3.send(
 		new PutObjectCommand({
