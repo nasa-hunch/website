@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
+	import InlineButton from '$lib/components/InlineButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import MdiAccountStudent from '~icons/mdi/account-student';
 	import MdiShieldAccount from '~icons/mdi/shield-account';
@@ -45,7 +46,7 @@
 					to <a href="mailto:JSC-HUNCH@mai.nasa.gov">JSC-HUNCH@mail.nasa.gov</a>
 				</p>
 				<form action="?/rescindRole" method="post" use:enhance>
-					<p>Not a teacher? <button class="button">Rescind Your Role</button></p>
+					<p>Not a teacher? <InlineButton value="Rescind Your Role" /></p>
 				</form>
 			{:else if data.user.role == Role.STUDENT}
 				<form class="joinCode" action="?/submitJoinCode" method="post" use:enhance>
@@ -58,7 +59,7 @@
 					</div>
 				</form>
 				<form action="?/rescindRole" method="post" use:enhance>
-					<p>Not a student? <button class="button">Rescind Your Role</button></p>
+					<p>Not a student? <InlineButton value="Rescind Your Role" /></p>
 				</form>
 			{:else}
 				<p>Unexpected Role: {data.user.role}</p>
@@ -119,10 +120,6 @@
 	}
 	.buttons form button:hover {
 		box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
-	}
-	.buttons img {
-		height: 50%;
-		aspect-ratio: 1/1;
 	}
 	.buttons p {
 		font-size: 1.2rem;
