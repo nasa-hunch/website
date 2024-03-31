@@ -35,7 +35,7 @@
 </script>
 
 <form enctype="multipart/form-data" hidden {method} {action} use:enhance>
-	<input type="file" bind:this={fileBox}/>
+	<input name="file" type="file" bind:this={fileBox}/>
 	<button type="submit" bind:this={fileUploadButton}/>
 </form>
 

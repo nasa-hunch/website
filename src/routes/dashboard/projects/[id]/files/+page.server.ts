@@ -36,18 +36,14 @@ export const actions = {
 			}
 		});
 
-		console.log("preparing")
-
-		if (projectUser?.permission != ProjectUserPermission.EDITOR) {
+		if (projectUser?.permission != ProjectUserPermission.EDITOR && user.role != "HUNCH_ADMIN") {
 			return {
 				success: false,
 				message: 'No Permissions'
 			};
 		}
 
-		console.log("falling upload file")
-
-		return await uploadFile(request, projectUser.projectId);
+		return await uploadFile(request, parseInt(params.id));
 	},
 	deleteFile: formHandler(
 		z.object({
