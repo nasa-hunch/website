@@ -93,7 +93,7 @@ function generateOrgName() {
 	} else {
 		name = faker.word.noun();
 	}
-	name[0] = name[0].toUpperCase();
+	name = name.charAt(0).toUpperCase() + name.slice(1);
 	name += ` ${school}`;
 	return name;
 }
