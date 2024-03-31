@@ -81,7 +81,7 @@
 	.content {
 		max-width: 350px;
 		width: 100%;
-		padding: 20px;
+		padding: 0 1rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
