@@ -76,8 +76,8 @@
 
 	<table>
 		<tr class="headRow">
-			<th>ID</th>
-			<th>Email</th>
+			<th class="idRow">ID</th>
+			<th >Email</th>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Role</th>
@@ -85,7 +85,7 @@
 		</tr>
 		{#each data.userList as user}
 			<tr>
-				<td>{user.id}</td>
+				<td class="idRow">{user.id}</td>
 				<td>{user.email}</td>
 				<td>{user.firstName}</td>
 				<td>{user.lastName}</td>
@@ -152,4 +152,9 @@
 	h2 {
 		text-align: center;
 	}
+
+	.idRow {
+		width: 220px;
+	}
+
 </style>
