@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { toast } from 'svelte-french-toast';
 
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
-	import { pushState } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	export let data: PageData;
 

@@ -8,8 +8,8 @@
 	import { toast } from 'svelte-french-toast';
 
 	import Button from '$lib/components/Button.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 	dayjs.extend(localizedFormat);
 
 	import IconTrash from '~icons/mdi/delete-outline';
@@ -17,10 +17,10 @@
 	import IconFile from '~icons/mdi/file';
 	import IconImage from '~icons/mdi/image';
 	import { enhance } from '$app/forms';
-	import InTextInput from '$lib/components/InTextInput.svelte';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import DragDropUpload from '$lib/components/DragDropUpload.svelte';
+	import InTextInput from '$lib/components/InTextInput.svelte';
 
 	const extensionIcons: { [key: string]: ComponentType } = {
 		png: IconImage,
@@ -113,7 +113,7 @@
 
 <div class="wrap">
 	<p>Drag and drop files to upload.</p>
-	<DragDropUpload on:startUpload={startFileUpload} action="?/uploadFile">
+	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload}>
 		<table class="fileList">
 			<thead>
 				<tr>
