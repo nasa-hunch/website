@@ -92,6 +92,7 @@
 		"eslint-plugin-svelte": "^2.30.0",
 		"fluent-ffmpeg": "^2.1.2",
 		"libphonenumber-js": "^1.10.49",
+		"lowlight": "^3.1.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
 		"prisma": "^5.4.2",

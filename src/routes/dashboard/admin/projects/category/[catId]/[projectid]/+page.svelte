@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
+	import Editor from '$lib/components/Editor.svelte';
 
 	export let data;
 </script>
 
 <div class="wrap">
 	<form class="content" action="?/updateDesc" method="post" use:enhance>
-		<textarea
+		<Editor
 			name="description"
-			placeholder="Description"
-			bind:value={data.projectTemplate.description}
+			placeholder="Enter project description..."
+			bind:content={data.projectTemplate.description}
 		/>
 		<div class="ButtonWrap">
 			<div class="innerButtonWrap">
