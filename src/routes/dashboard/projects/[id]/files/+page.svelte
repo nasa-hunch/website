@@ -8,8 +8,8 @@
 	import { toast } from 'svelte-french-toast';
 
 	import Button from '$lib/components/Button.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 	dayjs.extend(localizedFormat);
 
 	import IconTrash from '~icons/mdi/delete-outline';
@@ -17,10 +17,10 @@
 	import IconFile from '~icons/mdi/file';
 	import IconImage from '~icons/mdi/image';
 	import { enhance } from '$app/forms';
-	import InTextInput from '$lib/components/InTextInput.svelte';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import DragDropUpload from '$lib/components/DragDropUpload.svelte';
+	import InTextInput from '$lib/components/InTextInput.svelte';
 
 	const extensionIcons: { [key: string]: ComponentType } = {
 		png: IconImage,
@@ -41,7 +41,7 @@
 	});
 
 	$: if (form) {
-		console.log(form)
+		console.log(form);
 		if (form.success) {
 			uploadResolve();
 		} else {
@@ -50,7 +50,6 @@
 		form = null;
 	}
 
-	
 	let doingFileDeleteOn: string;
 	let doingFileDeleteOnId: number;
 	const deleteFile = (id: number, fileName: string) => {
@@ -70,7 +69,7 @@
 			success: form?.message || 'File Deleted!',
 			error: form?.message || 'Could not delete file.'
 		});
-	}
+	};
 
 	const deleteFileSubmit = () => {
 		uploadPromise = new Promise((resolve, reject) => {
@@ -114,63 +113,60 @@
 
 <div class="wrap">
 	<p>Drag and drop files to upload.</p>
-	<DragDropUpload on:startUpload={startFileUpload} action="?/uploadFile">
-		<table
-		class="fileList"
-	>
-		<thead>
-			<tr>
-				<th scope="col">Name</th>
-				<th scope="col">Size</th>
-				<th scope="col">Modified</th>
-				<th scope="col">Deliverable</th>
-				<th scope="col">Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each data.files as file}
-				<tr class="file">
-					<th class="name" scope="row">
-						<div class="icon">
-							<svelte:component this={extensionSupport(file.name)} />
-						</div>
-						<InTextInput
-							name="fileName"
-							action="?/renameFile"
-							value={file.name}
-							on:submit={fileNameChange}
-						>
-							<input name="fileId" value={file.id} />
-						</InTextInput>
-					</th>
-					<td>
-						{file.size}
-					</td>
-					<td>
-						{dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
-					</td>
-					<td>
-						{file.size}
-					</td>
-					<td class="actionsRow">
-						<a class="iconButton" href={file.link}>
-							<IconDownload />
-						</a>
-						<button
-							class="iconButton"
-							on:click={() => {
-								deleteFile(file.id, file.name);
-							}}
-						>
-							<IconTrash />
-						</button>
-					</td>
+	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload}>
+		<table class="fileList">
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Size</th>
+					<th scope="col">Modified</th>
+					<th scope="col">Deliverable</th>
+					<th scope="col">Actions</th>
 				</tr>
-			{/each}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{#each data.files as file}
+					<tr class="file">
+						<th class="name" scope="row">
+							<div class="icon">
+								<svelte:component this={extensionSupport(file.name)} />
+							</div>
+							<InTextInput
+								name="fileName"
+								action="?/renameFile"
+								value={file.name}
+								on:submit={fileNameChange}
+							>
+								<input name="fileId" value={file.id} />
+							</InTextInput>
+						</th>
+						<td>
+							{file.size}
+						</td>
+						<td>
+							{dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
+						</td>
+						<td>
+							{file.size}
+						</td>
+						<td class="actionsRow">
+							<a class="iconButton" href={file.link}>
+								<IconDownload />
+							</a>
+							<button
+								class="iconButton"
+								on:click={() => {
+									deleteFile(file.id, file.name);
+								}}
+							>
+								<IconTrash />
+							</button>
+						</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
 	</DragDropUpload>
-	
 </div>
 
 <style lang="scss">

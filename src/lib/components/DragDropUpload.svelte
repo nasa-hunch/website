@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from 'svelte';
 
-	export let method = "post"
-	export let action = "?/uploadFile"
+	import { enhance } from '$app/forms';
 
-	const dispatch = createEventDispatcher()
+	export let method = 'post';
+	export let action = '?/uploadFile';
 
-	let fileBox: HTMLInputElement
+	const dispatch = createEventDispatcher();
+
+	let fileBox: HTMLInputElement;
 	let fileUploadButton: HTMLButtonElement;
 	let uploadPromise: Promise<unknown>;
 
@@ -19,7 +20,7 @@
 		}
 		fileBox.files = e.dataTransfer.files;
 		fileUploadButton.click();
-		dispatch("startUpload")
+		dispatch('startUpload');
 	};
 	const dragOverHandler = (e: Event) => {
 		dragging = true;
@@ -31,24 +32,25 @@
 	const stopDragOver = () => {
 		dragging = false;
 	};
-	
 </script>
 
-<form enctype="multipart/form-data" hidden {method} {action} use:enhance>
-	<input name="file" type="file" bind:this={fileBox}/>
-	<button type="submit" bind:this={fileUploadButton}/>
+<form {action} enctype="multipart/form-data" hidden {method} use:enhance>
+	<input bind:this={fileBox} name="file" type="file" />
+	<button bind:this={fileUploadButton} type="submit" />
 </form>
 
-<button class="dragField" on:dragover={dragOverHandler} on:drop={dropHandler} on:dragleave={stopDragOver}>
-	<slot/>
+<button
+	class="dragField"
+	on:dragover={dragOverHandler}
+	on:drop={dropHandler}
+	on:dragleave={stopDragOver}
+>
+	<slot />
 </button>
 
 <style lang="scss">
-	.dragField{
+	.dragField {
 		all: unset;
 		width: 100%;
-
-		
 	}
-	
 </style>

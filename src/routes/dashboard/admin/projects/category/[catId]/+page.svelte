@@ -3,11 +3,11 @@
 
 	import Button from '$lib/components/Button.svelte';
 	export let data;
-	import Input from '$lib/components/Input.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
-	import Modal from '$lib/components/Modal.svelte';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Input from '$lib/components/Input.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 
 	const calculatePercentDone = (startDay: Date, endDay: Date) => {
 		const startTimestamp = dayjs(startDay).unix();
@@ -42,9 +42,13 @@
 	<header>
 		<h1>
 			<!-- TODO: actually get this to send to server -->
-			<input bind:this={colorInput} type="color" hidden value={"#" + data.category.color} />
-			<button class="colorInput" style="background: #{data.category.color}" on:click={() => colorInput.click()} />
-			<input type="text" placeholder="Category name" value={data.category.name} />
+			<input bind:this={colorInput} hidden type="color" value={'#' + data.category.color} />
+			<button
+				style="background: #{data.category.color}"
+				class="colorInput"
+				on:click={() => colorInput.click()}
+			/>
+			<input placeholder="Category name" type="text" value={data.category.name} />
 		</h1>
 	</header>
 	<div class="projectWrap">
@@ -66,7 +70,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'createProject'
-				})
+				});
 			}}
 		/>
 	</div>
@@ -142,7 +146,7 @@
 		align-items: center;
 		justify-content: center;
 
-		input[type="text"] {
+		input[type='text'] {
 			font-size: 1.5rem;
 			margin-right: 10px;
 			text-align: center;

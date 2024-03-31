@@ -36,7 +36,7 @@ export const actions = {
 			}
 		});
 
-		if (projectUser?.permission != ProjectUserPermission.EDITOR && user.role != "HUNCH_ADMIN") {
+		if (projectUser?.permission != ProjectUserPermission.EDITOR && user.role != 'HUNCH_ADMIN') {
 			return {
 				success: false,
 				message: 'No Permissions'

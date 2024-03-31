@@ -4,17 +4,17 @@
 	import toast from 'svelte-french-toast';
 
 	import AddItemIcon from '~icons/mdi/plus';
+	import { pushState, replaceState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 	import ProgressGauge from '$lib/components/ProgressGauge.svelte';
 
 	import type { PageData } from './$types';
 	import CheckListItem from './CheckListItem.svelte';
-	import { pushState, replaceState } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	export let data: PageData;
 	export let form;
@@ -53,7 +53,7 @@
 		}
 		replaceState('', {
 			modal: null
-		})
+		});
 		form = null;
 	}
 

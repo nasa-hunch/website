@@ -2,14 +2,14 @@
 	import toast from 'svelte-french-toast';
 
 	import AddUserIcon from '~icons/mdi/person-add-outline';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import IconButton from '$lib/components/IconButton.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
 
 	import Member from './Member.svelte';
-	import { page } from '$app/stores';
-	import { pushState } from '$app/navigation';
 
 	export let form;
 
@@ -55,7 +55,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'invite'
-				})
+				});
 			}}
 		>
 			<AddUserIcon />

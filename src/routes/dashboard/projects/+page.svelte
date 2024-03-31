@@ -1,13 +1,13 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
 	export let data;
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import ComboBox from '$lib/components/Combobox.svelte';
 	import { Role } from '$lib/enums';
-	import { page } from '$app/stores';
-	import { pushState } from '$app/navigation';
 </script>
 
 {#if $page.state.modal === 'creatingProject'}
@@ -46,7 +46,7 @@
 				on:click={() => {
 					pushState('', {
 						modal: 'creatingProject'
-					})
+					});
 				}}>Create a new project?</TextButton
 			>
 		{/if}

@@ -6,15 +6,15 @@
 	import DoneIcon from '~icons/mdi/done';
 	import AddPersonIcon from '~icons/mdi/person-add-outline';
 	import { enhance } from '$app/forms';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
 	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 
 	import Assignees from './Assignees.svelte';
-	import { pushState } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	type CheckListItem = {
 		id: number;
@@ -180,7 +180,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'completeItem'
-				})
+				});
 			}}
 		>
 			{#if !data.checked}
@@ -197,7 +197,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'deleteItem'
-				})
+				});
 			}}
 		>
 			<DeleteIcon />
