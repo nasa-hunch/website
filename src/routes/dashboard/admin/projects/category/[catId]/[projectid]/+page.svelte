@@ -35,22 +35,6 @@
 		padding-top: 20px;
 	}
 
-	textarea {
-		width: 100%;
-		border-radius: 5px;
-		padding: 10px;
-		font-size: 1.1rem;
-		box-sizing: border-box;
-		outline: 1px solid gray;
-		border: 0px;
-		resize: vertical;
-		min-height: 300px;
-
-		&:focus,
-		&:active {
-			outline: 1px solid $secondary;
-		}
-	}
 	.ButtonWrap {
 		display: flex;
 		align-items: center;
