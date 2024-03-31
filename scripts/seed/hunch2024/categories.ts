@@ -1,12 +1,17 @@
+import fs from 'node:fs/promises';
+import path from 'node:path'
+
 import { Prisma } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
+import frontMatter from 'front-matter';
+import showdown from 'showdown';
+import { z } from 'zod';
 
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
 const MONTH = 1000 * 60 * 60 * 24 * 30;
 
 const deadline = (minMonths = 3, maxMonths = 5) =>
 	new Date(Date.now() + random(minMonths * MONTH, maxMonths * MONTH));
-const block = (text: string) => text.replace(/^\s+/gm, '').replaceAll(/\n\s+/g, '\n');
 
 const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 	{
@@ -43,6 +48,11 @@ const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 	}
 ];
 
+const attributesSchema = z.object({
+	name: z.string(),
+	category: z.array(z.string()),
+});
+
 export async function main(client: PrismaClient) {
 	console.log('Seeding categories...');
 
@@ -52,6 +62,48 @@ export async function main(client: PrismaClient) {
 				...category,
 				icon: 'no',
 				deadline: new Date(Date.now() + random(3 * MONTH, 5 * MONTH))
+			}
+		});
+	}
+
+	const converter = new showdown.Converter();
+
+	const currentDirectory = new URL('.', import.meta.url).pathname;
+
+	const files = await fs.readdir(path.join(currentDirectory, 'projects'));
+	const transformedFiles = await Promise.all(
+		files.map(async (file) => {
+			const content = await fs.readFile(path.join(currentDirectory, 'projects', file), 'utf-8');
+			const { attributes, body } = frontMatter(content);
+			const html = converter.makeHtml(body);
+			const { name, category } = attributesSchema.parse(attributes);
+			return { html, name, categories: category };
+		})
+	);
+
+	for (const { html, name, categories } of transformedFiles) {
+		const categoryInDatabase = await client.category.findFirst({
+			where: {
+				name: {
+					in: categories
+				}
+			}
+		});
+
+		if (!categoryInDatabase) {
+			throw new Error(`Category ${categories.join(', ')} not found`);
+		}
+
+		await client.projectTemplate.create({
+			data: {
+				name,
+				category: {
+					connect: {
+						id: categoryInDatabase.id
+					}
+				},
+				deadline: deadline(),
+				description: html
 			}
 		});
 	}
