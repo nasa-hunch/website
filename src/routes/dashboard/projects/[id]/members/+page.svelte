@@ -55,7 +55,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'invite'
-				})
+				});
 			}}
 		>
 			<AddUserIcon />

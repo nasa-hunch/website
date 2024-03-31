@@ -46,7 +46,7 @@
 				on:click={() => {
 					pushState('', {
 						modal: 'creatingProject'
-					})
+					});
 				}}>Create a new project?</TextButton
 			>
 		{/if}

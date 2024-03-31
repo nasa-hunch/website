@@ -34,9 +34,13 @@
 				<p>{category.name}</p>
 			</a>
 		{/each}
-		<Button value="New Category" on:click={() => pushState('', {
-			modal: 'createCategory'
-		})} />
+		<Button
+			value="New Category"
+			on:click={() =>
+				pushState('', {
+					modal: 'createCategory'
+				})}
+		/>
 	</div>
 </div>
 

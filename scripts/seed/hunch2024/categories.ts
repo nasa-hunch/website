@@ -68,9 +68,9 @@ const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
                     offers personalized content, intuitive navigation, and visually appealing graphics.`),
 					deadline: deadline()
 				},
-                {
-                    name: `Lunar, Mars, and Space Station Facility Environmental Control and Sensor Alarm System`,
-                    description: block(`Our Off-Plant Smart Building Software Controller provides
+				{
+					name: `Lunar, Mars, and Space Station Facility Environmental Control and Sensor Alarm System`,
+					description: block(`Our Off-Plant Smart Building Software Controller provides
                     a complete solution for managing and controlling the environment in a 2 - 3
                     room smart building, off-planet. It features a comprehensive Control System,
                     software, and sensors, compatible with Windows, Linux, PC, Arduino, and
@@ -78,26 +78,26 @@ const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
                     adjust, and control the environment of space exploration.
                     With our Off-Plant Smart Building Software Controller, you can rest assured
                     that your space exploration is in safe and capable hands.`),
-                    deadline: deadline()
-                },
-                {
-                    name: `Defending the Smart Lunar Building: Cyber Security for Control Systems`,
-                    description: block(`As we embark on a new era of space exploration,
+					deadline: deadline()
+				},
+				{
+					name: `Defending the Smart Lunar Building: Cyber Security for Control Systems`,
+					description: block(`As we embark on a new era of space exploration,
                     the need for cyber security in smart lunar buildings, space stations,
                     satellites, and other space-bound structures increases.`),
-                    deadline: deadline()
-                },
-                {
-                    name: `Personal Astronaut Assistant in Space`,
-                    description: block(`NASA HUNCH Software is on a mission to explore the boundaries
+					deadline: deadline()
+				},
+				{
+					name: `Personal Astronaut Assistant in Space`,
+					description: block(`NASA HUNCH Software is on a mission to explore the boundaries
                     of space and create an innovative system to help astronauts in their daily
                     operations. To achieve this, we have developed a portable Personal Astronaut
                     Assistant that is equipped with task support, health monitoring, companionship,
                     lab assistant, and entertainment functions. By combining cutting-edge technology
                     with our passion for space exploration, we’re creating a system that will revolutionize
                     the way astronauts work and live in space.`),
-                    deadline: deadline()
-                }
+					deadline: deadline()
+				}
 			]
 		}
 	},
@@ -116,50 +116,50 @@ const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 	{
 		color: 'FED18C',
 		name: 'Culinary',
-        projectTemplates: {
-            create: [
-                {
-                    name: 'Savory Breakfast Item that includes a Vegetable',
-                    description: block(`Create a savory breakfast item that includes a
+		projectTemplates: {
+			create: [
+				{
+					name: 'Savory Breakfast Item that includes a Vegetable',
+					description: block(`Create a savory breakfast item that includes a
                     vegetable.`),
-                    deadline: deadline()
-                }
-            ]
-        }
+					deadline: deadline()
+				}
+			]
+		}
 	},
 	{
 		color: '80DED9',
 		name: 'Biomedical Science',
-        projectTemplates: {
-            create: [
-                {
-                    name: 'Biofilms and Keeping Water Clean',
-                    description: block(`Microbial growth, biofilm formation, stress response,
+		projectTemplates: {
+			create: [
+				{
+					name: 'Biofilms and Keeping Water Clean',
+					description: block(`Microbial growth, biofilm formation, stress response,
                     and pathogenicity are affected by microgravity. Increased resistance to
                     antibiotics in bacteria isolated from the ISS has often been reported.
                     Enterococcus faecalis and Staphylococcus spp. isolates from the ISS have
                     been shown to harbor plasmid-encoded transfer genes.`),
-                    deadline: deadline()
-                }
-            ]
-        }
+					deadline: deadline()
+				}
+			]
+		}
 	},
 	{
 		color: 'F1C8DB',
 		name: 'Flight Configuration',
-        projectTemplates: {
-            create: [
-                {
-                    name: 'Cardboard School - Lunar Lander',
-                    description: block(`Cardboard School designed a lunar lander that
+		projectTemplates: {
+			create: [
+				{
+					name: 'Cardboard School - Lunar Lander',
+					description: block(`Cardboard School designed a lunar lander that
                     NASA HUNCH will use to test the feasibility of landing on the Moon.
                     This team has been working on this project for the past year,
                     but is no longer able to continue. NASA HUNCH is looking for a
                     team to take over the project and complete the lunar lander.`),
-                    deadline: deadline()
-                }
-            ]
-        }
+					deadline: deadline()
+				}
+			]
+		}
 	}
 ];
 

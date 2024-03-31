@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ close: void }>();
 
@@ -13,7 +13,7 @@
 
 	let keyHelper = (e: KeyboardEvent) => {
 		if (e.key == 'Escape') {
-			dispatch('close')
+			dispatch('close');
 		}
 	};
 </script>

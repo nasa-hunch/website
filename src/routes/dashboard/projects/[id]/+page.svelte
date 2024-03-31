@@ -53,7 +53,7 @@
 		}
 		replaceState('', {
 			modal: null
-		})
+		});
 		form = null;
 	}
 

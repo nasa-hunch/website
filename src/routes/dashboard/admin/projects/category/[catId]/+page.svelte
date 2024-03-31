@@ -42,8 +42,12 @@
 	<header>
 		<h1>
 			<!-- TODO: actually get this to send to server -->
-			<input bind:this={colorInput} type="color" hidden value={"#" + data.category.color} />
-			<button class="colorInput" style="background: #{data.category.color}" on:click={() => colorInput.click()} />
+			<input bind:this={colorInput} type="color" hidden value={'#' + data.category.color} />
+			<button
+				class="colorInput"
+				style="background: #{data.category.color}"
+				on:click={() => colorInput.click()}
+			/>
 			<input type="text" placeholder="Category name" value={data.category.name} />
 		</h1>
 	</header>
@@ -66,7 +70,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'createProject'
-				})
+				});
 			}}
 		/>
 	</div>
@@ -142,7 +146,7 @@
 		align-items: center;
 		justify-content: center;
 
-		input[type="text"] {
+		input[type='text'] {
 			font-size: 1.5rem;
 			margin-right: 10px;
 			text-align: center;

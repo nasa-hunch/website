@@ -29,7 +29,7 @@
 	let deletePerson = (id: number, firstName: string, lastName: string) => {
 		pushState('', {
 			modal: 'deleteUser'
-		})
+		});
 		deleteData = {
 			id,
 			firstName,

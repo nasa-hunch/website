@@ -180,7 +180,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'completeItem'
-				})
+				});
 			}}
 		>
 			{#if !data.checked}
@@ -197,7 +197,7 @@
 			on:click={() => {
 				pushState('', {
 					modal: 'deleteItem'
-				})
+				});
 			}}
 		>
 			<DeleteIcon />
