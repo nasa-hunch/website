@@ -4,6 +4,6 @@
 
 <style>
     .container {
-        margin: 1rem;
+        margin: 2rem;
     }
 </style>
