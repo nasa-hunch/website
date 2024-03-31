@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import { createEventDispatcher } from 'svelte';
+
+	import { enhance } from '$app/forms';
 
 	export let method = 'post';
 	export let action = '?/uploadFile';
@@ -33,9 +34,9 @@
 	};
 </script>
 
-<form enctype="multipart/form-data" hidden {method} {action} use:enhance>
-	<input name="file" type="file" bind:this={fileBox} />
-	<button type="submit" bind:this={fileUploadButton} />
+<form {action} enctype="multipart/form-data" hidden {method} use:enhance>
+	<input bind:this={fileBox} name="file" type="file" />
+	<button bind:this={fileUploadButton} type="submit" />
 </form>
 
 <button

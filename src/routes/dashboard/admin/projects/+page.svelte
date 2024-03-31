@@ -1,11 +1,11 @@
 <script lang="ts">
 	export let data;
-	import Button from '$lib/components/Button.svelte';
-	import Input from '$lib/components/Input.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
-	import Modal from '$lib/components/Modal.svelte';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Button from '$lib/components/Button.svelte';
+	import Input from '$lib/components/Input.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 </script>
 
 {#if $page.state.modal === 'createCategory'}
