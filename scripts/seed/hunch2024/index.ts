@@ -25,6 +25,12 @@ async function main() {
 		);
 	}
 
+	if (org) {
+		// We already have a Cardboard organization, so we don't need to seed
+		console.log('Cardboard organization already exists, skipping seeding.');
+		return;
+	}
+
 	await categories.main(prisma);
 	await partners.main(prisma);
 	await teams.main(prisma);
