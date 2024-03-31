@@ -2,7 +2,7 @@
 	// Import images
 	import ccw2018 from '$lib/connect/images/CULINARY CHALLENGE WINNER 2018.jpg';
 	import ccw2019 from '$lib/connect/images/CULINARY CHALLENGE WINNER 2019.jpg';
-	import culinary from '$lib/connect/images/culinary1.jpg';
+	import culinary from '$lib/connect/images/culinary1.webp';
 	import media2018 from '$lib/connect/images/MEDIA CHALLENGE WINNER 2018.jpg';
 	import Section from '$lib/page/Section.svelte';
 </script>
