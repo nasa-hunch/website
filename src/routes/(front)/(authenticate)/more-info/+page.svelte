@@ -16,7 +16,7 @@
 	<div class="content">
 		{#if data.user.role == null}
 			<h2>
-				Welcome to NASA Hunch! To verify your identity, we need to know a little more about you.
+				Welcome to <span class="accent">NASA Hunch</span>! To verify your identity, we need to know a little more about you.
 			</h2>
 			<h3>I am a:</h3>
 			<div class="buttons">
@@ -88,13 +88,17 @@
 		justify-content: center;
 	}
 	.bigButton {
-		background: #f1f1f1;
-		border: 1px solid #f1f1f1;
-		border: 0px solid white;
+		background: white;
+		border: 0;
+		border-radius: 5px;
 		padding: 20px;
-		box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
-		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+		box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+		transition: box-shadow cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
 		cursor: pointer;
+
+		&:hover {
+			box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+		}
 	}
 
 	h2 {
@@ -118,9 +122,6 @@
 		width: 100%;
 		aspect-ratio: 1/1;
 	}
-	.buttons form button:hover {
-		box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
-	}
 	.buttons p {
 		font-size: 1.2rem;
 	}
@@ -139,5 +140,9 @@
 	.formItem {
 		width: 100%;
 		margin: 7px 0px;
+	}
+
+	.accent {
+		color: $primary;
 	}
 </style>
