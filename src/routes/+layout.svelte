@@ -15,6 +15,7 @@
 </script>
 
 <svelte:head>
+	<meta property="og:image" content="/og-img.webp" />
 	{@html webManifest}
 </svelte:head>
 <div class="toasts">
