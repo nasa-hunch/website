@@ -118,8 +118,6 @@
     <input hidden type="text" name={name} value={content} />
 {/if}
 
-<p>{content}</p>
-
 <div bind:this={element}></div>
 
 <style lang="scss">
