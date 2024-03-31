@@ -30,7 +30,7 @@ async function main() {
 	// 250 orgs
 	for (let i = 0; i < 250; i++) {
 		orgs.push({
-			name: `${faker.word.adjective()}-${faker.word.noun()}`
+			name: generateOrgName()
 		});
 	}
 
@@ -78,6 +78,24 @@ async function main() {
 	console.log(`Users seeded in ${Date.now() - recentStartTime}ms`);
 	recentStartTime = Date.now();
 	console.log(`All done! Completed in ${Date.now() - startTime}ms`);
+}
+
+function generateOrgName() {
+	const school = Math.random() > 0.5 ? 'High School' : (Math.random() > 0.5 ? 'College' : 'Academy');
+	let name;
+	if (Math.random() > 0.75) {
+		name = faker.company.name();
+		return name;
+	} else if (Math.random() > 0.5) {
+		name = faker.location.city();
+	} else if (Math.random() > 0.25) {
+		name = faker.person.fullName();
+	} else {
+		name = faker.word.noun();
+	}
+	name[0] = name[0].toUpperCase();
+	name += ` ${school}`;
+	return name;
 }
 
 main()
