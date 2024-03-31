@@ -9,7 +9,6 @@
 </script>
 
 <div class="wrap">
-	<Navbar />
 	<div class="contentWrap">
 		<form class="content" action="?/login" method="post" use:enhance>
 			<h1>Login</h1>
@@ -36,7 +35,7 @@
 	}
 	.wrap {
 		width: 100%;
-		height: 100vh;
+		height: calc(100vh - 100px - 75px);
 		background: #ffffff;
 		display: flex;
 		flex-direction: column;

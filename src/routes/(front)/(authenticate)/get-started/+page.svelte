@@ -10,7 +10,6 @@
 </script>
 
 <div class="wrap">
-	<Navbar />
 	<div class="contentWrap">
 		<form
 			class="content"
@@ -61,7 +60,7 @@
 	}
 	.wrap {
 		width: 100%;
-		height: 100vh;
+		height: calc(100vh - 100px - 75px);
 		background: #ffffff;
 		display: flex;
 		flex-direction: column;

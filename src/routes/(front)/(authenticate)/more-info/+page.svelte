@@ -2,8 +2,9 @@
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
+	import MdiAccountStudent from '~icons/mdi/account-student';
+	import MdiShieldAccount from '~icons/mdi/shield-account';
 	import { Role } from '$lib/enums';
-	import Navbar from '$lib/Navbar.svelte';
 
 	import type { PageData } from './$types';
 
@@ -11,7 +12,6 @@
 </script>
 
 <div class="wrap">
-	<Navbar />
 	<div class="content">
 		{#if data.user.role == null}
 			<h2>
@@ -21,13 +21,13 @@
 			<div class="buttons">
 				<form action="?/setRoleStudent" method="post" use:enhance>
 					<button class="bigButton">
-						<img alt="student" src="student_cap.svg" />
+						<MdiAccountStudent width="50%" height="50%" aria-hidden />
 						<p>Student</p>
 					</button>
 				</form>
 				<form action="?/setRoleTeacher" method="post" use:enhance>
 					<button class="bigButton">
-						<img alt="teacher" src="admin_shield.svg" />
+						<MdiShieldAccount width="50%" height="50%" aria-hidden />
 						<p>Teacher/Admin</p>
 					</button>
 				</form>
@@ -72,7 +72,7 @@
 <style lang="scss">
 	.wrap {
 		width: 100%;
-		height: 100vh;
+		height: calc(100vh - 100px - 75px);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
