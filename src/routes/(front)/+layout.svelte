@@ -4,14 +4,11 @@
 
 	import Lenis from '@studio-freight/lenis';
 	import { onMount } from 'svelte';
-	import toast from 'svelte-french-toast';
 
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/Navbar.svelte';
 
 	onMount(() => {
-		toast('This is the unofficial website.');
-
 		const lenis = new Lenis();
 
 		function raf(time: number) {
