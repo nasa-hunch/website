@@ -2,11 +2,13 @@
 	import { geoAlbersUsa, geoIdentity, geoPath } from 'd3-geo';
 	import type { GeoJsonProperties } from 'geojson';
 	import { cubicOut } from 'svelte/easing';
-	import { tweened } from 'svelte/motion';
+	import { tweened, spring } from 'svelte/motion';
 	import { Canvas, Layer, type Render } from 'svelte-canvas';
 	import { mesh } from 'topojson-client';
 	import type { Objects, Topology } from 'topojson-specification';
 	import usRaw from 'us-atlas/counties-albers-10m.json';
+	import { inview } from 'svelte-inview';
+	import { data } from './map/data';
 
 	const opacity = tweened(0.01, {
 		duration: 1000,
@@ -18,12 +20,11 @@
 		easing: cubicOut
 	});
 
-	import { inview } from 'svelte-inview';
-
-	import { data } from './map/data';
+	const mouseSpring = spring({ x: 0, y: 0 });
 
 	const us = usRaw as unknown as Topology<Objects<GeoJsonProperties>>;
 
+	let canvas: HTMLElement;
 	let width: number;
 
 	$: projection = geoIdentity().scale(width / 975);
@@ -53,10 +54,32 @@
 			context.fillStyle = `rgba(221, 54, 28, ${$opacityElements - i / pixelData.length})`;
 			context.fill();
 		}
+
+		context.beginPath();
+		context.arc($mouseSpring.x, $mouseSpring.y, 25, 0, 2 * Math.PI);
+		context.fillStyle = 'rgba(221, 54, 28, 0.2)';
+		context.strokeStyle = 'rgba(221, 54, 28, 0.5)';
+		context.fill();
+		context.stroke();
 	};
+
+	const dataAmount = tweened(0, {
+		duration: 2000,
+		easing: cubicOut
+	});
+
+	const studentLocations = tweened(0, {
+		duration: 2000,
+		easing: cubicOut
+	});
 </script>
 
 <h2>Connecting Students <span class="accent">Nationwide</span></h2>
+
+<h3>
+	<span class="accent">{Math.round($studentLocations)}</span> students from
+	<span class="accent">{Math.round($dataAmount)}</span> locations
+</h3>
 
 <div class="wrap">
 	<div
@@ -64,6 +87,8 @@
 		on:inview_enter={() => {
 			opacity.set(2);
 			opacityElements.set(2);
+			dataAmount.set(data.length);
+			studentLocations.set(2575);
 		}}
 		use:inview={{ unobserveOnEnter: true }}
 	>
@@ -77,19 +102,39 @@
 				<path d={path(mesh(us, usRaw.objects.counties))} />
 			{/if}
 		</svg>
-		<Canvas style="position: absolute" autoplay on:resize={({ detail }) => (width = detail.width)}>
-			<Layer {render} />
-		</Canvas>
+		<div class="canvasWrap" bind:this={canvas}>
+			<Canvas
+				style="position: absolute"
+				autoplay
+				on:resize={({ detail }) => (width = detail.width)}
+				on:mousemove={(e) => {
+					const { clientX, clientY } = e;
+					mouseSpring.set({
+						x: clientX - canvas.getBoundingClientRect().left,
+						y: clientY - canvas.getBoundingClientRect().top
+					});
+				}}
+			>
+				<Layer {render} />
+			</Canvas>
+		</div>
 	</div>
 </div>
 
 <style lang="scss">
-	h2 {
+	h2, h3 {
 		width: 100%;
 		text-align: center;
-		font-size: 3rem;
 		font-weight: 500;
 		font-family: 'Lexend Variable', sans-serif;
+	}
+
+	h2 {
+		font-size: 3rem;
+	}
+
+	h3 {
+		font-size: 2.5rem;
 	}
 
 	.accent {
