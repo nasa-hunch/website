@@ -6,36 +6,36 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
 import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async () => {
-	const categories = await prisma.category.findMany({});
+  const categories = await prisma.category.findMany({});
 
-	return {
-		categories
-	};
+  return {
+    categories
+  };
 };
 
 export const actions = {
-	createCategory: formHandler(
-		z.object({
-			name: z.string().min(1),
-			icon: z.string().min(1),
-			color: z.string().length(7),
-			deadline: z.coerce.string()
-		}),
-		async ({ name, icon, color, deadline }, { cookies }) => {
-			await verifySession(cookies, Role.HUNCH_ADMIN);
+  createCategory: formHandler(
+    z.object({
+      name: z.string().min(1),
+      icon: z.string().min(1),
+      color: z.string().length(7),
+      deadline: z.coerce.string()
+    }),
+    async ({ name, icon, color, deadline }, { cookies }) => {
+      await verifySession(cookies, Role.HUNCH_ADMIN);
 
-			const projectDeadline = new Date(deadline);
+      const projectDeadline = new Date(deadline);
 
-			const newColor = color.replace('#', '');
+      const newColor = color.replace('#', '');
 
-			await prisma.category.create({
-				data: {
-					name,
-					icon,
-					color: newColor,
-					deadline: projectDeadline
-				}
-			});
-		}
-	)
+      await prisma.category.create({
+        data: {
+          name,
+          icon,
+          color: newColor,
+          deadline: projectDeadline
+        }
+      });
+    }
+  )
 };
