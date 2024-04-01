@@ -1,40 +1,40 @@
 <script lang="ts">
-	import '@fontsource-variable/manrope';
-	import '@fontsource-variable/lexend';
-	import '../app.css';
+  import '@fontsource-variable/manrope';
+  import '@fontsource-variable/lexend';
+  import '../app.css';
 
-	import { onMount } from 'svelte';
-	import { Toaster } from 'svelte-french-toast';
-	import { pwaInfo } from 'virtual:pwa-info';
+  import { onMount } from 'svelte';
+  import { Toaster } from 'svelte-french-toast';
+  import { pwaInfo } from 'virtual:pwa-info';
 
-	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+  $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 
-	onMount(() => {
-		document.body.classList.add('started');
-	});
+  onMount(() => {
+    document.body.classList.add('started');
+  });
 </script>
 
 <svelte:head>
-	<meta content="/og-img.webp" property="og:image" />
-	{@html webManifest}
+  <meta content="/og-img.webp" property="og:image" />
+  {@html webManifest}
 </svelte:head>
 <div class="toasts">
-	<Toaster />
+  <Toaster />
 </div>
 
 <div class="body">
-	<slot />
+  <slot />
 </div>
 
 <style lang="scss">
-	:global(body) {
-		margin: 0px;
+  :global(body) {
+    margin: 0px;
 
-		--green: #158547;
-		--background-alt: #e6e6e6;
-	}
+    --green: #158547;
+    --background-alt: #e6e6e6;
+  }
 
-	:global(*) {
-		box-sizing: border-box;
-	}
+  :global(*) {
+    box-sizing: border-box;
+  }
 </style>
