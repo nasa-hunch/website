@@ -4,7 +4,8 @@
 
 <div class="content">
 	<div class="inner">
-		<h1>{data.projectTemplate.name}</h1>
+		<h1 class="name">{data.projectTemplate.name}</h1>
+		{@html data.projectTemplate.description}
 	</div>
 </div>
 
@@ -17,7 +18,11 @@
 	}
 
 	.inner {
-		width: 90%;
+		max-width: 700px;
+		margin: 0 1rem;
+	}
+
+	.name {
 		text-align: center;
 	}
 </style>
