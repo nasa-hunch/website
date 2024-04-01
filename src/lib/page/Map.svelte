@@ -20,7 +20,8 @@
 		easing: cubicOut
 	});
 
-	const mouseSpring = spring({ x: 0, y: 0 });
+	let mouseX = 0;
+	let mouseY = 0;
 
 	const us = usRaw as unknown as Topology<Objects<GeoJsonProperties>>;
 
@@ -54,13 +55,6 @@
 			context.fillStyle = `rgba(221, 54, 28, ${$opacityElements - i / pixelData.length})`;
 			context.fill();
 		}
-
-		context.beginPath();
-		context.arc($mouseSpring.x, $mouseSpring.y, 25, 0, 2 * Math.PI);
-		context.fillStyle = 'rgba(221, 54, 28, 0.2)';
-		context.strokeStyle = 'rgba(221, 54, 28, 0.5)';
-		context.fill();
-		context.stroke();
 	};
 
 	const dataAmount = tweened(0, {
@@ -109,10 +103,9 @@
 				on:resize={({ detail }) => (width = detail.width)}
 				on:mousemove={(e) => {
 					const { clientX, clientY } = e;
-					mouseSpring.set({
-						x: clientX - canvas.getBoundingClientRect().left,
-						y: clientY - canvas.getBoundingClientRect().top
-					});
+
+					mouseX = clientX;
+					mouseY = clientY;
 				}}
 			>
 				<Layer {render} />
@@ -156,6 +149,10 @@
 		aspect-ratio: 975 / 610;
 		border: 4px solid black;
 		border-radius: 1rem;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	svg {
