@@ -1,5 +1,5 @@
 <script lang="ts">
-import { slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import Hamburger from 'svelte-hamburger';
 
 	let open = false;
@@ -26,23 +26,23 @@ import { slide } from 'svelte/transition';
 		link('Get Started', 'get-started', true)
 	];
 </script>
-<svelte:window bind:innerWidth />
-<nav >
-	<a href="/" class="hamburger">
-		<Hamburger {open} on:click={() => open = !open} />
 
+<svelte:window bind:innerWidth />
+<nav>
+	<a class="hamburger" href="/">
+		<Hamburger {open} on:click={() => (open = !open)} />
 	</a>
 	<a class="logoLink" href="/">
 		<img alt="NASA Hunch Logo" src="/favicon.png" />
 	</a>
 	{#if open || innerWidth >= 768}
-	<ul class="navInner" transition:slide>
-		{#each links as link}
-			<li class="navbutton {link.special ? 'specialButton' : 'navRegularLink'}">
-				<a href={link.href}>{link.name}</a>
-			</li>
-		{/each}
-	</ul>
+		<ul class="navInner" transition:slide>
+			{#each links as link}
+				<li class="navbutton {link.special ? 'specialButton' : 'navRegularLink'}">
+					<a href={link.href}>{link.name}</a>
+				</li>
+			{/each}
+		</ul>
 	{/if}
 </nav>
 
@@ -149,10 +149,9 @@ import { slide } from 'svelte/transition';
 		opacity: 0.6;
 	}
 
-
 	.hamburger {
-	display: none;
-		}
+		display: none;
+	}
 
 	@media (max-width: 768px) {
 		nav {
@@ -185,7 +184,7 @@ import { slide } from 'svelte/transition';
 
 		.hamburger {
 			padding: 1rem 0;
-		display: block;
+			display: block;
 		}
 	}
 </style>
