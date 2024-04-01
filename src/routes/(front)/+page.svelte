@@ -5,6 +5,7 @@
 	import type { GalleryImage } from '$lib/page/Gallery.svelte';
 	import Gallery from '$lib/page/Gallery.svelte';
 	import Mission from '$lib/page/Mission.svelte';
+	import Map from '$lib/page/Map.svelte';
 
 	const title = 'NASA Hunch';
 
@@ -63,4 +64,5 @@
 
 <Hero image={NonTransparent} image2={Transparent} {title} />
 <Mission />
+<Map />
 <Gallery galleryImages={gallery} title="Explore Our Programs" />

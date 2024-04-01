@@ -181,12 +181,24 @@ devDependencies:
   '@types/d3':
     specifier: ^7.4.3
     version: 7.4.3
+  '@types/d3-geo':
+    specifier: ^3.1.0
+    version: 3.1.0
   '@types/fluent-ffmpeg':
     specifier: ^2.1.23
     version: 2.1.24
+  '@types/geojson':
+    specifier: ^7946.0.14
+    version: 7946.0.14
   '@types/showdown':
     specifier: ^2.0.6
     version: 2.0.6
+  '@types/topojson-client':
+    specifier: ^3.1.4
+    version: 3.1.4
+  '@types/topojson-specification':
+    specifier: ^1.0.5
+    version: 1.0.5
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.0.0
     version: 6.17.0(@typescript-eslint/parser@6.17.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -205,6 +217,9 @@ devDependencies:
   d3:
     specifier: ^7.8.5
     version: 7.8.5
+  d3-geo:
+    specifier: ^3.1.1
+    version: 3.1.1
   dotenv-cli:
     specifier: ^7.3.0
     version: 7.3.0
@@ -229,6 +244,9 @@ devDependencies:
   front-matter:
     specifier: ^4.0.2
     version: 4.0.2
+  geojson:
+    specifier: ^0.5.0
+    version: 0.5.0
   libphonenumber-js:
     specifier: ^1.10.49
     version: 1.10.53
@@ -253,12 +271,18 @@ devDependencies:
   svelte:
     specifier: ^4.2.2
     version: 4.2.8
+  svelte-canvas:
+    specifier: ^1.1.1
+    version: 1.1.1
   svelte-check:
     specifier: ^3.5.2
     version: 3.6.2(@babel/core@7.23.9)(postcss@8.4.32)(sass@1.69.7)(svelte@4.2.8)
   svelte-inview:
     specifier: ^4.0.2
     version: 4.0.2(svelte@4.2.8)
+  topojson-client:
+    specifier: ^3.1.0
+    version: 3.1.0
   tslib:
     specifier: ^2.4.1
     version: 2.6.2
@@ -271,6 +295,9 @@ devDependencies:
   unplugin-icons:
     specifier: ^0.18.5
     version: 0.18.5
+  us-atlas:
+    specifier: ^3.0.1
+    version: 3.0.1
   vite:
     specifier: ^5.1.0
     version: 5.1.0(sass@1.69.7)
@@ -4286,6 +4313,19 @@ packages:
     resolution: {integrity: sha512-pTvD/0CIeqe4x23+YJWlX2gArHa8G0J0Oh6GKaVXV7TAeickpkkZiNOgFcFcmLQ5lB/K0qBJL1FtRYltBfbGCQ==}
     dev: true
 
+  /@types/topojson-client@3.1.4:
+    resolution: {integrity: sha512-Ntf3ZSetMYy7z3PrVCvcqmdRoVhgKA9UKN0ZuuZf8Ts2kcyL4qK34IXBs6qO5fem62EK4k03PtkJPVoroVu4/w==}
+    dependencies:
+      '@types/geojson': 7946.0.14
+      '@types/topojson-specification': 1.0.5
+    dev: true
+
+  /@types/topojson-specification@1.0.5:
+    resolution: {integrity: sha512-C7KvcQh+C2nr6Y2Ub4YfgvWvWCgP2nOQMtfhlnwsRL4pYmmwzBS7HclGiS87eQfDOU/DLQpX6GEscviaz4yLIQ==}
+    dependencies:
+      '@types/geojson': 7946.0.14
+    dev: true
+
   /@types/trusted-types@2.0.7:
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
     dev: true
@@ -4790,6 +4830,10 @@ packages:
   /caniuse-lite@1.0.30001587:
     resolution: {integrity: sha512-HMFNotUmLXn71BQxg8cijvqxnIAofforZOwGsxyXJ0qugTdspUF4sPSJ2vhgprHCB996tIDzEq1ubumPDV8ULA==}
 
+  /canvas-size@1.2.6:
+    resolution: {integrity: sha512-x2iVHOrZ5x9V0Hwx6kBz+Yxf/VCAII+jrD6WLjJbytJLozHq/oDJjEva432Os0eHxWMFR0vYlLJwTr6QxyxQqw==}
+    dev: true
+
   /chai@4.3.10:
     resolution: {integrity: sha512-0UXG04VuVbruMUYbJ6JctvH0YnC/4q3/AkT18q4NaITo91CUm0liMS9VqzT9vZhVQ/1eqPanMWjBM+Juhfb/9g==}
     engines: {node: '>=4'}
@@ -5072,8 +5116,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /d3-geo@3.1.0:
-    resolution: {integrity: sha512-JEo5HxXDdDYXCaWdwLRt79y7giK8SbhZJbFWXqbRTolCHFI5jRqteLzCsq51NKbUoX0PjBVSohxrx+NoOUujYA==}
+  /d3-geo@3.1.1:
+    resolution: {integrity: sha512-637ln3gXKXOwhalDzinUgY83KzNWZRKbYubaG+fGVuc/dxO64RRljtCTnf5ecMyE1RIdtqpkVcq0IbtU2S8j2Q==}
     engines: {node: '>=12'}
     dependencies:
       d3-array: 3.2.4
@@ -5204,7 +5248,7 @@ packages:
       d3-fetch: 3.0.1
       d3-force: 3.0.0
       d3-format: 3.1.0
-      d3-geo: 3.1.0
+      d3-geo: 3.1.1
       d3-hierarchy: 3.1.2
       d3-interpolate: 3.0.1
       d3-path: 3.1.0
@@ -5913,6 +5957,11 @@ packages:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
 
+  /geojson@0.5.0:
+    resolution: {integrity: sha512-/Bx5lEn+qRF4TfQ5aLu6NH+UKtvIv7Lhc487y/c8BdludrCTpiWf9wyI0RTyqg49MFefIAvFDuEi5Dfd/zgNxQ==}
+    engines: {node: '>= 0.10'}
+    dev: true
+
   /get-func-name@2.0.2:
     resolution: {integrity: sha512-8vXOvuE167CtIc3OyItco7N/dpRtBbYOsPsXCz7X/PMnlGjYjSGuZJgM1Y7mmew7BKf9BqvLX2tnOVy1BBUsxQ==}
     dev: true
@@ -6099,6 +6148,10 @@ packages:
   /highlight.js@11.9.0:
     resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
     engines: {node: '>=12.0.0'}
+
+  /hit-canvas@0.1.0:
+    resolution: {integrity: sha512-Zhu5xo03Z9gnzwTUFZ+n5Qo7fOyV4fdsuQnj0eDwi1vwdPjwlKbEfb1Sp2osbX8pPOjzPkXwxuLRMWB3vANMbA==}
+    dev: true
 
   /human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
@@ -7784,6 +7837,14 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /svelte-canvas@1.1.1:
+    resolution: {integrity: sha512-3nZaqhluGnDwpZ9TAV27yh69zA11EguazW2/XL6RgiC4coswznUATD8qUyRXu+xCMlhMoliXhHF1vOvcwg9ZZQ==}
+    dependencies:
+      canvas-size: 1.2.6
+      hit-canvas: 0.1.0
+      svelte: 4.2.8
+    dev: true
+
   /svelte-check@3.6.2(@babel/core@7.23.9)(postcss@8.4.32)(sass@1.69.7)(svelte@4.2.8):
     resolution: {integrity: sha512-E6iFh4aUCGJLRz6QZXH3gcN/VFfkzwtruWSRmlKrLWQTiO6VzLsivR6q02WYLGNAGecV3EocqZuCDrC2uttZ0g==}
     hasBin: true
@@ -8054,6 +8115,13 @@ packages:
     dependencies:
       is-number: 7.0.0
 
+  /topojson-client@3.1.0:
+    resolution: {integrity: sha512-605uxS6bcYxGXw9qi62XyrV6Q3xwbndjachmNxu8HWTtVPxZfEJN9fd/SZS1Q54Sn2y0TMyMxFj/cJINqGHrKw==}
+    hasBin: true
+    dependencies:
+      commander: 2.20.3
+    dev: true
+
   /totalist@3.0.1:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
     engines: {node: '>=6'}
@@ -8288,6 +8356,10 @@ packages:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
       punycode: 2.3.1
+    dev: true
+
+  /us-atlas@3.0.1:
+    resolution: {integrity: sha512-wEIZCq0ImPvGblTd8gZMqNNCPkQshugMUG/8nkSWXb02+XqNFREg9atHOKP9w6prLZTpqcLhSvdBW81MkV3/0Q==}
     dev: true
 
   /util-deprecate@1.0.2:

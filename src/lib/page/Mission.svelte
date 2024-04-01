@@ -27,8 +27,9 @@
 						<h3>Empower</h3>
 					</div>
 					<p>
-						We offer students a real-world STEM experience, and drive students to learn new skills
-						and create particle products that are sent to the International Space Station.
+						We offer students a real-world STEM experience and drive students to learn new skills
+						that are deployed everywhere on NASA,
+						from astronaut training materials to the International Space Station
 					</p>
 				</div>
 			</div>
@@ -42,7 +43,7 @@
 					</div>
 					<p>
 						<span class="accent">NASA Hunch</span> is on a mission to inspire students through our project-based
-						experiences. We encourage students to create new innovations and discover their passions.
+						experiences. We encourage students to innovate and discover their passions.
 					</p>
 				</div>
 			</div>
@@ -56,7 +57,7 @@
 					</div>
 					<p>
 						Participants are prepared for the real-world. Our program focuses on critical thinking
-						and problem solving skills. We expose students to rigorous challenges and cultivate
+						and problem-solving skills. We expose students to rigorous challenges and cultivate
 						collaboration and communication skills.
 					</p>
 				</div>
@@ -68,6 +69,7 @@
 <style lang="scss">
 	.accent {
 		color: $primary;
+		font-family: inherit;
 	}
 
 	.wrap {
@@ -99,7 +101,9 @@
 	h2 {
 		width: 100%;
 		text-align: center;
-		font-size: 2.5rem;
+		font-size: 3rem;
+		font-weight: 500;
+		font-family: 'Lexend Variable', sans-serif;
 	}
 	.cards {
 		display: flex;
