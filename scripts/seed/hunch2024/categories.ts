@@ -76,8 +76,8 @@ export async function main(client: PrismaClient) {
 			const content = await fs.readFile(path.join(currentDirectory, 'projects', file), 'utf-8');
 			const { attributes, body } = frontMatter(content);
 			const html = converter.makeHtml(body);
-			const { name, category } = attributesSchema.parse(attributes);
-			return { html, name, categories: category };
+			const { name, category, shortDescription } = attributesSchema.parse(attributes);
+			return { html, name, categories: category, shortDescription };
 		})
 	);
 

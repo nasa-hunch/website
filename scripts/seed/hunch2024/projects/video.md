@@ -1,6 +1,7 @@
 ---
 name: Why Go To The Moon?
 category: [Video & Media]
+shortDescription: This video challenge invites students from K-8, high school, and post-secondary levels to showcase space exploration preparations and the CTE courses and careers needed for them, with awards given to the best videos in each category.
 ---
 
 This is for _K-8 Students_, _High School Students_, and _Post-Secondary Students_.

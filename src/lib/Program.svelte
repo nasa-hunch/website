@@ -5,6 +5,7 @@
 		id: number;
 		name: string;
 		description: string;
+		shortDescription: string;
 	}[] = [];
 </script>
 
@@ -30,7 +31,7 @@
 					{#each projectTemplates as project}
 						<a class="project" href="/projects/{project.id}">
 							<h3>{project.name}</h3>
-							<p>{project.description}</p>
+							<p>{@html project.shortDescription}</p>
 						</a>
 					{/each}
 				{:else}

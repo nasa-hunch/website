@@ -1,6 +1,7 @@
 ---
 name: Defending the Smart Lunar Building - Cyber Security for Control Systems
 category: [Software]
+shortDescription: Protecting smart lunar buildings and space-bound structures from cyber attacks is crucial for ensuring the safety and integrity of data, systems, and communications.
 ---
 
 As we embark on a new era of space exploration, the need for cyber security in smart lunar buildings, space stations, satellites, and other space-bound structures increases.

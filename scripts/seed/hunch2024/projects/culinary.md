@@ -1,6 +1,7 @@
 ---
 name: Savory Breakfast Item that includes a Vegetable.
 category: [Culinary]
+shortDescription: A culinary project exploring savory breakfast items that include vegetables.
 ---
 
 ## Space Physiology and Astronaut Nutrition Video

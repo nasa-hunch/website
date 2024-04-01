@@ -1,6 +1,7 @@
 ---
 name: Lunar Art
 category: [Design & Prototype]
+shortDescription: Lunar Art project aims to explore the possibilities of creating art on the moon and how it can inspire astronauts and the public alike.
 ---
 
 NASA has a long history of art connections. Walls and hallways at

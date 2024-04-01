@@ -1,6 +1,7 @@
 ---
 name: Biofilms and Keeping Water Clean
 category: [Biomedical Science]
+shortDescription: Investigating the impact of microgravity on microbial growth, biofilm formation, and pathogenicity in order to develop strategies for keeping water clean in space.
 ---
 
 ​Microbial growth, biofilm formation, stress response, and pathogenicity are affected by microgravity. Increased resistance to antibiotics in bacteria isolated from the ISS has often been reported. Enterococcus faecalis and Staphylococcus spp. isolates from the ISS have been shown to harbor plasmid-encoded transfer genes.

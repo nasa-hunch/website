@@ -1,6 +1,7 @@
 ---
 name: Space-based Medical Inventory System
 category: [Software, Biomedical Science]
+shortDescription: Our Space-based Medical Inventory System is a comprehensive solution for managing medical supplies in space exploration missions, ensuring the health and safety of astronauts.
 ---
 
 Our Space-based Medical Inventory System is the perfect solution for any space exploration mission. It is designed to monitor and manage every aspect of medical supplies, from ordering and receiving to storage and usage. This system is critical to ensure the health and safety of your astronauts, as it enables you to keep track of medical supplies in case of an emergency. With our advanced features and tailored solutions, it is the perfect tool for any space exploration mission.

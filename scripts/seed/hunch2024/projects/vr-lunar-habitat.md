@@ -1,6 +1,7 @@
 ---
 name: VR Lunar Habitat Project
 category: [Design & Prototype]
+shortDescription: A virtual reality project to visualize and plan a multi-room lunar habitat for future space missions.
 ---
 
 [See the full PDF](https://www.hunchdesign.com/uploads/2/2/0/9/22093000/vr_lunar_habitat_--10-20.pdf)

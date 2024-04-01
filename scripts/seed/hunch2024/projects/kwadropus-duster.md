@@ -1,6 +1,7 @@
 ---
 name: Kwadropus Duster
 category: [Design & Prototype]
+shortDescription: Kwadropus Duster is a robotic cleaning device designed to assist NASA in maintaining cleanliness in their space stations.
 ---
 
 Help NASA keep their various space stations clean.

@@ -1,6 +1,7 @@
 ---
 name: Lunar Bamboo Greenhouse
 category: [Design & Prototype]
+shortDescription: A lunar bamboo greenhouse designed to remove carbon dioxide, supply oxygen, and serve as a structural material on the moon.
 ---
 
 Can bamboo be used to remove carbon

@@ -1,6 +1,7 @@
 ---
 name: Multi-Tool Badge Holder
 category: [Design & Prototype]
+shortDescription: A versatile badge holder that combines functionality with convenience, allowing users to carry essential tools while keeping their identification badge easily accessible.
 ---
 
 Everybody at NASA and lots of other people have to wear identification badges. They are worn whenever at work but also lots of times when not on site or not at work but still doing our jobs. Since it is always on your person, why not make it hold something or somethings that you often need to do your job but don’t always carry (forgetfulness)?

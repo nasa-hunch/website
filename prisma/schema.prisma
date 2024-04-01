@@ -105,6 +105,7 @@ model Project {
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
   description String @db.Text
+  shortDescription String @db.Text
   organization Organization @relation(fields: [orgId], references: [id])
   orgId Int
   users ProjectUser[] @relation("users")

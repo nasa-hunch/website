@@ -1,6 +1,7 @@
 ---
 name: Mental Health in Space
 category: [Biomedical Science]
+shortDescription: A project focused on addressing mental health issues faced by astronauts during long-duration space missions.
 ---
 
 Astronauts on long–duration
