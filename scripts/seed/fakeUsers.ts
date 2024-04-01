@@ -49,7 +49,7 @@ async function main() {
 			do {
 				firstName = faker.person.firstName();
 				lastName = faker.person.lastName();
-				email = faker.internet.email({ firstName, lastName });
+				email = faker.internet.email({ firstName, lastName }).toLowerCase();
 			} while (emails.includes(email));
 			return {
 				firstName,
