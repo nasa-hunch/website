@@ -121,7 +121,7 @@
 	.cardInner {
 		background: #f1f1f1;
 		box-sizing: border-box;
-		padding: 10px;
+		padding: 2rem;
 		border-radius: 10px;
 		height: 100%;
 	}
