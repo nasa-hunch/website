@@ -64,5 +64,5 @@
 
 <Hero image={NonTransparent} image2={Transparent} {title} />
 <Mission />
-<Map animate />
+<Map />
 <Gallery galleryImages={gallery} title="Explore Our Programs" />

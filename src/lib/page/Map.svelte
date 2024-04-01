@@ -6,7 +6,7 @@
 	import { Canvas, Layer, type Render } from 'svelte-canvas';
 	import { mesh } from 'topojson-client';
 	import type { Objects, Topology } from 'topojson-specification';
-	import usRaw from 'us-atlas/states-albers-10m.json';
+	import usRaw from 'us-atlas/counties-albers-10m.json';
 
 	const opacity = tweened(0.01, {
 		duration: 1000,
@@ -14,7 +14,7 @@
 	});
 
 	const opacityElements = tweened(0.01, {
-		duration: 3000,
+		duration: 5000,
 		easing: cubicOut
 	});
 
@@ -24,13 +24,10 @@
 
 	const us = usRaw as unknown as Topology<Objects<GeoJsonProperties>>;
 
-	export let animate = false;
-
 	let width: number;
 
 	$: projection = geoIdentity().scale(width / 975);
 	$: path = geoPath(projection);
-	const usMesh = mesh(us, usRaw.objects.states);
 	$: geoAlbersInstance = geoAlbersUsa().scale(1300).translate([487.5, 305]);
 
 	let pixelData: [number, number][];
@@ -65,15 +62,19 @@
 	<div
 		class="canvas"
 		on:inview_enter={() => {
-            if (!animate) return;
-			opacity.set(1);
+			opacity.set(2);
 			opacityElements.set(2);
 		}}
 		use:inview={{ unobserveOnEnter: true }}
 	>
 		<svg style="opacity: {$opacity}">
 			{#if us}
-				<path d={path(usMesh)} />
+				<path d={path(mesh(us, usRaw.objects.states))} />
+			{/if}
+		</svg>
+		<svg style="opacity: {$opacity / 2.5 - 0.5}">
+			{#if us}
+				<path d={path(mesh(us, usRaw.objects.counties))} />
 			{/if}
 		</svg>
 		<Canvas style="position: absolute" autoplay on:resize={({ detail }) => (width = detail.width)}>
@@ -108,12 +109,16 @@
 		height: 100%;
 		width: 80%;
 		aspect-ratio: 975 / 610;
+		border: 4px solid black;
+		border-radius: 1rem;
 	}
 
 	svg {
 		position: absolute;
 		width: 100%;
 		height: 100%;
+		aspect-ratio: 975 / 610;
+		border-radius: 1rem;
 	}
 
 	path {
