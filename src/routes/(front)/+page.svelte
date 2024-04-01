@@ -4,8 +4,8 @@
 	import Transparent from '$lib/landing/images/transparent.png';
 	import type { GalleryImage } from '$lib/page/Gallery.svelte';
 	import Gallery from '$lib/page/Gallery.svelte';
-	import Mission from '$lib/page/Mission.svelte';
 	import Map from '$lib/page/Map.svelte';
+	import Mission from '$lib/page/Mission.svelte';
 
 	const title = 'NASA Hunch';
 

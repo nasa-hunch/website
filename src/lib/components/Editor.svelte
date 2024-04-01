@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
-
 	import ExtensionBlockquote from '@tiptap/extension-blockquote';
 	import ExtensionBold from '@tiptap/extension-bold';
 	import ExtensionBulletList from '@tiptap/extension-bullet-list';
@@ -39,7 +37,8 @@
 	import ExtensionTextStyle from '@tiptap/extension-text-style';
 	import ExtensionTypography from '@tiptap/extension-typography';
 	import ExtensionUnderline from '@tiptap/extension-underline';
-	import { createLowlight, common } from 'lowlight';
+	import { common,createLowlight } from 'lowlight';
+	import { onDestroy,onMount } from 'svelte';
 
 	let element: HTMLDivElement;
 	let editor: Editor;
@@ -115,7 +114,7 @@
 </script>
 
 {#if name}
-	<input hidden type="text" {name} value={content} />
+	<input {name} hidden type="text" value={content} />
 {/if}
 
 <div bind:this={element} />

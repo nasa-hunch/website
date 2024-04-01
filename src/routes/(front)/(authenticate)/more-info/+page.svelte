@@ -1,10 +1,10 @@
 <script lang="ts">
+	import MdiAccountStudent from '~icons/mdi/account-student';
+	import MdiShieldAccount from '~icons/mdi/shield-account';
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import InlineButton from '$lib/components/InlineButton.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import MdiAccountStudent from '~icons/mdi/account-student';
-	import MdiShieldAccount from '~icons/mdi/shield-account';
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
@@ -23,13 +23,13 @@
 			<div class="buttons">
 				<form action="?/setRoleStudent" method="post" use:enhance>
 					<button class="bigButton">
-						<MdiAccountStudent width="50%" height="50%" aria-hidden />
+						<MdiAccountStudent aria-hidden height="50%" width="50%" />
 						<p>Student</p>
 					</button>
 				</form>
 				<form action="?/setRoleTeacher" method="post" use:enhance>
 					<button class="bigButton">
-						<MdiShieldAccount width="50%" height="50%" aria-hidden />
+						<MdiShieldAccount aria-hidden height="50%" width="50%" />
 						<p>Teacher/Admin</p>
 					</button>
 				</form>

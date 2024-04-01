@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { Canvas, type Render, Layer } from 'svelte-canvas';
-	import type { Topology, Objects } from 'topojson-specification';
-	import type { GeoJsonProperties } from 'geojson';
-	import { feature, mesh } from 'topojson-client';
 	import { geoAlbersUsa, geoIdentity, geoPath } from 'd3-geo';
+	import type { GeoJsonProperties } from 'geojson';
+	import { Canvas, Layer,type Render } from 'svelte-canvas';
+	import { feature, mesh } from 'topojson-client';
+	import type { Objects,Topology } from 'topojson-specification';
 	import usRaw from 'us-atlas/states-albers-10m.json';
+
 	import { data } from './map/data';
 
 	const us = usRaw as unknown as Topology<Objects<GeoJsonProperties>>;
@@ -50,7 +51,7 @@
 				<path d={path(usMesh)} />
 			{/if}
 		</svg>
-		<Canvas on:resize={({ detail }) => (width = detail.width)} style="position: absolute" autoplay>
+		<Canvas style="position: absolute" autoplay on:resize={({ detail }) => (width = detail.width)}>
 			<Layer {render} />
 		</Canvas>
 	</div>
