@@ -37,8 +37,8 @@
 	import ExtensionTextStyle from '@tiptap/extension-text-style';
 	import ExtensionTypography from '@tiptap/extension-typography';
 	import ExtensionUnderline from '@tiptap/extension-underline';
-	import { common,createLowlight } from 'lowlight';
-	import { onDestroy,onMount } from 'svelte';
+	import { common, createLowlight } from 'lowlight';
+	import { onDestroy, onMount } from 'svelte';
 
 	let element: HTMLDivElement;
 	let editor: Editor;

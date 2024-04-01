@@ -10,11 +10,9 @@
 
 	let fileBox: HTMLInputElement;
 	let fileUploadButton: HTMLButtonElement;
-	let uploadPromise: Promise<unknown>;
 
 	const dropHandler = (e: DragEvent) => {
 		e.preventDefault();
-		dragging = false;
 		if (!e.dataTransfer) {
 			return;
 		}
@@ -23,14 +21,7 @@
 		dispatch('startUpload');
 	};
 	const dragOverHandler = (e: Event) => {
-		dragging = true;
 		e.preventDefault();
-	};
-
-	let dragging = false;
-
-	const stopDragOver = () => {
-		dragging = false;
 	};
 </script>
 
@@ -43,7 +34,6 @@
 	class="dragField"
 	on:dragover={dragOverHandler}
 	on:drop={dropHandler}
-	on:dragleave={stopDragOver}
 >
 	<slot />
 </button>

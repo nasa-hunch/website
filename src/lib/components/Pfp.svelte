@@ -10,8 +10,6 @@
 	export let size = '24px';
 	export let marginRight = '10px';
 
-	let image: HTMLImageElement;
-
 	let imageSrc = user.pfp;
 
 	const tryPfp = async () => {

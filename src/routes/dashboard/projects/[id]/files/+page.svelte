@@ -16,7 +16,6 @@
 	import IconDownload from '~icons/mdi/download';
 	import IconFile from '~icons/mdi/file';
 	import IconImage from '~icons/mdi/image';
-	import { enhance } from '$app/forms';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import DragDropUpload from '$lib/components/DragDropUpload.svelte';

@@ -1,14 +1,30 @@
 <script lang="ts">
 	import { geoAlbersUsa, geoIdentity, geoPath } from 'd3-geo';
 	import type { GeoJsonProperties } from 'geojson';
-	import { Canvas, Layer,type Render } from 'svelte-canvas';
-	import { feature, mesh } from 'topojson-client';
-	import type { Objects,Topology } from 'topojson-specification';
+	import { cubicOut } from 'svelte/easing';
+	import { tweened } from 'svelte/motion';
+	import { Canvas, Layer, type Render } from 'svelte-canvas';
+	import { mesh } from 'topojson-client';
+	import type { Objects, Topology } from 'topojson-specification';
 	import usRaw from 'us-atlas/states-albers-10m.json';
+
+	const opacity = tweened(0.01, {
+		duration: 1000,
+		easing: cubicOut
+	});
+
+	const opacityElements = tweened(0.01, {
+		duration: 3000,
+		easing: cubicOut
+	});
+
+	import { inview } from 'svelte-inview';
 
 	import { data } from './map/data';
 
 	const us = usRaw as unknown as Topology<Objects<GeoJsonProperties>>;
+
+	export let animate = false;
 
 	let width: number;
 
@@ -33,10 +49,11 @@
 		.filter((x) => Array.isArray(x) && x.length === 2) as [number, number][];
 
 	const render: Render = ({ context }) => {
-		for (const [x, y] of pixelData) {
+		for (let i = 0; i < pixelData.length; i++) {
+			const [x, y] = pixelData[i];
 			context.beginPath();
 			context.arc(x, y, 2, 0, 2 * Math.PI);
-			context.fillStyle = '#dd361c';
+			context.fillStyle = `rgba(221, 54, 28, ${$opacityElements - i / pixelData.length})`;
 			context.fill();
 		}
 	};
@@ -45,8 +62,16 @@
 <h2>Connecting Students <span class="accent">Nationwide</span></h2>
 
 <div class="wrap">
-	<div class="canvas">
-		<svg>
+	<div
+		class="canvas"
+		on:inview_enter={() => {
+            if (!animate) return;
+			opacity.set(1);
+			opacityElements.set(2);
+		}}
+		use:inview={{ unobserveOnEnter: true }}
+	>
+		<svg style="opacity: {$opacity}">
 			{#if us}
 				<path d={path(usMesh)} />
 			{/if}

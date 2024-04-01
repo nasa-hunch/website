@@ -2,7 +2,7 @@
 	<slot />
 </div>
 
-<style>
+<style lang="scss">
 	.container {
 		margin: 2rem;
 	}

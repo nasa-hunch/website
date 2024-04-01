@@ -2,7 +2,6 @@
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import Navbar from '$lib/Navbar.svelte';
 
 	import type { ActionData } from './$types';
 	export let form: ActionData;
