@@ -6,50 +6,50 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
 import { S3 } from '$lib/server/storage/s3.js';
 
 export const uploadFile = async (request: Request, projectId?: number) => {
-  const formData = await request.formData();
-  const uploadFile: File = formData.get('file') as File;
-  const key = crypto.randomBytes(32).toString('hex') + '/' + uploadFile.name;
+	const formData = await request.formData();
+	const uploadFile: File = formData.get('file') as File;
+	const key = crypto.randomBytes(32).toString('hex') + '/' + uploadFile.name;
 
-  console.log('Upload Triggered');
+	console.log('Upload Triggered');
 
-  if (uploadFile.size > 10e6) {
-    return {
-      success: false,
-      message: 'File too large.'
-    };
-  }
+	if (uploadFile.size > 10e6) {
+		return {
+			success: false,
+			message: 'File too large.'
+		};
+	}
 
-  const fileBuffer = await uploadFile.arrayBuffer();
+	const fileBuffer = await uploadFile.arrayBuffer();
 
-  if (!fileBuffer) {
-    return {
-      success: false,
-      message: 'No file sent.'
-    };
-  }
+	if (!fileBuffer) {
+		return {
+			success: false,
+			message: 'No file sent.'
+		};
+	}
 
-  await S3.send(
-    new PutObjectCommand({
-      Bucket: bucket,
-      Key: key,
-      Body: new Uint8Array(fileBuffer)
-    })
-  );
+	await S3.send(
+		new PutObjectCommand({
+			Bucket: bucket,
+			Key: key,
+			Body: new Uint8Array(fileBuffer)
+		})
+	);
 
-  await prisma.file.create({
-    data: {
-      projectId: projectId,
-      name: uploadFile.name,
-      key: key,
-      link: `${mediaurl}/${key}`,
-      size: uploadFile.size
-    }
-  });
+	await prisma.file.create({
+		data: {
+			projectId: projectId,
+			name: uploadFile.name,
+			key: key,
+			link: `${mediaurl}/${key}`,
+			size: uploadFile.size
+		}
+	});
 
-  return {
-    success: true,
-    message: 'File Uploaded',
-    key,
-    link: `${mediaurl}/${key}`
-  };
+	return {
+		success: true,
+		message: 'File Uploaded',
+		key,
+		link: `${mediaurl}/${key}`
+	};
 };
