@@ -35,7 +35,6 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-		border-top: 2px solid black;
 
 		div.right {
 			display: flex;
