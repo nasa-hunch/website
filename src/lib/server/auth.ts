@@ -9,32 +9,32 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
  * Throws a redirect if the session is invalid.
  */
 export async function validateSession(
-	session: string | undefined,
-	include: Prisma.UserInclude = {}
+  session: string | undefined,
+  include: Prisma.UserInclude = {}
 ) {
-	if (!session) {
-		redirect(303, '/login');
-	}
+  if (!session) {
+    redirect(303, '/login');
+  }
 
-	const sessionInstance = await prisma.session.findFirst({
-		where: {
-			sessionText: session
-		},
-		include: {
-			user: {
-				include: {
-					...include
-				}
-			}
-		}
-	});
+  const sessionInstance = await prisma.session.findFirst({
+    where: {
+      sessionText: session
+    },
+    include: {
+      user: {
+        include: {
+          ...include
+        }
+      }
+    }
+  });
 
-	const user = sessionInstance?.user;
+  const user = sessionInstance?.user;
 
-	// We have a valid session!
-	if (!user) {
-		redirect(303, '/login');
-	}
+  // We have a valid session!
+  if (!user) {
+    redirect(303, '/login');
+  }
 
-	return user;
+  return user;
 }

@@ -1,248 +1,247 @@
 <script lang="ts">
-	export let form: {
-		message: string;
-		success?: boolean;
-	} | null;
+  export let form: {
+    message: string;
+    success?: boolean;
+  } | null;
 
-	import dayjs from 'dayjs';
-	import localizedFormat from 'dayjs/plugin/localizedFormat';
-	import { toast } from 'svelte-french-toast';
+  import dayjs from 'dayjs';
+  import localizedFormat from 'dayjs/plugin/localizedFormat';
+  import { toast } from 'svelte-french-toast';
 
-	import Button from '$lib/components/Button.svelte';
-	import Modal from '$lib/components/Modal.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
-	dayjs.extend(localizedFormat);
+  import Button from '$lib/components/Button.svelte';
+  import Modal from '$lib/components/Modal.svelte';
+  import ModelForm from '$lib/components/ModalForm.svelte';
+  dayjs.extend(localizedFormat);
 
-	import IconTrash from '~icons/mdi/delete-outline';
-	import IconDownload from '~icons/mdi/download';
+  import IconTrash from '~icons/mdi/delete-outline';
+  import IconDownload from '~icons/mdi/download';
+  import { pushState } from '$app/navigation';
+  import { page } from '$app/stores';
+  import InTextInput from '$lib/components/InTextInput.svelte';
+  import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
+  import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
 
-	import { pushState } from '$app/navigation';
-	import { page } from '$app/stores';
-	import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
-	import InTextInput from '$lib/components/InTextInput.svelte';
-	import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
+  export let files: {
+    name: string;
+    link: string;
+    id: number;
+    size: number;
+    updatedAt: Date;
+  }[];
 
-	export let files: {
-		name: string;
-		link: string;
-		id: number;
-		size: number;
-		updatedAt: Date;
-	}[];
+  let uploadResolve: (value?: unknown) => void, uploadReject: (value?: unknown) => void;
+  let uploadPromise = new Promise((resolve, reject) => {
+    uploadResolve = resolve;
+    uploadReject = reject;
+  });
 
-	let uploadResolve: (value?: unknown) => void, uploadReject: (value?: unknown) => void;
-	let uploadPromise = new Promise((resolve, reject) => {
-		uploadResolve = resolve;
-		uploadReject = reject;
-	});
+  $: if (form) {
+    console.log(form);
+    if (form.success) {
+      uploadResolve();
+    } else {
+      uploadReject();
+    }
+    form = null;
+  }
 
-	$: if (form) {
-		console.log(form);
-		if (form.success) {
-			uploadResolve();
-		} else {
-			uploadReject();
-		}
-		form = null;
-	}
+  let doingFileDeleteOn: string;
+  let doingFileDeleteOnId: number;
+  const deleteFile = (id: number, fileName: string) => {
+    doingFileDeleteOnId = id;
+    doingFileDeleteOn = fileName;
+    pushState('', { modal: 'deleteFile' });
+  };
 
-	let doingFileDeleteOn: string;
-	let doingFileDeleteOnId: number;
-	const deleteFile = (id: number, fileName: string) => {
-		doingFileDeleteOnId = id;
-		doingFileDeleteOn = fileName;
-		pushState('', { modal: 'deleteFile' });
-	};
+  const startFileUpload = () => {
+    uploadPromise = new Promise((resolve, reject) => {
+      uploadResolve = resolve;
+      uploadReject = reject;
+    });
 
-	const startFileUpload = () => {
-		uploadPromise = new Promise((resolve, reject) => {
-			uploadResolve = resolve;
-			uploadReject = reject;
-		});
+    toast.promise(uploadPromise, {
+      loading: 'Uploading File...',
+      success: form?.message || 'File Uploaded!',
+      error: form?.message || 'Could not upload file.'
+    });
+  };
 
-		toast.promise(uploadPromise, {
-			loading: 'Uploading File...',
-			success: form?.message || 'File Uploaded!',
-			error: form?.message || 'Could not upload file.'
-		});
-	};
+  const deleteFileSubmit = () => {
+    uploadPromise = new Promise((resolve, reject) => {
+      uploadResolve = resolve;
+      uploadReject = reject;
+    });
 
-	const deleteFileSubmit = () => {
-		uploadPromise = new Promise((resolve, reject) => {
-			uploadResolve = resolve;
-			uploadReject = reject;
-		});
+    toast.promise(uploadPromise, {
+      loading: 'Deleting File...',
+      success: form?.message || 'File Deleted!',
+      error: form?.message || 'Could not delete file.'
+    });
+  };
 
-		toast.promise(uploadPromise, {
-			loading: 'Deleting File...',
-			success: form?.message || 'File Deleted!',
-			error: form?.message || 'Could not delete file.'
-		});
-	};
+  const fileNameChange = () => {
+    uploadPromise = new Promise((resolve, reject) => {
+      uploadResolve = resolve;
+      uploadReject = reject;
+    });
 
-	const fileNameChange = () => {
-		uploadPromise = new Promise((resolve, reject) => {
-			uploadResolve = resolve;
-			uploadReject = reject;
-		});
-
-		toast.promise(uploadPromise, {
-			loading: 'Updating File...',
-			success: form?.message || 'File Updated!',
-			error: form?.message || 'Could not update file.'
-		});
-	};
+    toast.promise(uploadPromise, {
+      loading: 'Updating File...',
+      success: form?.message || 'File Updated!',
+      error: form?.message || 'Could not update file.'
+    });
+  };
 </script>
 
 {#if $page.state.modal === 'deleteFile'}
-	<Modal on:close={() => history.back()}>
-		<ModelForm action="?/deleteFile" method="post" on:submit={deleteFileSubmit}>
-			<div class="deleteForm">
-				<input name="fileId" hidden value={doingFileDeleteOnId} />
-				<h2>Are you sure?</h2>
-				<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
-				<Button type="submit" value="Confirm" />
-			</div>
-		</ModelForm>
-	</Modal>
+  <Modal on:close={() => history.back()}>
+    <ModelForm action="?/deleteFile" method="post" on:submit={deleteFileSubmit}>
+      <div class="deleteForm">
+        <input name="fileId" hidden value={doingFileDeleteOnId} />
+        <h2>Are you sure?</h2>
+        <p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
+        <Button type="submit" value="Confirm" />
+      </div>
+    </ModelForm>
+  </Modal>
 {/if}
 
 <div class="wrap">
-	<p>Drag and drop files to upload.</p>
-	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload}>
-		<table class="fileList">
-			<thead>
-				<tr>
-					<th scope="col">Name</th>
-					<th scope="col">Size</th>
-					<th scope="col">Modified</th>
-					<th scope="col">Deliverable</th>
-					<th scope="col">Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each files as file}
-					<tr class="file">
-						<th class="name" scope="row">
-							<div class="icon">
-								<svelte:component this={extensionSupport(file.name)} />
-							</div>
-							<InTextInput
-								name="fileName"
-								action="?/renameFile"
-								value={file.name}
-								on:submit={fileNameChange}
-							>
-								<input name="fileId" value={file.id} />
-							</InTextInput>
-						</th>
-						<td>
-							{file.size}
-						</td>
-						<td>
-							{dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
-						</td>
-						<td>
-							{file.size}
-						</td>
-						<td class="actionsRow">
-							<a class="iconButton" href={file.link}>
-								<IconDownload />
-							</a>
-							<button
-								class="iconButton"
-								on:click={() => {
-									deleteFile(file.id, file.name);
-								}}
-							>
-								<IconTrash />
-							</button>
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</DragDropUpload>
+  <p>Drag and drop files to upload.</p>
+  <DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload}>
+    <table class="fileList">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Size</th>
+          <th scope="col">Modified</th>
+          <th scope="col">Deliverable</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {#each files as file}
+          <tr class="file">
+            <th class="name" scope="row">
+              <div class="icon">
+                <svelte:component this={extensionSupport(file.name)} />
+              </div>
+              <InTextInput
+                name="fileName"
+                action="?/renameFile"
+                value={file.name}
+                on:submit={fileNameChange}
+              >
+                <input name="fileId" value={file.id} />
+              </InTextInput>
+            </th>
+            <td>
+              {file.size}
+            </td>
+            <td>
+              {dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
+            </td>
+            <td>
+              {file.size}
+            </td>
+            <td class="actionsRow">
+              <a class="iconButton" href={file.link}>
+                <IconDownload />
+              </a>
+              <button
+                class="iconButton"
+                on:click={() => {
+                  deleteFile(file.id, file.name);
+                }}
+              >
+                <IconTrash />
+              </button>
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+  </DragDropUpload>
 </div>
 
 <style lang="scss">
-	.fileList {
-		width: 100%;
-		height: 100%;
-		margin-top: 20px;
-		background: $background-alt;
-		position: relative;
-		z-index: 2;
-		padding: 10px;
-		border-radius: 10px;
-		overflow-x: hidden;
-		box-sizing: border-box;
-	}
-	.file {
-		text-wrap: nowrap;
+  .fileList {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    background: $background-alt;
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+    border-radius: 10px;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  .file {
+    text-wrap: nowrap;
 
-		align-items: center;
-		justify-content: start;
-		padding: 10px 5px;
-		font-size: 1.1rem;
-		border-bottom: 1px solid $background2;
+    align-items: center;
+    justify-content: start;
+    padding: 10px 5px;
+    font-size: 1.1rem;
+    border-bottom: 1px solid $background2;
 
-		.icon {
-			margin-right: 5px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-	}
-	.uploadFileThing::after {
-		position: absolute;
-		content: '';
-		background: $background;
-		top: 0px;
-		left: 0px;
-		height: 100%;
-		width: 100%;
-		opacity: 0.5;
-		z-index: 1;
-		border-radius: 5px 0px 0px 5px;
-	}
-	.name {
-		display: flex;
-		flex-direction: row;
-		overflow-x: hidden;
-	}
-	td {
-		text-align: left;
-	}
-	tr {
-		text-align: left;
-	}
+    .icon {
+      margin-right: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .uploadFileThing::after {
+    position: absolute;
+    content: '';
+    background: $background;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    z-index: 1;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .name {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+  }
+  td {
+    text-align: left;
+  }
+  tr {
+    text-align: left;
+  }
 
-	.actionsRow {
-		display: flex;
-		align-items: center;
-		justify-content: start;
-	}
+  .actionsRow {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
 
-	.iconButton {
-		all: unset;
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 100%;
-		padding: 5px;
-		border-radius: 50%;
-	}
-	.iconButton:hover {
-		background: $background2;
-	}
-	.deleteForm {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-		height: 100%;
-		align-items: center;
-		justify-content: center;
-	}
+  .iconButton {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  .iconButton:hover {
+    background: $background2;
+  }
+  .deleteForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
