@@ -141,7 +141,6 @@
 	@media (max-width: 768px) {
 		nav {
 			flex-direction: column;
-			position: static;
 		}
 
 		.logoLink {
