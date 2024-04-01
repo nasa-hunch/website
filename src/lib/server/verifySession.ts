@@ -7,7 +7,7 @@ export const verifySession = async (cookies: Cookies, role?: Role) => {
 	const session = cookies.get('session');
 
 	if (!session) {
-		redirect(303, '/login');
+		throw redirect(303, '/login');
 	}
 
 	const sessionCheck = await prisma.session.findFirst({
@@ -20,11 +20,11 @@ export const verifySession = async (cookies: Cookies, role?: Role) => {
 	});
 
 	if (!sessionCheck?.user) {
-		redirect(303, '/login');
+		throw redirect(303, '/login');
 	}
 
 	if (role && sessionCheck.user.role != role) {
-		redirect(303, '/login');
+		throw redirect(303, '/login');
 	}
 
 	return sessionCheck.user;

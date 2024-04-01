@@ -37,9 +37,10 @@ export const actions = {
 		});
 
 		if (projectUser?.permission != ProjectUserPermission.EDITOR && user.role != 'HUNCH_ADMIN') {
+			console.log("No permissions")
 			return {
 				success: false,
-				message: 'No Permissions'
+				message: 'No file sent.'
 			};
 		}
 

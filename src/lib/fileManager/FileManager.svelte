@@ -61,9 +61,9 @@
 		});
 
 		toast.promise(uploadPromise, {
-			loading: 'Deleting File...',
-			success: form?.message || 'File Deleted!',
-			error: form?.message || 'Could not delete file.'
+			loading: 'Uploading File...',
+			success: form?.message || 'File Uploaded!',
+			error: form?.message || 'Could not upload file.'
 		});
 	};
 
