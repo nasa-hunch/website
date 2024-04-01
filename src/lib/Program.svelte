@@ -35,7 +35,7 @@
 						</a>
 					{/each}
 				{:else}
-					<p><i>No projects yet</i></p>
+					<p><i>No projects yet!</i></p>
 				{/if}
 			</div>
 		</div>
