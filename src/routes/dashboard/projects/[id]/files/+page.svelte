@@ -1,9 +1,9 @@
 <script>
-  import FileManager from '$lib/fileManager/FileManager.svelte';
-  export let form;
-  export let data;
+	import FileManager from '$lib/fileManager/FileManager.svelte';
+	export let form;
+	export let data;
 
-  $: console.log(form);
+	$: console.log(form);
 </script>
 
 <FileManager files={data.files} bind:form />
