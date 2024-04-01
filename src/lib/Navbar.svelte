@@ -35,6 +35,7 @@
 	<a class="logoLink" href="/">
 		<img alt="NASA Hunch Logo" src="/favicon.png" />
 	</a>
+	{#if open}
 	<ul class="navInner">
 		{#each links as link}
 			<li class="navbutton {link.special ? 'specialButton' : 'navRegularLink'}">
@@ -42,6 +43,7 @@
 			</li>
 		{/each}
 	</ul>
+	{/if}
 </nav>
 
 <style lang="scss">
