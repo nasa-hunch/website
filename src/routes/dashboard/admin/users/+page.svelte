@@ -76,7 +76,6 @@
 
 	<table>
 		<tr class="headRow">
-			<th class="idRow">ID</th>
 			<th>Email</th>
 			<th>First Name</th>
 			<th>Last Name</th>
@@ -85,7 +84,6 @@
 		</tr>
 		{#each data.userList as user}
 			<tr>
-				<td class="idRow">{user.id}</td>
 				<td>{user.email}</td>
 				<td>{user.firstName}</td>
 				<td>{user.lastName}</td>
@@ -115,7 +113,6 @@
 
 <style lang="scss">
 	main {
-		margin: 1rem;
 		width: 100%;
 		box-sizing: border-box;
 	}
@@ -151,9 +148,5 @@
 	}
 	h2 {
 		text-align: center;
-	}
-
-	.idRow {
-		width: 220px;
 	}
 </style>
