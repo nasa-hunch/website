@@ -53,8 +53,6 @@ async function main() {
 			},
 			projects: {
 				create: {
-					name: 'Test Project',
-					description: 'This is a test project.',
 					joinCode: 123456,
 					users: {
 						create: {

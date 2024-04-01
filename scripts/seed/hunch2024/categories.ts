@@ -51,7 +51,8 @@ const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 
 const attributesSchema = z.object({
 	name: z.string(),
-	category: z.array(z.string())
+	category: z.array(z.string()),
+	shortDescription: z.string()
 });
 
 export async function main(client: PrismaClient) {
@@ -84,7 +85,7 @@ export async function main(client: PrismaClient) {
 		})
 	);
 
-	for (const { html, name, categories } of transformedFiles) {
+	for (const { html, name, categories, shortDescription } of transformedFiles) {
 		const categoryInDatabase = await client.category.findFirst({
 			where: {
 				name: {
@@ -106,7 +107,8 @@ export async function main(client: PrismaClient) {
 					}
 				},
 				deadline: deadline(),
-				description: html
+				description: html,
+				shortDescription
 			}
 		});
 	}

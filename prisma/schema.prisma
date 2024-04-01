@@ -103,9 +103,6 @@ model Project {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  name String @db.VarChar(255)
-  description String @db.Text
-  shortDescription String @db.Text
   organization Organization @relation(fields: [orgId], references: [id])
   orgId Int
   users ProjectUser[] @relation("users")
@@ -124,6 +121,7 @@ model ProjectTemplate {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
+  shortDescription String @db.Text
   description String
   deadline DateTime
   categoryId Int

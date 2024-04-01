@@ -39,6 +39,7 @@ export const actions = {
 				data: {
 					name,
 					description: desc,
+					shortDescription: "",
 					deadline,
 					categoryId: category.id
 				}

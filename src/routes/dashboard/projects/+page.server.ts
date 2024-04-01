@@ -55,8 +55,6 @@ export const actions = {
 
 			await prisma.project.create({
 				data: {
-					name: projectTemplate.name,
-					description: projectTemplate.description,
 					orgId: user.orgId,
 					projectTemplateId: projectTemplate.id,
 					joinCode: joinCode,
