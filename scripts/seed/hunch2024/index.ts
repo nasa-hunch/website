@@ -48,7 +48,7 @@ async function main() {
 					firstName: 'Admin',
 					lastName: 'Cardboard',
 					role: Role.SCHOOL_ADMIN,
-					...(await makePassword('password'))
+					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 				}
 			},
 			projects: {
@@ -64,7 +64,7 @@ async function main() {
 									firstName: 'Chalk',
 									lastName: 'Board',
 									role: Role.TEACHER,
-									...(await makePassword('password'))
+									...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 								}
 							},
 							permission: ProjectUserPermission.NEEDS_APPROVAL,
@@ -89,7 +89,7 @@ async function main() {
 			firstName: 'Admin',
 			lastName: 'NASA',
 			role: Role.HUNCH_ADMIN,
-			...(await makePassword('password'))
+			...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 		}
 	});
 

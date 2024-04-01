@@ -14,6 +14,7 @@ import { makePassword } from '../../src/lib/server/password';
 const prisma = new PrismaClient();
 
 async function main() {
+
 	// If there are more than 100 orgs, the seed will fail
 	if ((await prisma.organization.count()) > 100) {
 		throw new Error(
@@ -56,7 +57,7 @@ async function main() {
 				email,
 				role: Role[Object.keys(Role)[Math.floor(Math.random() * Object.keys(Role).length)]],
 				orgId: Math.ceil(Math.random() * 250),
-				...(await makePassword('password'))
+				...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 			};
 		})
 	);

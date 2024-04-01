@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { Prisma } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
@@ -68,12 +69,14 @@ export async function main(client: PrismaClient) {
 
 	const converter = new showdown.Converter();
 
-	const currentDirectory = new URL('.', import.meta.url).pathname;
+	const currentDirectory = fileURLToPath(new URL('.', import.meta.url));
 
-	const files = await fs.readdir(path.join(currentDirectory, 'projects'));
+	const files = await fs.readdir(path.normalize(path.join(currentDirectory, 'projects')));
 	const transformedFiles = await Promise.all(
 		files.map(async (file) => {
-			const content = await fs.readFile(path.join(currentDirectory, 'projects', file), 'utf-8');
+			const content = await fs.readFile(path.normalize(
+				path.join(currentDirectory, 'projects', file)
+			), 'utf-8');
 			const { attributes, body } = frontMatter(content);
 			const html = converter.makeHtml(body);
 			const { name, category } = attributesSchema.parse(attributes);
