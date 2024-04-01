@@ -7,7 +7,7 @@ category: [Culinary]
 
 **Make sure to READ Challenge information and watch video on Space Physiology**
 
-You can start video at 4:49 for the presentation material.  This material gives you understanding as to why the astronauts have certain nutritional requirements in order to be in space.  
+You can start video at 4:49 for the presentation material. This material gives you understanding as to why the astronauts have certain nutritional requirements in order to be in space.
 
 - [See Video](https://www.youtube.com/watch?v=bRT1LKvJn_Y&feature=youtu.be)
 

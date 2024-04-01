@@ -1,18 +1,17 @@
 enum MarkerStatus {
-    NASA,
-    School,
-    Special
+	NASA,
+	School,
+	Special
 }
 
 interface Marker {
-    name: string;
-    status: MarkerStatus;
-    address: string;
-    location: {
-        lat: number;
-        lng: number;
-    };
-
+	name: string;
+	status: MarkerStatus;
+	address: string;
+	location: {
+		lat: number;
+		lng: number;
+	};
 }
 
 export const data: Marker[] = [

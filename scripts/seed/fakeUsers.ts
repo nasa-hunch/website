@@ -81,7 +81,7 @@ async function main() {
 }
 
 function generateOrgName() {
-	const school = Math.random() > 0.5 ? 'High School' : (Math.random() > 0.5 ? 'College' : 'Academy');
+	const school = Math.random() > 0.5 ? 'High School' : Math.random() > 0.5 ? 'College' : 'Academy';
 	let name;
 	if (Math.random() > 0.75) {
 		name = faker.company.name();

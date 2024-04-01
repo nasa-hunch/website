@@ -16,7 +16,8 @@
 	<div class="content">
 		{#if data.user.role == null}
 			<h2>
-				Welcome to <span class="accent">NASA Hunch</span>! To verify your identity, we need to know a little more about you.
+				Welcome to <span class="accent">NASA Hunch</span>! To verify your identity, we need to know
+				a little more about you.
 			</h2>
 			<h3>I am a:</h3>
 			<div class="buttons">

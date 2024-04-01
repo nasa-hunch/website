@@ -3,7 +3,7 @@ name: Biofilms and Keeping Water Clean
 category: [Biomedical Science]
 ---
 
-​Microbial growth, biofilm formation, stress response, and pathogenicity are affected by microgravity. Increased resistance to antibiotics in bacteria isolated from the ISS has often been reported. Enterococcus faecalis and Staphylococcus spp. isolates from the ISS have been shown to harbor plasmid-encoded transfer genes.  
+​Microbial growth, biofilm formation, stress response, and pathogenicity are affected by microgravity. Increased resistance to antibiotics in bacteria isolated from the ISS has often been reported. Enterococcus faecalis and Staphylococcus spp. isolates from the ISS have been shown to harbor plasmid-encoded transfer genes.
 
 Multi-resistant biofilm-forming pathogens on the International Space Station - PubMed
 The International Space Station (ISS) is a confined and closed habitat with unique conditions such as cosmic radiation, and microgravity. These conditions have a strong effect on the human and spacecraft microflora. They can affect the immune response of the crew-members, thus posing a threat to the …

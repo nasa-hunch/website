@@ -37,6 +37,7 @@ water). NASA has also used a Sabatier system that would mix the carbon dioxide
 with hydrogen and use a catalytic reaction to produce water and methane.
 
 <!-- CO2 + 4H2 = CH4 + 2H2O -->
+
 CO<sub>2</sub> + 4H<sub>2</sub> = CH<sub>4</sub> + 2H<sub>2</sub>O
 
 The water would be kept on the space station and reused. The methane would be

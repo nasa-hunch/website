@@ -77,7 +77,7 @@
 	<table>
 		<tr class="headRow">
 			<th class="idRow">ID</th>
-			<th >Email</th>
+			<th>Email</th>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Role</th>
@@ -156,5 +156,4 @@
 	.idRow {
 		width: 220px;
 	}
-
 </style>

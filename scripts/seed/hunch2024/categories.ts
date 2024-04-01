@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import path from 'node:path'
+import path from 'node:path';
 
 import { Prisma } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
@@ -16,11 +16,11 @@ const deadline = (minMonths = 3, maxMonths = 5) =>
 const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 	{
 		color: 'ff0000',
-		name: 'Design & Prototype',
+		name: 'Design & Prototype'
 	},
 	{
 		color: '3F88C5',
-		name: 'Software',
+		name: 'Software'
 	},
 	{
 		color: 'E94F37',
@@ -36,21 +36,21 @@ const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 	},
 	{
 		color: 'FED18C',
-		name: 'Culinary',
+		name: 'Culinary'
 	},
 	{
 		color: '80DED9',
-		name: 'Biomedical Science',
+		name: 'Biomedical Science'
 	},
 	{
 		color: 'F1C8DB',
-		name: 'Flight Configuration',
+		name: 'Flight Configuration'
 	}
 ];
 
 const attributesSchema = z.object({
 	name: z.string(),
-	category: z.array(z.string()),
+	category: z.array(z.string())
 });
 
 export async function main(client: PrismaClient) {

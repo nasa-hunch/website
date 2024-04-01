@@ -28,8 +28,8 @@
 					</div>
 					<p>
 						We offer students a real-world STEM experience and drive students to learn new skills
-						that are deployed everywhere on NASA,
-						from astronaut training materials to the International Space Station
+						that are deployed everywhere on NASA, from astronaut training materials to the
+						International Space Station
 					</p>
 				</div>
 			</div>
