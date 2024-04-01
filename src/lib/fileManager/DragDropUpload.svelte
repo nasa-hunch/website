@@ -30,11 +30,7 @@
 	<button bind:this={fileUploadButton} type="submit" />
 </form>
 
-<button
-	class="dragField"
-	on:dragover={dragOverHandler}
-	on:drop={dropHandler}
->
+<button class="dragField" on:dragover={dragOverHandler} on:drop={dropHandler}>
 	<slot />
 </button>
 
