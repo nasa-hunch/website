@@ -1,4 +1,9 @@
 <script lang="ts">
+
+	import Hamburger from 'svelte-hamburger';
+
+	let open = false;
+
 	interface Link {
 		name: string;
 		href: string;
@@ -23,6 +28,10 @@
 </script>
 
 <nav>
+	<a href="/" class="hamburger">
+		<Hamburger {open} on:click={() => open = !open} />
+
+	</a>
 	<a class="logoLink" href="/">
 		<img alt="NASA Hunch Logo" src="/favicon.png" />
 	</a>
@@ -138,6 +147,11 @@
 		opacity: 0.6;
 	}
 
+
+	.hamburger {
+	display: none;
+		}
+
 	@media (max-width: 768px) {
 		nav {
 			flex-direction: column;
@@ -146,6 +160,10 @@
 		.logoLink {
 			width: 100%;
 			padding: 1rem;
+		}
+
+		.logoLink {
+			display: none;
 		}
 
 		.navInner {
@@ -160,6 +178,11 @@
 
 		.navInner li a {
 			font-size: 1.2rem;
+		}
+
+		.hamburger {
+			padding: 1rem 0;
+		display: block;
 		}
 	}
 </style>

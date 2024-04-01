@@ -14,6 +14,9 @@ dependencies:
   svelte-french-toast:
     specifier: ^1.2.0
     version: 1.2.0(svelte@4.2.8)
+  svelte-hamburger:
+    specifier: ^1.0.1
+    version: 1.0.1
   svelte-highlight:
     specifier: ^7.6.0
     version: 7.6.0
@@ -7906,6 +7909,10 @@ packages:
       svelte-writable-derived: 3.1.0(svelte@4.2.8)
     dev: false
 
+  /svelte-hamburger@1.0.1:
+    resolution: {integrity: sha512-OU8JNKXSR54FZlmzhm/SCsMTaJQG+gpotphhQ7RAzIPhPDPhTUSfG/lj1ZB5jHVmyGlITnPbFe97Ya4RApgzDg==}
+    dev: false
+
   /svelte-highlight@7.6.0:
     resolution: {integrity: sha512-J9X1d07iMIKZMAqNAhlkjLX/FS+7R2lPrqVul7i+EleVZIOYvBhtx7ES62bc661a70nKNOS05yr9JAvyQPPOIA==}
     dependencies:
@@ -8671,6 +8678,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
