@@ -3,7 +3,7 @@
 	import Hamburger from 'svelte-hamburger';
 
 	let open = false;
-
+	let innerWidth;
 	interface Link {
 		name: string;
 		href: string;
@@ -26,7 +26,7 @@
 		link('Get Started', 'get-started', true)
 	];
 </script>
-
+<svelte:window bind:innerWidth />
 <nav>
 	<a href="/" class="hamburger">
 		<Hamburger {open} on:click={() => open = !open} />
@@ -35,7 +35,7 @@
 	<a class="logoLink" href="/">
 		<img alt="NASA Hunch Logo" src="/favicon.png" />
 	</a>
-	{#if !open}
+	{#if open || innerWidth >= 768}
 	<ul class="navInner">
 		{#each links as link}
 			<li class="navbutton {link.special ? 'specialButton' : 'navRegularLink'}">
