@@ -182,8 +182,8 @@ export const data: Marker[] = [
 		status: MarkerStatus.School,
 		address: '4432 Bayview Rd',
 		location: {
-			lat: 0,
-			lng: 0
+			lat: 36.91964654440103,
+			lng: -76.133757202224
 		}
 	},
 	{
@@ -245,8 +245,8 @@ export const data: Marker[] = [
 		status: MarkerStatus.School,
 		address: '19601 Hwy 6, Manvel, TX 77578',
 		location: {
-			lat: 0,
-			lng: 0
+			lat: 29.47340025593174,
+			lng: -95.36532077352642
 		}
 	},
 	{
@@ -385,15 +385,6 @@ export const data: Marker[] = [
 		}
 	},
 	{
-		name: 'Peru Central School',
-		status: MarkerStatus.School,
-		address: '17 School st.',
-		location: {
-			lat: 0,
-			lng: 0
-		}
-	},
-	{
 		name: 'Peru High School',
 		status: MarkerStatus.School,
 		address: '17 School St, Peru, NY 12972, USA',
@@ -443,8 +434,8 @@ export const data: Marker[] = [
 		status: MarkerStatus.School,
 		address: '57 River Rd',
 		location: {
-			lat: 0,
-			lng: 0
+			lat: 42.69272974259219,
+			lng: -71.19544911988524
 		}
 	},
 	{
@@ -488,8 +479,8 @@ export const data: Marker[] = [
 		status: MarkerStatus.School,
 		address: '45 Reinhardt Road,',
 		location: {
-			lat: 0,
-			lng: 0
+			lat: 40.92996184492638,
+			lng: -74.20344226655318
 		}
 	},
 	{
@@ -497,8 +488,8 @@ export const data: Marker[] = [
 		status: MarkerStatus.School,
 		address: '6800 Hoke Road',
 		location: {
-			lat: 0,
-			lng: 0
+			lat: 39.84468124360479,
+			lng: -84.32764836177513
 		}
 	},
 	{
@@ -506,8 +497,8 @@ export const data: Marker[] = [
 		status: MarkerStatus.School,
 		address: '1302 North Street SE, Olympia, WA 98501',
 		location: {
-			lat: 0,
-			lng: 0
+			lat: 40.3966357297922,
+			lng: -89.2476423886532
 		}
 	},
 	{
@@ -533,8 +524,8 @@ export const data: Marker[] = [
 		status: MarkerStatus.School,
 		address: '949 Mendota Heights Road',
 		location: {
-			lat: 0,
-			lng: 0
+			lat: 44.867371784571596,
+			lng: -93.13757739831011
 		}
 	},
 	{
