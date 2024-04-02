@@ -1,9 +1,7 @@
 <script lang="ts">
-	import type { ActionResult } from '@sveltejs/kit';
 	import { createEventDispatcher } from 'svelte';
-	import toast from 'svelte-french-toast';
 
-	import { deserialize, enhance } from '$app/forms';
+	import { enhance } from '$app/forms';
 
 	export let method = 'post';
 	export let action = '?/uploadFile';
@@ -19,9 +17,10 @@
 		if (!e.dataTransfer) {
 			return;
 		}
+		dispatch('startUpload');
 		fileBox.files = e.dataTransfer.files;
 		fileUploadButton.click();
-		dispatch('startUpload');
+		
 		draggedOver = false;
 	};
 	const dragOverHandler = (e: Event) => {

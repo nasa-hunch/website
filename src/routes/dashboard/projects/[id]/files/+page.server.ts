@@ -29,7 +29,7 @@ export const load = async ({ parent }) => {
 
 export const actions = {
 	uploadFile: async ({ request, cookies, params }) => {
-		await request.formData(); // If your machine is too fast, this stops the request from hanging.
+		const file = (await request.formData()).get("file"); // If your machine is too fast, this stops the request from hanging.
 		const user = await verifySession(cookies);
 		const projectId = parseInt(params.id);
 
@@ -48,7 +48,7 @@ export const actions = {
 				message: 'No permissions'
 			};
 		} else {
-			return await uploadFile(request, {
+			return await uploadFile(file as File, {
 				destinationName: destinations.PROJECT,
 				destinationId: projectId
 			});

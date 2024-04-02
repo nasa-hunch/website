@@ -19,7 +19,9 @@ export const load = async ({parent}) => {
 }
 
 export const actions = {
-	uploadFile: () => {
+	uploadFile: async ({request}) => {
+		await request.formData()
+		console.log("Upload called")
 		return {
 			success: true,
 			message: "File uploaded"
