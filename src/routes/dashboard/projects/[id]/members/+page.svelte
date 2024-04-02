@@ -65,7 +65,7 @@
 	</div>
 	<div class="members">
 		{#each data.project.users as member}
-			<Member bind:memberData={member} />
+			<Member bind:memberData={member} bind:userRole={data.user.role} />
 		{/each}
 	</div>
 </div>

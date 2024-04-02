@@ -14,7 +14,6 @@
 			firstName: string;
 			lastName: string;
 			pfp: string | null;
-			role: Role
 		};
 		id: number;
 		createdAt: Date;
@@ -26,6 +25,7 @@
 	};
 
 	export let memberData: Data;
+	export let userRole: Role;
 	$: role = memberData.permission;
 </script>
 
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<div class="right">
-		{#if memberData.user.role === 'TEACHER' || memberData.user.role === 'SCHOOL_ADMIN' || memberData.user.role === 'HUNCH_ADMIN'}
+		{#if userRole === 'TEACHER' || userRole === 'SCHOOL_ADMIN' || userRole === 'HUNCH_ADMIN'}
 			<IconButton formData={{ action: '?/makeViewer', method: 'post' }}>
 				<input name="memberId" hidden value={memberData.id} />
 				<MakeViewer />
