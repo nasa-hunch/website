@@ -39,7 +39,7 @@ export const load = async ({ params, parent }) => {
 			projectTemplate: {
 				select: {
 					name: true,
-					description: true,
+					description: true
 				}
 			}
 		}

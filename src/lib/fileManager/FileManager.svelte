@@ -43,7 +43,11 @@
 		}
 	}
 
-	const createToast = async (loadingMessage: string, successMessage: string, failMessage: string) => {
+	const createToast = async (
+		loadingMessage: string,
+		successMessage: string,
+		failMessage: string
+	) => {
 		toastPromise = new Promise((resolve, reject) => {
 			toastPromiseResolve = resolve;
 			toastPromiseReject = reject;
@@ -51,9 +55,9 @@
 		toast.promise(toastPromise, {
 			loading: loadingMessage,
 			success: successMessage,
-			error: await getError(toastPromise) as string ?? failMessage
-		})
-	}
+			error: ((await getError(toastPromise)) as string) ?? failMessage
+		});
+	};
 
 	$: if (form) {
 		if (form.success) {
@@ -73,15 +77,15 @@
 	};
 
 	const startFileUpload = () => {
-		createToast("Uploading File...", "File Uploaded!", "Could not upload file.")
+		createToast('Uploading File...', 'File Uploaded!', 'Could not upload file.');
 	};
 
 	const deleteFileSubmit = () => {
-		createToast("Deleting File...", "File Deleted!", "Could not delete file.")
+		createToast('Deleting File...', 'File Deleted!', 'Could not delete file.');
 	};
 
 	const fileNameChange = () => {
-		createToast("Updating File...", "File Updated!", "Could not update file.")
+		createToast('Updating File...', 'File Updated!', 'Could not update file.');
 	};
 </script>
 

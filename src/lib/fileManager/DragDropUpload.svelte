@@ -1,14 +1,12 @@
 <script lang="ts">
+	import type { ActionResult } from '@sveltejs/kit';
 	import { createEventDispatcher } from 'svelte';
+	import toast from 'svelte-french-toast';
 
 	import { deserialize, enhance } from '$app/forms';
-	import toast from 'svelte-french-toast';
-	import type { ActionResult } from '@sveltejs/kit';
 
 	export let method = 'post';
 	export let action = '?/uploadFile';
-
-	
 
 	const dispatch = createEventDispatcher();
 
@@ -33,7 +31,7 @@
 
 	const dragOverEnd = () => {
 		draggedOver = false;
-	}
+	};
 </script>
 
 <form {action} enctype="multipart/form-data" hidden {method} use:enhance>
@@ -41,7 +39,13 @@
 	<button bind:this={fileUploadButton} type="submit" />
 </form>
 
-<button class="dragField" class:active={draggedOver} on:dragover={dragOverHandler} on:drop={dropHandler} on:dragleave={dragOverEnd}>
+<button
+	class="dragField"
+	class:active={draggedOver}
+	on:dragover={dragOverHandler}
+	on:drop={dropHandler}
+	on:dragleave={dragOverEnd}
+>
 	<slot />
 </button>
 

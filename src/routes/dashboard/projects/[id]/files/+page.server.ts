@@ -30,7 +30,7 @@ export const load = async ({ parent }) => {
 export const actions = {
 	uploadFile: async ({ request, cookies, params }) => {
 		const user = await verifySession(cookies);
-		const projectId = parseInt(params.id)
+		const projectId = parseInt(params.id);
 
 		const projectUser = await prisma.projectUser.findFirst({
 			where: {
@@ -77,7 +77,7 @@ export const actions = {
 
 			const fileCheck = await prisma.file.findFirst({
 				where: {
-					id: fileId,
+					id: fileId
 				}
 			});
 
@@ -142,7 +142,7 @@ export const actions = {
 
 			const fileCheck = await prisma.file.findFirst({
 				where: {
-					id: fileId,
+					id: fileId
 				}
 			});
 

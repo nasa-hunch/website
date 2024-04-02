@@ -11,11 +11,11 @@ export const enum destinations {
 }
 
 type UploadDestination = {
-	destinationName: destinations
-	destinationId: number
-}
+	destinationName: destinations;
+	destinationId: number;
+};
 
-//Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here. 
+//Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here.
 
 export const uploadFile = async (request: Request, destinationDetails: UploadDestination) => {
 	const formData = await request.formData();
@@ -55,25 +55,25 @@ export const uploadFile = async (request: Request, destinationDetails: UploadDes
 		}
 	});
 
-	if(destinationDetails.destinationName == destinations.PROJECT) {
+	if (destinationDetails.destinationName == destinations.PROJECT) {
 		await prisma.projectFile.create({
 			data: {
 				fileId: file.id,
 				projectId: destinationDetails.destinationId
 			}
-		})
+		});
 	} else if (destinationDetails.destinationName == destinations.TEMPLATE) {
 		await prisma.projectTemplateFile.create({
 			data: {
 				fileId: file.id,
 				templateId: destinationDetails.destinationId
 			}
-		})
+		});
 	} else {
 		return {
 			success: false,
-			message: "No idea where to put this file."
-		}
+			message: 'No idea where to put this file.'
+		};
 	}
 
 	return {
