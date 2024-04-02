@@ -11,7 +11,7 @@
 		cursor: pointer;
 		color: $primary;
 		margin-left: 5px;
-		padding: 0px 2px;
+		padding: 0px 0px;
 		z-index: 5;
 
 		&::after {

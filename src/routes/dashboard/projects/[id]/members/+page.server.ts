@@ -1,4 +1,3 @@
-import { redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 
 import { ProjectUserPermission, Role } from '$lib/enums';
