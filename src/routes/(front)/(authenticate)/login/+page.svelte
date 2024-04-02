@@ -60,6 +60,8 @@
 		align-items: center;
 		justify-content: center;
 		border-radius: 10px;
+		transform: scale(0.9);
+
 	}
 	.inputDiv {
 		margin: 7px;
