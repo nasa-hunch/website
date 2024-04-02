@@ -1,12 +1,24 @@
 <script lang="ts">
+    import Fuse from 'fuse.js';
+
     export let data;
+
+    const fuse = new Fuse(data.organizations, {
+        keys: ['name'],
+    });
+
+    let searchInput = '';
+
+    $: searchedOrgs = searchInput ? fuse.search(searchInput).map(data => data.item) : data.organizations;
 </script>
 
 <main>
     <h1>Organizations</h1>
 
+    <input type="text" placeholder="Search..." bind:value={searchInput}>
+
     <div class="organizations">
-        {#each data.organizations as org}
+        {#each searchedOrgs as org}
             <a class="org" href="/dashboard/admin/orgs/{org.id}">
                 <h2>{org.name}</h2>
             </a>
@@ -17,6 +29,16 @@
 <style lang="scss">
     main {
         margin: 1rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.5rem;
+        margin: 1rem 0;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 0;
+        border-radius: 0.5rem;
     }
 
     .organizations {
