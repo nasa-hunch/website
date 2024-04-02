@@ -9,7 +9,6 @@ import { verifySession } from '$lib/server/verifySession.js';
 
 import { updateMemberRole } from './changeRoleHelper.js';
 
-
 export const actions = {
 	refreshCode: async ({ cookies, params }) => {
 		const user = await verifySession(cookies);

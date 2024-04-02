@@ -31,7 +31,8 @@ export const load = async ({ params, parent }) => {
 						select: {
 							firstName: true,
 							lastName: true,
-							pfp: true
+							pfp: true,
+							role: true
 						}
 					}
 				}
