@@ -9,13 +9,17 @@ import { PrismaTransactionClient } from './returnType';
 const chance = new Chance();
 
 function generateOrgName() {
-	const school = chance.pickone(['High School', 'College', 'Academy', 'University']);
+	const school = chance.weighted(
+		['High School', 'College', 'Academy', 'University', 'Middle School', 'Elementary School'],
+		[5, 3, 3, 2, 1, 1]
+	);
 	const name = chance.pickone([
-		faker.company.name(),
-		faker.location.city(),
-		faker.person.fullName(),
-		faker.word.noun()
-	]);
+		faker.company.name,
+		faker.location.city,
+		faker.person.fullName,
+		faker.word.noun,
+		faker.animal.type
+	])();
 	return `${name.charAt(0).toUpperCase()}${name.slice(1)} ${school}`;
 }
 
