@@ -9,14 +9,6 @@ import { verifySession } from '$lib/server/verifySession.js';
 
 import { updateMemberRole } from './changeRoleHelper.js';
 
-export const load = async ({ cookies, params }) => {
-	const user = await verifySession(cookies);
-	await verifyProjectUser(cookies, params.id);
-
-	if (user.role != Role.TEACHER) {
-		throw redirect(303, `/dashboard/projects/${params.id}`);
-	}
-};
 
 export const actions = {
 	refreshCode: async ({ cookies, params }) => {

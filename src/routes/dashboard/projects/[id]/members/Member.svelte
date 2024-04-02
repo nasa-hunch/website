@@ -7,6 +7,7 @@
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 	import type { ProjectUserPermission } from '$lib/enums';
+	import { snakeCaseToTitleCase } from '$lib/case';
 
 	type Data = {
 		user: {
@@ -27,9 +28,6 @@
 	export let memberData: Data;
 	let role = memberData.permission as unknown as ProjectUserPermission;
 	$: role = memberData.permission as unknown as ProjectUserPermission;
-	let titleCasedRole: string;
-	$: titleCasedRole =
-		role.toLowerCase().substring(0, 1).toUpperCase() + role.toLowerCase().substring(1);
 </script>
 
 <div class="member">
@@ -38,7 +36,7 @@
 		{memberData.user.firstName}
 		{memberData.user.lastName}
 		<div class="role">
-			{titleCasedRole}
+			{snakeCaseToTitleCase(role)}
 		</div>
 	</div>
 	<div class="right">
