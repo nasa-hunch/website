@@ -19,7 +19,7 @@
 
     <div class="organizations">
         {#each searchedOrgs as org}
-            <a class="org" href="/dashboard/admin/orgs/{org.id}">
+            <a class="org" href="/dashboard/orgs/{org.id}">
                 <h2>{org.name}</h2>
             </a>
         {/each}
