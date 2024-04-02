@@ -52,7 +52,7 @@
 			rejectPromise();
 		}
 		replaceState('', {
-			modal: null
+			modal: undefined
 		});
 		form = null;
 	}
