@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { geoAlbersUsa, geoIdentity, geoPath } from 'd3-geo';
-	import type { GeoJsonProperties } from 'geojson';
+	import { geoAlbersUsa, geoContains, geoIdentity, geoPath } from 'd3-geo';
+	import type { Geometry, GeometryCollection, MultiPolygon } from 'geojson';
 	import { cubicOut } from 'svelte/easing';
 	import { spring, tweened } from 'svelte/motion';
 	import { Canvas, Layer, type Render } from 'svelte-canvas';
 	import { inview } from 'svelte-inview';
-	import { mesh } from 'topojson-client';
-	import type { Objects, Topology } from 'topojson-specification';
+	import { feature, mesh } from 'topojson-client';
+	import type { Arc, Objects, Topology, Transform } from 'topojson-specification';
 	import usRaw from 'us-atlas/counties-albers-10m.json';
 
 	import { data } from './map/data';
@@ -24,7 +24,21 @@
 	let mouseX = 0;
 	let mouseY = 0;
 
-	const us = usRaw as unknown as Topology<Objects<GeoJsonProperties>>;
+	interface TopoJSON {
+		type: "Topology" | GeoJSON.GeoJsonGeometryTypes | null;
+		bbox?: GeoJSON.BBox | undefined;
+	}
+
+	interface TopologyCustom<T> extends TopoJSON {
+		type: "Topology";
+		objects: T;
+		arcs: Arc[];
+		transform?: Transform | undefined;
+	}
+
+	const us = usRaw as unknown as TopologyCustom<{
+		[key: string]: GeometryCollection<Geometry>
+	}>;
 
 	let canvas: HTMLElement;
 	let width: number;
@@ -48,7 +62,8 @@
 		})
 		.filter((x) => Array.isArray(x) && x.length === 2) as [number, number][];
 
-	const render: Render = ({ context }) => {
+	let render: Render
+	$: render = ({ context }) => {
 		for (let i = 0; i < pixelData.length; i++) {
 			const [x, y] = pixelData[i];
 			context.beginPath();
@@ -56,7 +71,24 @@
 			context.fillStyle = `rgba(221, 54, 28, ${$opacityElements - i / pixelData.length})`;
 			context.fill();
 		}
-	};
+
+		// console.log state where mouse is
+		const polygons = us.objects.states.geometries as MultiPolygon[];
+		const mappedProj = projection.invert([mouseX, mouseY]);
+		if (!mappedProj || !geoAlbersInstance?.invert) return;
+		console.log(
+			polygons.filter((polygon) =>
+				geoContains(
+					// polygon,
+					feature(us, polygon),
+					mappedProj
+				)
+			).map((polygon) => polygon.properties.name)
+			.sort()
+		)
+	}
+
+	console.log((us.objects.states.geometries as MultiPolygon[]).map(polygon => (feature(us, polygon))));
 
 	const dataAmount = tweened(0, {
 		duration: 2000,
@@ -105,8 +137,8 @@
 				on:mousemove={(e) => {
 					const { clientX, clientY } = e;
 
-					mouseX = clientX;
-					mouseY = clientY;
+					mouseX = clientX - canvas.getBoundingClientRect().left;
+					mouseY = clientY - canvas.getBoundingClientRect().top;
 				}}
 			>
 				<Layer {render} />
