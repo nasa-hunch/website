@@ -12,7 +12,7 @@
 			<div class="projects">
 				{#each [...data.user.projectUser.map((user) => user.project)] as project}
 					<a class="project" href="/dashboard/projects/{project.id}">
-						<p>{project.name}</p>
+						<p>{project.projectTemplate.name}</p>
 					</a>
 				{/each}
 			</div>

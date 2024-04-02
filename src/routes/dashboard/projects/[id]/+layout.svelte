@@ -5,7 +5,7 @@
 <div class="wrap">
 	<div class="header">
 		<div class="headerInner">
-			<h1>{data.project.name}</h1>
+			<h1>{data.project.projectTemplate.name}</h1>
 
 			<nav class="nav">
 				<a href="/dashboard/projects/{data.project.id}">Checklist</a>
