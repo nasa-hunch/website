@@ -4,10 +4,10 @@
 	import RemoveMember from '~icons/mdi/person-remove-outline';
 	// Icons
 	import MakeViewer from '~icons/mdi/visibility-outline';
+	import { snakeCaseToTitleCase } from '$lib/case';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 	import type { ProjectUserPermission, Role } from '$lib/enums';
-	import { snakeCaseToTitleCase } from '$lib/case';
 
 	type Data = {
 		user: {

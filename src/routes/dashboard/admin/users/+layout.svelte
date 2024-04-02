@@ -1,8 +1,7 @@
 <div class="wrap">
 	<div class="inner">
-		<slot/>
+		<slot />
 	</div>
-	
 </div>
 
 <style lang="scss">

@@ -29,8 +29,17 @@
 	<h1>Projects</h1>
 	<div class="projects">
 		{#each data.user.projectUser as projectUser}
-			<a class="project" class:submitted={projectUser.project.submitted} href="/dashboard/projects/{projectUser.project.id}">
-				<h3>{projectUser.project.projectTemplate.name.substring(0, 25)}{projectUser.project.projectTemplate.name.length > 25 ? "..." : ""}</h3>
+			<a
+				class="project"
+				class:submitted={projectUser.project.submitted}
+				href="/dashboard/projects/{projectUser.project.id}"
+			>
+				<h3>
+					{projectUser.project.projectTemplate.name.substring(0, 25)}{projectUser.project
+						.projectTemplate.name.length > 25
+						? '...'
+						: ''}
+				</h3>
 			</a>
 		{/each}
 	</div>

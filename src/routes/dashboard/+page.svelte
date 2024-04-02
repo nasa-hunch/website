@@ -11,8 +11,17 @@
 			<h1>Projects</h1>
 			<div class="projects">
 				{#each data.user.projectUser as projectUser}
-					<a class="project" class:submitted={projectUser.project.submitted} href="/dashboard/projects/{projectUser.project.id}">
-						<h3>{projectUser.project.projectTemplate.name.substring(0, 25)}{projectUser.project.projectTemplate.name.length > 25 ? "..." : ""}</h3>
+					<a
+						class="project"
+						class:submitted={projectUser.project.submitted}
+						href="/dashboard/projects/{projectUser.project.id}"
+					>
+						<h3>
+							{projectUser.project.projectTemplate.name.substring(0, 25)}{projectUser.project
+								.projectTemplate.name.length > 25
+								? '...'
+								: ''}
+						</h3>
 					</a>
 				{/each}
 			</div>
@@ -22,7 +31,7 @@
 				<h2>To Do</h2>
 				<div class="items">
 					{#if data.assignees.length < 1}
-					<p>Nothing to do!</p>
+						<p>Nothing to do!</p>
 					{/if}
 					{#each data.assignees as assignee}
 						<a class="toDoItem" href="/dashboard/projects/{assignee.toDoItem.projectId}">
@@ -75,8 +84,6 @@
 		}
 	}
 
-	
-
 	.wrap {
 		display: flex;
 		flex-direction: row;
@@ -92,10 +99,9 @@
 	}
 
 	.right {
-		
 		width: 25rem;
 		padding: 0.5rem;
-		
+
 		box-sizing: border-box;
 		text-align: center;
 		display: flex;
