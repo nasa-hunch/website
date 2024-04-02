@@ -3,10 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { Prisma } from '@prisma/client';
-import { PrismaClient } from '@prisma/client';
 import frontMatter from 'front-matter';
 import showdown from 'showdown';
 import { z } from 'zod';
+
+import { PrismaTransactionClient } from './returnType';
 
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
 const MONTH = 1000 * 60 * 60 * 24 * 30;
@@ -55,7 +56,7 @@ const attributesSchema = z.object({
 	shortDescription: z.string()
 });
 
-export async function seed(client: PrismaClient) {
+export async function seed(client: PrismaTransactionClient) {
 	console.log('Seeding categories...');
 
 	for (const category of categories) {

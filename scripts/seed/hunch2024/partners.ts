@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
+import { PrismaTransactionClient } from './returnType';
 import { githubURL } from './url';
 
 export interface Partner {
@@ -126,7 +125,7 @@ const partners: Partner[] = [
 	}
 ].map((x) => ({ ...x, logo: `${githubURL}/partners/${x.logo}` }));
 
-export async function seed(client: PrismaClient) {
+export async function seed(client: PrismaTransactionClient) {
 	if ((await client.partner.count()) > 0) {
 		console.log('Partners already seeded, skipping...');
 		return;

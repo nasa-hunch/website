@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
+import { PrismaTransactionClient } from './returnType';
 import { githubURL } from './url';
 
 interface TeamMember {
@@ -198,7 +197,7 @@ const members: TeamMember[] = [
 	}
 ].map((x) => ({ ...x, pfp: `${githubURL}/team/${x.pfp}` }));
 
-export async function seed(client: PrismaClient) {
+export async function seed(client: PrismaTransactionClient) {
 	if ((await client.teamMember.count()) > 0) {
 		console.log('Team members already seeded, skipping...');
 		return;

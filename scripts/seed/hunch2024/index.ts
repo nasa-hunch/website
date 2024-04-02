@@ -7,9 +7,9 @@
 	used in the NASA HUNCH program.
 */
 
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-import { makePassword } from '../../../src/lib/server/password';
+import * as admin from './admin';
 import * as categories from './categories';
 import * as organizations from './organization';
 import * as partners from './partners';
@@ -36,24 +36,18 @@ async function main() {
 	}
 
 	console.log('Seeding database...');
-	await partners.seed(prisma);
-	await teams.seed(prisma);
-	await categories.seed(prisma);
-	await organizations.seed(prisma);
-	await projects.seed(prisma);
-	await unverifiedTeachers.seed(prisma);
 
-	console.log("Adding NASA HUNCH Admin user...");
-	await prisma.user.upsert({
-		where: { email: 'admin@nasa.fake' },
-		update: {},
-		create: {
-			email: 'admin@nasa.fake',
-			firstName: 'Admin',
-			lastName: 'NASA',
-			role: Role.HUNCH_ADMIN,
-			...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-		}
+	await prisma.$transaction(async (tx) => {
+		await partners.seed(tx);
+		await teams.seed(tx);
+		await categories.seed(tx);
+		await organizations.seed(tx);
+		await projects.seed(tx);
+		await unverifiedTeachers.seed(tx);
+		await admin.seed(tx);
+	}, {
+		timeout: 1000 * 60 * 5,
+		maxWait: 1000 * 60 * 5
 	});
 
 	console.log('Database seeded!');
