@@ -20,7 +20,15 @@ export const load = async ({ cookies }) => {
 					organization: true,
 					projectUser: {
 						include: {
-							project: true
+							project: {
+								include: {
+									projectTemplate: {
+										select: {
+											name: true
+										}
+									}
+								}
+							}
 						}
 					}
 				}

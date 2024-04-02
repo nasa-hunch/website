@@ -21,7 +21,7 @@ export const load = async ({ parent }) => {
 			}
 		},
 		include: {
-			toDoItem: true
+			toDoItem: true,
 		}
 	});
 
