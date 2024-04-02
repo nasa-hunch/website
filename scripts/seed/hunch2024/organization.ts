@@ -3,6 +3,7 @@ import { Role } from '@prisma/client';
 import Chance from 'chance';
 
 import { makePassword } from '../../../src/lib/server/password';
+import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
 const chance = new Chance();
@@ -31,6 +32,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 					firstName: 'Admin',
 					lastName: 'Cardboard',
 					role: Role.SCHOOL_ADMIN,
+					pfp: pickAvatar(),
 					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 				}
 			}
@@ -48,6 +50,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 						firstName: faker.person.firstName(),
 						lastName: faker.person.lastName(),
 						role: Role.SCHOOL_ADMIN,
+						pfp: pickAvatar(),
 						...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 					}
 				}

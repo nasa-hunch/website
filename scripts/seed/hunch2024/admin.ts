@@ -1,6 +1,7 @@
 import { Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
+import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
 export async function seed(prisma: PrismaTransactionClient) {
@@ -13,6 +14,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 			firstName: 'Admin',
 			lastName: 'NASA',
 			role: Role.HUNCH_ADMIN,
+			pfp: pickAvatar(),
 			...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 		}
 	});

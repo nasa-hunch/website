@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { Chance } from 'chance';
 
 import { makePassword } from '../../../src/lib/server/password';
+import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
 const chance = new Chance();
@@ -44,6 +45,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 							firstName: faker.person.firstName(),
 							lastName: faker.person.lastName(),
 							role: 'TEACHER',
+							pfp: pickAvatar(),
 							...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 						}
 					},
@@ -66,6 +68,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 								firstName: faker.person.firstName(),
 								lastName: faker.person.lastName(),
 								role: 'STUDENT',
+								...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
 								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 							}
 						},
@@ -89,6 +92,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 								firstName: faker.person.firstName(),
 								lastName: faker.person.lastName(),
 								role: 'STUDENT',
+								pfp: pickAvatar(),
 								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 							}
 						},
