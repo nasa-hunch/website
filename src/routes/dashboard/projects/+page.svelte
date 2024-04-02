@@ -30,7 +30,7 @@
 	<div class="projects">
 		{#each data.user.projectUser as projectUser}
 			<a class="project" class:submitted={projectUser.project.submitted} href="/dashboard/projects/{projectUser.project.id}">
-				<h3>{projectUser.project.projectTemplate.name}</h3>
+				<h3>{projectUser.project.projectTemplate.name.substring(0, 25)}{projectUser.project.projectTemplate.name.length > 25 ? "..." : ""}</h3>
 			</a>
 		{/each}
 	</div>
@@ -56,10 +56,8 @@
 <style lang="scss">
 	main {
 		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: start;
+		padding: 0rem 2rem;
+		text-align: center;
 	}
 	.createNewPrompt {
 		display: flex;
@@ -72,27 +70,36 @@
 	}
 
 	.projects {
-		display: grid;
-		width: 90%;
-		gap: 10px;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
 	}
 
 	.project {
 		all: unset;
-		height: 180px;
-		background: $background2;
+		height: 12rem;
+		width: 20rem;
+		max-width: 25rem;
+		background: $background-alt;
 		border-radius: 10px;
 		padding: 25px;
 		box-sizing: border-box;
 		cursor: pointer;
+		margin: 10px;
+		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
 
-		&:hover {
-			background: $background3;
-		}
 		h3 {
-			all: unset;
-			font-size: 1.25rem;
+			width: 100%;
+			text-wrap: nowrap;
+			word-wrap: normal;
+			overflow: hidden;
+			margin: 0px;
+			padding: 0rem;
+			text-align: left;
+			font-weight: 500;
+		}
+		&:hover {
+			background: $background2;
 		}
 	}
 </style>
