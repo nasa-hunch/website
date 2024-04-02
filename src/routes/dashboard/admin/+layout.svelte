@@ -1,9 +1,2 @@
-<div class="container">
-	<slot />
-</div>
+<slot />
 
-<style lang="scss">
-	.container {
-		margin: 2rem;
-	}
-</style>

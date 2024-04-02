@@ -29,7 +29,7 @@
 	<h1>Projects</h1>
 	<div class="projects">
 		{#each data.user.projectUser as projectUser}
-			<a class="project" href="/dashboard/projects/{projectUser.project.id}">
+			<a class="project" class:submitted={projectUser.project.submitted} href="/dashboard/projects/{projectUser.project.id}">
 				<h3>{projectUser.project.projectTemplate.name}</h3>
 			</a>
 		{/each}
