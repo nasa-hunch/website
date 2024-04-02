@@ -1,4 +1,3 @@
-import { redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 
 import { ProjectUserPermission, Role } from '$lib/enums';
@@ -8,15 +7,6 @@ import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
 import { verifySession } from '$lib/server/verifySession.js';
 
 import { updateMemberRole } from './changeRoleHelper.js';
-
-export const load = async ({ cookies, params }) => {
-	const user = await verifySession(cookies);
-	await verifyProjectUser(cookies, params.id);
-
-	if (user.role != Role.TEACHER) {
-		throw redirect(303, `/dashboard/projects/${params.id}`);
-	}
-};
 
 export const actions = {
 	refreshCode: async ({ cookies, params }) => {

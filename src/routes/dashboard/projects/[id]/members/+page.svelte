@@ -42,7 +42,9 @@
 					><input disabled value={data.project.joinCode} />
 					<button type="button" on:click={copyCode}>Copy</button></span
 				>
-				<p>You may also<TextButton type="submit">refresh your join code</TextButton></p>
+				{#if data.user.role === 'TEACHER'}
+					<p>You may also<TextButton type="submit">refresh your join code</TextButton></p>
+				{/if}
 			</div>
 		</ModelForm>
 	</Modal>
@@ -63,7 +65,7 @@
 	</div>
 	<div class="members">
 		{#each data.project.users as member}
-			<Member bind:memberData={member} />
+			<Member bind:memberData={member} bind:userRole={data.user.role} />
 		{/each}
 	</div>
 </div>

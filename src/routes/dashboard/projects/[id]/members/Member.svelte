@@ -6,7 +6,8 @@
 	import MakeViewer from '~icons/mdi/visibility-outline';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
-	import type { ProjectUserPermission } from '$lib/enums';
+	import type { ProjectUserPermission, Role } from '$lib/enums';
+	import { snakeCaseToTitleCase } from '$lib/case';
 
 	type Data = {
 		user: {
@@ -20,16 +21,12 @@
 		userId: number;
 		projectId: number;
 		owner: boolean;
-		// This is terrible, but necessary because of a lack of prisma esm support
-		permission: unknown;
+		permission: ProjectUserPermission;
 	};
 
 	export let memberData: Data;
-	let role = memberData.permission as unknown as ProjectUserPermission;
-	$: role = memberData.permission as unknown as ProjectUserPermission;
-	let titleCasedRole: string;
-	$: titleCasedRole =
-		role.toLowerCase().substring(0, 1).toUpperCase() + role.toLowerCase().substring(1);
+	export let userRole: Role;
+	$: role = memberData.permission;
 </script>
 
 <div class="member">
@@ -38,26 +35,28 @@
 		{memberData.user.firstName}
 		{memberData.user.lastName}
 		<div class="role">
-			{titleCasedRole}
+			{snakeCaseToTitleCase(role)}
 		</div>
 	</div>
 	<div class="right">
-		<IconButton formData={{ action: '?/makeViewer', method: 'post' }}>
-			<input name="memberId" hidden value={memberData.id} />
-			<MakeViewer />
-		</IconButton>
-		<IconButton formData={{ action: '?/makeEditor', method: 'post' }}>
-			<input name="memberId" hidden value={memberData.id} />
-			<MakeEditor />
-		</IconButton>
-		<IconButton formData={{ action: '?/makeNone', method: 'post' }}>
-			<input name="memberId" hidden value={memberData.id} />
-			<MakeUnverified />
-		</IconButton>
-		<IconButton formData={{ action: '?/kickMember', method: 'post' }}>
-			<input name="memberId" hidden value={memberData.id} />
-			<RemoveMember />
-		</IconButton>
+		{#if userRole === 'TEACHER' || userRole === 'SCHOOL_ADMIN' || userRole === 'HUNCH_ADMIN'}
+			<IconButton formData={{ action: '?/makeViewer', method: 'post' }}>
+				<input name="memberId" hidden value={memberData.id} />
+				<MakeViewer />
+			</IconButton>
+			<IconButton formData={{ action: '?/makeEditor', method: 'post' }}>
+				<input name="memberId" hidden value={memberData.id} />
+				<MakeEditor />
+			</IconButton>
+			<IconButton formData={{ action: '?/makeNone', method: 'post' }}>
+				<input name="memberId" hidden value={memberData.id} />
+				<MakeUnverified />
+			</IconButton>
+			<IconButton formData={{ action: '?/kickMember', method: 'post' }}>
+				<input name="memberId" hidden value={memberData.id} />
+				<RemoveMember />
+			</IconButton>
+		{/if}
 	</div>
 </div>
 
