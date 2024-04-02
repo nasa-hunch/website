@@ -48,14 +48,17 @@
 		successMessage: string,
 		failMessage: string
 	) => {
+		console.log("Creating toast promise")
 		toastPromise = new Promise((resolve, reject) => {
 			toastPromiseResolve = resolve;
 			toastPromiseReject = reject;
 		});
+
+		console.log("Promising Toast")
 		toast.promise(toastPromise, {
 			loading: loadingMessage,
-			success: successMessage,
-			error: ((await getError(toastPromise)) as string) ?? failMessage
+			success: (message) => `${message}` || successMessage,
+			error: (message) => `${message}` || failMessage
 		});
 	};
 
@@ -77,6 +80,7 @@
 	};
 
 	const startFileUpload = () => {
+		console.log("Calling function")
 		createToast('Uploading File...', 'File Uploaded!', 'Could not upload file.');
 	};
 

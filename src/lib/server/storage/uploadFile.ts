@@ -17,9 +17,13 @@ type UploadDestination = {
 
 //Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here.
 
-export const uploadFile = async (request: Request, destinationDetails: UploadDestination) => {
-	const formData = await request.formData();
-	const uploadFile: File = formData.get('file') as File;
+export const uploadFile = async (uploadFile: File, destinationDetails: UploadDestination) => {
+	if(!uploadFile) {
+		return {
+			success: false,
+			message: "No file present"
+		}
+	}
 	const key = crypto.randomBytes(32).toString('hex') + '/' + uploadFile.name;
 
 	if (uploadFile.size > 10e6) {
