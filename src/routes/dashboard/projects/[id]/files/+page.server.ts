@@ -42,9 +42,11 @@ export const actions = {
 				success: false,
 				message: 'No file sent.'
 			};
+		} else {
+			return await uploadFile(request, parseInt(params.id));
 		}
 
-		return await uploadFile(request, parseInt(params.id));
+		
 	},
 	deleteFile: formHandler(
 		z.object({

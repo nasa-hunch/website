@@ -29,18 +29,30 @@
 		updatedAt: Date;
 	}[];
 
-	let uploadResolve: (value?: unknown) => void, uploadReject: (value?: unknown) => void;
-	let uploadPromise = new Promise((resolve, reject) => {
-		uploadResolve = resolve;
-		uploadReject = reject;
+	let toastPromiseResolve: (value?: unknown) => void, toastPromiseReject: (value?: unknown) => void;
+	let toastPromise = new Promise((resolve, reject) => {
+		toastPromiseResolve = resolve;
+		toastPromiseReject = reject;
 	});
+
+	const createToast = (loadingMessage: string, successMessage: string, failMessage: string) => {
+		toastPromise = new Promise((resolve, reject) => {
+			toastPromiseResolve = resolve;
+			toastPromiseReject = reject;
+		});
+		toast.promise(toastPromise, {
+			loading: loadingMessage,
+			success: successMessage,
+			error: failMessage
+		})
+	}
 
 	$: if (form) {
 		console.log(form);
 		if (form.success) {
-			uploadResolve();
+			toastPromiseResolve();
 		} else {
-			uploadReject();
+			toastPromiseReject();
 		}
 		form = null;
 	}
@@ -54,42 +66,15 @@
 	};
 
 	const startFileUpload = () => {
-		uploadPromise = new Promise((resolve, reject) => {
-			uploadResolve = resolve;
-			uploadReject = reject;
-		});
-
-		toast.promise(uploadPromise, {
-			loading: 'Uploading File...',
-			success: form?.message || 'File Uploaded!',
-			error: form?.message || 'Could not upload file.'
-		});
+		createToast("Uploading File...", "File Uploaded!", "Could not upload file.")
 	};
 
 	const deleteFileSubmit = () => {
-		uploadPromise = new Promise((resolve, reject) => {
-			uploadResolve = resolve;
-			uploadReject = reject;
-		});
-
-		toast.promise(uploadPromise, {
-			loading: 'Deleting File...',
-			success: form?.message || 'File Deleted!',
-			error: form?.message || 'Could not delete file.'
-		});
+		createToast("Deleting File...", "File Deleted!", "Could not delete file.")
 	};
 
 	const fileNameChange = () => {
-		uploadPromise = new Promise((resolve, reject) => {
-			uploadResolve = resolve;
-			uploadReject = reject;
-		});
-
-		toast.promise(uploadPromise, {
-			loading: 'Updating File...',
-			success: form?.message || 'File Updated!',
-			error: form?.message || 'Could not update file.'
-		});
+		createToast("Updating File...", "File Updated!", "Could not update file.")
 	};
 </script>
 
