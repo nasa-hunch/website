@@ -29,13 +29,21 @@
 		updatedAt: Date;
 	}[];
 
-	let toastPromiseResolve: (value?: unknown) => void, toastPromiseReject: (value?: unknown) => void;
-	let toastPromise = new Promise((resolve, reject) => {
+	let toastPromiseResolve: (message: string) => void, toastPromiseReject: (reason: string) => void;
+	let toastPromise: Promise<string> = new Promise((resolve, reject) => {
 		toastPromiseResolve = resolve;
 		toastPromiseReject = reject;
 	});
 
-	const createToast = (loadingMessage: string, successMessage: string, failMessage: string) => {
+	async function getError(promise: Promise<unknown>): Promise<unknown> {
+		try {
+			await promise;
+		} catch (error) {
+			return error;
+		}
+	}
+
+	const createToast = async (loadingMessage: string, successMessage: string, failMessage: string) => {
 		toastPromise = new Promise((resolve, reject) => {
 			toastPromiseResolve = resolve;
 			toastPromiseReject = reject;
@@ -43,16 +51,15 @@
 		toast.promise(toastPromise, {
 			loading: loadingMessage,
 			success: successMessage,
-			error: failMessage
+			error: await getError(toastPromise) as string ?? failMessage
 		})
 	}
 
 	$: if (form) {
-		console.log(form);
 		if (form.success) {
-			toastPromiseResolve();
+			toastPromiseResolve(form.message);
 		} else {
-			toastPromiseReject();
+			toastPromiseReject(form.message);
 		}
 		form = null;
 	}
