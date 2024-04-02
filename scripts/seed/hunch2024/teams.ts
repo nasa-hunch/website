@@ -198,12 +198,13 @@ const members: TeamMember[] = [
 	}
 ].map((x) => ({ ...x, pfp: `${githubURL}/team/${x.pfp}` }));
 
-export async function main(client: PrismaClient) {
+export async function seed(client: PrismaClient) {
 	if ((await client.teamMember.count()) > 0) {
 		console.log('Team members already seeded, skipping...');
 		return;
 	}
 
+	console.log('Seeding team members...');
 	await client.teamMember.createMany({
 		data: members.map((member) => ({
 			role: member.role,
@@ -215,4 +216,5 @@ export async function main(client: PrismaClient) {
 			}`
 		}))
 	});
+	console.log('Team members seeded!');
 }

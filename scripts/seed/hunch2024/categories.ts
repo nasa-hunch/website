@@ -55,7 +55,7 @@ const attributesSchema = z.object({
 	shortDescription: z.string()
 });
 
-export async function main(client: PrismaClient) {
+export async function seed(client: PrismaClient) {
 	console.log('Seeding categories...');
 
 	for (const category of categories) {

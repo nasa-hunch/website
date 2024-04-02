@@ -126,13 +126,15 @@ const partners: Partner[] = [
 	}
 ].map((x) => ({ ...x, logo: `${githubURL}/partners/${x.logo}` }));
 
-export async function main(client: PrismaClient) {
+export async function seed(client: PrismaClient) {
 	if ((await client.partner.count()) > 0) {
 		console.log('Partners already seeded, skipping...');
 		return;
 	}
 
+	console.log('Seeding partners...');
 	await client.partner.createMany({
 		data: partners
 	});
+	console.log('Partners seeded!');
 }
