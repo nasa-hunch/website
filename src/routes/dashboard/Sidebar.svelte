@@ -15,6 +15,7 @@
 			<a class="button" href="/dashboard">Dashboard</a>
 			{#if data.user.role == Role.HUNCH_ADMIN}
 				<a class="button" href="/dashboard/admin/users">Users</a>
+				<a class="button" href="/dashboard/admin/orgs">Organizations</a>
 				<a class="button" href="/dashboard/admin/projects">Categories</a>
 			{:else}
 				<a class="button" href="/dashboard/projects">Projects</a>
