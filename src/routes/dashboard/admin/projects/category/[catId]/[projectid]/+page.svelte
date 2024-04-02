@@ -31,7 +31,6 @@
 	}
 
 	.content {
-		width: 90%;
 		padding-top: 20px;
 	}
 

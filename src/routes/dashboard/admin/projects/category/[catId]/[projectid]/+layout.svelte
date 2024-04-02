@@ -25,13 +25,19 @@
 			</nav>
 		</div>
 	</div>
-	<slot />
+	<div class='content'>
+		<slot />
+	</div>
+	
 </div>
 
 <style lang="scss">
 	.wrap {
 		width: 100%;
 		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 	.header {
 		width: 100%;
@@ -44,6 +50,10 @@
 		width: 90%;
 	}
 
+	.content {
+		
+		width: 90%;
+	}
 	.nav {
 		display: flex;
 		flex-direction: row;

@@ -17,7 +17,11 @@ export const load = async ({ parent }) => {
 					pfp: true
 				}
 			},
-			project: true
+			project: {
+				include: {
+					projectTemplate: true
+				}
+			}
 		}
 	});
 

@@ -15,7 +15,7 @@
 				<tr class="projectUserRole">
 					<td>{participant.user.firstName} {participant.user.lastName}</td>
 					<td>
-						<a href="/dashboard/projects/{participant.project.id}">{participant.project.name}</a>
+						<a href="/dashboard/projects/{participant.project.id}">{participant.project.projectTemplate.name}</a>
 					</td>
 				</tr>
 			{/each}
@@ -32,7 +32,7 @@
 		padding: 1.5rem 0px;
 
 		table {
-			width: 90%;
+			width: 100%;
 			background: var(--background-alt);
 			border-radius: 5px;
 			box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
