@@ -6,7 +6,7 @@ import { ProjectUserPermission } from '$lib/enums.js';
 import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { S3 } from '$lib/server/storage/s3.js';
-import { uploadFile } from '$lib/server/storage/uploadFile.js';
+import { destinations, uploadFile } from '$lib/server/storage/uploadFile.js';
 import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async ({ parent }) => {
@@ -14,7 +14,11 @@ export const load = async ({ parent }) => {
 
 	const files = await prisma.file.findMany({
 		where: {
-			projectId: parentData.project.id
+			projectFiles: {
+				some: {
+					projectId: parentData.project.id
+				}
+			}
 		}
 	});
 
@@ -26,12 +30,13 @@ export const load = async ({ parent }) => {
 export const actions = {
 	uploadFile: async ({ request, cookies, params }) => {
 		const user = await verifySession(cookies);
+		const projectId = parseInt(params.id)
 
 		const projectUser = await prisma.projectUser.findFirst({
 			where: {
 				AND: {
 					userId: user.id,
-					projectId: parseInt(params.id)
+					projectId: projectId
 				}
 			}
 		});
@@ -43,7 +48,10 @@ export const actions = {
 				message: 'No file sent.'
 			};
 		} else {
-			return await uploadFile(request, parseInt(params.id));
+			return await uploadFile(request, {
+				destinationName: destinations.PROJECT,
+				destinationId: projectId
+			});
 		}
 
 		
@@ -72,10 +80,7 @@ export const actions = {
 
 			const fileCheck = await prisma.file.findFirst({
 				where: {
-					AND: {
-						id: fileId,
-						projectId: projectUser.projectId
-					}
+					id: fileId,
 				}
 			});
 
@@ -140,10 +145,7 @@ export const actions = {
 
 			const fileCheck = await prisma.file.findFirst({
 				where: {
-					AND: {
-						id: fileId,
-						projectId: projectUser.projectId
-					}
+					id: fileId,
 				}
 			});
 

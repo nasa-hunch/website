@@ -106,7 +106,7 @@ model Project {
   organization Organization @relation(fields: [orgId], references: [id])
   orgId Int
   users ProjectUser[] @relation("users")
-  files File[]
+  files ProjectFile[]
   joinCode Int @unique
   projectTemplateId Int
   projectTemplate ProjectTemplate @relation(fields: [projectTemplateId], references: [id])
@@ -127,7 +127,7 @@ model ProjectTemplate {
   categoryId Int
   category Category @relation(fields: [categoryId], references: [id])
   projects Project[]
-
+  files ProjectTemplateFile[]
 }
 
 // project management items
@@ -137,10 +137,29 @@ model File {
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
   key String? @db.VarChar(255)
-  project Project? @relation(fields: [projectId], references: [id])
-  projectId Int?
   link String @db.VarChar(255)
   size Int @default(0)
+
+  projectFiles ProjectFile[]
+  templateFiles ProjectTemplateFile[]
+}
+
+model ProjectFile {
+  projectId Int
+  project Project @relation(fields: [projectId], references: [id])
+  fileId Int
+  file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, fileId])
+}
+
+model ProjectTemplateFile {
+  templateId Int
+  template ProjectTemplate @relation(fields: [templateId], references: [id])
+  fileId Int
+  file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@id([templateId, fileId])
 }
 
 model ToDoItem {

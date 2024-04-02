@@ -5,7 +5,19 @@ import { bucket, mediaurl } from '$env/static/private';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { S3 } from '$lib/server/storage/s3.js';
 
-export const uploadFile = async (request: Request, projectId?: number) => {
+export const enum destinations {
+	PROJECT,
+	TEMPLATE
+}
+
+type UploadDestination = {
+	destinationName: destinations
+	destinationId: number
+}
+
+//Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here. 
+
+export const uploadFile = async (request: Request, destinationDetails: UploadDestination) => {
 	const formData = await request.formData();
 	const uploadFile: File = formData.get('file') as File;
 	const key = crypto.randomBytes(32).toString('hex') + '/' + uploadFile.name;
@@ -36,15 +48,35 @@ export const uploadFile = async (request: Request, projectId?: number) => {
 		})
 	);
 
-	await prisma.file.create({
+	const file = await prisma.file.create({
 		data: {
-			projectId: projectId,
 			name: uploadFile.name,
 			key: key,
 			link: `${mediaurl}/${key}`,
 			size: uploadFile.size
 		}
 	});
+
+	if(destinationDetails.destinationName == destinations.PROJECT) {
+		await prisma.projectFile.create({
+			data: {
+				fileId: file.id,
+				projectId: destinationDetails.destinationId
+			}
+		})
+	} else if (destinationDetails.destinationName == destinations.TEMPLATE) {
+		await prisma.projectTemplateFile.create({
+			data: {
+				fileId: file.id,
+				templateId: destinationDetails.destinationId
+			}
+		})
+	} else {
+		return {
+			success: false,
+			message: "No idea where to put this file."
+		}
+	}
 
 	return {
 		success: true,
