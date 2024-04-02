@@ -30,7 +30,7 @@
 	<div class="projects">
 		{#each data.user.projectUser as projectUser}
 			<a class="project" href="/dashboard/projects/{projectUser.project.id}">
-				<h3>{projectUser.project.name}</h3>
+				<h3>{projectUser.project.projectTemplate.name}</h3>
 			</a>
 		{/each}
 	</div>
