@@ -42,6 +42,11 @@ export const load = async ({ params, parent }) => {
 					name: true,
 					description: true
 				}
+			},
+			organization: {
+				select: {
+					name: true
+				}
 			}
 		}
 	});

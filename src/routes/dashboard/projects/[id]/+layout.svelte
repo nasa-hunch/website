@@ -1,11 +1,18 @@
 <script lang="ts">
 	export let data;
+
+	$: isHunchAdmin = data.user.role === 'HUNCH_ADMIN';
 </script>
 
 <div class="wrap">
 	<div class="header">
 		<div class="headerInner">
-			<h1>{data.project.projectTemplate.name}</h1>
+			<h1 class:no-margin-bottom={isHunchAdmin}>{data.project.projectTemplate.name}</h1>
+			{#if isHunchAdmin}
+				<h2>
+					<a href="/dashboard/orgs/{data.project.orgId}">{data.project.organization.name}</a>
+				</h2>
+			{/if}
 
 			<nav class="nav">
 				<a href="/dashboard/projects/{data.project.id}">Checklist</a>
@@ -42,6 +49,19 @@
 
 	.content {
 		width: 90%;
+	}
+
+	.no-margin-bottom {
+		margin-bottom: 0;
+	}
+
+	h2 {
+		font-size: 1.2rem;
+		margin-top: 0;
+
+		a {
+			color: gray;
+		}
 	}
 
 	.nav {
