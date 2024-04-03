@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { snakeCaseToTitleCase } from '$lib/case.js';
+
     export let data;
 </script>
 
@@ -27,6 +29,9 @@
                 <img src={user.pfp} alt={user.firstName} />
                 <div class="content">
                     <p>{user.firstName} {user.lastName}</p>
+                    {#if user.role && user.role !== 'STUDENT'}
+                        <p class="role">{snakeCaseToTitleCase(user.role)}</p>
+                    {/if}
                 </div>
             </a>
         {/each}
@@ -42,6 +47,16 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 1rem;
+    }
+
+    .role {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--text-alt);
+        background-color: rgba(221, 54, 28, 0.25);
+        border: 1px solid #dd361c;
     }
 
     .user {
