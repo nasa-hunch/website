@@ -41,9 +41,13 @@ model Organization {
 
 model Session {
   id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  lastUsed DateTime @default(now())
   sessionText String
   userId Int
   user User @relation(fields: [userId], references: [id])
+  ip String
+  userAgent String
 }
 
 model User {

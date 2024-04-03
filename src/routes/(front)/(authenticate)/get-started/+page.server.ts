@@ -24,7 +24,7 @@ export const load = async ({ cookies }) => {
 };
 
 export const actions = {
-	register: async ({ request, cookies }) => {
+	register: async ({ request, cookies, getClientAddress }) => {
 		// Get all for the form data
 		const formData = await request.formData();
 
@@ -89,14 +89,14 @@ export const actions = {
 			};
 		}
 
-		// Creata a new session!
-
+		// Create a new session!
 		const session = crypto.randomBytes(64).toString('hex');
-		// Add session to db
 		await prisma.session.create({
 			data: {
 				sessionText: session,
-				userId: newUser.id
+				userId: newUser.id,
+				ip: getClientAddress(),
+				userAgent: request.headers.get('user-agent') || 'Unknown'
 			}
 		});
 

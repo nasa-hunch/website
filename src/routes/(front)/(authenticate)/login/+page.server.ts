@@ -5,7 +5,7 @@ import { checkPassword } from '$lib/server/password';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 
 export const actions = {
-	login: async ({ request, cookies }) => {
+	login: async ({ request, cookies, getClientAddress }) => {
 		// Get all for the form data
 		const formData = await request.formData();
 
@@ -48,7 +48,9 @@ export const actions = {
 		await prisma.session.create({
 			data: {
 				sessionText: sessionToken,
-				userId: user.id
+				userId: user.id,
+				ip: getClientAddress(),
+				userAgent: request.headers.get('user-agent') || 'Unknown'
 			}
 		});
 

@@ -51,79 +51,95 @@
 </form>
 
 <main>
-	<div class="wrap">
-		<h1>Settings</h1>
+	<h1>Settings</h1>
 
-		<div class="accountInfo">
-			<div class="header">
-				<h2>Account Information</h2>
-				<p class="role">{titleCasedRole}</p>
-			</div>
-			<div class="content">
-				<div class="left">
-					<button
-						class="pfp"
-						class:uploadFileThing={dragging}
-						on:drop={dropHandler}
-						on:dragover={dragOverHandler}
-						on:dragleave={stopDragOver}
-					>
-						<img alt="Profile" src={data.user.pfp || '/defaultUser.svg'} />
-					</button>
-				</div>
-				<form
-					class="right"
-					action="?/updateAccountInfo"
-					method="post"
-					use:enhance={() => {
-						return ({ update }) => {
-							update({ reset: false });
-						};
-					}}
-				>
-					<Input
-						name="firstName"
-						bgColor="var(--background-alt)"
-						label="First Name"
-						value={data.user.firstName}
-					/>
-					<hr />
-					<Input
-						name="lastName"
-						bgColor="var(--background-alt)"
-						label="Last Name"
-						value={data.user.lastName}
-					/>
-					<hr />
-					<Input
-						name="email"
-						bgColor="var(--background-alt)"
-						label="Email"
-						value={data.user.email}
-					/>
-					<hr />
-					<Button value="Save Information" />
-				</form>
-			</div>
+	<div class="accountInfo">
+		<div class="header">
+			<h2>Account Information</h2>
+			<p class="role">{titleCasedRole}</p>
 		</div>
+		<div class="content">
+			<div class="left">
+				<button
+					class="pfp"
+					class:uploadFileThing={dragging}
+					on:drop={dropHandler}
+					on:dragover={dragOverHandler}
+					on:dragleave={stopDragOver}
+				>
+					<img alt="Profile" src={data.user.pfp || '/defaultUser.svg'} />
+				</button>
+			</div>
+			<form
+				class="right"
+				action="?/updateAccountInfo"
+				method="post"
+				use:enhance={() => {
+					return ({ update }) => {
+						update({ reset: false });
+					};
+				}}
+			>
+				<Input
+					name="firstName"
+					bgColor="var(--background-alt)"
+					label="First Name"
+					value={data.user.firstName}
+				/>
+				<hr />
+				<Input
+					name="lastName"
+					bgColor="var(--background-alt)"
+					label="Last Name"
+					value={data.user.lastName}
+				/>
+				<hr />
+				<Input
+					name="email"
+					bgColor="var(--background-alt)"
+					label="Email"
+					value={data.user.email}
+				/>
+				<hr />
+				<Button value="Save Information" />
+			</form>
+		</div>
+	</div>
+
+	<div class="accountInfo m-top">
+		<div class="header">
+			<h2>Sessions</h2>
+		</div>
+		{#each data.user.sessions as session}
+			<p>
+				{session.ip} at {session.createdAt.toLocaleString()}
+				{#if session.sessionText === 'current'}
+					(Current Session)
+				{/if}
+			</p>
+		{/each}
 	</div>
 </main>
 
 <style lang="scss">
-	.wrap {
+	main {
 		width: 100%;
-		height: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
 
+	.m-top {
+		margin-top: 2rem;
+	}
+
 	.accountInfo {
 		width: 90%;
 		max-width: 600px;
 		background: $background-alt;
-		padding: 25px;
+		padding: 2rem;
+		padding-top: 0rem;
 		box-sizing: border-box;
 		border-radius: 10px;
 	}
@@ -135,6 +151,10 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+
+		h2 {
+			padding: 3px 0;
+		}
 
 		.role {
 			margin-left: 10px;

@@ -3,7 +3,7 @@
 	import Hamburger from 'svelte-hamburger';
 
 	let open = false;
-	let innerWidth;
+	let innerWidth: number;
 	interface Link {
 		name: string;
 		href: string;

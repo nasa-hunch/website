@@ -16,8 +16,13 @@ export const load = async ({ cookies }) => {
 		},
 		include: {
 			user: {
-				include: {
-					organization: true,
+				select: {
+					organization: {
+						select: {
+							id: true,
+							name: true
+						}
+					},
 					projectUser: {
 						include: {
 							project: {
@@ -29,6 +34,24 @@ export const load = async ({ cookies }) => {
 									}
 								}
 							}
+						}
+					},
+					id: true,
+					createdAt: true,
+					updatedAt: true,
+					firstName: true,
+					lastName: true,
+					email: true,
+					pfp: true,
+					role: true,
+					orgId: true,
+					sessions: {
+						select: {
+							createdAt: true,
+							lastUsed: true,
+							ip: true,
+							userAgent: true,
+							sessionText: true
 						}
 					}
 				}
@@ -65,15 +88,12 @@ export const load = async ({ cookies }) => {
 
 	return {
 		user: {
-			id: user.id,
-			createdAt: user.createdAt,
-			updatedAt: user.updatedAt,
-			firstName: user.firstName,
-			lastName: user.lastName,
-			email: user.email,
-			pfp: user.pfp,
+			...user,
+			sessions: user.sessions.map((session) => ({
+				...session,
+				sessionText: sessionCheck.sessionText == session.sessionText ? 'current' : 'not'
+			})),
 			role: user.role,
-			projectUser: user.projectUser,
 			orgId: user.role == Role.HUNCH_ADMIN ? null : user.orgId ?? user.projectUser[0].project.orgId
 		}
 	};
