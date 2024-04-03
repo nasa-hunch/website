@@ -7,22 +7,32 @@ export const load = async ({ params, parent }) => {
 	const parentData = await parent();
 	const id = parseInt(params.id);
 
-	const projectUser = await prisma.projectUser.findFirst({
-		where: {
-			AND: {
-				userId: parentData.user.id,
-				projectId: id
-			}
-		}
-	});
-
-	if ((!projectUser || projectUser == null) && parentData.user.role != Role.HUNCH_ADMIN) {
-		error(404, 'Project not found');
-	}
-
 	const project = await prisma.project.findFirst({
 		where: {
-			id: id
+			AND: {
+				id: id,
+				OR: parentData.user.role == Role.HUNCH_ADMIN ? [] : [
+					{
+						users: {
+							some: {
+								userId: parentData.user.id
+							}
+						}
+					},
+					{
+						organization: {
+							users: {
+								some: {
+									AND: {
+										id: parentData.user.id,
+										role: Role.SCHOOL_ADMIN
+									}
+								}
+							}
+						}
+					}
+				]
+			}
 		},
 		include: {
 			users: {
@@ -51,7 +61,7 @@ export const load = async ({ params, parent }) => {
 		}
 	});
 
-	if (!project || project == null) {
+	if (!project) {
 		error(404, 'Project not found');
 	}
 
