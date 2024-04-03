@@ -14,6 +14,7 @@
 			firstName: string;
 			lastName: string;
 			pfp: string | null;
+			role: Role;
 		};
 		id: number;
 		createdAt: Date;
@@ -40,6 +41,11 @@
 		<div class="role">
 			{snakeCaseToTitleCase(role)}
 		</div>
+		{#if memberData.user.role === 'TEACHER'}
+			<div class="teacher">
+				Teacher
+			</div>
+		{/if}
 	</div>
 	<div class="right">
 		{#if userRole === 'TEACHER' || userRole === 'SCHOOL_ADMIN' || userRole === 'HUNCH_ADMIN'}
@@ -83,26 +89,22 @@
 		align-items: center;
 	}
 
-	.role {
+	.role, .teacher {
 		margin-left: 10px;
-		border: 1px solid $primary;
 		position: relative;
 		z-index: 2;
 		padding: 0px 5px;
 		border-radius: 5px;
+	}
 
-		&::after {
-			content: '';
-			position: absolute;
-			top: 0px;
-			left: 0px;
-			width: 100%;
-			height: 100%;
-			border-radius: 5px;
-			background: $primary;
-			z-index: -1;
-			opacity: 0.25;
-		}
+	.role {
+		border: 1px solid $primary;
+		background-color: rgba($primary, 0.25);
+	}
+
+	.teacher {
+		border: 1px solid $secondary;
+		background-color: rgba($secondary, 0.25);
 	}
 
 	.right {
