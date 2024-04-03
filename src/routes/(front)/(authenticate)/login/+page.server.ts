@@ -55,7 +55,7 @@ export const actions = {
 		});
 
 		cookies.set('session', sessionToken, {
-			secure: true,
+			secure: process.env.NODE_ENV != 'development' && !process.env.CI,
 			sameSite: 'strict',
 			expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
 			path: '/'

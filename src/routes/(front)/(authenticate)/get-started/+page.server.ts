@@ -101,7 +101,7 @@ export const actions = {
 		});
 
 		cookies.set('session', session, {
-			secure: true,
+			secure: process.env.NODE_ENV != 'development' && !process.env.CI,
 			sameSite: 'strict',
 			path: '/',
 			// 7 days
