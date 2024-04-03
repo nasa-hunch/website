@@ -93,6 +93,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 								lastName: faker.person.lastName(),
 								role: 'STUDENT',
 								pfp: pickAvatar(),
+								orgId: i,
 								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 							}
 						},
