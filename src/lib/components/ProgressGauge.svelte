@@ -4,7 +4,7 @@
 	/**
 	 * %, ex: 0.12 = 12%
 	 */
-	export let percentDone = 55;
+	export let percentDone = 0.55;
 	export let fill = 'var(--green)';
 	export let height = 30;
 	export let width = 30;

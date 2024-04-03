@@ -81,7 +81,7 @@
 				margin-left: 5px;
 
 				&:hover {
-					cursor: pointer;
+					cursor: not-allowed;
 					opacity: 0.25;
 				}
 			}
