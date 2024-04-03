@@ -19,12 +19,12 @@ export const actions = {
 			};
 		}
 
-		// Pull the user from the database
-		const newEmail = email.toLowerCase();
-
 		const user = await prisma.user.findFirst({
 			where: {
-				email: newEmail
+				email: {
+					equals: email,
+					mode: 'insensitive'
+				}
 			}
 		});
 

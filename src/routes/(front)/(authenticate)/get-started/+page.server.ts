@@ -48,16 +48,13 @@ export const actions = {
 			};
 		}
 
-		// Now we need to verify that this email is in fact one of a kind which is pretty much impossible
-		// We are just going to cast out certain groups here, so we will only check for lowercase and if the email already exsists
-
-		const newEmail = email.toLowerCase();
-
-		// Check if a user with this email already exsists
-
+		// Check if a user with this email already exists
 		const userEmailCheck = await prisma.user.findFirst({
 			where: {
-				email: newEmail
+				email: {
+					equals: email,
+					mode: 'insensitive'
+				}
 			}
 		});
 
@@ -73,7 +70,7 @@ export const actions = {
 			data: {
 				firstName,
 				lastName,
-				email: newEmail,
+				email,
 				...(await makePassword(pass1)),
 				createdAt: new Date(Date.now()),
 				updatedAt: new Date(Date.now()),
