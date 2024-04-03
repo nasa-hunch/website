@@ -17,6 +17,23 @@ export const load = async ({ params }) => {
                     role: true,
                     pfp: true
                 }
+            },
+            projects: {
+                include: {
+                    projectTemplate: true,
+                    users: {
+                        select: {
+                            user: {
+                                select: {
+                                    id: true,
+                                    firstName: true,
+                                    lastName: true,
+                                    pfp: true
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     })
