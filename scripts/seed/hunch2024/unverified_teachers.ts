@@ -16,10 +16,10 @@ export async function seed(prisma: PrismaTransactionClient) {
 		for (let j = 0; j < chance.pickone([1, 2]); j++) {
 			await prisma.user.create({
 				data: {
-					email: `${i}@project${j}.unverifiedTeacher`,
+					email: `${i}@project${j}.unverifiedTeacher`.toLowerCase(),
 					firstName: faker.person.firstName(),
 					lastName: faker.person.lastName(),
-					role: 'TEACHER',
+					role: 'UNVERIFIED_TEACHER',
 					pfp: pickAvatar(),
 					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || '')),
 					organization: {

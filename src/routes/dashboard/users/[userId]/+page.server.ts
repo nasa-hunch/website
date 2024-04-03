@@ -30,6 +30,7 @@ export const load = async ({ params, parent }) => {
             firstName: true,
             lastName: true,
             pfp: true,
+            email: true
         }
     });
 

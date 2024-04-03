@@ -6,6 +6,7 @@
     <div class="title">
         <img src={data.selectedUser.pfp} alt={data.selectedUser.firstName} />
         <h1>{data.selectedUser.firstName} {data.selectedUser.lastName}</h1>
+        <h2>{data.selectedUser.email}</h2>
     </div>
 </main>
 

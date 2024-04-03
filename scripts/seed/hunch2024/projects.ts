@@ -46,6 +46,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 							lastName: faker.person.lastName(),
 							role: 'TEACHER',
 							pfp: pickAvatar(),
+							orgId: i,
 							...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 						}
 					},
@@ -68,6 +69,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 								firstName: faker.person.firstName(),
 								lastName: faker.person.lastName(),
 								role: 'STUDENT',
+								orgId: i,
 								...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
 								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 							}
@@ -77,7 +79,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 				});
 			}
 
-			// Add one or two unverified students
+			// Add one or two unapproved students
 			for (let k = 0; k < chance.pickone([1, 2]); k++) {
 				await prisma.projectUser.create({
 					data: {
@@ -88,7 +90,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 						},
 						user: {
 							create: {
-								email: `${i}@project${j}.unverified${k}`,
+								email: `${i}@project${j}.unapproved${k}`,
 								firstName: faker.person.firstName(),
 								lastName: faker.person.lastName(),
 								role: 'STUDENT',
