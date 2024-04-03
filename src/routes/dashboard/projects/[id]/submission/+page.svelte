@@ -158,4 +158,14 @@
 			margin: 0px;
 		}
 	}
+
+	@media (max-width: 1111px) {
+		.panels {
+			flex-direction: column;
+
+			.panel {
+				width: 100%;
+			}
+		}
+	}
 </style>
