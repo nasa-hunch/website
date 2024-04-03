@@ -3,7 +3,8 @@
 	import Hamburger from 'svelte-hamburger';
 
 	let open = false;
-	let innerWidth: number;
+	// TODO: make an SSR guess based on the user agent
+	let innerWidth = 1000;
 	interface Link {
 		name: string;
 		href: string;
