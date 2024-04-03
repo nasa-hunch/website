@@ -22,12 +22,13 @@ export const load = async ({ params }) => {
             updatedAt: true,
             firstName: true,
             lastName: true,
+            pfp: true,
         }
     });
 
     if (!user) error(404, 'User not found');
 
     return {
-        user
+        selectedUser: user
     }
 }

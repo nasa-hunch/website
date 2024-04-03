@@ -3,11 +3,30 @@
 </script>
 
 <main>
-    <h1>{data.user.firstName} {data.user.lastName}</h1>
+    <div class="title">
+        <img src={data.selectedUser.pfp} alt={data.selectedUser.firstName} />
+        <h1>{data.selectedUser.firstName} {data.selectedUser.lastName}</h1>
+    </div>
 </main>
 
 <style lang="scss">
     main {
-        margin: 1rem;
+        margin-top: 1rem;
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: var(--background-alt);
+        color: black;
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
     }
 </style>
