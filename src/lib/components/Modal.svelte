@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fade, fly } from 'svelte/transition';
+	import { cubicInOut } from 'svelte/easing';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ close: void }>();
@@ -19,8 +21,10 @@
 </script>
 
 <svelte:window on:keydown={keyHelper} />
-<button bind:this={buttonElement} class="wrap" on:mousedown={clickHelper}>
-	<slot />
+<button transition:fade={{ easing: cubicInOut, duration: 150 }} bind:this={buttonElement} class="wrap" on:mousedown={clickHelper}>
+	<div transition:fly={{ easing: cubicInOut, duration: 300, delay: 50, y: 50 }}>
+		<slot />
+	</div>
 </button>
 
 <style lang="scss">
