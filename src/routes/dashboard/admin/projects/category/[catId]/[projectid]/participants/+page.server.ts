@@ -3,29 +3,32 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
 export const load = async ({ parent }) => {
 	const parentData = await parent();
 
-	const participants = await prisma.projectUser.findMany({
+	const projects = await prisma.project.findMany({
 		where: {
-			project: {
-				projectTemplateId: parentData.projectTemplate.id
-			}
+			projectTemplateId: parentData.projectTemplate.id
 		},
 		include: {
-			user: {
-				select: {
-					firstName: true,
-					lastName: true,
-					pfp: true
+			projectTemplate: true,
+			users: {
+				include: {
+					user: {
+						select: {
+							firstName: true,
+							lastName: true,
+							pfp: true
+						}
+					}
 				}
 			},
-			project: {
-				include: {
-					projectTemplate: true
+			organization: {
+				select: {
+					name: true
 				}
 			}
 		}
 	});
 
 	return {
-		participants
+		projects
 	};
 };
