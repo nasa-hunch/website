@@ -16,19 +16,13 @@ export const load = async ({ params }) => {
 		}
 	});
 
-	let submittedProjectCount = 0;
 
 	if (!projectTemplate) {
 		throw error(404, 'Project not found.');
 	}
 
-	let projectUserCount = 0;
-	projectTemplate.projects.forEach((item) => {
-		if (item.submitted) {
-			submittedProjectCount++;
-		}
-		projectUserCount += item.users.length;
-	});
+	const submittedProjectCount = projectTemplate.projects.filter((item) => item.submitted).length;
+	const projectUserCount = projectTemplate.projects.reduce((acc, item) => acc + item.users.length, 0);
 
 	return {
 		projectTemplate,
