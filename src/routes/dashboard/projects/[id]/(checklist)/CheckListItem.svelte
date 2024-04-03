@@ -108,7 +108,7 @@
 	let selectingUser = false;
 </script>
 
-{#if $page.state.modal === 'deleteItem'}
+{#if $page.state.modal === `deleteItem${data.id}`}
 	<Modal on:close={() => history.back()}>
 		<ModelForm
 			action="?/deleteToDoItem"
@@ -148,7 +148,7 @@
 	{/each}
 </FloatingComboBox>
 
-{#if $page.state.modal === 'completeItem'}
+{#if $page.state.modal === `completeItem${data.id}`}
 	<Modal on:close={() => history.back()}>
 		<ModelForm
 			action="?/completeToDoItem"
@@ -179,7 +179,7 @@
 		<IconButton
 			on:click={() => {
 				pushState('', {
-					modal: 'completeItem'
+					modal: `completeItem${data.id}`
 				});
 			}}
 		>
@@ -196,7 +196,7 @@
 		<IconButton
 			on:click={() => {
 				pushState('', {
-					modal: 'deleteItem'
+					modal: `deleteItem${data.id}`
 				});
 			}}
 		>

@@ -4,7 +4,7 @@
 	import toast from 'svelte-french-toast';
 
 	import AddItemIcon from '~icons/mdi/plus';
-	import { pushState, replaceState } from '$app/navigation';
+	import { invalidateAll, pushState, replaceState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
@@ -48,6 +48,7 @@
 	$: if (form) {
 		if (form.success) {
 			resolvePromise();
+			invalidateAll();
 		} else {
 			rejectPromise();
 		}

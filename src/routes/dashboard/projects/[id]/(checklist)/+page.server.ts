@@ -31,16 +31,8 @@ export const load = async ({ parent }) => {
 		}
 	});
 
-	const uncheckedItems: typeof checkableItems = [];
-	const checkedItems: typeof checkableItems = [];
-
-	checkableItems.map((item) => {
-		if (item.checked) {
-			checkedItems.push(item);
-		} else {
-			uncheckedItems.push(item);
-		}
-	});
+	const checkedItems = checkableItems.filter((item) => item.checked);
+	const uncheckedItems = checkableItems.filter((item) => !item.checked);
 
 	return {
 		numberOfItems: checkableItems.length,
