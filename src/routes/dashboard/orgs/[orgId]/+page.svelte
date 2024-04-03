@@ -23,7 +23,7 @@
 
     <div class="users">
         {#each data.org.users as user}
-            <a class="user" href="/dashboard/admin/users/{user.id}">
+            <a class="user" href="/dashboard/users/{user.id}">
                 <img src={user.pfp} alt={user.firstName} />
                 <div class="content">
                     <p>{user.firstName} {user.lastName}</p>

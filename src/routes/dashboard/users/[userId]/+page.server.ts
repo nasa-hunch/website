@@ -2,10 +2,17 @@ import { error } from '@sveltejs/kit';
 
 import { prisma } from '$lib/server/prisma/prismaConnection.js'
 
-export const load = async ({ params }) => {
+export const load = async ({ params, parent }) => {
+    const data = await parent();
+
+    if (data.user.role !== 'HUNCH_ADMIN' && data.user.role !== 'SCHOOL_ADMIN') error(404, 'User not found');
+
     const user = await prisma.user.findFirst({
         where: {
-            id: parseInt(params.userId)
+            AND: {
+                id: parseInt(params.userId),
+                ...(data.user.role === 'HUNCH_ADMIN' ? {} : { orgId: data.user.orgId })
+            }
         },
         select: {
             sessions: {
