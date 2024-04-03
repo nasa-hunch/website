@@ -16,7 +16,7 @@
 
 	let selectedUserId = 0;
 
-	type DeleteData ={
+	type DeleteData = {
 		id: number;
 		firstName: string;
 		lastName: string;
