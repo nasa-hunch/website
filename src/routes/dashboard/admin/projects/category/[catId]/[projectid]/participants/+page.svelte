@@ -1,10 +1,23 @@
 <script lang="ts">
+	import Fuse from 'fuse.js';
+
+	let searchInput = '';
+
 	export let data;
+
+	const fuse = new Fuse(data.projects, {
+		keys: ['organization.name', 'users.user.firstName', 'users.user.lastName']
+	});
+
+	$: filteredProjects = searchInput
+		? fuse.search(searchInput).map(result => result.item)
+		: data.projects;
 </script>
 
 <main>
+	<input type="text" placeholder="Search..." bind:value={searchInput} />
 	<div class="projects">
-		{#each data.projects as project}
+		{#each filteredProjects as project}
 			<a class="project" href="/dashboard/projects/{project.id}">
 				<div class="content">
 					<h1>{project.organization.name}</h1>
@@ -26,7 +39,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 		padding: 1.5rem 0px;
+	}
+
+	input {
+		width: 100%;
+		padding: 0.5rem;
+		margin-bottom: 1rem;
+		border: 1px solid var(--background-alt);
+		border-radius: 0.5rem;
 	}
 
 	.projects {
