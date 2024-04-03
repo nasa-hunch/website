@@ -16,6 +16,8 @@ If you want the production environment, you can run:
 docker compose -f .\docker-compose.yml -f .\docker-compose.test.yml up
 ```
 
+To see account info, go to [ACCOUNTS.md](ACCOUNTS.md).
+
 ## Testing
 
 Once you have the development environment running, you can run the tests by running:
