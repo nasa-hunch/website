@@ -127,10 +127,6 @@
 		}
 	}
 
-	.voteStatus {
-		display: flex;
-		flex-direction: column;
-	}
 
 	.columns {
 		display: flex;
