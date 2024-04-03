@@ -16,15 +16,13 @@
 
 	let selectedUserId = 0;
 
-	type DeleteData =
-		| {
-				id: number;
-				firstName: string;
-				lastName: string;
-		  }
-		| undefined;
+	type DeleteData = {
+		id: number;
+		firstName: string;
+		lastName: string;
+	}
 
-	let deleteData: DeleteData;
+	let deleteData: DeleteData | undefined = undefined;
 
 	let deletePerson = (id: number, firstName: string, lastName: string) => {
 		pushState('', {

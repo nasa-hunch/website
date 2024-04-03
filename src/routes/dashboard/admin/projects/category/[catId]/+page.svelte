@@ -54,7 +54,7 @@
 	<div class="projectWrap">
 		{#each data.category.projectTemplates as project}
 			{@const percentDone = calculatePercentDone(project.createdAt, project.deadline)}
-			<a class="project" href="/dashboard/admin/projects/category/{data.category.id}/{project.id}">
+			<a class="project" href="/dashboard/admin/projects/{project.id}">
 				<div class="projectTitle">
 					{project.name}
 				</div>
