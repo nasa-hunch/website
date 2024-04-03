@@ -3,6 +3,9 @@
 	import { tweened } from 'svelte/motion';
 	import toast from 'svelte-french-toast';
 
+	import MdiClipboardCheckOutline from '~icons/mdi/clipboard-check-outline';
+	import MdiClipboardRemoveOutline from '~icons/mdi/clipboard-remove-outline';
+
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
@@ -12,8 +15,8 @@
 
 	let users: typeof data.project.users;
 	$: users = data.project.users;
-	let votedYes: typeof users = [];
-	let votedNo: typeof users = [];
+	let votedYes = 0;
+	let votedNo = 0;
 
 	let percentDone = tweened(0, {
 		easing: cubicInOut,
@@ -21,18 +24,18 @@
 	});
 
 	$: if (users) {
-		votedYes = [];
-		votedNo = [];
-		users.forEach((item) => {
-			if (item.voteSubmit) {
-				votedYes.push(item);
+		votedYes = 0;
+		votedNo = 0;
+		for (const user of users) {
+			if (user.voteSubmit) {
+				votedYes++;
 			} else {
-				votedNo.push(item);
+				votedNo++;
 			}
-		});
+		}
 	}
 
-	$: percentDone.set(votedYes.length / users.length);
+	$: percentDone.set(votedYes / users.length);
 
 	$: if (form) {
 		if (form.success) {
@@ -44,7 +47,7 @@
 </script>
 
 <div class="panels">
-	<div class="panel">
+	<div class="panel submitInfo">
 		<div class="title">
 			<h2>Ready to submit?</h2>
 		</div>
@@ -53,7 +56,7 @@
 			Once a project has been submitted, it will no longer be editable. All submissions are final.
 		</p>
 		<form action="?/submit" method="post" use:enhance>
-			<Button disabled={votedYes.length != users.length} value="Submit Project" />
+			<Button disabled={votedYes != users.length} value="Submit Project" />
 		</form>
 	</div>
 
@@ -63,24 +66,20 @@
 			<ProgressGauge fill="var(--green)" percentDone={$percentDone} strokeWidth={4} />
 		</div>
 		<div class="columns">
-			<div class="left col">
-				<h2>Voted Yes</h2>
-				{#each votedYes as person}
+			<div class="col">
+				{#each users as person}
 					<div class="person">
 						<Pfp size="32px" user={person.user} />
 						<p>{person.user.firstName} {person.user.lastName}</p>
+						{#if person.voteSubmit}
+							<MdiClipboardCheckOutline class="sicon green"/>
+						{:else}
+							<MdiClipboardRemoveOutline class="sicon red"/>
+						{/if}
 					</div>
 				{/each}
 			</div>
-			<div class="right col">
-				<h2>Voted No</h2>
-				{#each votedNo as person}
-					<div class="person">
-						<Pfp size="32px" user={person.user} />
-						<p>{person.user.firstName} {person.user.lastName}</p>
-					</div>
-				{/each}
-			</div>
+			
 		</div>
 		<form action="?/voteSubmit" method="post" use:enhance>
 			<Button value="Change Vote" />
@@ -92,19 +91,22 @@
 	.panels {
 		display: flex;
 		flex-direction: row;
+		box-sizing: border-box;
 
 		.panel {
-			min-width: 300px;
-			width: calc(33% - 40px);
+			max-width: fit-content;
 			padding: 10px;
 			box-sizing: border-box;
 			border-radius: 10px;
-			flex-grow: 1;
 			margin: 20px;
 			background: $background-alt;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+		}
+
+		.submitInfo {
+			max-width: 600px;
 		}
 	}
 
@@ -144,6 +146,19 @@
 
 			h2 {
 				font-size: 1.2rem;
+			}
+
+			:global(.sicon) {
+				font-size: 30px;
+				text-align: right;
+			}
+
+			:global(.green) {
+				color: $green;
+			}
+
+			:global(.red) {
+				color: $primary;
 			}
 		}
 	}
