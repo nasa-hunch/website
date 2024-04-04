@@ -1,5 +1,29 @@
 <script lang="ts">
 	export let data;
+	import { page } from '$app/stores';
+
+	console.log($page.route.id);
+	const routeIdBase = `/dashboard/admin/projects/[templateId]`;
+	const routeBase = `/dashboard/admin/projects/${$page.params.templateId}`;
+
+	const links = [
+		{
+			name: `Info`,
+			route: ''
+		},
+		{
+			name: `Files`,
+			route: 'files'
+		},
+		{
+			name: `Participants (${data.projectUserCount})`,
+			route: `participants`
+		},
+		{
+			name: `Submissions (${data.projectCount})`,
+			route: 'submissions'
+		}
+	];
 </script>
 
 <div class="wrap">
@@ -7,14 +31,14 @@
 		<div class="headerInner">
 			<h1>{data.projectTemplate.name}</h1>
 			<nav class="nav">
-				<a href="/dashboard/admin/projects/{data.projectTemplate.id}">Info</a>
-				<a href="/dashboard/admin/projects/{data.projectTemplate.id}/files">Files</a>
-				<a href="/dashboard/admin/projects/{data.projectTemplate.id}/participants"
-					>Participants ({data.projectUserCount})</a
-				>
-				<a href="/dashboard/admin/projects/{data.projectTemplate.id}/submissions"
-					>Submissions ({data.projectCount})</a
-				>
+				{#each links as link}
+					<a
+						href="{routeBase}/{link.route}"
+						class:active={$page.route.id == `${routeIdBase}${link.route ? '/' : ''}${link.route}`}
+					>
+						{link.name}
+					</a>
+				{/each}
 			</nav>
 		</div>
 	</div>
@@ -75,6 +99,14 @@
 			&:hover {
 				color: $primary;
 
+				&::after {
+					transform: scaleX(1);
+				}
+			}
+
+			&.active {
+				color: $primary;
+				opacity: 0.5;
 				&::after {
 					transform: scaleX(1);
 				}
