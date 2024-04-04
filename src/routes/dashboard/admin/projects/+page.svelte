@@ -13,7 +13,6 @@
 		<ModelForm action="?/createCategory" method="post">
 			<h2>New Category</h2>
 			<Input name="name" bgColor="#f1f1f1" label="Name" />
-			<Input name="icon" bgColor="#f1f1f1" label="Icon" />
 			<input name="color" type="color" />
 			<input name="deadline" type="date" />
 			<Button value="Create" />

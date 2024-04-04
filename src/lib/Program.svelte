@@ -1,4 +1,6 @@
 <script lang="ts">
+	import sanitizeHtml from 'sanitize-html';
+
 	export let program: string;
 
 	export let projectTemplates: {

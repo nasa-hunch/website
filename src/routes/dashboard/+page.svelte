@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
+	import { Role } from '$lib/enums'; 
 	export let data: PageData;
 </script>
 
@@ -28,10 +28,10 @@
 		</div>
 		<div class="right">
 			<div class="toDo">
-				<h2>To Do</h2>
+				<h2>Todo</h2>
 				<div class="items">
 					{#if data.assignees.length < 1}
-						<p>Nothing to do!</p>
+						<p>Nothing to do 🎉</p>
 					{/if}
 					{#each data.assignees as assignee}
 						<a class="toDoItem" href="/dashboard/projects/{assignee.toDoItem.projectId}">

@@ -15,6 +15,7 @@
 	import ModelForm from '$lib/components/ModalForm.svelte';
 
 	import Assignees from './Assignees.svelte';
+	import Pfp from '$lib/components/Pfp.svelte';
 
 	type CheckListItem = {
 		id: number;
@@ -47,6 +48,7 @@
 		user: {
 			firstName: string;
 			lastName: string;
+			pfp: string | null;
 		};
 	};
 
@@ -54,6 +56,18 @@
 	export let data: CheckListItem;
 	export let resolvePromise: (value?: unknown) => void;
 	export let rejectPromise: (value?: unknown) => void;
+
+	const checkAssignee = (user: UserLike) => {
+		let found = false;
+		data.assignees.forEach((item) => {
+			console.log(item.projectUser.id, user.id)
+			if(item.projectUser.id == user.id) {
+				found = true
+
+			}
+		})
+		return found
+	}
 
 	let deleteSubmitHelper = () => {
 		toast.promise(
@@ -131,20 +145,24 @@
 	let:filteredData
 >
 	{#each filteredData as user}
-		<form
-			action="?/addAssignee"
-			method="post"
-			on:submit={assigneeSubmitHelper}
-			on:reset={() => (selectingUser = false)}
-			use:enhance
-		>
-			<input name="itemId" hidden value={data.id} />
-			<input name="projectUserId" hidden value={user.id} />
-			<button class="assigneeButton">
-				{user.user.firstName}
-				{user.user.lastName}
-			</button>
-		</form>
+		{#if !checkAssignee(user)}
+			<form
+				action="?/addAssignee"
+				method="post"
+				on:submit={assigneeSubmitHelper}
+				on:reset={() => (selectingUser = false)}
+				use:enhance
+			>
+				
+				<input name="itemId" hidden value={data.id} />
+				<input name="projectUserId" hidden value={user.id} />
+				<button class="assigneeButton">
+					<Pfp user={user.user}/>
+					{user.user.firstName}
+					{user.user.lastName}
+				</button>
+			</form>
+		{/if}
 	{/each}
 </FloatingComboBox>
 

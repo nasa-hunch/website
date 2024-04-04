@@ -18,9 +18,11 @@
 		box-sizing: border-box;
 		font-size: 1.2rem;
 		cursor: pointer;
+		transition: 0.2s all cubic-bezier(0.075, 0.82, 0.165, 1);
 	}
 	button:disabled {
 		opacity: 0.25;
+		cursor: not-allowed;
 	}
 	button:focus,
 	button:hover,

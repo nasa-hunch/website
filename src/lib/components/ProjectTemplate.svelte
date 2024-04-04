@@ -1,11 +1,13 @@
 <script lang="ts">
+	import sanitizeHtml from 'sanitize-html';
+
 	export let data;
 </script>
 
 <div class="content">
 	<div class="inner">
 		<h1 class="name">{data.projectTemplate.name}</h1>
-		{@html data.projectTemplate.description}
+		{@html sanitizeHtml(data.projectTemplate.description)}
 	</div>
 </div>
 

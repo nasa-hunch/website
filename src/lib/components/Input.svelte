@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	// Yes this uses javascript and is not good for js disabled browsers
-	// No I am not going to fix it because we need js for the backend anyways.
-	// It will still work but it will look bad
 
 	export let name = 'Input';
 	export let label = 'Input';
