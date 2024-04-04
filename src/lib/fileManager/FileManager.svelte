@@ -20,6 +20,7 @@
 	import InTextInput from '$lib/components/InTextInput.svelte';
 	import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
 	import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
+	import { getFormattedSize } from './sizeCalculator';
 
 	export let files: {
 		name: string;
@@ -136,7 +137,7 @@
 							</InTextInput>
 						</th>
 						<td>
-							{file.size}
+							{getFormattedSize(file.size)}
 						</td>
 						<td>
 							{dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
