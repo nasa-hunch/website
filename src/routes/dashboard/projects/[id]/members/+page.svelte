@@ -2,14 +2,16 @@
 	import toast from 'svelte-french-toast';
 
 	import AddUserIcon from '~icons/mdi/person-add-outline';
-	import { pushState } from '$app/navigation';
+	import { invalidateAll, pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ModalForm from '$lib/components/ModalForm.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
+	import Button from '$lib/components/Button.svelte';
 
 	import Member from './Member.svelte';
+	import ModalWrap from '$lib/components/ModalWrap.svelte';
 
 	export let form;
 
@@ -31,11 +33,17 @@
 			toast.error('Could not copy code.');
 		}
 	};
+
+	function showRefreshConfirmModal() {
+		pushState('', {
+			modal: 'refreshConfirm'
+		});
+	}
 </script>
 
 {#if $page.state.modal === 'invite'}
 	<Modal on:close={() => history.back()}>
-		<ModelForm action="?/refreshCode" method="post">
+		<ModalWrap>
 			<div class="inviteCode">
 				<p>Send project invite:</p>
 				<span class="projectCode"
@@ -43,10 +51,29 @@
 					<button type="button" on:click={copyCode}>Copy</button></span
 				>
 				{#if data.user.role === 'TEACHER'}
-					<p>You may also<TextButton type="submit">refresh your join code</TextButton></p>
+					<p>You may also<TextButton on:click={showRefreshConfirmModal}>refresh your join code</TextButton></p>
 				{/if}
 			</div>
-		</ModelForm>
+		</ModalWrap>
+	</Modal>
+{/if}
+
+{#if $page.state.modal === 'refreshConfirm'}
+	<Modal on:close={() => history.back()}>
+		<ModalForm method="POST" action="?/refreshCode" enhanceBody={() => {
+			return async ({ update }) => {
+				await update();
+				await invalidateAll();
+				history.back();
+			};
+		}}>
+			<p>Are you sure you want to refresh your project's join code?</p>
+			<p>This will break existing codes.</p>
+			<div class="buttons">
+				<Button type="submit" value="Yes" />
+				<Button type="button" on:click={() => history.back()} value="No" />
+			</div>
+		</ModalForm>
 	</Modal>
 {/if}
 
@@ -127,6 +154,19 @@
 			&:hover {
 				background: $background3;
 			}
+		}
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		gap: 1rem;
+
+		button {
+			width: 45%;
 		}
 	}
 </style>
