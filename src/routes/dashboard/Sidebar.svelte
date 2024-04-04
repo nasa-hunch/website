@@ -22,6 +22,7 @@
 			{:else}
 				<a class="button" href="/dashboard/projects">Projects</a>
 			{/if}
+			<a class="button" href="/">Home</a>
 		</div>
 	</div>
 	<div class="bottom">
