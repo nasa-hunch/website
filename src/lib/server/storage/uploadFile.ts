@@ -8,12 +8,7 @@ import { S3 } from '$lib/server/storage/s3.js';
 import type { FileDestination } from './fileTypes';
 import { destinations } from './fileTypes';
 
-
-
-
-
 //Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here.
-
 export const uploadFile = async (uploadFile: File, destinationDetails: FileDestination) => {
 	if(!uploadFile) {
 		return {

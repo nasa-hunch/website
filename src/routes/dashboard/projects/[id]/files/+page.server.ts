@@ -5,8 +5,9 @@ import { bucket } from '$env/static/private';
 import { ProjectUserPermission } from '$lib/enums.js';
 import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
+import { destinations } from '$lib/server/storage/fileTypes';
 import { S3 } from '$lib/server/storage/s3.js';
-import { destinations, uploadFile } from '$lib/server/storage/uploadFile.js';
+import { uploadFile } from '$lib/server/storage/uploadFile.js';
 import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async ({ parent }) => {
