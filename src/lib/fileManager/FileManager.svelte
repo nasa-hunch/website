@@ -111,7 +111,6 @@
 {/if}
 
 <div class="wrap">
-	<p>Drag and drop files to upload.</p>
 	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload}>
 		<table class="fileList">
 			<thead>
@@ -161,25 +160,36 @@
 				{/each}
 			</tbody>
 		</table>
+		<div class="infoBox">
+			<p>
+				{#if files.length < 1}
+					<span class="accentText">No files yet!</span>
+				{/if}
+				<span>Drag and drop to upload files.</span>
+			</p>
+		</div>
 	</DragDropUpload>
 </div>
 
 <style lang="scss">
+	.wrap {
+		background: $background-alt;
+		margin: 1rem 0px;
+		padding: 10px;
+		box-sizing: border-box;
+		border-radius: 0.25rem;
+	}
 	.fileList {
 		width: 100%;
 		height: 100%;
-		margin-top: 20px;
-		background: $background-alt;
 		position: relative;
 		z-index: 2;
 		padding: 10px;
-		border-radius: 10px;
 		overflow-x: hidden;
 		box-sizing: border-box;
 	}
 	.file {
 		text-wrap: nowrap;
-
 		align-items: center;
 		justify-content: start;
 		padding: 10px 5px;
@@ -223,19 +233,6 @@
 		justify-content: start;
 	}
 
-	.iconButton {
-		all: unset;
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 100%;
-		padding: 5px;
-		border-radius: 50%;
-	}
-	.iconButton:hover {
-		background: $background2;
-	}
 	.deleteForm {
 		display: flex;
 		flex-direction: column;
@@ -243,5 +240,12 @@
 		height: 100%;
 		align-items: center;
 		justify-content: center;
+	}
+	.infoBox {
+		width: 100%;
+		text-align: center;
+	}
+	.accentText {
+		color: $primary;
 	}
 </style>
