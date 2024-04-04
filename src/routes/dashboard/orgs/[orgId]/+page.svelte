@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { snakeCaseToTitleCase } from '$lib/case.js';
-
+    import Pfp from "$lib/components/Pfp.svelte";
     export let data;
 </script>
 
@@ -26,7 +26,7 @@
     <div class="users">
         {#each data.org.users as user}
             <a class="user" href="/dashboard/users/{user.id}">
-                <img src={user.pfp} alt={user.firstName} />
+                <Pfp {user} size="50px"/>
                 <div class="content">
                     <p>{user.firstName} {user.lastName}</p>
                     {#if user.role && user.role !== 'STUDENT'}

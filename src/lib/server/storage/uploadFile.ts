@@ -5,19 +5,16 @@ import { bucket, mediaurl } from '$env/static/private';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { S3 } from '$lib/server/storage/s3.js';
 
-export const enum destinations {
-	PROJECT,
-	TEMPLATE
-}
+import type { FileDestination } from './fileTypes';
+import { destinations } from './fileTypes';
 
-type UploadDestination = {
-	destinationName: destinations;
-	destinationId: number;
-};
+
+
+
 
 //Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here.
 
-export const uploadFile = async (uploadFile: File, destinationDetails: UploadDestination) => {
+export const uploadFile = async (uploadFile: File, destinationDetails: FileDestination) => {
 	if(!uploadFile) {
 		return {
 			success: false,

@@ -3,7 +3,9 @@ import { z } from "zod";
 import { Role } from "$lib/enums.js";
 import { formHandler } from "$lib/server/bodyguard.js";
 import { prisma } from "$lib/server/prisma/prismaConnection";
-import { destinations, uploadFile } from "$lib/server/storage/uploadFile.js";
+import { deleteFile } from "$lib/server/storage/deleteFile.js";
+import { destinations } from "$lib/server/storage/fileTypes";
+import { uploadFile } from "$lib/server/storage/uploadFile.js";
 import { verifySession } from "$lib/server/verifySession.js";
 
 export const load = async ({parent}) => {
@@ -101,5 +103,22 @@ export const actions = {
 		}
 
 		
+	}),
+	deleteFile: formHandler(z.object({
+		fileId: z.coerce.number()
+	}), async({fileId}, {cookies, params}) => {
+		
+		const user = await verifySession(cookies)
+		if(user.role != Role.HUNCH_ADMIN) {
+			return {
+				success: false,
+				message: "No permissions"
+			}
+		}
+
+		return await deleteFile(fileId, {
+			destinationName: destinations.TEMPLATE,
+			destinationId: parseInt(params.templateId)
+		})
 	})
 }
