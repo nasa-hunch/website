@@ -81,9 +81,11 @@
 			</div>
 			
 		</div>
-		<form action="?/voteSubmit" method="post" use:enhance>
-			<Button value="Change Vote" />
-		</form>
+		{#if users.some(user => user.user.id === data.user.id)}
+			<form action="?/voteSubmit" method="post" use:enhance>
+				<Button value="Change Vote" />
+			</form>
+		{/if}
 	</div>
 </div>
 
@@ -139,10 +141,6 @@
 			margin-bottom: 10px;
 			background: $background-alt;
 			flex-grow: 1;
-
-			h2 {
-				font-size: 1.2rem;
-			}
 
 			:global(.sicon) {
 				font-size: 30px;

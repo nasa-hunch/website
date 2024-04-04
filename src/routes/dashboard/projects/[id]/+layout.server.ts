@@ -42,7 +42,8 @@ export const load = async ({ params, parent }) => {
 							firstName: true,
 							lastName: true,
 							pfp: true,
-							role: true
+							role: true,
+							id: true
 						}
 					}
 				}
