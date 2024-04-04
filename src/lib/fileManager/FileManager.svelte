@@ -116,7 +116,6 @@
 					<th scope="col">Name</th>
 					<th scope="col">Size</th>
 					<th scope="col">Modified</th>
-					<th scope="col">Deliverable</th>
 					<th scope="col">Actions</th>
 				</tr>
 			</thead>
@@ -141,9 +140,6 @@
 						</td>
 						<td>
 							{dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
-						</td>
-						<td>
-							{file.size}
 						</td>
 						<td class="actionsRow">
 							<a class="iconButton" href={file.link}>
