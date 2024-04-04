@@ -20,7 +20,7 @@
 		dispatch('startUpload');
 		fileBox.files = e.dataTransfer.files;
 		fileUploadButton.click();
-		
+
 		draggedOver = false;
 	};
 	const dragOverHandler = (e: Event) => {

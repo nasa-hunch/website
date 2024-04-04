@@ -34,7 +34,9 @@
 	<div class="left">
 		<Pfp marginRight="8px" size="28px" user={memberData.user} />
 		{#if userRole === 'SCHOOL_ADMIN' || userRole === 'HUNCH_ADMIN'}
-			<a href="/dashboard/users/{memberData.userId}">{memberData.user.firstName} {memberData.user.lastName}</a>
+			<a href="/dashboard/users/{memberData.userId}"
+				>{memberData.user.firstName} {memberData.user.lastName}</a
+			>
 		{:else}
 			{memberData.user.firstName} {memberData.user.lastName}
 		{/if}
@@ -42,9 +44,7 @@
 			{snakeCaseToTitleCase(role)}
 		</div>
 		{#if memberData.user.role === 'TEACHER'}
-			<div class="teacher">
-				Teacher
-			</div>
+			<div class="teacher">Teacher</div>
 		{/if}
 	</div>
 	<div class="right">
@@ -89,7 +89,8 @@
 		align-items: center;
 	}
 
-	.role, .teacher {
+	.role,
+	.teacher {
 		margin-left: 10px;
 		position: relative;
 		z-index: 2;

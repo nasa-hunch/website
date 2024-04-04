@@ -10,11 +10,11 @@ import { destinations } from './fileTypes';
 
 //Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here.
 export const uploadFile = async (uploadFile: File, destinationDetails: FileDestination) => {
-	if(!uploadFile) {
+	if (!uploadFile) {
 		return {
 			success: false,
-			message: "No file present"
-		}
+			message: 'No file present'
+		};
 	}
 	const key = crypto.randomBytes(32).toString('hex') + '/' + uploadFile.name;
 

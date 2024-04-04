@@ -94,12 +94,7 @@
 					value={data.user.lastName}
 				/>
 				<hr />
-				<Input
-					name="email"
-					bgColor="var(--background-alt)"
-					label="Email"
-					value={data.user.email}
-				/>
+				<Input name="email" bgColor="var(--background-alt)" label="Email" value={data.user.email} />
 				<hr />
 				<Button value="Save Information" />
 			</form>

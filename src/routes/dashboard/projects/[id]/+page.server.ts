@@ -6,10 +6,10 @@ export const load = async ({ params }) => {
 	const projectTemplate = await prisma.projectTemplate.findFirst({
 		where: {
 			projects: {
-                some: {
-                    id: parseInt(params.id)
-                }
-            }
+				some: {
+					id: parseInt(params.id)
+				}
+			}
 		}
 	});
 

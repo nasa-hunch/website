@@ -11,27 +11,30 @@ export const load = async ({ params, parent }) => {
 		where: {
 			AND: {
 				id: id,
-				OR: parentData.user.role == Role.HUNCH_ADMIN ? [] : [
-					{
-						users: {
-							some: {
-								userId: parentData.user.id
-							}
-						}
-					},
-					{
-						organization: {
-							users: {
-								some: {
-									AND: {
-										id: parentData.user.id,
-										role: Role.SCHOOL_ADMIN
+				OR:
+					parentData.user.role == Role.HUNCH_ADMIN
+						? []
+						: [
+								{
+									users: {
+										some: {
+											userId: parentData.user.id
+										}
+									}
+								},
+								{
+									organization: {
+										users: {
+											some: {
+												AND: {
+													id: parentData.user.id,
+													role: Role.SCHOOL_ADMIN
+												}
+											}
+										}
 									}
 								}
-							}
-						}
-					}
-				]
+						  ]
 			}
 		},
 		include: {

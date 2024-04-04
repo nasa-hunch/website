@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
-	import { cubicInOut } from 'svelte/easing';
 	import { createEventDispatcher } from 'svelte';
+	import { cubicInOut } from 'svelte/easing';
+	import { fade, fly } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher<{ close: void }>();
 
@@ -21,7 +21,12 @@
 </script>
 
 <svelte:window on:keydown={keyHelper} />
-<button transition:fade={{ easing: cubicInOut, duration: 150 }} bind:this={buttonElement} class="wrap" on:mousedown={clickHelper}>
+<button
+	bind:this={buttonElement}
+	class="wrap"
+	on:mousedown={clickHelper}
+	transition:fade={{ easing: cubicInOut, duration: 150 }}
+>
 	<div transition:fly={{ easing: cubicInOut, duration: 300, delay: 50, y: 50 }}>
 		<slot />
 	</div>

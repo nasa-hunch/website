@@ -20,7 +20,7 @@
 		id: number;
 		firstName: string;
 		lastName: string;
-	}
+	};
 
 	let deleteData: DeleteData | undefined = undefined;
 

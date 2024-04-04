@@ -13,9 +13,9 @@
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
+	import Pfp from '$lib/components/Pfp.svelte';
 
 	import Assignees from './Assignees.svelte';
-	import Pfp from '$lib/components/Pfp.svelte';
 
 	type CheckListItem = {
 		id: number;
@@ -60,14 +60,13 @@
 	const checkAssignee = (user: UserLike) => {
 		let found = false;
 		data.assignees.forEach((item) => {
-			console.log(item.projectUser.id, user.id)
-			if(item.projectUser.id == user.id) {
-				found = true
-
+			console.log(item.projectUser.id, user.id);
+			if (item.projectUser.id == user.id) {
+				found = true;
 			}
-		})
-		return found
-	}
+		});
+		return found;
+	};
 
 	let deleteSubmitHelper = () => {
 		toast.promise(
@@ -153,11 +152,10 @@
 				on:reset={() => (selectingUser = false)}
 				use:enhance
 			>
-				
 				<input name="itemId" hidden value={data.id} />
 				<input name="projectUserId" hidden value={user.id} />
 				<button class="assigneeButton">
-					<Pfp user={user.user}/>
+					<Pfp user={user.user} />
 					{user.user.firstName}
 					{user.user.lastName}
 				</button>

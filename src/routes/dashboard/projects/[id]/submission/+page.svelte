@@ -5,7 +5,6 @@
 
 	import MdiClipboardCheckOutline from '~icons/mdi/clipboard-check-outline';
 	import MdiClipboardRemoveOutline from '~icons/mdi/clipboard-remove-outline';
-
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
@@ -72,16 +71,15 @@
 						<Pfp size="32px" user={person.user} />
 						<p>{person.user.firstName} {person.user.lastName}</p>
 						{#if person.voteSubmit}
-							<MdiClipboardCheckOutline class="sicon green"/>
+							<MdiClipboardCheckOutline class="sicon green" />
 						{:else}
-							<MdiClipboardRemoveOutline class="sicon red"/>
+							<MdiClipboardRemoveOutline class="sicon red" />
 						{/if}
 					</div>
 				{/each}
 			</div>
-			
 		</div>
-		{#if users.some(user => user.user.id === data.user.id)}
+		{#if users.some((user) => user.user.id === data.user.id)}
 			<form action="?/voteSubmit" method="post" use:enhance>
 				<Button value="Change Vote" />
 			</form>
@@ -128,7 +126,6 @@
 			margin-right: 10px;
 		}
 	}
-
 
 	.columns {
 		display: flex;

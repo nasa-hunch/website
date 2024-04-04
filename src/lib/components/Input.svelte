@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-
 	export let name = 'Input';
 	export let label = 'Input';
 	export let bgColor = '#f8f8f8';

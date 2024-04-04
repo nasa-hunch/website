@@ -10,22 +10,19 @@
 	});
 
 	$: filteredProjects = searchInput
-		? fuse.search(searchInput).map(result => result.item)
+		? fuse.search(searchInput).map((result) => result.item)
 		: data.projects;
 </script>
 
 <main>
-	<input type="text" placeholder="Search..." bind:value={searchInput} />
+	<input placeholder="Search..." type="text" bind:value={searchInput} />
 	<div class="projects">
 		{#each filteredProjects as project}
 			<a class="project" href="/dashboard/projects/{project.id}">
 				<div class="content">
 					<h1>{project.organization.name}</h1>
 					<p>
-						{project.users
-							.map(user => `${user.user.firstName} ${user.user.lastName}`)
-							.join(', ')
-						}
+						{project.users.map((user) => `${user.user.firstName} ${user.user.lastName}`).join(', ')}
 					</p>
 				</div>
 			</a>

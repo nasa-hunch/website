@@ -1,15 +1,14 @@
-import { DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { DeleteObjectCommand } from '@aws-sdk/client-s3';
 
-import { bucket } from "$env/static/private";
+import { bucket } from '$env/static/private';
 
-import { prisma } from "../prisma/prismaConnection";
-import { destinations, type FileDestination } from "./fileTypes";
-import { S3 } from "./s3";
-
+import { prisma } from '../prisma/prismaConnection';
+import { destinations, type FileDestination } from './fileTypes';
+import { S3 } from './s3';
 
 export const deleteFile = async (fileId: number, fileDestination: FileDestination) => {
 	let fileCheck;
-	if(fileDestination.destinationName == destinations.TEMPLATE) {
+	if (fileDestination.destinationName == destinations.TEMPLATE) {
 		fileCheck = await prisma.file.findFirst({
 			where: {
 				AND: {
@@ -21,8 +20,8 @@ export const deleteFile = async (fileId: number, fileDestination: FileDestinatio
 					}
 				}
 			}
-		})
-	} else if(fileDestination.destinationName == destinations.PROJECT) {
+		});
+	} else if (fileDestination.destinationName == destinations.PROJECT) {
 		fileCheck = await prisma.file.findFirst({
 			where: {
 				AND: {
@@ -34,24 +33,24 @@ export const deleteFile = async (fileId: number, fileDestination: FileDestinatio
 					}
 				}
 			}
-		})
+		});
 	} else {
 		return {
 			success: false,
-			message: "Something went wrong"
-		}
+			message: 'Something went wrong'
+		};
 	}
 
-	if(!fileCheck) {
+	if (!fileCheck) {
 		return {
 			success: false,
-			message: "No file"
-		}
+			message: 'No file'
+		};
 	}
 
 	//If there is no key, we assume there is no s3 upload
 
-	if(fileCheck.key) {
+	if (fileCheck.key) {
 		await S3.send(
 			new DeleteObjectCommand({
 				Bucket: bucket,
@@ -64,11 +63,10 @@ export const deleteFile = async (fileId: number, fileDestination: FileDestinatio
 		where: {
 			id: fileCheck.id
 		}
-	})
+	});
 
 	return {
 		success: true,
-		message: "File deleted"
-	}
-	
-}
+		message: 'File deleted'
+	};
+};

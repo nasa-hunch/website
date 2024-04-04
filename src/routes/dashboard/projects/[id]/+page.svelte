@@ -1,5 +1,6 @@
 <script>
-    import ProjectTemplate from "$lib/components/ProjectTemplate.svelte";
-    export let data;
-    </script>
-    <ProjectTemplate {data} />
+	import ProjectTemplate from '$lib/components/ProjectTemplate.svelte';
+	export let data;
+</script>
+
+<ProjectTemplate {data} />

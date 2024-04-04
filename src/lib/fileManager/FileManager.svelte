@@ -20,6 +20,7 @@
 	import InTextInput from '$lib/components/InTextInput.svelte';
 	import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
 	import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
+
 	import { getFormattedSize } from './sizeCalculator';
 
 	export let files: {
@@ -49,13 +50,13 @@
 		successMessage: string,
 		failMessage: string
 	) => {
-		console.log("Creating toast promise")
+		console.log('Creating toast promise');
 		toastPromise = new Promise((resolve, reject) => {
 			toastPromiseResolve = resolve;
 			toastPromiseReject = reject;
 		});
 
-		console.log("Promising Toast")
+		console.log('Promising Toast');
 		toast.promise(toastPromise, {
 			loading: loadingMessage,
 			success: (message) => `${message}` || successMessage,
@@ -81,7 +82,7 @@
 	};
 
 	const startFileUpload = () => {
-		console.log("Calling function")
+		console.log('Calling function');
 		createToast('Uploading File...', 'File Uploaded!', 'Could not upload file.');
 	};
 

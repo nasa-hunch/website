@@ -37,18 +37,21 @@ async function main() {
 
 	console.log('Seeding database...');
 
-	await prisma.$transaction(async (tx) => {
-		await partners.seed(tx);
-		await teams.seed(tx);
-		await categories.seed(tx);
-		await organizations.seed(tx);
-		await projects.seed(tx);
-		await unverifiedTeachers.seed(tx);
-		await admin.seed(tx);
-	}, {
-		timeout: 1000 * 60 * 5,
-		maxWait: 1000 * 60 * 5
-	});
+	await prisma.$transaction(
+		async (tx) => {
+			await partners.seed(tx);
+			await teams.seed(tx);
+			await categories.seed(tx);
+			await organizations.seed(tx);
+			await projects.seed(tx);
+			await unverifiedTeachers.seed(tx);
+			await admin.seed(tx);
+		},
+		{
+			timeout: 1000 * 60 * 5,
+			maxWait: 1000 * 60 * 5
+		}
+	);
 
 	console.log('Database seeded!');
 }

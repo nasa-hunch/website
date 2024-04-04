@@ -7,28 +7,20 @@
 		<div class="headerInner">
 			<h1>{data.projectTemplate.name}</h1>
 			<nav class="nav">
-				<a href="/dashboard/admin/projects/{data.projectTemplate.id}"
-					>Info</a
+				<a href="/dashboard/admin/projects/{data.projectTemplate.id}">Info</a>
+				<a href="/dashboard/admin/projects/{data.projectTemplate.id}/files">Files</a>
+				<a href="/dashboard/admin/projects/{data.projectTemplate.id}/participants"
+					>Participants ({data.projectUserCount})</a
 				>
-				<a
-					href="/dashboard/admin/projects/{data.projectTemplate
-						.id}/files">Files</a
-				>
-				<a
-					href="/dashboard/admin/projects/{data.projectTemplate
-						.id}/participants">Participants ({data.projectUserCount})</a
-				>
-				<a
-					href="/dashboard/admin/projects/{data.projectTemplate
-						.id}/submissions">Submissions ({data.projectCount})</a
+				<a href="/dashboard/admin/projects/{data.projectTemplate.id}/submissions"
+					>Submissions ({data.projectCount})</a
 				>
 			</nav>
 		</div>
 	</div>
-	<div class='content'>
+	<div class="content">
 		<slot />
 	</div>
-	
 </div>
 
 <style lang="scss">
@@ -51,7 +43,6 @@
 	}
 
 	.content {
-		
 		width: 90%;
 	}
 	.nav {

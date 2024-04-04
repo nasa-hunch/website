@@ -30,7 +30,7 @@ export const load = async ({ parent }) => {
 
 export const actions = {
 	uploadFile: async ({ request, cookies, params }) => {
-		const file = (await request.formData()).get("file"); // If your machine is too fast, this stops the request from hanging.
+		const file = (await request.formData()).get('file'); // If your machine is too fast, this stops the request from hanging.
 		const user = await verifySession(cookies);
 		const projectId = parseInt(params.id);
 

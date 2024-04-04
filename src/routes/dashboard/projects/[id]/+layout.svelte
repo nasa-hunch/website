@@ -1,27 +1,28 @@
 <script lang="ts">
 	export let data;
 	import { page } from '$app/stores';
-	let route = "";
-	$: switch ($page.route.id?.split("/").at(-1)) {
-		case "checklist":
-			route = "checklist";
+	let route = '';
+	$: switch ($page.route.id?.split('/').at(-1)) {
+		case 'checklist':
+			route = 'checklist';
 			break;
-		case "files":
-			route = "files";
+		case 'files':
+			route = 'files';
 			break;
-		case "members":
-			route = "members";
+		case 'members':
+			route = 'members';
 			break;
-		case "submission":
-			route = "submission";
+		case 'submission':
+			route = 'submission';
 			break;
 		default:
-			route = "overview";
+			route = 'overview';
 			break;
 	}
 
 	$: isHunchAdmin = data.user.role === 'HUNCH_ADMIN';
 </script>
+
 <div class="wrap">
 	<div class="header">
 		<div class="headerInner">
@@ -32,11 +33,26 @@
 				</h2>
 			{/if}
 			<nav class="nav">
-				<a href="/dashboard/projects/{data.project.id}" class:active={route.toLowerCase() === "overview"}>Overview</a>
-				<a href="/dashboard/projects/{data.project.id}/checklist" class:active={route.toLowerCase() === "checklist"}>Checklist</a>
-				<a href="/dashboard/projects/{data.project.id}/files" class:active={route.toLowerCase() === "files"}>Files</a>
-				<a href="/dashboard/projects/{data.project.id}/members" class:active={route.toLowerCase() === "members"}>Members</a>
-				<a href="/dashboard/projects/{data.project.id}/submission" class:active={route.toLowerCase() === "submission"}>Submission</a>
+				<a
+					class:active={route.toLowerCase() === 'overview'}
+					href="/dashboard/projects/{data.project.id}">Overview</a
+				>
+				<a
+					class:active={route.toLowerCase() === 'checklist'}
+					href="/dashboard/projects/{data.project.id}/checklist">Checklist</a
+				>
+				<a
+					class:active={route.toLowerCase() === 'files'}
+					href="/dashboard/projects/{data.project.id}/files">Files</a
+				>
+				<a
+					class:active={route.toLowerCase() === 'members'}
+					href="/dashboard/projects/{data.project.id}/members">Members</a
+				>
+				<a
+					class:active={route.toLowerCase() === 'submission'}
+					href="/dashboard/projects/{data.project.id}/submission">Submission</a
+				>
 			</nav>
 		</div>
 	</div>
@@ -124,10 +140,6 @@
 					transform: scaleX(1);
 				}
 			}
-
-
 		}
 	}
-
-	
 </style>
