@@ -1,9 +1,27 @@
 <script lang="ts">
 	export let data;
+	import { page } from '$app/stores';
+	let route = "";
+	$: switch ($page.route.id?.split("/").at(-1)) {
+		case "checklist":
+			route = "checklist";
+			break;
+		case "files":
+			route = "files";
+			break;
+		case "members":
+			route = "members";
+			break;
+		case "submission":
+			route = "submission";
+			break;
+		default:
+			route = "overview";
+			break;
+	}
 
 	$: isHunchAdmin = data.user.role === 'HUNCH_ADMIN';
 </script>
-
 <div class="wrap">
 	<div class="header">
 		<div class="headerInner">
@@ -13,12 +31,12 @@
 					<a href="/dashboard/orgs/{data.project.orgId}">{data.project.organization.name}</a>
 				</h2>
 			{/if}
-
 			<nav class="nav">
-				<a href="/dashboard/projects/{data.project.id}/checklist">Checklist</a>
-				<a href="/dashboard/projects/{data.project.id}/files">Files</a>
-				<a href="/dashboard/projects/{data.project.id}/members">Members</a>
-				<a href="/dashboard/projects/{data.project.id}/submission">Submission</a>
+				<a href="/dashboard/projects/{data.project.id}" class:active={route.toLowerCase() === "overview"}>Overview</a>
+				<a href="/dashboard/projects/{data.project.id}/checklist" class:active={route.toLowerCase() === "checklist"}>Checklist</a>
+				<a href="/dashboard/projects/{data.project.id}/files" class:active={route.toLowerCase() === "files"}>Files</a>
+				<a href="/dashboard/projects/{data.project.id}/members" class:active={route.toLowerCase() === "members"}>Members</a>
+				<a href="/dashboard/projects/{data.project.id}/submission" class:active={route.toLowerCase() === "submission"}>Submission</a>
 			</nav>
 		</div>
 	</div>
@@ -98,6 +116,18 @@
 					transform: scaleX(1);
 				}
 			}
+
+			&.active {
+				color: $primary;
+
+				&::after {
+					transform: scaleX(1);
+				}
+			}
+
+
 		}
 	}
+
+	
 </style>
