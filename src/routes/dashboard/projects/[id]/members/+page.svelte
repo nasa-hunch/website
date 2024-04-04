@@ -4,14 +4,14 @@
 	import AddUserIcon from '~icons/mdi/person-add-outline';
 	import { invalidateAll, pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Button from '$lib/components/Button.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
+	import ModalWrap from '$lib/components/ModalWrap.svelte';
 	import TextButton from '$lib/components/TextButton.svelte';
-	import Button from '$lib/components/Button.svelte';
 
 	import Member from './Member.svelte';
-	import ModalWrap from '$lib/components/ModalWrap.svelte';
 
 	export let form;
 
@@ -51,7 +51,11 @@
 					<button type="button" on:click={copyCode}>Copy</button></span
 				>
 				{#if data.user.role === 'TEACHER'}
-					<p>You may also<TextButton on:click={showRefreshConfirmModal}>refresh your join code</TextButton></p>
+					<p>
+						You may also<TextButton on:click={showRefreshConfirmModal}
+							>refresh your join code</TextButton
+						>
+					</p>
 				{/if}
 			</div>
 		</ModalWrap>
@@ -60,18 +64,22 @@
 
 {#if $page.state.modal === 'refreshConfirm'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm method="POST" action="?/refreshCode" enhanceBody={() => {
-			return async ({ update }) => {
-				await update();
-				await invalidateAll();
-				history.back();
-			};
-		}}>
+		<ModalForm
+			action="?/refreshCode"
+			enhanceBody={() => {
+				return async ({ update }) => {
+					await update();
+					await invalidateAll();
+					history.back();
+				};
+			}}
+			method="POST"
+		>
 			<p>Are you sure you want to refresh your project's join code?</p>
 			<p>This will break existing codes.</p>
 			<div class="buttons">
 				<Button type="submit" value="Yes" />
-				<Button type="button" on:click={() => history.back()} value="No" />
+				<Button type="button" value="No" on:click={() => history.back()} />
 			</div>
 		</ModalForm>
 	</Modal>

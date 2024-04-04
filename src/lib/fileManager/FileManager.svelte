@@ -17,12 +17,12 @@
 	import IconDownload from '~icons/mdi/download';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import IconButton from '$lib/components/IconButton.svelte';
 	import InTextInput from '$lib/components/InTextInput.svelte';
 	import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
 	import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
 
 	import { getFormattedSize } from './sizeCalculator';
-	import IconButton from '$lib/components/IconButton.svelte';
 
 	export let files: {
 		name: string;
@@ -146,11 +146,14 @@
 						</td>
 						<td class="actionsRow">
 							<IconButton href={file.link}>
-								<IconDownload/>
+								<IconDownload />
 							</IconButton>
-							<IconButton disabled={file.locked} on:click={() => {
-								deleteFile(file.id, file.name);
-							}}>
+							<IconButton
+								disabled={file.locked}
+								on:click={() => {
+									deleteFile(file.id, file.name);
+								}}
+							>
 								<IconTrash />
 							</IconButton>
 						</td>

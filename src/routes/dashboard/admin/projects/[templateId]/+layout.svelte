@@ -31,8 +31,8 @@
 			<nav class="nav">
 				{#each links as link}
 					<a
-						href="{routeBase}/{link.route}"
 						class:active={$page.route.id == `${routeIdBase}${link.route ? '/' : ''}${link.route}`}
+						href="{routeBase}/{link.route}"
 					>
 						{link.name}
 					</a>

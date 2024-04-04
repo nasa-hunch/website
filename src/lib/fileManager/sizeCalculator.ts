@@ -13,7 +13,7 @@ export const getFormattedSize = (size: number) => {
 		}
 	}
 
-	const shortenedString = (Math.floor(sizer * 1000) / 1000).toString().substring(0, 5)
+	const shortenedString = (Math.floor(sizer * 1000) / 1000).toString().substring(0, 5);
 
 	return shortenedString + sizes[suffixIndex];
 };
