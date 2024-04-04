@@ -7,6 +7,7 @@
 	export let href: string | undefined = undefined;
 
 	export let disabled = false;
+	export let style = '';
 
 	/**
 	 * Href and formData are not compatible, use one or the other.
@@ -20,21 +21,21 @@
 </script>
 
 {#if disabled}
-	<div class="iconButton disabled">
+	<div {style} class="iconButton disabled">
 		<slot />
 	</div>
 {:else if href}
-	<a class="iconButton" {href} on:click>
+	<a {style} class="iconButton" {href} on:click>
 		<slot />
 	</a>
 {:else if formData}
 	<form class="formButton" action={formData.action} method={formData.method} use:enhance>
-		<button class="iconButton" on:click>
+		<button {style} class="iconButton" on:click>
 			<slot />
 		</button>
 	</form>
 {:else}
-	<button class="iconButton" on:click>
+	<button {style} class="iconButton" on:click>
 		<slot />
 	</button>
 {/if}

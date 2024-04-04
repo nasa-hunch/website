@@ -5,6 +5,7 @@
 	export let action: string;
 	export let name: string = 'InTextInput';
 	export let disableFormMode = false;
+	export let style = '';
 
 	let buttonElement: HTMLButtonElement;
 
@@ -27,7 +28,7 @@
 		};
 	}}
 >
-	<input {name} class="inTextInput" on:change on:input on:change={submitForm} bind:value />
+	<input {name} {style} class="inTextInput" on:change on:input on:change={submitForm} bind:value />
 	<div hidden>
 		<slot />
 	</div>

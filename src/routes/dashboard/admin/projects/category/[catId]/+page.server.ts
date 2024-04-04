@@ -50,5 +50,56 @@ export const actions = {
 				message: 'Created!'
 			};
 		}
+	),
+	updateCategory: formHandler(
+		z.object({
+			name: z.string().optional(),
+			color: z.string().optional(),
+			deadline: z.string().optional()
+		}),
+		async ({ name, color, deadline }, { cookies, params }) => {
+			await verifySession(cookies, Role.HUNCH_ADMIN);
+
+			if (!params.catId) {
+				return {
+					success: false,
+					message: 'No Category'
+				};
+			}
+
+			const category = await prisma.category.findFirst({
+				where: {
+					id: parseInt(params.catId)
+				}
+			});
+
+			if (!category) {
+				return {
+					success: false,
+					message: 'No Category'
+				};
+			}
+
+			let deadLineDate: Date | undefined = undefined;
+			if (deadline) {
+				deadLineDate = new Date(Date.parse(deadline));
+			}
+
+			await prisma.category.update({
+				where: {
+					id: category.id
+				},
+				data: {
+					name: name || category.name,
+					color: color?.substring(1, 6) || category.color,
+					deadline: deadLineDate || category.deadline
+				}
+			});
+
+			return {
+				success: true,
+				message: 'Updated'
+			};
+		}
 	)
 };

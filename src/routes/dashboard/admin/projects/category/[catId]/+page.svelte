@@ -3,8 +3,10 @@
 
 	import Button from '$lib/components/Button.svelte';
 	export let data;
+	import PencilIcon from '~icons/mdi/pencil-outline';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
@@ -38,17 +40,33 @@
 	</Modal>
 {/if}
 
-<div class="wrap">
+{#if $page.state.modal === 'updateCategory'}
+	<Modal on:close={() => history.back()}>
+		<ModelForm action="?/updateCategory" method="post">
+			<h2>Update Category</h2>
+			<Input name="name" bgColor="#f1f1f1" label="Name" />
+			<input name="color" type="color" />
+			<input name="deadline" type="date" />
+			<Button value="Create" />
+		</ModelForm>
+	</Modal>
+{/if}
+
+<div style="--catColor: {'#' + data.category.color};" class="wrap">
 	<header>
 		<h1>
 			<!-- TODO: actually get this to send to server -->
-			<input bind:this={colorInput} hidden type="color" value={'#' + data.category.color} />
-			<button
-				style="background: #{data.category.color}"
-				class="colorInput"
-				on:click={() => colorInput.click()}
-			/>
-			<input placeholder="Category name" type="text" value={data.category.name} />
+			{data.category.name}
+			<IconButton
+				style="margin-left: 1rem;"
+				on:click={() => {
+					pushState('', {
+						modal: 'updateCategory'
+					});
+				}}
+			>
+				<PencilIcon />
+			</IconButton>
 		</h1>
 	</header>
 	<div class="projectWrap">
@@ -98,11 +116,24 @@
 		justify-content: start;
 	}
 	header {
+		position: relative;
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background: $background-alt;
+		z-index: 1;
+		&::after {
+			content: '';
+			height: 100%;
+			width: 100%;
+			top: 0px;
+			left: 0px;
+			position: absolute;
+			background: $background-alt;
+			z-index: -1;
+			opacity: 0.25;
+		}
 	}
 	.projectWrap {
 		padding-top: 20px;
@@ -121,7 +152,7 @@
 		all: unset;
 		border-radius: 5px;
 		width: 100%;
-		background: $background-alt;
+
 		height: 100%;
 		box-sizing: border-box;
 		padding: 10px 15px;
@@ -131,9 +162,13 @@
 		margin-bottom: 15px;
 		cursor: pointer;
 		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
-	}
-	.project:hover {
-		background: $background2;
+		position: relative;
+		z-index: 1;
+		background: $background-alt;
+
+		&:hover {
+			background: $background3;
+		}
 	}
 	.deadline {
 		width: 100%;
