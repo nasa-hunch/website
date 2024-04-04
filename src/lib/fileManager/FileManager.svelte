@@ -22,6 +22,7 @@
 	import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
 
 	import { getFormattedSize } from './sizeCalculator';
+	import IconButton from '$lib/components/IconButton.svelte';
 
 	export let files: {
 		name: string;
@@ -29,6 +30,7 @@
 		id: number;
 		size: number;
 		updatedAt: Date;
+		locked?: boolean;
 	}[];
 
 	let toastPromiseResolve: (message: string) => void, toastPromiseReject: (reason: string) => void;
@@ -143,17 +145,14 @@
 							{dayjs(file.updatedAt).format('MM/DD/YYYY h:mm A')}
 						</td>
 						<td class="actionsRow">
-							<a class="iconButton" href={file.link}>
-								<IconDownload />
-							</a>
-							<button
-								class="iconButton"
-								on:click={() => {
-									deleteFile(file.id, file.name);
-								}}
-							>
+							<IconButton href={file.link}>
+								<IconDownload/>
+							</IconButton>
+							<IconButton disabled={file.locked} on:click={() => {
+								deleteFile(file.id, file.name);
+							}}>
 								<IconTrash />
-							</button>
+							</IconButton>
 						</td>
 					</tr>
 				{/each}

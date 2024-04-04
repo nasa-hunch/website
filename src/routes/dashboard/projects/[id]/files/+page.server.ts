@@ -23,8 +23,20 @@ export const load = async ({ parent }) => {
 		}
 	});
 
+	const templateFiles = await prisma.file.findMany({
+		where: {
+			templateFiles: {
+				some: {
+					templateId: parentData.project.projectTemplateId
+				}
+			}
+		}
+	});
+
+	const lockedFiles = templateFiles.map((item) => ({ ...item, locked: true }));
+
 	return {
-		files
+		files: [...files, ...lockedFiles]
 	};
 };
 
@@ -79,7 +91,14 @@ export const actions = {
 
 			const fileCheck = await prisma.file.findFirst({
 				where: {
-					id: fileId
+					AND: {
+						id: fileId,
+						projectFiles: {
+							some: {
+								projectId: projectUser.projectId
+							}
+						}
+					}
 				}
 			});
 
@@ -144,7 +163,14 @@ export const actions = {
 
 			const fileCheck = await prisma.file.findFirst({
 				where: {
-					id: fileId
+					AND: {
+						id: fileId,
+						projectFiles: {
+							some: {
+								projectId: projectUser.projectId
+							}
+						}
+					}
 				}
 			});
 

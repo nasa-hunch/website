@@ -2,7 +2,7 @@
 	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
 
-	export let enhanceBody: SubmitFunction | undefined;
+	export let enhanceBody: SubmitFunction | undefined = undefined;
 	export let method: HTMLFormElement['method'] | undefined;
 	export let action: HTMLFormElement['action'] | undefined;
 </script>
