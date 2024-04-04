@@ -1,8 +1,6 @@
 <script lang="ts">
 	export let data;
 	import { page } from '$app/stores';
-
-	console.log($page.route.id);
 	const routeIdBase = `/dashboard/admin/projects/[templateId]`;
 	const routeBase = `/dashboard/admin/projects/${$page.params.templateId}`;
 
