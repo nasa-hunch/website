@@ -2,7 +2,7 @@
 	import { geoAlbersUsa, geoIdentity, geoPath } from 'd3-geo';
 	import type { GeoJsonProperties } from 'geojson';
 	import { cubicOut } from 'svelte/easing';
-	import { spring, tweened } from 'svelte/motion';
+	import { tweened } from 'svelte/motion';
 	import { Canvas, Layer, type Render } from 'svelte-canvas';
 	import { inview } from 'svelte-inview';
 	import { mesh } from 'topojson-client';
