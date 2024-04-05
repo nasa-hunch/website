@@ -1,14 +1,14 @@
 <script lang="ts">
 	import Pfp from '$lib/components/Pfp.svelte';
 
-	export let data;
+	export let user;
 </script>
 
 <main>
 	<div class="title">
-		<Pfp user={data.selectedUser} size="100px" />
-		<h1>{data.selectedUser.firstName} {data.selectedUser.lastName}</h1>
-		<h2>{data.selectedUser.email}</h2>
+		<Pfp user={user} size="100px" />
+		<h1>{user.firstName} {user.lastName}</h1>
+		<h2>{user.email}</h2>
 	</div>
 </main>
 
