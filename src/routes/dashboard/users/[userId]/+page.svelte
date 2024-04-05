@@ -1,10 +1,12 @@
 <script lang="ts">
+	import Pfp from '$lib/components/Pfp.svelte';
+
 	export let data;
 </script>
 
 <main>
 	<div class="title">
-		<img alt={data.selectedUser.firstName} src={data.selectedUser.pfp ?? '/defaultUser.svg'} />
+		<Pfp user={data.user} size="100px" />
 		<h1>{data.selectedUser.firstName} {data.selectedUser.lastName}</h1>
 		<h2>{data.selectedUser.email}</h2>
 	</div>
