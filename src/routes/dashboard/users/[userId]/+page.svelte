@@ -3,4 +3,11 @@
 
 	export let data;
 </script>
-<User {data} />
+<main>
+	<User user={data.selectedUser} />
+</main>
+<style lang="scss">
+	main {
+		margin: 1rem;
+	}
+</style>
