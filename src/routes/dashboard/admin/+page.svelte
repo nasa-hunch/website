@@ -1,5 +1,11 @@
+<script lang="ts">
+	import User from "$lib/components/User.svelte";
+	export let data;
+</script>
+
 <main>
-	<h1>Admin Dashboard</h1>
+	<User user={data.user} />
+
 </main>
 
 <style lang="scss">

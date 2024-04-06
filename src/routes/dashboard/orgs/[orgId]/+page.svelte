@@ -57,19 +57,18 @@
 		border: 1px solid #dd361c;
 	}
 
-	.user {
+	.user, .project {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
 		padding: 1rem;
 		border-radius: 0.5rem;
-		background-color: var(--background-alt);
+		background-color: $background-alt;
 		color: black;
+		transition: 0.2s all cubic-bezier(0.075, 0.82, 0.165, 1);
 
-		img {
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
+		&:hover {
+			background-color: $background2;
 		}
 	}
 
@@ -80,15 +79,9 @@
 	}
 
 	.project {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		padding: 1rem;
-		border-radius: 0.5rem;
-		background-color: var(--background-alt);
-		color: black;
 		flex-direction: column;
 		justify-content: space-between;
+		align-items: start;
 		text-decoration: underline;
 	}
 </style>

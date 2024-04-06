@@ -1,33 +1,13 @@
 <script lang="ts">
+	import User from '$lib/components/User.svelte';
+
 	export let data;
 </script>
-
 <main>
-	<div class="title">
-		<img alt={data.selectedUser.firstName} src={data.selectedUser.pfp ?? '/defaultUser.svg'} />
-		<h1>{data.selectedUser.firstName} {data.selectedUser.lastName}</h1>
-		<h2>{data.selectedUser.email}</h2>
-	</div>
+	<User user={data.selectedUser} />
 </main>
-
 <style lang="scss">
 	main {
-		margin-top: 1rem;
-	}
-
-	.title {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		padding: 1rem;
-		border-radius: 0.5rem;
-		background-color: var(--background-alt);
-		color: black;
-
-		img {
-			width: 100px;
-			height: 100px;
-			border-radius: 50%;
-		}
+		margin: 1rem;
 	}
 </style>
