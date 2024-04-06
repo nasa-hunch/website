@@ -6,6 +6,7 @@
 	import PencilIcon from '~icons/mdi/pencil-outline';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import DatePicker from '$lib/components/DatePicker.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
@@ -33,8 +34,11 @@
 		<ModelForm action="?/createProject" method="post">
 			<h2>Creating Project</h2>
 			<Input name="name" bgColor="#f1f1f1" label="Name" />
+			<hr />
 			<Input name="desc" bgColor="#f1f1f1" label="Description" />
-			<input name="deadline" type="date" />
+			<hr />
+			<DatePicker name="deadline" bgColor="#f1f1f1" label="Deadline" />
+			<hr />
 			<Button value="create" />
 		</ModelForm>
 	</Modal>
@@ -105,6 +109,10 @@
 		&:hover {
 			cursor: pointer;
 		}
+	}
+
+	hr {
+		border: 0px;
 	}
 
 	.wrap {
