@@ -2,6 +2,7 @@
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
+	import Editor from '$lib/components/Editor.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
@@ -42,12 +43,16 @@
 	</div>
 	<div class="actions">
 		<h2>Actions</h2>
-		{#if data.user.role === 'SCHOOL_ADMIN' || data.user.role === 'HUNCH_ADMIN'}
+		{#if data.user.role === 'SCHOOL_ADMIN' || data.user.role === 'HUNCH_ADMIN' || data.user.role === 'TEACHER'}
 			<Button value="Send Notification" on:click={sendNotificationModal} />
 			<div class="margin-separator" />
-			<Button value="Update User" on:click={updateUserModal} />
 		{/if}
-		<div class="margin-separator" />
+
+		{#if data.user.role === 'SCHOOL_ADMIN' || data.user.role === 'HUNCH_ADMIN'}
+			<Button value="Update User" on:click={updateUserModal} />
+			<div class="margin-separator" />
+		{/if}
+
 		{#if data.user.role === 'HUNCH_ADMIN'}
 			<Button value="Change Password" on:click={changePasswordModal} />
 		{/if}
@@ -58,10 +63,10 @@
 	<Modal on:close={() => history.back()}>
 		<ModalForm action="?/sendNotification" method="POST">
 			<h1>Send Notification</h1>
-			<label>
-				<span>Message</span>
-				<textarea name="message" required />
-			</label>
+			<Input name="title" label="Title" required />
+			<div class="margin-separator" />
+			<Editor name="message" placeholder="Enter message..." />
+			<div class="margin-separator" />
 			<Button type="submit" value="Send" />
 		</ModalForm>
 	</Modal>
