@@ -25,8 +25,6 @@
 
 		return maxPercent;
 	};
-
-	let colorInput: HTMLInputElement;
 </script>
 
 {#if $page.state.modal === 'createProject'}
@@ -99,18 +97,6 @@
 </div>
 
 <style lang="scss">
-	.colorInput {
-		width: 40px;
-		height: 40px;
-		border-radius: 50%;
-		margin-right: 10px;
-		border: 2px solid black;
-
-		&:hover {
-			cursor: pointer;
-		}
-	}
-
 	hr {
 		border: 0px;
 	}
@@ -188,12 +174,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-
-		input[type='text'] {
-			font-size: 1.5rem;
-			margin-right: 10px;
-			text-align: center;
-		}
 	}
 	h2 {
 		text-align: center;

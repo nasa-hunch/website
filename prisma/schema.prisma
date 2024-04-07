@@ -128,8 +128,7 @@ model ProjectTemplate {
   shortDescription String @db.Text
   description String
   deadline DateTime
-  categoryId Int
-  category Category @relation(fields: [categoryId], references: [id])
+  category Category[]
   projects Project[]
   files ProjectTemplateFile[]
 }

@@ -41,7 +41,11 @@ export const actions = {
 					description: desc,
 					shortDescription: '',
 					deadline,
-					categoryId: category.id
+					category: {
+						connect: {
+							id: category.id
+						}
+					}
 				}
 			});
 

@@ -32,27 +32,30 @@ export async function seed(prisma: PrismaTransactionClient) {
 				}
 			});
 
-			await prisma.projectUser.create({
-				data: {
-					project: {
-						connect: {
-							id: project.id
-						}
-					},
-					user: {
-						create: {
-							email: `${i}@project${j}.teacher`,
-							firstName: faker.person.firstName(),
-							lastName: faker.person.lastName(),
-							role: 'TEACHER',
-							pfp: pickAvatar(),
-							orgId: i,
-							...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-						}
-					},
-					permission: 'EDITOR'
-				}
-			});
+			// Add one or two teachers
+			for (let k = 0; k < chance.weighted([1, 2], [0.9, 0.1]); k++) {
+				await prisma.projectUser.create({
+					data: {
+						project: {
+							connect: {
+								id: project.id
+							}
+						},
+						user: {
+							create: {
+								email: `${i}@project${j}.teacher`,
+								firstName: faker.person.firstName(),
+								lastName: faker.person.lastName(),
+								role: 'TEACHER',
+								pfp: pickAvatar(),
+								orgId: i,
+								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+							}
+						},
+						permission: 'EDITOR'
+					}
+				});
+			}
 
 			// Add three verified students
 			for (let k = 0; k < 3; k++) {

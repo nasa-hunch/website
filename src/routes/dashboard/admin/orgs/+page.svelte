@@ -58,6 +58,11 @@
 			justify-content: center;
 			text-align: center;
 			color: black;
+			transition: background 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+			&:hover {
+				background: #f0f0f0;
+			}
 		}
 	}
 </style>
