@@ -17,7 +17,7 @@
 	style="width: {size}; max-height: {size}; max-width: {size}; height: {size}; margin-right: {marginRight}"
 	alt="{user.firstName} {user.lastName}"
 	src={imageSrc}
-	on:error|once={() => imageSrc = '/defaultUser.svg'}
+	on:error|once={() => (imageSrc = '/defaultUser.svg')}
 />
 
 <style lang="scss">

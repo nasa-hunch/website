@@ -2,6 +2,8 @@
 	import toast from 'svelte-french-toast';
 
 	import { enhance } from '$app/forms';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
@@ -9,8 +11,6 @@
 	import ModalForm from '$lib/components/ModalForm.svelte';
 
 	import type { PageData } from './$types';
-	import { pushState } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	export let data: PageData;
 	export let form;
@@ -113,6 +113,17 @@
 
 	<div class="accountInfo m-top">
 		<div class="header">
+			<h2>Actions</h2>
+		</div>
+		<form action="/logout" method="POST">
+			<Button value="Log Out" />
+		</form>
+		<hr />
+		<Button value="Change Password" on:click={changePasswordModal} />
+	</div>
+
+	<div class="accountInfo m-top">
+		<div class="header">
 			<h2>Sessions</h2>
 		</div>
 		{#each data.user.sessions as session}
@@ -124,24 +135,24 @@
 			</p>
 		{/each}
 	</div>
-	<div class="accountInfo m-top">
-		<div class="header">
-			<h2>Actions</h2>
-		</div>
-		<Button value="Change Password" on:click={changePasswordModal} />
-	</div>
 </main>
 
 {#if $page.state.modal === 'changePassword'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm method="POST" action="?/changePassword">
+		<ModalForm action="?/changePassword" method="POST">
 			<h1>Change Password</h1>
-			<Input type="password" name="oldPassword" label="Old Password" required />
-			<div class="margin-separator"></div>
-			<Input autocomplete="new-password" type="password" name="password" label="Password" required />
-			<div class="margin-separator"></div>
-			<Input type="password" name="confirmPassword" label="Confirm Password" required />
-			<div class="margin-separator"></div>
+			<Input name="oldPassword" label="Old Password" required type="password" />
+			<div class="margin-separator" />
+			<Input
+				name="password"
+				autocomplete="new-password"
+				label="Password"
+				required
+				type="password"
+			/>
+			<div class="margin-separator" />
+			<Input name="confirmPassword" label="Confirm Password" required type="password" />
+			<div class="margin-separator" />
 			<Button type="submit" value="Change" />
 		</ModalForm>
 	</Modal>

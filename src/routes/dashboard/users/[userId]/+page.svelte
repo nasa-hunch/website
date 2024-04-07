@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Pfp from '$lib/components/Pfp.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import Modal from '$lib/components/Modal.svelte';
-	import ModalForm from '$lib/components/ModalForm.svelte';
-	import Input from '$lib/components/Input.svelte';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Button from '$lib/components/Button.svelte';
+	import Input from '$lib/components/Input.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import ModalForm from '$lib/components/ModalForm.svelte';
+	import Pfp from '$lib/components/Pfp.svelte';
 
 	export let data;
 
@@ -29,9 +29,10 @@
 		});
 	}
 </script>
+
 <main>
 	<div class="title">
-		<Pfp user={user} size="100px" />
+		<Pfp size="100px" {user} />
 		<h1>{user.firstName} {user.lastName}</h1>
 		<h2>{user.email}</h2>
 	</div>
@@ -42,24 +43,24 @@
 	<div class="actions">
 		<h2>Actions</h2>
 		{#if data.user.role === 'SCHOOL_ADMIN' || data.user.role === 'HUNCH_ADMIN'}
-			<Button on:click={sendNotificationModal} value="Send Notification" />
-			<div class="margin-separator"></div>
-			<Button on:click={updateUserModal} value="Update User" />
+			<Button value="Send Notification" on:click={sendNotificationModal} />
+			<div class="margin-separator" />
+			<Button value="Update User" on:click={updateUserModal} />
 		{/if}
-		<div class="margin-separator"></div>
+		<div class="margin-separator" />
 		{#if data.user.role === 'HUNCH_ADMIN'}
-			<Button on:click={changePasswordModal} value="Change Password" />
+			<Button value="Change Password" on:click={changePasswordModal} />
 		{/if}
 	</div>
 </main>
 
 {#if $page.state.modal === 'sendNotification'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm method="POST" action="?/sendNotification">
+		<ModalForm action="?/sendNotification" method="POST">
 			<h1>Send Notification</h1>
 			<label>
 				<span>Message</span>
-				<textarea name="message" required></textarea>
+				<textarea name="message" required />
 			</label>
 			<Button type="submit" value="Send" />
 		</ModalForm>
@@ -68,14 +69,14 @@
 
 {#if $page.state.modal === 'updateUser'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm method="POST" action="?/updateUser">
+		<ModalForm action="?/updateUser" method="POST">
 			<h1>Update User</h1>
-			<Input name="firstName" label="First Name" value={user.firstName} required />
-			<div class="margin-separator"></div>
-			<Input name="lastName" label="Last Name" value={user.lastName} required />
-			<div class="margin-separator"></div>
-			<Input name="email" label="Email" value={user.email} required />
-			<div class="margin-separator"></div>
+			<Input name="firstName" label="First Name" required value={user.firstName} />
+			<div class="margin-separator" />
+			<Input name="lastName" label="Last Name" required value={user.lastName} />
+			<div class="margin-separator" />
+			<Input name="email" label="Email" required value={user.email} />
+			<div class="margin-separator" />
 			<Button type="submit" value="Update" />
 		</ModalForm>
 	</Modal>
@@ -83,12 +84,18 @@
 
 {#if $page.state.modal === 'changePassword'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm method="POST" action="?/changePassword">
+		<ModalForm action="?/changePassword" method="POST">
 			<h1>Change Password</h1>
-			<Input  autocomplete="new-password" type="password" name="password" label="Password" required />
-			<div class="margin-separator"></div>
-			<Input type="password" name="confirmPassword" label="Confirm Password" required />
-			<div class="margin-separator"></div>
+			<Input
+				name="password"
+				autocomplete="new-password"
+				label="Password"
+				required
+				type="password"
+			/>
+			<div class="margin-separator" />
+			<Input name="confirmPassword" label="Confirm Password" required type="password" />
+			<div class="margin-separator" />
 			<Button type="submit" value="Change" />
 		</ModalForm>
 	</Modal>
@@ -102,7 +109,7 @@
 	div.margin-separator {
 		margin-top: 1rem;
 	}
-	
+
 	div.actions {
 		max-width: 20rem;
 	}

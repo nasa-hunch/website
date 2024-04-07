@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { pushState } from '$app/navigation';
-	import { snakeCaseToTitleCase } from '$lib/case.js';
-	import Pfp from '$lib/components/Pfp.svelte';
 	import MdiGear from '~icons/mdi/gear';
-	import Modal from '$lib/components/Modal.svelte';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
+	import { snakeCaseToTitleCase } from '$lib/case.js';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
+	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
-	import { page } from '$app/stores';
+	import Pfp from '$lib/components/Pfp.svelte';
 
 	export let data;
 
 	function openOrgSettings() {
 		pushState('', {
-			modal: 'orgSettings',
-		})
+			modal: 'orgSettings'
+		});
 	}
 </script>
 
@@ -22,7 +22,7 @@
 	<div class="title">
 		<h1>{data.org.name}</h1>
 		<button class="gear" on:click={openOrgSettings}>
-			<MdiGear width="2rem" height="2rem" />
+			<MdiGear height="2rem" width="2rem" />
 		</button>
 	</div>
 
@@ -57,10 +57,10 @@
 
 {#if $page.state.modal === 'orgSettings'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm method="POST" action="?/update">
+		<ModalForm action="?/update" method="POST">
 			<h2>Organization Settings</h2>
 			<Input name="name" label="Name" value={data.org.name} />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Button type="submit" value="Save" />
 		</ModalForm>
 	</Modal>
@@ -112,7 +112,8 @@
 		border: 1px solid #dd361c;
 	}
 
-	.user, .project {
+	.user,
+	.project {
 		display: flex;
 		align-items: center;
 		gap: 1rem;

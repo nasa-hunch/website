@@ -101,7 +101,7 @@ export const actions = {
 					id: parseInt(params.userId)
 				},
 				data: {
-					...await makePassword(password)
+					...(await makePassword(password))
 				}
 			});
 
@@ -109,5 +109,5 @@ export const actions = {
 				success: true
 			};
 		}
-	),
-}
+	)
+};
