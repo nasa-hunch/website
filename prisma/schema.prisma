@@ -37,6 +37,21 @@ model Organization {
   name String @db.VarChar(255)
   users User[]
   projects Project[]
+  locations Location[]
+}
+
+model Location {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String @db.VarChar(255)
+  address String @db.VarChar(255)
+  city String @db.VarChar(255)
+  state String @db.VarChar(255)
+  zip String @db.VarChar(255)
+  coordinates String @db.VarChar(255)
+  organization Organization @relation(fields: [orgId], references: [id])
+  orgId Int
 }
 
 model Session {
