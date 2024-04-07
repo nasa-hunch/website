@@ -80,7 +80,7 @@ model User {
   organization Organization? @relation(fields: [orgId], references: [id])
   orgId Int?
   projectUser ProjectUser[]
-  inbox Notification[] @relation("reciever")
+  inbox Notification[] @relation("receiver")
   outbox Notification[] @relation("sender")
   blogPosts BlogPost[]
 }
@@ -91,8 +91,8 @@ model Notification {
   updatedAt DateTime @updatedAt
   senderId Int
   sender User @relation("sender", fields: [senderId], references: [id])
-  recieverId Int
-  receiver User @relation("reciever", fields: [recieverId], references: [id])
+  receiverId Int
+  receiver User @relation("receiver", fields: [receiverId], references: [id])
   title String @db.VarChar(255)
   message String @db.Text
 }

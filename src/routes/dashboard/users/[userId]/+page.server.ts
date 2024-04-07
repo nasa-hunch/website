@@ -128,7 +128,7 @@ export const actions = {
 
 			await prisma.notification.create({
 				data: {
-					recieverId: user.id,
+					receiverId: user.id,
 					senderId: sender.id,
 					message,
 					title

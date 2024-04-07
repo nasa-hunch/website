@@ -13,9 +13,11 @@ All passwords are `password`, with an optional suffix in demo environments.
 ## Sub accounts
 
 - `org` is the org number, from 1 - ~100
-- `project` from 0 - 4
+- `project` from 0 - 1
 
-`{org}@project{project}.teacher`, i.e. `5@project4.teacher`
+- `n`, to be safe, pick `0`, but it can be either `0` or sometimes `1`
+
+`{org}@project{project}.teacher{n}`, i.e. `5@project4.teacher1`
 
 - `student` from 0 - 3
 
