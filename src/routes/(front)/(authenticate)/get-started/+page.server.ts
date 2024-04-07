@@ -1,10 +1,10 @@
 import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
+import { z } from 'zod';
 
+import { formHandler } from '$lib/server/bodyguard.js';
 import { makePassword } from '$lib/server/password';
 import { prisma } from '$lib/server/prisma/prismaConnection';
-import { formHandler } from '$lib/server/bodyguard.js';
-import { z } from 'zod';
 
 export const load = async ({ cookies }) => {
 	// If the user is logged in, we can skip all this stuff

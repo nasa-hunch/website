@@ -5,9 +5,9 @@
 
 	export let data: PageData;
 
+	import BellIcon from '~icons/mdi/bell';
 	import HomeIcon from '~icons/mdi/home';
 	import SettingsIcon from '~icons/mdi/settings';
-	import BellIcon from '~icons/mdi/bell';
 </script>
 
 <nav class="nav">
@@ -31,13 +31,13 @@
 	</div>
 	<div class="bottom">
 		<a class="button bottomButton" href="#/dashboard/notifications">
-			<BellIcon width="30px" height="30px" />
+			<BellIcon height="30px" width="30px" />
 		</a>
 		<a class="button bottomButton" href="/dashboard/settings">
-			<SettingsIcon width="30px" height="30px" />
+			<SettingsIcon height="30px" width="30px" />
 		</a>
 		<a class="button bottomButton" href="/">
-			<HomeIcon width="30px" height="30px" />
+			<HomeIcon height="30px" width="30px" />
 		</a>
 	</div>
 </nav>
