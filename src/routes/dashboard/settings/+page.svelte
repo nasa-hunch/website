@@ -5,8 +5,12 @@
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import ModalForm from '$lib/components/ModalForm.svelte';
 
 	import type { PageData } from './$types';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
 	export let form;
@@ -42,6 +46,12 @@
 
 	const stopDragOver = () => {
 		dragging = false;
+	};
+
+	const changePasswordModal = () => {
+		pushState('', {
+			modal: 'changePassword'
+		});
 	};
 </script>
 
@@ -114,9 +124,34 @@
 			</p>
 		{/each}
 	</div>
+	<div class="accountInfo m-top">
+		<div class="header">
+			<h2>Actions</h2>
+		</div>
+		<Button value="Change Password" on:click={changePasswordModal} />
+	</div>
 </main>
 
+{#if $page.state.modal === 'changePassword'}
+	<Modal on:close={() => history.back()}>
+		<ModalForm method="POST" action="?/changePassword">
+			<h1>Change Password</h1>
+			<Input type="password" name="oldPassword" label="Old Password" required />
+			<div class="margin-separator"></div>
+			<Input autocomplete="new-password" type="password" name="password" label="Password" required />
+			<div class="margin-separator"></div>
+			<Input type="password" name="confirmPassword" label="Confirm Password" required />
+			<div class="margin-separator"></div>
+			<Button type="submit" value="Change" />
+		</ModalForm>
+	</Modal>
+{/if}
+
 <style lang="scss">
+	.margin-separator {
+		margin-top: 1rem;
+	}
+
 	main {
 		width: 100%;
 		display: flex;
