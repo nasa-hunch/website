@@ -10,32 +10,14 @@
 	export let size = '24px';
 	export let marginRight = '10px';
 
-	let imageSrc = user.pfp;
-
-	const tryPfp = async () => {
-		if (user.pfp) {
-			try {
-				const fetchTest = await fetch(new URL(user.pfp));
-
-				if (fetchTest.status != 200) {
-					imageSrc = '/defaultUser.svg';
-				}
-			} catch (e) {
-				imageSrc = '/defaultUser.svg';
-			}
-		} else {
-			imageSrc = '/defaultUser.svg';
-		}
-	};
-	onMount(() => {
-		tryPfp();
-	});
+	let imageSrc = user.pfp ?? '/defaultUser.svg';
 </script>
 
 <img
 	style="width: {size}; max-height: {size}; max-width: {size}; height: {size}; margin-right: {marginRight}"
 	alt="{user.firstName} {user.lastName}"
 	src={imageSrc}
+	on:error|once={() => imageSrc = '/defaultUser.svg'}
 />
 
 <style lang="scss">
