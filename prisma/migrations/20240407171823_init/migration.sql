@@ -30,8 +30,12 @@ CREATE TABLE "Organization" (
 -- CreateTable
 CREATE TABLE "Session" (
     "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "lastUsed" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "sessionText" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
+    "ip" TEXT NOT NULL,
+    "userAgent" TEXT NOT NULL,
 
     CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
 );
@@ -103,7 +107,6 @@ CREATE TABLE "ProjectTemplate" (
     "shortDescription" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
-    "categoryId" INTEGER NOT NULL,
 
     CONSTRAINT "ProjectTemplate_pkey" PRIMARY KEY ("id")
 );
@@ -115,11 +118,26 @@ CREATE TABLE "File" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "key" VARCHAR(255),
-    "projectId" INTEGER,
     "link" VARCHAR(255) NOT NULL,
     "size" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "File_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ProjectFile" (
+    "projectId" INTEGER NOT NULL,
+    "fileId" INTEGER NOT NULL,
+
+    CONSTRAINT "ProjectFile_pkey" PRIMARY KEY ("projectId","fileId")
+);
+
+-- CreateTable
+CREATE TABLE "ProjectTemplateFile" (
+    "templateId" INTEGER NOT NULL,
+    "fileId" INTEGER NOT NULL,
+
+    CONSTRAINT "ProjectTemplateFile_pkey" PRIMARY KEY ("templateId","fileId")
 );
 
 -- CreateTable
@@ -187,6 +205,12 @@ CREATE TABLE "Partner" (
 );
 
 -- CreateTable
+CREATE TABLE "_CategoryToProjectTemplate" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "_ProjectToTeamMember" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
@@ -197,6 +221,12 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Project_joinCode_key" ON "Project"("joinCode");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_CategoryToProjectTemplate_AB_unique" ON "_CategoryToProjectTemplate"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_CategoryToProjectTemplate_B_index" ON "_CategoryToProjectTemplate"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_ProjectToTeamMember_AB_unique" ON "_ProjectToTeamMember"("A", "B");
@@ -229,10 +259,16 @@ ALTER TABLE "Project" ADD CONSTRAINT "Project_orgId_fkey" FOREIGN KEY ("orgId") 
 ALTER TABLE "Project" ADD CONSTRAINT "Project_projectTemplateId_fkey" FOREIGN KEY ("projectTemplateId") REFERENCES "ProjectTemplate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ProjectTemplate" ADD CONSTRAINT "ProjectTemplate_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ProjectFile" ADD CONSTRAINT "ProjectFile_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "File" ADD CONSTRAINT "File_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "ProjectFile" ADD CONSTRAINT "ProjectFile_fileId_fkey" FOREIGN KEY ("fileId") REFERENCES "File"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ProjectTemplateFile" ADD CONSTRAINT "ProjectTemplateFile_templateId_fkey" FOREIGN KEY ("templateId") REFERENCES "ProjectTemplate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ProjectTemplateFile" ADD CONSTRAINT "ProjectTemplateFile_fileId_fkey" FOREIGN KEY ("fileId") REFERENCES "File"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ToDoItem" ADD CONSTRAINT "ToDoItem_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -248,6 +284,12 @@ ALTER TABLE "ToDoAssignee" ADD CONSTRAINT "ToDoAssignee_userId_fkey" FOREIGN KEY
 
 -- AddForeignKey
 ALTER TABLE "BlogPost" ADD CONSTRAINT "BlogPost_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_CategoryToProjectTemplate" ADD CONSTRAINT "_CategoryToProjectTemplate_A_fkey" FOREIGN KEY ("A") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_CategoryToProjectTemplate" ADD CONSTRAINT "_CategoryToProjectTemplate_B_fkey" FOREIGN KEY ("B") REFERENCES "ProjectTemplate"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ProjectToTeamMember" ADD CONSTRAINT "_ProjectToTeamMember_A_fkey" FOREIGN KEY ("A") REFERENCES "Project"("id") ON DELETE CASCADE ON UPDATE CASCADE;

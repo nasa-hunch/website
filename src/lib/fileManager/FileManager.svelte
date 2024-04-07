@@ -203,18 +203,7 @@
 			justify-content: center;
 		}
 	}
-	.uploadFileThing::after {
-		position: absolute;
-		content: '';
-		background: $background;
-		top: 0px;
-		left: 0px;
-		height: 100%;
-		width: 100%;
-		opacity: 0.5;
-		z-index: 1;
-		border-radius: 5px 0px 0px 5px;
-	}
+	
 	.name {
 		display: flex;
 		flex-direction: row;

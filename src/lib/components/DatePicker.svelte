@@ -30,11 +30,6 @@
 		background: var(--bgColor);
 	}
 
-	.spanPlaceholders {
-		width: fit-content;
-		opacity: 1;
-	}
-
 	.placeholder {
 		width: 100%;
 		border: 0px;
@@ -47,18 +42,6 @@
 
 		font-family: 'Lexend Variable', sans-serif;
 		background: transparent;
-
-		.inputs {
-			width: fit-content;
-
-			input {
-				z-index: 3sx;
-				all: unset;
-				flex-shrink: 1;
-
-				text-align: center;
-			}
-		}
 	}
 
 	.labelBase {

@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 import { formHandler } from '$lib/server/bodyguard.js';
+import { checkPassword, makePassword } from '$lib/server/password.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 import { uploadFile } from '$lib/server/storage/uploadFile';
 import { verifySession } from '$lib/server/verifySession.js';
-import { checkPassword, makePassword } from '$lib/server/password.js';
 
 export const actions = {
 	updateAccountInfo: formHandler(

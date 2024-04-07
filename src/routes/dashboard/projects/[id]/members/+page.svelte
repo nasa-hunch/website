@@ -172,9 +172,5 @@
 		justify-content: space-between;
 		width: 100%;
 		gap: 1rem;
-
-		button {
-			width: 45%;
-		}
 	}
 </style>
