@@ -61,14 +61,19 @@
 		gap: 1rem;
 		padding: 1rem;
 		border-radius: 0.5rem;
-		background-color: var(--background-alt);
+		background-color: $background-alt;
 		color: black;
 		text-decoration: none;
+		transition: background-color 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 
 		.content {
 			display: flex;
 			flex-direction: column;
 			gap: 0.5rem;
+		}
+
+		&:hover {
+			background-color: darken($background-alt, 5%);
 		}
 	}
 </style>
