@@ -4,6 +4,10 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+
+	import HomeIcon from '~icons/mdi/home';
+	import SettingsIcon from '~icons/mdi/settings';
+	import BellIcon from '~icons/mdi/bell';
 </script>
 
 <nav class="nav">
@@ -27,16 +31,14 @@
 	</div>
 	<div class="bottom">
 		<a class="button bottomButton" href="#/dashboard/notifications">
-			<img class="bottomIcon" alt="Notifications" src="/notifications.svg" width="30px" />
+			<BellIcon width="30px" height="30px" />
 		</a>
 		<a class="button bottomButton" href="/dashboard/settings">
-			<img class="bottomIcon" alt="Settings" src="/settings.svg" width="30px" />
+			<SettingsIcon width="30px" height="30px" />
 		</a>
-		<form action="/logout" method="POST">
-			<button class="button bottomButton" type="submit">
-				<img class="bottomIcon" alt="Log Out" src="/logout.svg" width="30px" />
-			</button>
-		</form>
+		<a class="button bottomButton" href="/">
+			<HomeIcon width="30px" height="30px" />
+		</a>
 	</div>
 </nav>
 

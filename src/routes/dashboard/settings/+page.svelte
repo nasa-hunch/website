@@ -113,6 +113,17 @@
 
 	<div class="accountInfo m-top">
 		<div class="header">
+			<h2>Actions</h2>
+		</div>
+		<form action="/logout" method="POST">
+			<Button value="Log Out" />
+		</form>
+		<hr />
+		<Button value="Change Password" on:click={changePasswordModal} />
+	</div>
+
+	<div class="accountInfo m-top">
+		<div class="header">
 			<h2>Sessions</h2>
 		</div>
 		{#each data.user.sessions as session}
@@ -124,12 +135,6 @@
 			</p>
 		{/each}
 	</div>
-	<div class="accountInfo m-top">
-		<div class="header">
-			<h2>Actions</h2>
-		</div>
-		<Button value="Change Password" on:click={changePasswordModal} />
-	</div>
 </main>
 
 {#if $page.state.modal === 'changePassword'}
@@ -137,11 +142,17 @@
 		<ModalForm method="POST" action="?/changePassword">
 			<h1>Change Password</h1>
 			<Input type="password" name="oldPassword" label="Old Password" required />
-			<div class="margin-separator"></div>
-			<Input autocomplete="new-password" type="password" name="password" label="Password" required />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
+			<Input
+				autocomplete="new-password"
+				type="password"
+				name="password"
+				label="Password"
+				required
+			/>
+			<div class="margin-separator" />
 			<Input type="password" name="confirmPassword" label="Confirm Password" required />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Button type="submit" value="Change" />
 		</ModalForm>
 	</Modal>

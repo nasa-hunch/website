@@ -29,9 +29,10 @@
 		});
 	}
 </script>
+
 <main>
 	<div class="title">
-		<Pfp user={user} size="100px" />
+		<Pfp {user} size="100px" />
 		<h1>{user.firstName} {user.lastName}</h1>
 		<h2>{user.email}</h2>
 	</div>
@@ -43,10 +44,10 @@
 		<h2>Actions</h2>
 		{#if data.user.role === 'SCHOOL_ADMIN' || data.user.role === 'HUNCH_ADMIN'}
 			<Button on:click={sendNotificationModal} value="Send Notification" />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Button on:click={updateUserModal} value="Update User" />
 		{/if}
-		<div class="margin-separator"></div>
+		<div class="margin-separator" />
 		{#if data.user.role === 'HUNCH_ADMIN'}
 			<Button on:click={changePasswordModal} value="Change Password" />
 		{/if}
@@ -59,7 +60,7 @@
 			<h1>Send Notification</h1>
 			<label>
 				<span>Message</span>
-				<textarea name="message" required></textarea>
+				<textarea name="message" required />
 			</label>
 			<Button type="submit" value="Send" />
 		</ModalForm>
@@ -71,11 +72,11 @@
 		<ModalForm method="POST" action="?/updateUser">
 			<h1>Update User</h1>
 			<Input name="firstName" label="First Name" value={user.firstName} required />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Input name="lastName" label="Last Name" value={user.lastName} required />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Input name="email" label="Email" value={user.email} required />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Button type="submit" value="Update" />
 		</ModalForm>
 	</Modal>
@@ -85,10 +86,16 @@
 	<Modal on:close={() => history.back()}>
 		<ModalForm method="POST" action="?/changePassword">
 			<h1>Change Password</h1>
-			<Input  autocomplete="new-password" type="password" name="password" label="Password" required />
-			<div class="margin-separator"></div>
+			<Input
+				autocomplete="new-password"
+				type="password"
+				name="password"
+				label="Password"
+				required
+			/>
+			<div class="margin-separator" />
 			<Input type="password" name="confirmPassword" label="Confirm Password" required />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Button type="submit" value="Change" />
 		</ModalForm>
 	</Modal>
@@ -102,7 +109,7 @@
 	div.margin-separator {
 		margin-top: 1rem;
 	}
-	
+
 	div.actions {
 		max-width: 20rem;
 	}

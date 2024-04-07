@@ -13,8 +13,8 @@
 
 	function openOrgSettings() {
 		pushState('', {
-			modal: 'orgSettings',
-		})
+			modal: 'orgSettings'
+		});
 	}
 </script>
 
@@ -60,7 +60,7 @@
 		<ModalForm method="POST" action="?/update">
 			<h2>Organization Settings</h2>
 			<Input name="name" label="Name" value={data.org.name} />
-			<div class="margin-separator"></div>
+			<div class="margin-separator" />
 			<Button type="submit" value="Save" />
 		</ModalForm>
 	</Modal>
@@ -112,7 +112,8 @@
 		border: 1px solid #dd361c;
 	}
 
-	.user, .project {
+	.user,
+	.project {
 		display: flex;
 		align-items: center;
 		gap: 1rem;

@@ -35,7 +35,7 @@ export const actions = {
 			pass2: z.string().min(1)
 		}),
 		async (
-			{ firstName, lastName, email, pass1, pass2 }, 
+			{ firstName, lastName, email, pass1, pass2 },
 			{ request, cookies, getClientAddress }
 		) => {
 			if (pass1 !== pass2) {

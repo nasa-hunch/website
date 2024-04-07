@@ -74,7 +74,7 @@ export const actions = {
 			return {
 				success: true,
 				message: 'Organization updated'
-			}
+			};
 		}
 	)
-}
+};

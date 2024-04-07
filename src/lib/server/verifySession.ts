@@ -23,7 +23,10 @@ export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
 		throw redirect(303, '/login');
 	}
 
-	if (roles.length > 0 && !(sessionCheck.user.role && roles.includes(sessionCheck.user.role as Role))) {
+	if (
+		roles.length > 0 &&
+		!(sessionCheck.user.role && roles.includes(sessionCheck.user.role as Role))
+	) {
 		throw redirect(303, '/login');
 	}
 

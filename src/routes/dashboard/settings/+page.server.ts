@@ -61,7 +61,7 @@ export const actions = {
 					id: user.id
 				},
 				data: {
-					...await makePassword(password)
+					...(await makePassword(password))
 				}
 			});
 
