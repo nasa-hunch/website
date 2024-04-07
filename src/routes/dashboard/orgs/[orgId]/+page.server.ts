@@ -1,6 +1,10 @@
 import { error } from '@sveltejs/kit';
+import { z } from 'zod';
 
+import { Role } from '$lib/enums';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
+import { verifySession } from '$lib/server/verifySession';
 
 export const load = async ({ params, parent }) => {
 	const data = await parent();
@@ -49,3 +53,28 @@ export const load = async ({ params, parent }) => {
 		org
 	};
 };
+
+export const actions = {
+	update: formHandler(
+		z.object({
+			name: z.string().min(1)
+		}),
+		async ({ name }, { params, cookies }) => {
+			await verifySession(cookies, Role.HUNCH_ADMIN, Role.SCHOOL_ADMIN);
+
+			await prisma.organization.update({
+				where: {
+					id: parseInt(params.orgId)
+				},
+				data: {
+					name
+				}
+			});
+
+			return {
+				success: true,
+				message: 'Organization updated'
+			}
+		}
+	)
+}
