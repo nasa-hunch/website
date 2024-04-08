@@ -20,6 +20,7 @@
 		"seed:hunch2024": "tsx scripts/seed/hunch2024/index.ts",
 		"seed": "npm run seed:hunch2024",
 		"s3devdata": "tsx scripts/s3.ts",
+		"deployPreviewServer": "pnpm install && prisma migrate reset && prisma migrate deploy && prisma generate && pnpm run build",
 		"deploy": "pnpm install && prisma migrate deploy && prisma generate && pnpm run build"
 	},
 	"devDependencies": {
