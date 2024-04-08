@@ -30,7 +30,7 @@
 		</div>
 	</div>
 	<div class="bottom">
-		<a class="button bottomButton" href="#/dashboard/notifications">
+		<a class="button bottomButton" href="/dashboard/notifications">
 			<BellIcon height="30px" width="30px" />
 		</a>
 		<a class="button bottomButton" href="/dashboard/settings">

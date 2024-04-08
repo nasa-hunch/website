@@ -109,5 +109,35 @@ export const actions = {
 				success: true
 			};
 		}
+	),
+	sendNotification: formHandler(
+		z.object({
+			message: z.string().min(1),
+			title: z.string().min(1)
+		}),
+		async ({ message, title }, { params, cookies }) => {
+			const sender = await verifySession(cookies, Role.HUNCH_ADMIN, Role.SCHOOL_ADMIN, Role.TEACHER);
+
+			const user = await prisma.user.findFirst({
+				where: {
+					id: parseInt(params.userId)
+				}
+			});
+
+			if (!user) error(404, 'User not found');
+
+			await prisma.notification.create({
+				data: {
+					receiverId: user.id,
+					senderId: sender.id,
+					message,
+					title
+				}
+			});
+
+			return {
+				success: true
+			};
+		}
 	)
 };

@@ -43,7 +43,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 						},
 						user: {
 							create: {
-								email: `${i}@project${j}.teacher`,
+								email: `${i}@project${j}.teacher${k}`,
 								firstName: faker.person.firstName(),
 								lastName: faker.person.lastName(),
 								role: 'TEACHER',
