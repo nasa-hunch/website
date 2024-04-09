@@ -3,11 +3,13 @@
 
 	import ChevronLeft from '~icons/mdi/chevron-left';
 	import ChevronRight from '~icons/mdi/chevron-right';
+	import FilterIcon from '~icons/mdi/filter';
 	import { goto, pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
+	import Filter from '$lib/components/Filter.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
@@ -26,6 +28,14 @@
 		firstName: string;
 		lastName: string;
 	};
+
+	const roleFilter = Object.keys(Role).map((item) => {
+		return {
+			name: snakeCaseToTitleCase(item),
+			value: item
+		};
+	});
+	let roleFilterComponent: Filter;
 
 	let deleteData: DeleteData | undefined = undefined;
 
@@ -79,6 +89,8 @@
 	};
 </script>
 
+<Filter bind:this={roleFilterComponent} filters={roleFilter} param="role" />
+
 {#if $page.state.modal === 'deleteUser'}
 	<Modal on:close={() => history.back()}>
 		<ModelForm action="?/deleteUser" method="post">
@@ -111,7 +123,15 @@
 			<th>Email</th>
 			<th>First Name</th>
 			<th>Last Name</th>
-			<th>Role</th>
+			<th
+				>Role
+				<IconButton
+					style="margin-left: 0.25rem"
+					on:click={(e) => roleFilterComponent.propagateClick(e)}
+				>
+					<FilterIcon />
+				</IconButton>
+			</th>
 			<th>Actions</th>
 		</tr>
 		{#each data.userList as user}
@@ -141,7 +161,7 @@
 			</tr>
 		{/each}
 		{#each { length: userDifferenceBetweenPerPage } as i}
-			<tr class="row" />
+			<tr id="fakeRow-{i}" class="row" />
 		{/each}
 	</table>
 	<div class="navigators">
@@ -260,6 +280,11 @@
 		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 		margin-bottom: 5px;
 		position: sticky;
+
+		th {
+			display: flex;
+			align-items: center;
+		}
 	}
 	.spacer {
 		height: 0px;
