@@ -49,6 +49,20 @@
 		}
 	}
 
+	let userDifferenceBetweenPerPage = 0;
+	$: userDifferenceBetweenPerPage = data.sortMeta.perPage - data.userList.length;
+
+	const pageCountHandler = (e: Event) => {
+		let count: number = parseInt((e.currentTarget as HTMLElement).innerText);
+		count = isNaN(count) ? 1 : count;
+		count = Math.min(data.sortMeta.totalPages, Math.max(count, 1));
+		$page.url.searchParams.set('page', count.toString());
+		(e.currentTarget as HTMLElement).innerHTML = count.toString();
+		goto($page.url, {
+			invalidateAll: true
+		});
+	};
+
 	const changePage = (count: number) => {
 		const url = $page.url;
 		url.searchParams.set('page', (data.sortMeta.page + count).toString());
@@ -93,7 +107,7 @@
 	<h1>User Management Panel</h1>
 
 	<table>
-		<tr class="headRow">
+		<tr class="headRow row">
 			<th>Email</th>
 			<th>First Name</th>
 			<th>Last Name</th>
@@ -101,7 +115,7 @@
 			<th>Actions</th>
 		</tr>
 		{#each data.userList as user}
-			<tr>
+			<tr class="row">
 				<td>{user.email}</td>
 				<td>{user.firstName}</td>
 				<td>{user.lastName}</td>
@@ -126,6 +140,9 @@
 				</td>
 			</tr>
 		{/each}
+		{#each { length: userDifferenceBetweenPerPage } as i}
+			<tr class="row" />
+		{/each}
 	</table>
 	<div class="navigators">
 		<div class="left">
@@ -146,7 +163,10 @@
 				<ChevronRight height="1.75rem" width="1.75rem" />
 			</IconButton>
 			<span>
-				Page {data.sortMeta.page}/{data.sortMeta.totalPages}
+				Page <span class="pageNumber"
+					><span contenteditable="true" on:blur={pageCountHandler}>{data.sortMeta.page}</span>/{data
+						.sortMeta.totalPages}
+				</span>
 			</span>
 		</div>
 		<div class="right">
@@ -220,6 +240,9 @@
 				}
 			}
 		}
+	}
+	.row {
+		height: 1.75rem;
 	}
 	tr {
 		width: 100%;
