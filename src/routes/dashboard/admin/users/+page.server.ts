@@ -5,8 +5,32 @@ import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { verifySession } from '$lib/server/verifySession.js';
 
-export const load = async () => {
+export const load = async ({ url }) => {
+	const filters: { [key: string]: unknown } = {};
+
+	const perPage = parseInt(url.searchParams.get('perPage') || '25');
+
+	let page = parseInt(url.searchParams.get('page') || '1');
+
+	const roleParam = url.searchParams.get('role') || 'null';
+	if (roleParam) {
+		if (Object.keys(Role).includes(roleParam.toUpperCase())) {
+			filters.role = roleParam.toUpperCase();
+		}
+	}
+
+	const totalUsers = await prisma.user.count({
+		where: filters
+	});
+	const totalPages = Math.ceil(totalUsers / perPage);
+
+	// A little odd, but ensures we don't end up on a page which does not exist
+	page = page > totalPages ? totalPages : page;
+	page = page < 1 ? 1 : page;
+
 	const userList = await prisma.user.findMany({
+		skip: perPage * (page - 1),
+		take: perPage,
 		select: {
 			id: true,
 			createdAt: true,
@@ -16,13 +40,23 @@ export const load = async () => {
 			email: true,
 			role: true,
 			orgId: true
+		},
+		where: filters,
+		orderBy: {
+			id: 'asc'
 		}
 	});
 
 	const orgList = await prisma.organization.findMany({});
 	return {
 		userList,
-		orgList
+		orgList,
+		sortMeta: {
+			perPage,
+			page,
+			totalUsers,
+			totalPages
+		}
 	};
 };
 

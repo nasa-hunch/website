@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { toast } from 'svelte-french-toast';
 
-	import { pushState } from '$app/navigation';
+	import ChevronLeft from '~icons/mdi/chevron-left';
+	import ChevronRight from '~icons/mdi/chevron-right';
+	import { goto, invalidateAll, pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
+	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
 	import { Role } from '$lib/enums';
@@ -15,6 +18,8 @@
 	export let data: PageData;
 
 	let selectedUserId = 0;
+
+	const perPageOptions = [10, 25, 50, 100];
 
 	type DeleteData = {
 		id: number;
@@ -43,6 +48,21 @@
 			toast.error(form.message || 'Action Failed!');
 		}
 	}
+
+	const changePage = (count: number) => {
+		const url = $page.url;
+		url.searchParams.set('page', (data.sortMeta.page + count).toString());
+		goto(url, {
+			invalidateAll: true
+		});
+	};
+
+	const setItemsPerPage = (itemsPerPage: number) => {
+		$page.url.searchParams.set('perPage', itemsPerPage.toString());
+		goto($page.url, {
+			invalidateAll: true
+		});
+	};
 </script>
 
 {#if $page.state.modal === 'deleteUser'}
@@ -107,6 +127,42 @@
 			</tr>
 		{/each}
 	</table>
+	<div class="navigators">
+		<div class="left">
+			<IconButton
+				disabled={data.sortMeta.page == 1}
+				on:click={() => {
+					changePage(-1);
+				}}
+			>
+				<ChevronLeft height="1.75rem" width="1.75rem" />
+			</IconButton>
+			<IconButton
+				disabled={data.sortMeta.page == data.sortMeta.totalPages}
+				on:click={() => {
+					changePage(1);
+				}}
+			>
+				<ChevronRight height="1.75rem" width="1.75rem" />
+			</IconButton>
+			<span>
+				Page {data.sortMeta.page}/{data.sortMeta.totalPages}
+			</span>
+		</div>
+		<div class="right">
+			<span>Items per page</span>
+			{#each perPageOptions as perPageOption}
+				<button
+					class:selected={data.sortMeta.perPage == perPageOption}
+					on:click={() => {
+						setItemsPerPage(perPageOption);
+					}}
+				>
+					{perPageOption}
+				</button>
+			{/each}
+		</div>
+	</div>
 </main>
 
 <style lang="scss">
@@ -120,6 +176,50 @@
 		padding: 1rem;
 		box-sizing: border-box;
 		border-radius: 5px;
+	}
+	.navigators {
+		width: 100%;
+		background: #f1f1f1;
+		padding: 1rem;
+		padding-top: 0px;
+		box-sizing: border-box;
+		border-radius: 5px;
+		display: flex;
+
+		.left {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			width: 100%;
+		}
+
+		.right {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: end;
+			span {
+				margin-right: 0.5rem;
+			}
+			button {
+				cursor: pointer;
+				margin: 0px 0.1rem;
+				padding: 0.25rem;
+				font-size: 1rem;
+				border: 1px solid $background3;
+				background: $background2;
+				border-radius: 0.1rem;
+				&:hover {
+					border: 1px solid black;
+					background: rgba(0, 0, 0, 0.15);
+				}
+				&.selected {
+					border: 1px solid black;
+					font-weight: bold;
+					background: rgba(0, 0, 0, 0.25);
+				}
+			}
+		}
 	}
 	tr {
 		width: 100%;

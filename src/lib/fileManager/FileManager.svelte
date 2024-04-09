@@ -203,7 +203,7 @@
 			justify-content: center;
 		}
 	}
-	
+
 	.name {
 		display: flex;
 		flex-direction: row;
