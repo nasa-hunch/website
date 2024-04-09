@@ -42,10 +42,6 @@
 </nav>
 
 <style lang="scss">
-	form {
-		display: contents;
-	}
-
 	.nav {
 		background: #323a45;
 		height: 100vh;
@@ -109,10 +105,7 @@
 	.button:focus {
 		background: rgb(33, 33, 33, 0.5);
 	}
-	.bottomIcon {
-		filter: invert(100%);
-		size: 20px;
-	}
+
 	.bottomButton {
 		display: flex;
 		align-items: center;

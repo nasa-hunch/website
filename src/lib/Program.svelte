@@ -33,7 +33,7 @@
 					{#each projectTemplates as project}
 						<a class="project" href="/projects/{project.id}">
 							<h3>{project.name}</h3>
-							<p>{@html project.shortDescription}</p>
+							<p>{@html sanitizeHtml(project.shortDescription)}</p>
 						</a>
 					{/each}
 				{:else}

@@ -3,7 +3,7 @@
 
 	import ChevronLeft from '~icons/mdi/chevron-left';
 	import ChevronRight from '~icons/mdi/chevron-right';
-	import { goto, invalidateAll, pushState } from '$app/navigation';
+	import { goto, pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';

@@ -15,8 +15,6 @@
 	let users: typeof data.project.users;
 	$: users = data.project.users;
 	let votedYes = 0;
-	let votedNo = 0;
-
 	let percentDone = tweened(0, {
 		easing: cubicInOut,
 		duration: 1500
@@ -24,12 +22,9 @@
 
 	$: if (users) {
 		votedYes = 0;
-		votedNo = 0;
 		for (const user of users) {
 			if (user.voteSubmit) {
 				votedYes++;
-			} else {
-				votedNo++;
 			}
 		}
 	}

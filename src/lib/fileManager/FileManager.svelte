@@ -39,19 +39,7 @@
 		toastPromiseReject = reject;
 	});
 
-	async function getError(promise: Promise<unknown>): Promise<unknown> {
-		try {
-			await promise;
-		} catch (error) {
-			return error;
-		}
-	}
-
-	const createToast = async (
-		loadingMessage: string,
-		successMessage: string,
-		failMessage: string
-	) => {
+	const createToast = (loadingMessage: string, successMessage: string, failMessage: string) => {
 		console.log('Creating toast promise');
 		toastPromise = new Promise((resolve, reject) => {
 			toastPromiseResolve = resolve;

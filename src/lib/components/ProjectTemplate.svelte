@@ -1,7 +1,12 @@
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
 
-	export let data;
+	export let data: {
+		projectTemplate: {
+			name: string;
+			description: string;
+		};
+	};
 </script>
 
 <div class="content">
