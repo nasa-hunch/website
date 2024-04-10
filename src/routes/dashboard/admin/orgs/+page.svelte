@@ -1,5 +1,12 @@
 <script lang="ts">
+	import { pushState } from '$app/navigation';
 	import Fuse from 'fuse.js';
+	import MdiPlus from '~icons/mdi/plus';
+	import Modal from '$lib/components/Modal.svelte';
+	import ModalForm from '$lib/components/ModalForm.svelte';
+	import Input from '$lib/components/Input.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import { page } from '$app/stores';
 
 	export let data;
 
@@ -12,6 +19,12 @@
 	$: searchedOrgs = searchInput
 		? fuse.search(searchInput).map((data) => data.item)
 		: data.organizations;
+	
+	function addNewOrgModal() {
+		pushState('', {
+			modal: 'addNewOrg'
+		})
+	}
 </script>
 
 <main>
@@ -20,6 +33,9 @@
 	<input placeholder="Search..." type="text" bind:value={searchInput} />
 
 	<div class="organizations">
+		<button class="newOrg" on:click={addNewOrgModal}>
+			<MdiPlus width="3rem" height="3rem" />
+		</button>
 		{#each searchedOrgs as org}
 			<a class="org" href="/dashboard/orgs/{org.id}">
 				<h2>{org.name}</h2>
@@ -28,7 +44,22 @@
 	</div>
 </main>
 
+{#if $page.state.modal === 'addNewOrg'}
+	<Modal on:close={() => history.back()}>
+		<ModalForm method="POST" action="?/addNewOrg">
+			<h1>Add New Organization</h1>
+			<Input name="name" label="Name" />
+			<div class="margin-separator" />
+			<Button value="Submit" />
+		</ModalForm>
+	</Modal>
+{/if}
+
 <style lang="scss">
+	.margin-separator {
+		margin-bottom: 1rem;
+	}
+
 	main {
 		margin: 1rem;
 	}
@@ -48,7 +79,7 @@
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		gap: 1rem;
 
-		.org {
+		.org, .newOrg {
 			background: white;
 			padding: 1rem;
 			border-radius: 0.5rem;
@@ -62,7 +93,14 @@
 
 			&:hover {
 				background: #f0f0f0;
+				cursor: pointer;
 			}
+		}
+
+		.newOrg {
+			padding: 0rem;
+			align-items: center;
+			border: 4px dashed gray;
 		}
 	}
 </style>
