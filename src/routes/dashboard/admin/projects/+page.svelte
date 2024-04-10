@@ -5,22 +5,25 @@
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import DatePicker from '$lib/components/DatePicker.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
+	import ColorPicker from '$lib/components/ColorPicker.svelte';
 </script>
 
 {#if $page.state.modal === 'createCategory'}
 	<Modal on:close={() => history.back()}>
 		<ModelForm action="?/createCategory" method="post">
-			<h2>New Category</h2>
+			<h2>New Category <ColorPicker name="color" /></h2>
 			<Input name="name" bgColor="#f1f1f1" label="Name" />
-			<input name="color" type="color" />
-			<input name="deadline" type="date" />
+			<div class="margin-separator" />
+			<DatePicker name="deadline" label="Deadline" bgColor="#f1f1f1" />
+			<div class="margin-separator" />
 			<Button value="Create" />
 		</ModelForm>
 	</Modal>
 {/if}
 
-<div class="wrap">
+<main>
 	<h2>Project Categories</h2>
 	<div class="categories">
 		{#each data.categories as category}
@@ -41,16 +44,21 @@
 				})}
 		/>
 	</div>
-</div>
+</main>
 
 <style lang="scss">
-	.wrap {
+	.margin-separator {
+		margin-bottom: 1rem;
+	}
+
+	main {
 		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: start;
+		padding-bottom: 1rem;
 	}
 	.categories {
 		width: 90%;
@@ -91,5 +99,9 @@
 	}
 	h2 {
 		text-align: center;
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		align-items: center;
 	}
 </style>

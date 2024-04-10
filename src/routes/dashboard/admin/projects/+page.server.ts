@@ -17,7 +17,6 @@ export const actions = {
 	createCategory: formHandler(
 		z.object({
 			name: z.string().min(1),
-			icon: z.string().min(1),
 			color: z.string().length(7),
 			deadline: z.coerce.string()
 		}),
@@ -31,7 +30,7 @@ export const actions = {
 			await prisma.category.create({
 				data: {
 					name,
-					icon,
+					icon: "",
 					color: newColor,
 					deadline: projectDeadline
 				}
