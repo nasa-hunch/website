@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
+import { ProjectUser } from '@prisma/client';
 import { Chance } from 'chance';
 
 import { makePassword } from '../../../src/lib/server/password';
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
-import { ProjectUser } from '@prisma/client';
 
 const chance = new Chance();
 
@@ -85,7 +85,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 			}
 
 			// Add one or two unapproved students
-			let users: ProjectUser[] = [];
+			const users: ProjectUser[] = [];
 			for (let k = 0; k < chance.pickone([1, 2]); k++) {
 				const user = await prisma.projectUser.create({
 					data: {
@@ -115,7 +115,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 			for (let k = 0; k < chance.weighted([0, 1, 2, 3, 4, 5], [1, 9, 9, 8, 7, 6]); k++) {
 				await prisma.toDoItem.create({
 					data: {
-						name: "Test",
+						name: chance.capitalize(faker.company.buzzPhrase()),
 						checked: chance.weighted([true, false], [1, 2]),
 						project: {
 							connect: {
