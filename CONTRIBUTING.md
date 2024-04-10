@@ -2,6 +2,12 @@
 
 ## Setup
 
+Clone the submodules:
+
+```sh
+git submodule update --init
+```
+
 We have a `docker-compose.yml` file that will start a local development environment for you. You can start it by running:
 
 ```bash
