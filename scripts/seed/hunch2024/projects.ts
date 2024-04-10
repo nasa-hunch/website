@@ -30,7 +30,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 							id: Math.floor(Math.random() * projectTemplateCount) + 1
 						}
 					},
-					joinCode: 123456 + i * 10 + j,
+					joinCode: 123456 + i * 10 + j
 				}
 			});
 
@@ -123,8 +123,9 @@ export async function seed(prisma: PrismaTransactionClient) {
 							}
 						},
 						assignees: {
-							create: chance.pickset(users, chance.natural({ min: 0, max: users.length - 1 }))
-								.map(user => ({
+							create: chance
+								.pickset(users, chance.natural({ min: 0, max: users.length - 1 }))
+								.map((user) => ({
 									projectUser: {
 										connect: {
 											id: user.id
@@ -133,7 +134,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 								}))
 						}
 					}
-				})
+				});
 			}
 		}
 	}

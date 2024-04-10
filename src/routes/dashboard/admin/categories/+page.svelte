@@ -3,11 +3,11 @@
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
+	import ColorPicker from '$lib/components/ColorPicker.svelte';
+	import DatePicker from '$lib/components/DatePicker.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import DatePicker from '$lib/components/DatePicker.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
-	import ColorPicker from '$lib/components/ColorPicker.svelte';
 </script>
 
 {#if $page.state.modal === 'createCategory'}
@@ -16,7 +16,7 @@
 			<h2>New Category <ColorPicker name="color" /></h2>
 			<Input name="name" bgColor="#f1f1f1" label="Name" />
 			<div class="margin-separator" />
-			<DatePicker name="deadline" label="Deadline" bgColor="#f1f1f1" />
+			<DatePicker name="deadline" bgColor="#f1f1f1" label="Deadline" />
 			<div class="margin-separator" />
 			<Button value="Create" />
 		</ModelForm>
