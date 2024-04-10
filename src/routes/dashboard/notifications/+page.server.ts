@@ -6,6 +6,22 @@ export const load = async ({ parent }) => {
 		notifications: await prisma.notification.findMany({
 			where: {
 				OR: [{ receiverId: data.user.id }, { senderId: data.user.id }]
+			},
+			include: {
+				sender: {
+					select: {
+						firstName: true,
+						lastName: true,
+						pfp: true
+					}
+				},
+				receiver: {
+					select: {
+						firstName: true,
+						lastName: true,
+						pfp: true
+					}
+				}
 			}
 		})
 	};
