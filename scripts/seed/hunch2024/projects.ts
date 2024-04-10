@@ -18,6 +18,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 		for (let j = 0; j < 5; j++) {
 			const project = await prisma.project.create({
 				data: {
+					submitted: Math.random() > 0.9,
 					organization: {
 						connect: {
 							id: i
