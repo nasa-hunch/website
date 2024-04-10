@@ -161,7 +161,7 @@
 		background: $background-alt;
 
 		&:hover {
-			background: $background3;
+			background: darken($background-alt, 10%);
 		}
 	}
 	.deadline {
