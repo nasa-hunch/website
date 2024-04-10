@@ -23,7 +23,7 @@
 				<a class="button" href="/dashboard/admin/users">Users</a>
 				<a class="button" href="/dashboard/admin/orgs">Organizations</a>
 				<a class="button" href="/dashboard/admin/categories">Categories</a>
-			{:else if data.user.role == Role.SCHOOL_ADMIN}
+			{:else if data.user.role == Role.ORG_ADMIN}
 				<a class="button" href="/dashboard/orgs/{data.user.orgId}">My Organization</a>
 			{:else}
 				<a class="button" href="/dashboard/projects">Projects</a>

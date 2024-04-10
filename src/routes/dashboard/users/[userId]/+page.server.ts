@@ -10,7 +10,7 @@ import { verifySession } from '$lib/server/verifySession.js';
 export const load = async ({ params, parent }) => {
 	const data = await parent();
 
-	if (data.user.role !== 'HUNCH_ADMIN' && data.user.role !== 'SCHOOL_ADMIN')
+	if (data.user.role !== 'HUNCH_ADMIN' && data.user.role !== 'ORG_ADMIN')
 		error(404, 'User not found');
 
 	const user = await prisma.user.findFirst({
@@ -55,7 +55,7 @@ export const actions = {
 			email: z.string().email()
 		}),
 		async ({ firstName, lastName, email }, { params, cookies }) => {
-			await verifySession(cookies, Role.HUNCH_ADMIN, Role.SCHOOL_ADMIN);
+			await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN);
 
 			await prisma.user.update({
 				where: {
@@ -119,7 +119,7 @@ export const actions = {
 			const sender = await verifySession(
 				cookies,
 				Role.HUNCH_ADMIN,
-				Role.SCHOOL_ADMIN,
+				Role.ORG_ADMIN,
 				Role.TEACHER
 			);
 

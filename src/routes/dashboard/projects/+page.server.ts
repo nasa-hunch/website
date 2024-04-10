@@ -22,7 +22,7 @@ export const actions = {
 			const user = await verifySession(cookies);
 			if (
 				user.role != Role.HUNCH_ADMIN &&
-				user.role != Role.SCHOOL_ADMIN &&
+				user.role != Role.ORG_ADMIN &&
 				user.role != Role.TEACHER
 			) {
 				return {
