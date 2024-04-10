@@ -25,48 +25,48 @@
 			<a class="logoButton" href="/dashboard">
 				<img alt="Nasa Hunch Logo" src="/favicon.png" />
 			</a>
-			<a class="button" href="/dashboard">
+			<a class="button buttonCenter" href="/dashboard">
 				<div class="icon">
-					<DashboardIcon/>
+					<DashboardIcon width="23px" height="23px" />
 				</div>
 				Dashboard
 			</a>
 			{#if data.user.role == Role.HUNCH_ADMIN}
-			<a class="button" href="/dashboard/admin/users">
+			<a class="button buttonCenter" href="/dashboard/admin/users">
 				<div class="icon">
-					<UsersIcon/>
+					<UsersIcon width="23px" height="23px" />
 				</div>
 				Users
 			</a>
-			<a class="button" href="/dashboard/admin/orgs">
+			<a class="button buttonCenter" href="/dashboard/admin/orgs">
 				<div class="icon">
-					<OrgIcon/>
+					<OrgIcon width="23px" height="23px" />
 				</div>
 				Organizations
 			</a>
-			<a class="button" href="/dashboard/admin/categories">
+			<a class="button buttonCenter" href="/dashboard/admin/categories">
 				<div class="icon">
-					<CatIcon/>
+					<CatIcon width="23px" height="23px" />
 				</div>
 				Categories
 			</a>
-			<a class="button" href="/dashboard/admin/staging">
+			<a class="button buttonCenter" href="/dashboard/admin/staging">
 				<div class="icon">
-					<StagingIcon/>
+					<StagingIcon width="23px" height="23px" />
 				</div>
 				Staging
 			</a>
 			{:else if data.user.role == Role.ORG_ADMIN}
-			<a class="button" href="/dashboard/orgs/{data.user.orgId}">
+			<a class="button buttonCenter" href="/dashboard/orgs/{data.user.orgId}">
 				<div class="icon">
-					<OrgIcon/>
+					<OrgIcon width="23px" height="23px" />
 				</div>
 				My Organization
 			</a>
 			{:else}
-				<a class="button" href="/dashboard/projects">
+				<a class="button buttonCenter" href="/dashboard/projects">
 					<div class="icon">
-						<ProjectIcon/>
+						<ProjectIcon width="23px" height="23px" />
 					</div>
 					Projects
 				</a>
@@ -159,6 +159,8 @@
 
 		.icon {
 			margin-right: 0.5rem;
+			display: flex;
+			align-items: center;
 		}
 	}
 	.button:hover {
@@ -166,6 +168,12 @@
 	}
 	.button:focus {
 		background: rgb(33, 33, 33, 0.5);
+	}
+
+	.buttonCenter {
+		display: flex;
+		align-items: center;
+		justify-content: start;
 	}
 
 	.bottomButton {
