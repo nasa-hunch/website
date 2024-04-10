@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@svelte-plugins/tooltips':
+    specifier: ^3.0.0
+    version: 3.0.0(svelte@4.2.8)
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
@@ -3643,6 +3646,14 @@ packages:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.10
     dev: true
+
+  /@svelte-plugins/tooltips@3.0.0(svelte@4.2.8):
+    resolution: {integrity: sha512-lE7LKU01OY8XYwsWmRxEcBZJqVv+f/TP5JQP5eqzb9ppS9UeN8DF/mFP9i2BfELRfYdwl4qwUENTPYBndMI3LA==}
+    peerDependencies:
+      svelte: ^3.54.0 || ^4.0.0 || ^5.0.0-next.0
+    dependencies:
+      svelte: 4.2.8
+    dev: false
 
   /@sveltejs/adapter-node@4.0.1(@sveltejs/kit@2.5.0):
     resolution: {integrity: sha512-IviiTtKCDp+0QoTmmMlGGZBA1EoUNsjecU6XGV9k62S3f01SNsVhpqi2e4nbI62BLGKh/YKKfFii+Vz/b9XIxg==}
