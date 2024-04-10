@@ -4,6 +4,7 @@ import { Chance } from 'chance';
 import { makePassword } from '../../../src/lib/server/password';
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
+import { ProjectUser } from '@prisma/client';
 
 const chance = new Chance();
 
@@ -29,7 +30,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 							id: Math.floor(Math.random() * projectTemplateCount) + 1
 						}
 					},
-					joinCode: 123456 + i * 10 + j
+					joinCode: 123456 + i * 10 + j,
 				}
 			});
 
@@ -84,8 +85,9 @@ export async function seed(prisma: PrismaTransactionClient) {
 			}
 
 			// Add one or two unapproved students
+			let users: ProjectUser[] = [];
 			for (let k = 0; k < chance.pickone([1, 2]); k++) {
-				await prisma.projectUser.create({
+				const user = await prisma.projectUser.create({
 					data: {
 						project: {
 							connect: {
@@ -106,6 +108,32 @@ export async function seed(prisma: PrismaTransactionClient) {
 						permission: 'NEEDS_APPROVAL'
 					}
 				});
+				users.push(user);
+			}
+
+			// Add zero to five tasks.
+			for (let k = 0; k < chance.weighted([0, 1, 2, 3, 4, 5], [1, 9, 9, 8, 7, 6]); k++) {
+				await prisma.toDoItem.create({
+					data: {
+						name: "Test",
+						checked: chance.weighted([true, false], [1, 2]),
+						project: {
+							connect: {
+								id: project.id
+							}
+						},
+						assignees: {
+							create: chance.pickset(users, chance.natural({ min: 0, max: users.length - 1 }))
+								.map(user => ({
+									projectUser: {
+										connect: {
+											id: user.id
+										}
+									}
+								}))
+						}
+					}
+				})
 			}
 		}
 	}
