@@ -18,6 +18,12 @@ enum Role {
   HUNCH_ADMIN
 }
 
+enum MFA {
+  ENABLED
+  PENDING
+  DISABLED
+}
+
 // Competition categories
 model Category {
   id Int @id @default(autoincrement())
@@ -74,6 +80,8 @@ model User {
   email String @db.VarChar(255) @unique
   hash String @db.VarChar(1000)
   salt String @db.VarChar(255)
+  secret String @db.VarChar(52)
+  mfa Boolean @default(false)
   pfp String?
   role Role?
   sessions Session[]

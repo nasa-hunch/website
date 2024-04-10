@@ -43,6 +43,8 @@ export const load = async ({ cookies }) => {
 					lastName: true,
 					email: true,
 					pfp: true,
+					mfa: true,
+					secret: true,
 					role: true,
 					orgId: true,
 					sessions: {

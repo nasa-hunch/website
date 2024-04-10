@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { formHandler } from '$lib/server/bodyguard.js';
-import { checkPassword, makePassword } from '$lib/server/password.js';
+import { checkPassword, makePassword, verifyToken } from '$lib/server/password.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 import { uploadFile } from '$lib/server/storage/uploadFile';
 import { verifySession } from '$lib/server/verifySession.js';
@@ -71,6 +71,62 @@ export const actions = {
 			};
 		}
 	),
+	disableMFA: formHandler(
+		z.object({
+			password: z.string()
+		}),
+		async ({ password}, { cookies }) => {
+			const user = await verifySession(cookies)
+			const validPass = await checkPassword(user.hash, user.salt, password);
+			if (!validPass) {
+				return {
+					success: false,
+					message: 'Password is incorrect.'
+				};
+			}
+
+			await prisma.user.update({
+				where: {
+					id: user.id
+				},
+				data: {
+					mfa: false
+				}
+			});
+			return {
+				success: true,
+				message: "Successfully disabled MFA."
+			}
+		}
+	),
+	confirmMFA: formHandler(
+		z.object({
+			token: z.string().length(6)
+		}),
+		async ({ token }, { cookies }) => {
+		const user = await verifySession(cookies);
+		const verified = verifyToken(token, user.secret);
+		if (!verified) {
+			return {
+				success: false,
+				message: 'Token is incorrect.'
+			};
+		}
+
+		await prisma.user.update({
+			where: {
+				id: user.id
+			},
+			data: {
+				mfa: true
+			}
+		});
+
+		return {
+			success: true,
+			message: 'MFA Confirmed.'
+		};
+	}),
 	uploadPfp: async ({ request, cookies }) => {
 		const user = await verifySession(cookies);
 

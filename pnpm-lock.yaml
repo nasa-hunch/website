@@ -11,6 +11,12 @@ dependencies:
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
+  scannable:
+    specifier: ^1.1.0
+    version: 1.1.0
+  speakeasy:
+    specifier: ^2.0.0
+    version: 2.0.0
   svelte-confetti:
     specifier: ^1.3.2
     version: 1.3.2(svelte@4.2.8)
@@ -205,6 +211,9 @@ devDependencies:
   '@types/showdown':
     specifier: ^2.0.6
     version: 2.0.6
+  '@types/speakeasy':
+    specifier: ^2.0.10
+    version: 2.0.10
   '@types/topojson-client':
     specifier: ^3.1.4
     version: 3.1.4
@@ -4352,6 +4361,12 @@ packages:
     resolution: {integrity: sha512-pTvD/0CIeqe4x23+YJWlX2gArHa8G0J0Oh6GKaVXV7TAeickpkkZiNOgFcFcmLQ5lB/K0qBJL1FtRYltBfbGCQ==}
     dev: true
 
+  /@types/speakeasy@2.0.10:
+    resolution: {integrity: sha512-QVRlDW5r4yl7p7xkNIbAIC/JtyOcClDIIdKfuG7PWdDT1MmyhtXSANsildohy0K+Lmvf/9RUtLbNLMacvrVwxA==}
+    dependencies:
+      '@types/node': 20.10.6
+    dev: true
+
   /@types/topojson-client@3.1.4:
     resolution: {integrity: sha512-Ntf3ZSetMYy7z3PrVCvcqmdRoVhgKA9UKN0ZuuZf8Ts2kcyL4qK34IXBs6qO5fem62EK4k03PtkJPVoroVu4/w==}
     dependencies:
@@ -4777,6 +4792,10 @@ packages:
       bare-os: 2.2.0
     dev: true
     optional: true
+
+  /base32.js@0.0.1:
+    resolution: {integrity: sha512-EGHIRiegFa62/SsA1J+Xs2tIzludPdzM064N9wjbiEgHnGnJ1V0WEpA4pEwCYT5nDvZk3ubf0shqaCS7k6xeUQ==}
+    dev: false
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
@@ -7593,6 +7612,11 @@ packages:
       immutable: 4.3.4
       source-map-js: 1.0.2
 
+  /scannable@1.1.0:
+    resolution: {integrity: sha512-lVWh7FpBEhRIos6ERR9lxr+58sEB3+4A4a6E9kHiUC6mpFdmwV5vYHt1NYXP0FpbpAtbH1p775DUpael4RwEcg==}
+    engines: {node: '>=15'}
+    dev: false
+
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
@@ -7799,6 +7823,13 @@ packages:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     deprecated: Please use @jridgewell/sourcemap-codec instead
     dev: true
+
+  /speakeasy@2.0.0:
+    resolution: {integrity: sha512-lW2A2s5LKi8rwu77ewisuUOtlCydF/hmQSOJjpTqTj1gZLkNgTaYnyvfxy2WBr4T/h+9c4g8HIITfj83OkFQFw==}
+    engines: {node: '>= 0.10.0'}
+    dependencies:
+      base32.js: 0.0.1
+    dev: false
 
   /sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}

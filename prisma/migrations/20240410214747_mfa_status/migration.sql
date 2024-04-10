@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "MFA" AS ENUM ('ENABLED', 'PENDING', 'DISABLED');
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "mfa" BOOLEAN NOT NULL DEFAULT false;
