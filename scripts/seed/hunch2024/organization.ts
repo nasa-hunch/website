@@ -1,27 +1,10 @@
 import { faker } from '@faker-js/faker';
 import { Role } from '@prisma/client';
-import Chance from 'chance';
 
 import { makePassword } from '../../../src/lib/server/password';
+import { schools } from './dump/orgs'
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
-
-const chance = new Chance();
-
-function generateOrgName() {
-	const school = chance.weighted(
-		['High School', 'College', 'Academy', 'University', 'Middle School', 'Elementary School'],
-		[5, 3, 3, 2, 1, 1]
-	);
-	const name = chance.pickone([
-		faker.company.name,
-		faker.location.city,
-		faker.person.fullName,
-		faker.word.noun,
-		faker.animal.type
-	])();
-	return `${name.charAt(0).toUpperCase()}${name.slice(1)} ${school}`;
-}
 
 export async function seed(prisma: PrismaTransactionClient) {
 	// Make the base organization
@@ -43,11 +26,11 @@ export async function seed(prisma: PrismaTransactionClient) {
 		}
 	});
 
-	// Make 99 more organizations
-	for (let i = 2; i <= 100; i++) {
+	// Make other organizations
+	for (let i = 2; i < schools.length + 2; i++) {
 		await prisma.organization.create({
 			data: {
-				name: generateOrgName(),
+				name: schools[i - 2].name,
 				users: {
 					create: {
 						email: `${i}@org.admin`,
