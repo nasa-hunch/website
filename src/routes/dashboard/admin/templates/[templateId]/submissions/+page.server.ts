@@ -12,6 +12,9 @@ export const load = async ({ parent }) => {
 		},
 		orderBy: {
 			submissionDate: 'asc'
+		},
+		include: {
+			organization: true
 		}
 	});
 
