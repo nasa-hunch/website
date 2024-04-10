@@ -33,7 +33,7 @@
 <div class="member">
 	<div class="left">
 		<Pfp marginRight="8px" size="28px" user={memberData.user} />
-		{#if userRole === 'SCHOOL_ADMIN' || userRole === 'HUNCH_ADMIN'}
+		{#if userRole === 'ORG_ADMIN' || userRole === 'HUNCH_ADMIN'}
 			<a href="/dashboard/users/{memberData.userId}"
 				>{memberData.user.firstName} {memberData.user.lastName}</a
 			>
@@ -48,7 +48,7 @@
 		{/if}
 	</div>
 	<div class="right">
-		{#if userRole === 'TEACHER' || userRole === 'SCHOOL_ADMIN' || userRole === 'HUNCH_ADMIN'}
+		{#if userRole === 'TEACHER' || userRole === 'ORG_ADMIN' || userRole === 'HUNCH_ADMIN'}
 			<IconButton formData={{ action: '?/makeViewer', method: 'post' }}>
 				<input name="memberId" hidden value={memberData.id} />
 				<MakeViewer />

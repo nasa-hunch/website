@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('STUDENT', 'UNVERIFIED_TEACHER', 'TEACHER', 'SCHOOL_ADMIN', 'HUNCH_ADMIN');
+CREATE TYPE "Role" AS ENUM ('STUDENT', 'UNVERIFIED_TEACHER', 'TEACHER', 'ORG_ADMIN', 'HUNCH_ADMIN');
 
 -- CreateEnum
 CREATE TYPE "ProjectUserPermission" AS ENUM ('NEEDS_APPROVAL', 'EDITOR', 'VIEWER');
@@ -25,6 +25,22 @@ CREATE TABLE "Organization" (
     "name" VARCHAR(255) NOT NULL,
 
     CONSTRAINT "Organization_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Location" (
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "address" VARCHAR(255) NOT NULL,
+    "city" VARCHAR(255) NOT NULL,
+    "state" VARCHAR(255) NOT NULL,
+    "zip" VARCHAR(255) NOT NULL,
+    "coordinates" VARCHAR(255) NOT NULL,
+    "orgId" INTEGER NOT NULL,
+
+    CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -63,7 +79,7 @@ CREATE TABLE "Notification" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "senderId" INTEGER NOT NULL,
-    "recieverId" INTEGER NOT NULL,
+    "receiverId" INTEGER NOT NULL,
     "title" VARCHAR(255) NOT NULL,
     "message" TEXT NOT NULL,
 
@@ -205,6 +221,20 @@ CREATE TABLE "Partner" (
 );
 
 -- CreateTable
+CREATE TABLE "Invite" (
+    "id" SERIAL NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "fromId" INTEGER NOT NULL,
+    "role" "Role" NOT NULL,
+    "form" TEXT NOT NULL,
+    "toId" INTEGER NOT NULL,
+    "used" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "Invite_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "_CategoryToProjectTemplate" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL
@@ -235,6 +265,9 @@ CREATE UNIQUE INDEX "_ProjectToTeamMember_AB_unique" ON "_ProjectToTeamMember"("
 CREATE INDEX "_ProjectToTeamMember_B_index" ON "_ProjectToTeamMember"("B");
 
 -- AddForeignKey
+ALTER TABLE "Location" ADD CONSTRAINT "Location_orgId_fkey" FOREIGN KEY ("orgId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -244,7 +277,7 @@ ALTER TABLE "User" ADD CONSTRAINT "User_orgId_fkey" FOREIGN KEY ("orgId") REFERE
 ALTER TABLE "Notification" ADD CONSTRAINT "Notification_senderId_fkey" FOREIGN KEY ("senderId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Notification" ADD CONSTRAINT "Notification_recieverId_fkey" FOREIGN KEY ("recieverId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Notification" ADD CONSTRAINT "Notification_receiverId_fkey" FOREIGN KEY ("receiverId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProjectUser" ADD CONSTRAINT "ProjectUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -284,6 +317,12 @@ ALTER TABLE "ToDoAssignee" ADD CONSTRAINT "ToDoAssignee_userId_fkey" FOREIGN KEY
 
 -- AddForeignKey
 ALTER TABLE "BlogPost" ADD CONSTRAINT "BlogPost_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Invite" ADD CONSTRAINT "Invite_fromId_fkey" FOREIGN KEY ("fromId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Invite" ADD CONSTRAINT "Invite_toId_fkey" FOREIGN KEY ("toId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CategoryToProjectTemplate" ADD CONSTRAINT "_CategoryToProjectTemplate_A_fkey" FOREIGN KEY ("A") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;

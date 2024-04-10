@@ -43,12 +43,12 @@
 	</div>
 	<div class="actions">
 		<h2>Actions</h2>
-		{#if data.user.role === 'SCHOOL_ADMIN' || data.user.role === 'HUNCH_ADMIN' || data.user.role === 'TEACHER'}
+		{#if data.user.role === 'ORG_ADMIN' || data.user.role === 'HUNCH_ADMIN' || data.user.role === 'TEACHER'}
 			<Button value="Send Notification" on:click={sendNotificationModal} />
 			<div class="margin-separator" />
 		{/if}
 
-		{#if data.user.role === 'SCHOOL_ADMIN' || data.user.role === 'HUNCH_ADMIN'}
+		{#if data.user.role === 'ORG_ADMIN' || data.user.role === 'HUNCH_ADMIN'}
 			<Button value="Update User" on:click={updateUserModal} />
 			<div class="margin-separator" />
 		{/if}

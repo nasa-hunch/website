@@ -90,7 +90,7 @@
 		border: 1px solid transparent;
 	}
 	.category:hover {
-		background: $background3;
+		background: darken($background-alt, 10%);
 		cursor: pointer;
 	}
 	.category p {

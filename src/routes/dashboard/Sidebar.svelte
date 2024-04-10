@@ -32,37 +32,11 @@
 				Dashboard
 			</a>
 			{#if data.user.role == Role.HUNCH_ADMIN}
-				<a class="button" href="/dashboard/admin/users">
-					<div class="icon">
-						<UsersIcon/>
-					</div>
-					Users
-				</a>
-				<a class="button" href="/dashboard/admin/orgs">
-					<div class="icon">
-						<OrgIcon/>
-					</div>
-					Organizations
-				</a>
-				<a class="button" href="/dashboard/admin/categories">
-					<div class="icon">
-						<CatIcon/>
-					</div>
-					Categories
-				</a>
-				<a class="button" href="/dashboard/admin/staging">
-					<div class="icon">
-						<StagingIcon/>
-					</div>
-					Staging
-				</a>
-			{:else if data.user.role == Role.SCHOOL_ADMIN}
-				<a class="button" href="/dashboard/orgs/{data.user.orgId}">
-					<div class="icon">
-						<OrgIcon/>
-					</div>
-					My Organization
-				</a>
+				<a class="button" href="/dashboard/admin/users">Users</a>
+				<a class="button" href="/dashboard/admin/orgs">Organizations</a>
+				<a class="button" href="/dashboard/admin/categories">Categories</a>
+			{:else if data.user.role == Role.ORG_ADMIN}
+				<a class="button" href="/dashboard/orgs/{data.user.orgId}">My Organization</a>
 			{:else}
 				<a class="button" href="/dashboard/projects">
 					<div class="icon">

@@ -18,7 +18,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 					email: 'admin@card.board',
 					firstName: 'Admin',
 					lastName: 'Cardboard',
-					role: Role.SCHOOL_ADMIN,
+					role: Role.ORG_ADMIN,
 					pfp: pickAvatar(),
 					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 				}
@@ -36,7 +36,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 						email: `${i}@org.admin`,
 						firstName: faker.person.firstName(),
 						lastName: faker.person.lastName(),
-						role: Role.SCHOOL_ADMIN,
+						role: Role.ORG_ADMIN,
 						pfp: pickAvatar(),
 						...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
 					}
