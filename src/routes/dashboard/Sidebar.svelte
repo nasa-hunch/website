@@ -5,6 +5,8 @@
 
 	export let data: PageData;
 
+	import { tooltip } from '@svelte-plugins/tooltips';
+
 	import BellIcon from '~icons/mdi/bell';
 	import HomeIcon from '~icons/mdi/home';
 	import SettingsIcon from '~icons/mdi/settings';
@@ -29,13 +31,25 @@
 		</div>
 	</div>
 	<div class="bottom">
-		<a class="button bottomButton" href="/dashboard/notifications">
+		<a
+			class="button bottomButton"
+			href="/dashboard/notifications"
+			use:tooltip={{ content: 'Notifications', action: 'hover', arrow: false, animation: 'fade' }}
+		>
 			<BellIcon height="30px" width="30px" />
 		</a>
-		<a class="button bottomButton" href="/dashboard/settings">
+		<a
+			class="button bottomButton"
+			href="/dashboard/settings"
+			use:tooltip={{ content: 'Settings', action: 'hover', arrow: false, animation: 'fade' }}
+		>
 			<SettingsIcon height="30px" width="30px" />
 		</a>
-		<a class="button bottomButton" href="/">
+		<a
+			class="button bottomButton"
+			href="/"
+			use:tooltip={{ content: 'Home', action: 'hover', arrow: false, animation: 'fade' }}
+		>
 			<HomeIcon height="30px" width="30px" />
 		</a>
 	</div>

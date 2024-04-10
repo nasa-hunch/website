@@ -1,8 +1,7 @@
-import { prisma } from "$lib/server/prisma/prismaConnection"
+import { prisma } from '$lib/server/prisma/prismaConnection';
 
-export const load = async ({parent}) => {
-
-	const parentData = await parent()
+export const load = async ({ parent }) => {
+	const parentData = await parent();
 
 	const submissions = await prisma.project.findMany({
 		where: {
@@ -12,11 +11,11 @@ export const load = async ({parent}) => {
 			}
 		},
 		orderBy: {
-			submissionDate: "asc",
+			submissionDate: 'asc'
 		}
-	})
+	});
 
 	return {
 		submissions
-	}
-}
+	};
+};
