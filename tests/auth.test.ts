@@ -2,6 +2,8 @@ import crypto from 'node:crypto';
 
 import { expect, test } from '@playwright/test';
 
+test.describe.configure({ mode: 'serial' });
+
 const randomUUID = crypto.randomUUID();
 
 test('user can register', async ({ page }) => {
