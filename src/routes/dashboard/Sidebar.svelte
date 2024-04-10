@@ -10,6 +10,13 @@
 	import BellIcon from '~icons/mdi/bell';
 	import HomeIcon from '~icons/mdi/home';
 	import SettingsIcon from '~icons/mdi/settings';
+
+	import DashboardIcon from "~icons/mdi/view-dashboard"
+	import UsersIcon from "~icons/mdi/account-group"
+	import OrgIcon from "~icons/mdi/domain"
+	import CatIcon from "~icons/mdi/group"
+	import StagingIcon from "~icons/mdi/chart-gantt"
+	import ProjectIcon from "~icons/mdi/cube-outline"
 </script>
 
 <nav class="nav">
@@ -18,15 +25,51 @@
 			<a class="logoButton" href="/dashboard">
 				<img alt="Nasa Hunch Logo" src="/favicon.png" />
 			</a>
-			<a class="button" href="/dashboard">Dashboard</a>
+			<a class="button buttonCenter" href="/dashboard">
+				<div class="icon">
+					<DashboardIcon width="23px" height="23px" />
+				</div>
+				Dashboard
+			</a>
 			{#if data.user.role == Role.HUNCH_ADMIN}
-				<a class="button" href="/dashboard/admin/users">Users</a>
-				<a class="button" href="/dashboard/admin/orgs">Organizations</a>
-				<a class="button" href="/dashboard/admin/projects">Categories</a>
-			{:else if data.user.role == Role.SCHOOL_ADMIN}
-				<a class="button" href="/dashboard/orgs/{data.user.orgId}">My Organization</a>
+			<a class="button buttonCenter" href="/dashboard/admin/users">
+				<div class="icon">
+					<UsersIcon width="23px" height="23px" />
+				</div>
+				Users
+			</a>
+			<a class="button buttonCenter" href="/dashboard/admin/orgs">
+				<div class="icon">
+					<OrgIcon width="23px" height="23px" />
+				</div>
+				Organizations
+			</a>
+			<a class="button buttonCenter" href="/dashboard/admin/categories">
+				<div class="icon">
+					<CatIcon width="23px" height="23px" />
+				</div>
+				Categories
+			</a>
+			<a class="button buttonCenter" href="/dashboard/admin/staging">
+				<div class="icon">
+					<StagingIcon width="23px" height="23px" />
+				</div>
+				Staging
+			</a>
+			{:else if data.user.role == Role.ORG_ADMIN}
+			<a class="button buttonCenter" href="/dashboard/orgs/{data.user.orgId}">
+				<div class="icon">
+					<OrgIcon width="23px" height="23px" />
+				</div>
+				My Organization
+			</a>
 			{:else}
-				<a class="button" href="/dashboard/projects">Projects</a>
+				<a class="button buttonCenter" href="/dashboard/projects">
+					<div class="icon">
+						<ProjectIcon width="23px" height="23px" />
+					</div>
+					Projects
+				</a>
 			{/if}
 		</div>
 	</div>
@@ -112,12 +155,25 @@
 		border-radius: 5px;
 		background-color: transparent;
 		cursor: pointer;
+		display: flex;
+
+		.icon {
+			margin-right: 0.5rem;
+			display: flex;
+			align-items: center;
+		}
 	}
 	.button:hover {
 		background: #212121;
 	}
 	.button:focus {
 		background: rgb(33, 33, 33, 0.5);
+	}
+
+	.buttonCenter {
+		display: flex;
+		align-items: center;
+		justify-content: start;
 	}
 
 	.bottomButton {

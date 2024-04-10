@@ -20,7 +20,7 @@ export const actions = {
 			color: z.string().length(7),
 			deadline: z.coerce.string()
 		}),
-		async ({ name, icon, color, deadline }, { cookies }) => {
+		async ({ name, color, deadline }, { cookies }) => {
 			await verifySession(cookies, Role.HUNCH_ADMIN);
 
 			const projectDeadline = new Date(deadline);
@@ -30,7 +30,7 @@ export const actions = {
 			await prisma.category.create({
 				data: {
 					name,
-					icon: "",
+					icon: '',
 					color: newColor,
 					deadline: projectDeadline
 				}

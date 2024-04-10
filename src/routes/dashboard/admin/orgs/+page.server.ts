@@ -1,9 +1,10 @@
+import { redirect } from '@sveltejs/kit';
+import { z } from 'zod';
+
 import { Role } from '$lib/enums';
 import { formHandler } from '$lib/server/bodyguard';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { verifySession } from '$lib/server/verifySession';
-import { redirect } from '@sveltejs/kit';
-import { z } from 'zod';
 
 export const load = async () => {
 	return {
@@ -28,4 +29,4 @@ export const actions = {
 			redirect(303, `/dashboard/orgs/${organization.id}`);
 		}
 	)
-}
+};

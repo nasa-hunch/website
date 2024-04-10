@@ -28,7 +28,7 @@ export const load = async ({ params, parent }) => {
 											some: {
 												AND: {
 													id: parentData.user.id,
-													role: Role.SCHOOL_ADMIN
+													role: Role.ORG_ADMIN
 												}
 											}
 										}

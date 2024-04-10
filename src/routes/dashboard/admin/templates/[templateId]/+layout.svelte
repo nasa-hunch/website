@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let data;
 	import { page } from '$app/stores';
-	const routeIdBase = `/dashboard/admin/projects/[templateId]`;
-	const routeBase = `/dashboard/admin/projects/${$page.params.templateId}`;
+	const routeIdBase = `/dashboard/admin/templates/[templateId]`;
+	const routeBase = `/dashboard/admin/templates/${$page.params.templateId}`;
 
 	const links = [
 		{

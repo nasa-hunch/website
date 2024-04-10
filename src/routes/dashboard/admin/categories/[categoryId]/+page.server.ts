@@ -15,7 +15,7 @@ export const actions = {
 		async ({ name, desc, deadline }, { params, cookies }) => {
 			await verifySession(cookies, Role.HUNCH_ADMIN);
 
-			if (!params.catId) {
+			if (!params.categoryId) {
 				return {
 					success: false,
 					message: 'No Category'
@@ -24,7 +24,7 @@ export const actions = {
 
 			const category = await prisma.category.findFirst({
 				where: {
-					id: parseInt(params.catId)
+					id: parseInt(params.categoryId)
 				}
 			});
 
@@ -64,7 +64,7 @@ export const actions = {
 		async ({ name, color, deadline }, { cookies, params }) => {
 			await verifySession(cookies, Role.HUNCH_ADMIN);
 
-			if (!params.catId) {
+			if (!params.categoryId) {
 				return {
 					success: false,
 					message: 'No Category'
@@ -73,7 +73,7 @@ export const actions = {
 
 			const category = await prisma.category.findFirst({
 				where: {
-					id: parseInt(params.catId)
+					id: parseInt(params.categoryId)
 				}
 			});
 

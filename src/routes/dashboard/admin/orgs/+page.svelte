@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { pushState } from '$app/navigation';
 	import Fuse from 'fuse.js';
+
 	import MdiPlus from '~icons/mdi/plus';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/stores';
+	import Button from '$lib/components/Button.svelte';
+	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
-	import Input from '$lib/components/Input.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import { page } from '$app/stores';
 
 	export let data;
 
@@ -19,11 +20,11 @@
 	$: searchedOrgs = searchInput
 		? fuse.search(searchInput).map((data) => data.item)
 		: data.organizations;
-	
+
 	function addNewOrgModal() {
 		pushState('', {
 			modal: 'addNewOrg'
-		})
+		});
 	}
 </script>
 
@@ -34,7 +35,7 @@
 
 	<div class="organizations">
 		<button class="newOrg" on:click={addNewOrgModal}>
-			<MdiPlus width="3rem" height="3rem" />
+			<MdiPlus height="3rem" width="3rem" />
 		</button>
 		{#each searchedOrgs as org}
 			<a class="org" href="/dashboard/orgs/{org.id}">
@@ -46,7 +47,7 @@
 
 {#if $page.state.modal === 'addNewOrg'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm method="POST" action="?/addNewOrg">
+		<ModalForm action="?/addNewOrg" method="POST">
 			<h1>Add New Organization</h1>
 			<Input name="name" label="Name" />
 			<div class="margin-separator" />
@@ -79,7 +80,8 @@
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		gap: 1rem;
 
-		.org, .newOrg {
+		.org,
+		.newOrg {
 			background: white;
 			padding: 1rem;
 			border-radius: 0.5rem;

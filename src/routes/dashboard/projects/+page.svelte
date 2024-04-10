@@ -50,7 +50,7 @@
 		{:else}
 			<p>Not what you are looking for?</p>
 		{/if}
-		{#if data.user.role == Role.TEACHER || data.user.role == Role.SCHOOL_ADMIN}
+		{#if data.user.role == Role.TEACHER || data.user.role == Role.ORG_ADMIN}
 			<TextButton
 				on:click={() => {
 					pushState('', {

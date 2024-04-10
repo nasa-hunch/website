@@ -60,7 +60,7 @@ export const actions = {
 			name: z.string().min(1)
 		}),
 		async ({ name }, { params, cookies }) => {
-			await verifySession(cookies, Role.HUNCH_ADMIN, Role.SCHOOL_ADMIN);
+			await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN);
 
 			await prisma.organization.update({
 				where: {

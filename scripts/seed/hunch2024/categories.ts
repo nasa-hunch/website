@@ -88,7 +88,7 @@ export async function seed(client: PrismaTransactionClient) {
 	);
 
 	for (const { html, name, categories, shortDescription } of transformedFiles) {
-		const categoryInDatabase = await client.category.findFirst({
+		const categoriesInDatabase = await client.category.findMany({
 			where: {
 				name: {
 					in: categories
@@ -96,7 +96,7 @@ export async function seed(client: PrismaTransactionClient) {
 			}
 		});
 
-		if (!categoryInDatabase) {
+		if (categoriesInDatabase.length !== categories.length) {
 			throw new Error(`Category ${categories.join(', ')} not found`);
 		}
 
@@ -104,9 +104,11 @@ export async function seed(client: PrismaTransactionClient) {
 			data: {
 				name,
 				category: {
-					connect: {
-						id: categoryInDatabase.id
-					}
+					connect: [
+						...categoriesInDatabase.map((category) => ({
+							id: category.id
+						}))
+					]
 				},
 				deadline: deadline(),
 				description: html,
