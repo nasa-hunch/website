@@ -72,15 +72,15 @@
 		</h1>
 	</header>
 	<div class="projectWrap">
-		{#each data.category.projectTemplates as project}
-			{@const percentDone = calculatePercentDone(project.createdAt, project.deadline)}
-			<a class="project" href="/dashboard/admin/projects/{project.id}">
+		{#each data.category.projectTemplates as template}
+			{@const percentDone = calculatePercentDone(template.createdAt, template.deadline)}
+			<a class="project" href="/dashboard/admin/templates/{template.id}">
 				<div class="projectTitle">
-					{project.name}
+					{template.name}
 				</div>
 
 				<div style="color: rgba({(percentDone / 100) * 255}, 0, 0)" class="deadline">
-					Deadline: {dayjs(project.deadline).format('MMM D, YYYY')}
+					Deadline: {dayjs(template.deadline).format('MMM D, YYYY')}
 				</div>
 			</a>
 		{/each}

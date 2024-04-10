@@ -22,7 +22,7 @@
 			{#if data.user.role == Role.HUNCH_ADMIN}
 				<a class="button" href="/dashboard/admin/users">Users</a>
 				<a class="button" href="/dashboard/admin/orgs">Organizations</a>
-				<a class="button" href="/dashboard/admin/projects">Categories</a>
+				<a class="button" href="/dashboard/admin/categories">Categories</a>
 			{:else if data.user.role == Role.SCHOOL_ADMIN}
 				<a class="button" href="/dashboard/orgs/{data.user.orgId}">My Organization</a>
 			{:else}

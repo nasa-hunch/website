@@ -5,7 +5,7 @@ import { prisma } from '$lib/server/prisma/prismaConnection.js';
 export const load = async ({ params }) => {
 	const category = await prisma.category.findUnique({
 		where: {
-			id: parseInt(params.catId)
+			id: parseInt(params.categoryId)
 		},
 		include: {
 			projectTemplates: true

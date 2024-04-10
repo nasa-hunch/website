@@ -30,7 +30,7 @@
 			<a
 				style="--circleBg: #{category.color}"
 				class="category"
-				href="/dashboard/admin/projects/category/{category.id}"
+				href="/dashboard/admin/categories/{category.id}"
 			>
 				<div class="circle" />
 				<p>{category.name}</p>
