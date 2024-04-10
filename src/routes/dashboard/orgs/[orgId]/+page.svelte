@@ -4,6 +4,7 @@
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case.js';
 	import Button from '$lib/components/Button.svelte';
+	import InlineButton from '$lib/components/InlineButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
@@ -26,33 +27,39 @@
 		</button>
 	</div>
 
-	<h2>Projects</h2>
-	<div class="projects">
-		{#each data.org.projects as project}
-			<a class="project" href="/dashboard/projects/{project.id}">
-				<h2>{project.projectTemplate.name}</h2>
-				<p>
-					{project.users.map(({ user }) => `${user.firstName} ${user.lastName}`).join(', ')}
-				</p>
-			</a>
-		{/each}
-	</div>
+	{#if data.org.projects.length > 0}
+		<h2>Projects</h2>
+		<div class="projects">
+			{#each data.org.projects as project}
+				<a class="project" href="/dashboard/projects/{project.id}">
+					<h2>{project.projectTemplate.name}</h2>
+					<p>
+						{project.users.map(({ user }) => `${user.firstName} ${user.lastName}`).join(', ')}
+					</p>
+				</a>
+			{/each}
+		</div>
+	{/if}
 
-	<h2>Users</h2>
+	{#if data.org.users.length > 0}
+		<h2>Users</h2>
 
-	<div class="users">
-		{#each data.org.users as user}
-			<a class="user" href="/dashboard/users/{user.id}">
-				<Pfp size="50px" {user} />
-				<div class="content">
-					<p>{user.firstName} {user.lastName}</p>
-					{#if user.role && user.role !== 'STUDENT'}
-						<p class="role">{snakeCaseToTitleCase(user.role)}</p>
-					{/if}
-				</div>
-			</a>
-		{/each}
-	</div>
+		<div class="users">
+			{#each data.org.users as user}
+				<a class="user" href="/dashboard/users/{user.id}">
+					<Pfp size="50px" {user} />
+					<div class="content">
+						<p>{user.firstName} {user.lastName}</p>
+						{#if user.role && user.role !== 'STUDENT'}
+							<p class="role">{snakeCaseToTitleCase(user.role)}</p>
+						{/if}
+					</div>
+				</a>
+			{/each}
+		</div>
+	{:else}
+		<p>This organization has no users. <InlineButton value="Add an administrator" /></p>
+	{/if}
 </main>
 
 {#if $page.state.modal === 'orgSettings'}
