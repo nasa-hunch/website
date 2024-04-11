@@ -17,7 +17,6 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 
 	for (let i = 2; i <= organizationCount + 2; i++) {
 		for (let j = 0; j < 5; j++) {
-			console.log(`Creating project ${j} for organization ${i}`);
 			const { users, id } = await prisma.project.create({
 				data: {
 					submitted: Math.random() > 0.9,
