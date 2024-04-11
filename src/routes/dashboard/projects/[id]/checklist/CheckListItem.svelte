@@ -15,7 +15,7 @@
 	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 
-	import Assignees from './Assignees.svelte';
+	import Assignees from '$lib/components/Assignees.svelte';
 
 	type CheckListItem = {
 		id: string;

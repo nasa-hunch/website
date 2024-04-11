@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Pfp from '$lib/components/Pfp.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -10,6 +11,7 @@
 			<h1>Projects</h1>
 			<div class="projects">
 				{#each data.user.projectUser as projectUser}
+					{@const taskCounts = projectUser.project.toDoItems.filter(x => !x.checked).length}
 					<a
 						class="project"
 						class:submitted={projectUser.project.submitted}
@@ -21,6 +23,19 @@
 								? '...'
 								: ''}
 						</h3>
+						<div class="projectFooter">
+							<div class="avatars">
+								{#each projectUser.project.users
+									.filter(user => user.user.id !== data.user.id)
+									.map(user => user.user) as pfp}
+										<Pfp size="32px" user={pfp} />
+								{/each}
+							</div>
+							<p>
+								{taskCounts}
+								{taskCounts === 1 ? ' task' : ' tasks'} left
+							</p>
+						</div>
 					</a>
 				{/each}
 			</div>
@@ -51,6 +66,17 @@
 		flex-direction: column;
 	}
 
+	.avatars {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		margin-left: 16px;
+		
+		> :global(*) {
+			margin-left: -16px;
+		}
+	}
+
 	.projects {
 		display: flex;
 		flex-direction: row;
@@ -68,7 +94,22 @@
 		box-sizing: border-box;
 		cursor: pointer;
 		margin: 10px;
+		display: flex;
 		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s;
+		justify-content: space-between;
+		flex-direction: column;
+		
+		.projectFooter {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 10px;
+
+			p {
+				margin: 0;
+			}
+		}
 
 		h3 {
 			width: 100%;
