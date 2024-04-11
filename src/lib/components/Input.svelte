@@ -51,6 +51,10 @@
     font-weight: bold;
 	}
 
+	:global(.label1 .required) {
+		margin-left: auto;
+	}
+
 	.wrap {
 		all: unset;
 		position: relative;
