@@ -36,7 +36,7 @@ export function verifyToken(token: string, secret: string)
 	return speakeasy.totp.verify({
 		secret: secret,
 		encoding: 'base32',
-		window: 5,
+		window: 2,
 		token: token
 	});
 }
