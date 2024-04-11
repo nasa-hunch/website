@@ -63,7 +63,7 @@ export const load = async ({ url }) => {
 export const actions = {
 	verifyUser: formHandler(
 		z.object({
-			id: z.coerce.number(),
+			id: z.string(),
 			orgId: z.coerce.number()
 		}),
 		async ({ id, orgId }, { cookies }) => {

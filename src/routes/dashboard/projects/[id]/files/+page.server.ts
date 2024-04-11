@@ -76,7 +76,7 @@ export const actions = {
 			const projectUser = await prisma.projectUser.findFirst({
 				where: {
 					AND: {
-						projectId: parseInt(params.id),
+						projectId: params.id,
 						userId: user.id
 					}
 				}
@@ -148,7 +148,7 @@ export const actions = {
 			const projectUser = await prisma.projectUser.findFirst({
 				where: {
 					AND: {
-						projectId: parseInt(params.id),
+						projectId: params.id,
 						userId: user.id
 					}
 				}

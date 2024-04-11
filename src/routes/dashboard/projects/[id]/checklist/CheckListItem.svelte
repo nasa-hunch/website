@@ -28,7 +28,7 @@
 		assignees: {
 			id: number;
 			projectUser: {
-				id: number;
+				id: string;
 				user: {
 					pfp: string | null;
 					firstName: string;
@@ -39,7 +39,7 @@
 	};
 
 	type UserLike = {
-		id: number;
+		id: string;
 		createdAt: Date;
 		updatedAt: Date;
 		userId: number;

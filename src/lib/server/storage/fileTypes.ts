@@ -5,5 +5,5 @@ export const enum destinations {
 
 export type FileDestination = {
 	destinationName: destinations;
-	destinationId: number;
+	destinationId: string;
 };
