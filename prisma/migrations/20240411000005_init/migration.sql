@@ -2,6 +2,9 @@
 CREATE TYPE "Role" AS ENUM ('STUDENT', 'UNVERIFIED_TEACHER', 'TEACHER', 'ORG_ADMIN', 'HUNCH_ADMIN');
 
 -- CreateEnum
+CREATE TYPE "MFA" AS ENUM ('ENABLED', 'PENDING', 'DISABLED');
+
+-- CreateEnum
 CREATE TYPE "ProjectUserPermission" AS ENUM ('NEEDS_APPROVAL', 'EDITOR', 'VIEWER');
 
 -- CreateTable
@@ -66,6 +69,8 @@ CREATE TABLE "User" (
     "email" VARCHAR(255) NOT NULL,
     "hash" VARCHAR(1000) NOT NULL,
     "salt" VARCHAR(255) NOT NULL,
+    "secret" VARCHAR(52) NOT NULL,
+    "mfa" BOOLEAN NOT NULL DEFAULT false,
     "pfp" TEXT,
     "role" "Role",
     "orgId" INTEGER,
