@@ -12,7 +12,7 @@ const chance = new Chance();
 
 const arr = <T>(length: number, fn: (i: number) => T): T[] => Array.from({ length }, (_, i) => fn(i));
 
-export async function seed(prisma: PrismaTransactionClient, projectTemplateCount: number) {
+export async function seed(prisma: PrismaTransactionClient, templateIds: string[]) {
 	console.log('Seeding projects...');
 
 	const organizationCount = schools.length;
@@ -68,7 +68,7 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 			id: projectId,
 			submitted: Math.random() > 0.9,
 			orgId,
-			projectTemplateId: chance.integer({ min: 1, max: projectTemplateCount }),
+			projectTemplateId: chance.pickone(templateIds),
 			joinCode: 123456 + i
 		}))
 	});
@@ -157,6 +157,7 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 	// Batch create task assignees
 	await prisma.toDoAssignee.createMany({
 		data: taskIds.flatMap(({ id, assigneeIds }) => assigneeIds.map((assigneeId) => ({
+			id: createId(),
 			toDoItemId: id,
 			userId: assigneeId.projectUserId
 		})))
