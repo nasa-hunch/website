@@ -23,7 +23,7 @@ export const updateMemberRole = async (
 	const updatingProjectUser = await prisma.projectUser.findFirst({
 		where: {
 			AND: {
-				projectId: parseInt(params.id),
+				projectId: params.id,
 				id: memberId
 			}
 		}

@@ -16,7 +16,7 @@ export const verifyProjectUser = async (cookies: Cookies, projectId: string) => 
 				include: {
 					projectUser: {
 						where: {
-							projectId: parseInt(projectId)
+							projectId
 						},
 						include: {
 							project: true

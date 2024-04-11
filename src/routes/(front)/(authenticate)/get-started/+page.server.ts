@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 import { z } from 'zod';
@@ -65,6 +66,7 @@ export const actions = {
 			// Now we can make the user!
 			const newUser = await prisma.user.create({
 				data: {
+					id: createId(),
 					firstName,
 					lastName,
 					email,

@@ -124,7 +124,7 @@ export const actions = {
 				}
 			});
 
-			if (toDoItem?.projectId != projectUser.projectId) {
+			if (!toDoItem || toDoItem?.projectId != projectUser.projectId) {
 				return {
 					success: false,
 					message: 'No Item'
@@ -148,7 +148,7 @@ export const actions = {
 	),
 	addAssignee: formHandler(
 		z.object({
-			projectUserId: z.coerce.number(),
+			projectUserId: z.string(),
 			itemId: z.coerce.number()
 		}),
 		async ({ projectUserId, itemId }, { cookies, params }) => {
@@ -167,7 +167,7 @@ export const actions = {
 				}
 			});
 
-			if (toDoItem?.projectId != projectUser.projectId) {
+			if (!toDoItem || toDoItem?.projectId != projectUser.projectId) {
 				return {
 					success: false,
 					message: 'No Item'
@@ -180,7 +180,7 @@ export const actions = {
 				}
 			});
 
-			if (userCheck?.projectId != projectUser.projectId) {
+			if (!userCheck || userCheck?.projectId != projectUser.projectId) {
 				return {
 					success: false,
 					message: 'How did we get here.'
@@ -238,7 +238,7 @@ export const actions = {
 					AND: {
 						id: assigneeId,
 						projectUser: {
-							projectId: parseInt(params.id)
+							projectId: params.id
 						}
 					}
 				}

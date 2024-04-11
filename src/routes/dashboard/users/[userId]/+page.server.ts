@@ -16,7 +16,7 @@ export const load = async ({ params, parent }) => {
 	const user = await prisma.user.findFirst({
 		where: {
 			AND: {
-				id: parseInt(params.userId),
+				id: params.userId,
 				...(data.user.role === 'HUNCH_ADMIN' ? {} : { orgId: data.user.orgId })
 			}
 		},
@@ -83,7 +83,7 @@ export const actions = {
 
 			const user = await prisma.user.findFirst({
 				where: {
-					id: parseInt(params.userId)
+					id: params.userId
 				}
 			});
 
@@ -98,7 +98,7 @@ export const actions = {
 
 			await prisma.user.update({
 				where: {
-					id: parseInt(params.userId)
+					id: params.userId
 				},
 				data: {
 					...(await makePassword(password))
@@ -125,7 +125,7 @@ export const actions = {
 
 			const user = await prisma.user.findFirst({
 				where: {
-					id: parseInt(params.userId)
+					id: params.userId
 				}
 			});
 
