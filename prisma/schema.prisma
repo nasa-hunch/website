@@ -193,7 +193,7 @@ model ProjectTemplateFile {
 }
 
 model ToDoItem {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String
@@ -209,7 +209,7 @@ model ToDoAssignee {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  toDoItemId Int
+  toDoItemId String
   toDoItem ToDoItem @relation(fields: [toDoItemId], references: [id], onDelete: Cascade)
   userId String
   projectUser ProjectUser @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -262,7 +262,7 @@ model Invite {
   form String @db.Text
 
   toId String
-  to User? @relation("to", fields: [toId], references: [id], onDelete: SetNull)
+  to User? @relation("to", fields: [toId], references: [id], onDelete: Cascade)
 
   used Boolean @default(false)
 }
