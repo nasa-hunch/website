@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
@@ -10,6 +11,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 		where: { email: 'admin@nasa.fake' },
 		update: {},
 		create: {
+			id: createId(),
 			email: 'admin@nasa.fake',
 			firstName: 'Admin',
 			lastName: 'NASA',

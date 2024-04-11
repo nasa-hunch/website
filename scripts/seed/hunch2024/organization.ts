@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { createId } from '@paralleldrive/cuid2';
 import { Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
@@ -17,6 +18,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 			name: 'Cardboard',
 			users: {
 				create: {
+					id: createId(),
 					email: 'admin@card.board',
 					firstName: 'Admin',
 					lastName: 'Cardboard',
@@ -39,6 +41,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 	// Attach admins to organizations
 	await prisma.user.createMany({
 		data: await Promise.all(schools.map(async (_, i) => ({
+			id: createId(),
 			email: `${i + 2}@org.admin`,
 			firstName: faker.person.firstName(),
 			lastName: faker.person.lastName(),
