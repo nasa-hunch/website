@@ -1,23 +1,24 @@
 import { faker } from '@faker-js/faker';
-import { ProjectUser } from '@prisma/client';
+import { ProjectUserPermission, Role } from '@prisma/client';
 import { Chance } from 'chance';
 
 import { makePassword } from '../../../src/lib/server/password';
+import { schools } from './dump/orgs'
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
 const chance = new Chance();
 
-export async function seed(prisma: PrismaTransactionClient) {
+export async function seed(prisma: PrismaTransactionClient, projectTemplateCount: number) {
 	console.log('Seeding projects...');
 
 	// For every organization, create 5 projects
-	const projectTemplateCount = await prisma.projectTemplate.count();
-	const organizationCount = await prisma.organization.count();
+	const organizationCount = schools.length + 1;
 
-	for (let i = 1; i <= organizationCount; i++) {
+	for (let i = 2; i <= organizationCount + 2; i++) {
 		for (let j = 0; j < 5; j++) {
-			const project = await prisma.project.create({
+			console.log(`Creating project ${j} for organization ${i}`);
+			const { users, id } = await prisma.project.create({
 				data: {
 					submitted: Math.random() > 0.9,
 					organization: {
@@ -27,89 +28,68 @@ export async function seed(prisma: PrismaTransactionClient) {
 					},
 					projectTemplate: {
 						connect: {
-							id: Math.floor(Math.random() * projectTemplateCount) + 1
+							id: chance.integer({ min: 1, max: projectTemplateCount })
 						}
 					},
-					joinCode: 123456 + i * 10 + j
+					joinCode: 123456 + i * 10 + j,
+					users: {
+						create: [
+							// Add one or two teachers
+							...await Promise.all(Array.from({ length: chance.weighted([1, 2], [9, 1]) }, async () => ({
+								user: {
+									create: {
+										email: `${i}@project${j}.teacher`,
+										firstName: faker.person.firstName(),
+										lastName: faker.person.lastName(),
+										role: Role.TEACHER,
+										orgId: i,
+										...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
+										...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+									}
+								},
+								permission: ProjectUserPermission.EDITOR
+							}))),
+							// Add three verified students
+							...await Promise.all(Array.from({ length: 3 }, async (_, k) => ({
+								user: {
+									create: {
+										email: `${i}@project${j}.student${k}`,
+										firstName: faker.person.firstName(),
+										lastName: faker.person.lastName(),
+										role: Role.STUDENT,
+										orgId: i,
+										...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
+										...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+									}
+								},
+								permission: ProjectUserPermission.EDITOR
+							}))),
+							// Add one or two unverified students
+							...await Promise.all(Array.from({ length: chance.weighted([1, 2], [9, 1]) }, async (_, k) => ({
+								user: {
+									create: {
+										email: `${i}@project${j}.unverified${k}`,
+										firstName: faker.person.firstName(),
+										lastName: faker.person.lastName(),
+										role: Role.STUDENT,
+										orgId: i,
+										...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
+										...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+									}
+								},
+								permission: ProjectUserPermission.NEEDS_APPROVAL
+							})))
+						]
+					}
+				},
+				include: {
+					users: {
+						select: {
+							id: true
+						}
+					}
 				}
 			});
-
-			// Add one or two teachers
-			for (let k = 0; k < chance.weighted([1, 2], [0.9, 0.1]); k++) {
-				await prisma.projectUser.create({
-					data: {
-						project: {
-							connect: {
-								id: project.id
-							}
-						},
-						user: {
-							create: {
-								email: `${i}@project${j}.teacher${k}`,
-								firstName: faker.person.firstName(),
-								lastName: faker.person.lastName(),
-								role: 'TEACHER',
-								pfp: pickAvatar(),
-								orgId: i,
-								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-							}
-						},
-						permission: 'EDITOR'
-					}
-				});
-			}
-
-			// Add three verified students
-			for (let k = 0; k < 3; k++) {
-				await prisma.projectUser.create({
-					data: {
-						project: {
-							connect: {
-								id: project.id
-							}
-						},
-						user: {
-							create: {
-								email: `${i}@project${j}.student${k}`,
-								firstName: faker.person.firstName(),
-								lastName: faker.person.lastName(),
-								role: 'STUDENT',
-								orgId: i,
-								...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
-								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-							}
-						},
-						permission: 'EDITOR'
-					}
-				});
-			}
-
-			// Add one or two unapproved students
-			const users: ProjectUser[] = [];
-			for (let k = 0; k < chance.pickone([1, 2]); k++) {
-				const user = await prisma.projectUser.create({
-					data: {
-						project: {
-							connect: {
-								id: project.id
-							}
-						},
-						user: {
-							create: {
-								email: `${i}@project${j}.unapproved${k}`,
-								firstName: faker.person.firstName(),
-								lastName: faker.person.lastName(),
-								role: 'STUDENT',
-								pfp: pickAvatar(),
-								orgId: i,
-								...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-							}
-						},
-						permission: 'NEEDS_APPROVAL'
-					}
-				});
-				users.push(user);
-			}
 
 			// Add zero to five tasks.
 			for (let k = 0; k < chance.weighted([0, 1, 2, 3, 4, 5], [1, 9, 9, 8, 7, 6]); k++) {
@@ -119,7 +99,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 						checked: chance.weighted([true, false], [1, 2]),
 						project: {
 							connect: {
-								id: project.id
+								id
 							}
 						},
 						assignees: {

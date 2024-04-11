@@ -56,18 +56,16 @@ const attributesSchema = z.object({
 	shortDescription: z.string()
 });
 
-export async function seed(client: PrismaTransactionClient) {
+export async function seed(prisma: PrismaTransactionClient) {
 	console.log('Seeding categories...');
 
-	for (const category of categories) {
-		await client.category.create({
-			data: {
-				...category,
-				icon: 'no',
-				deadline: new Date(Date.now() + random(3 * MONTH, 5 * MONTH))
-			}
-		});
-	}
+	await prisma.category.createMany({
+		data: categories.map((category) => ({
+			...category,
+			icon: 'no',
+			deadline: deadline()
+		}))
+	});
 
 	const converter = new showdown.Converter();
 
@@ -87,8 +85,9 @@ export async function seed(client: PrismaTransactionClient) {
 		})
 	);
 
+	let templateCount = 0;
 	for (const { html, name, categories, shortDescription } of transformedFiles) {
-		const categoriesInDatabase = await client.category.findMany({
+		const categoriesInDatabase = await prisma.category.findMany({
 			where: {
 				name: {
 					in: categories
@@ -100,8 +99,9 @@ export async function seed(client: PrismaTransactionClient) {
 			throw new Error(`Category ${categories.join(', ')} not found`);
 		}
 
-		await client.projectTemplate.create({
+		await prisma.projectTemplate.create({
 			data: {
+				id: templateCount + 1,
 				name,
 				category: {
 					connect: [
@@ -115,7 +115,10 @@ export async function seed(client: PrismaTransactionClient) {
 				shortDescription
 			}
 		});
+		templateCount++;
 	}
 
 	console.log('Categories seeded');
+
+	return templateCount;
 }
