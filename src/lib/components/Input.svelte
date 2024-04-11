@@ -41,11 +41,16 @@
 		{...{ type /* Asserting string input since we know the type is always a password */ }}
 	/>
 	<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
-		{label}
+		{label} {@html required ? "<span class='required'>*</span>" : ""}
 	</div>
 </button>
 
 <style lang="scss">
+	:global(.required) {
+		color: $primary;
+    font-weight: bold;
+	}
+
 	.wrap {
 		all: unset;
 		position: relative;
