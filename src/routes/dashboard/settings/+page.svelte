@@ -75,7 +75,7 @@
 </script>
 
 <form action="?/uploadPfp" enctype="multipart/form-data" hidden method="post" use:enhance>
-	<input bind:this={fileBox} name="file" type="file" />
+	<input bind:this={fileBox} name="file" type="file" on:change={() => fileUploadButton.click()}/>
 	<button bind:this={fileUploadButton} />
 </form>
 
@@ -98,6 +98,7 @@
 				>
 					<img alt="Profile" src={data.user.pfp || '/defaultUser.svg'} />
 				</button>
+				<Button value="Upload" on:click={() => fileBox.click()} />
 			</div>
 			<form
 				class="right"
@@ -279,7 +280,6 @@
 		background: $background;
 		border-radius: 50%;
 		position: relative;
-		margin-right: 25px;
 
 		img {
 			position: absolute;
@@ -301,6 +301,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		gap: 1rem;
 	}
 
 	.left {
@@ -308,6 +309,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
+		gap: .5rem;
 		flex-grow: 1;
 	}
 

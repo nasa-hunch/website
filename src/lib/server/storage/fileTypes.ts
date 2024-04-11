@@ -3,7 +3,7 @@ export const enum destinations {
 	TEMPLATE
 }
 
-export type FileDestination = {
+export interface FileDestination {
 	destinationName: destinations;
-	destinationId: string;
-};
+	destinationId: number | string;
+}
