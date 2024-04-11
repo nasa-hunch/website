@@ -34,10 +34,10 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 					users: {
 						create: [
 							// Add one or two teachers
-							...await Promise.all(Array.from({ length: chance.weighted([1, 2], [9, 1]) }, async () => ({
+							...await Promise.all(Array.from({ length: chance.weighted([1, 2], [9, 1]) }, async (_, k) => ({
 								user: {
 									create: {
-										email: `${i}@project${j}.teacher`,
+										email: `${i}@project${j}.teacher${k}`,
 										firstName: faker.person.firstName(),
 										lastName: faker.person.lastName(),
 										role: Role.TEACHER,
