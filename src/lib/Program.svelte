@@ -4,7 +4,7 @@
 	export let program: string;
 
 	export let projectTemplates: {
-		id: number;
+		id: string;
 		name: string;
 		description: string;
 		shortDescription: string;

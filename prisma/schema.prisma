@@ -61,7 +61,7 @@ model Location {
 }
 
 model Session {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   lastUsed DateTime @default(now())
   sessionText String
@@ -96,7 +96,7 @@ model User {
 }
 
 model Notification {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   senderId String
@@ -137,7 +137,7 @@ model Project {
   users ProjectUser[] @relation("users")
   files ProjectFile[]
   joinCode Int @unique
-  projectTemplateId Int
+  projectTemplateId String
   projectTemplate ProjectTemplate @relation(fields: [projectTemplateId], references: [id])
   toDoItems ToDoItem[]
   submissionDate DateTime?
@@ -146,7 +146,7 @@ model Project {
 }
 
 model ProjectTemplate { 
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
@@ -184,7 +184,7 @@ model ProjectFile {
 }
 
 model ProjectTemplateFile {
-  templateId Int
+  templateId String
   template ProjectTemplate @relation(fields: [templateId], references: [id])
   fileId Int
   file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
@@ -206,7 +206,7 @@ model ToDoItem {
 }
 
 model ToDoAssignee {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   toDoItemId String
@@ -216,11 +216,11 @@ model ToDoAssignee {
 }
 
 model BlogPost {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title String @db.VarChar(255)
-  slug String @db.VarChar(255)
+  slug String @db.VarChar(255) @unique
   summary String
   content String @db.Text
   authorId String
@@ -249,7 +249,7 @@ model Partner {
 }
 
 model Invite {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

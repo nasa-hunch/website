@@ -89,6 +89,7 @@ export const actions = {
 			const session = crypto.randomBytes(64).toString('hex');
 			await prisma.session.create({
 				data: {
+					id: createId(),
 					sessionText: session,
 					userId: newUser.id,
 					ip: getClientAddress(),

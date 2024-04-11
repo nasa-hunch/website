@@ -6,6 +6,7 @@ import { formHandler } from '$lib/server/bodyguard.js';
 import { makePassword } from '$lib/server/password.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 import { verifySession } from '$lib/server/verifySession.js';
+import { createId } from '@paralleldrive/cuid2';
 
 export const load = async ({ params, parent }) => {
 	const data = await parent();
@@ -128,6 +129,7 @@ export const actions = {
 
 			await prisma.notification.create({
 				data: {
+					id: createId(),
 					receiverId: user.id,
 					senderId: sender.id,
 					message,

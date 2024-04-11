@@ -52,7 +52,7 @@ export const actions = {
 	),
 	makeNone: formHandler(
 		z.object({
-			memberId: z.coerce.number()
+			memberId: z.string()
 		}),
 		async ({ memberId }, { cookies, params }) => {
 			return await updateMemberRole(
@@ -65,7 +65,7 @@ export const actions = {
 	),
 	kickMember: formHandler(
 		z.object({
-			memberId: z.coerce.number()
+			memberId: z.string()
 		}),
 		async ({ memberId }, { cookies, params }) => {
 			const projectUser = await verifyProjectUser(cookies, params.id);

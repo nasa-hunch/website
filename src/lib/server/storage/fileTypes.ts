@@ -5,5 +5,5 @@ export const enum destinations {
 
 export interface FileDestination {
 	destinationName: destinations;
-	destinationId: number | string;
+	destinationId: string;
 }

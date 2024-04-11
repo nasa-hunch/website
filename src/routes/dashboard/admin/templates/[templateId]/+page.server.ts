@@ -16,7 +16,7 @@ export const actions = {
 
 			await prisma.projectTemplate.update({
 				where: {
-					id: parseInt(params.templateId)
+					id: params.templateId
 				},
 				data: {
 					description,

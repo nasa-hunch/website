@@ -7,7 +7,7 @@ import { verifyProjectUser } from '$lib/server/verifyProjectUser';
 import type { RouteParams } from './$types';
 
 export const updateMemberRole = async (
-	memberId: number,
+	memberId: string,
 	permission: ProjectUserPermission,
 	cookies: Cookies,
 	params: RouteParams

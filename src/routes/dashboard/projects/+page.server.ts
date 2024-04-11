@@ -16,7 +16,7 @@ export const load = async () => {
 export const actions = {
 	createProject: formHandler(
 		z.object({
-			projectId: z.coerce.number()
+			projectId: z.string()
 		}),
 		async ({ projectId }, { cookies }) => {
 			const user = await verifySession(cookies);

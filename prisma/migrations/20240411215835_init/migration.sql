@@ -48,7 +48,7 @@ CREATE TABLE "Location" (
 
 -- CreateTable
 CREATE TABLE "Session" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastUsed" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "sessionText" TEXT NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Notification" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "senderId" TEXT NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE "Project" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "orgId" INTEGER NOT NULL,
     "joinCode" INTEGER NOT NULL,
-    "projectTemplateId" INTEGER NOT NULL,
+    "projectTemplateId" TEXT NOT NULL,
     "submissionDate" TIMESTAMP(3),
     "submitted" BOOLEAN NOT NULL DEFAULT false,
 
@@ -121,7 +121,7 @@ CREATE TABLE "Project" (
 
 -- CreateTable
 CREATE TABLE "ProjectTemplate" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE "ProjectFile" (
 
 -- CreateTable
 CREATE TABLE "ProjectTemplateFile" (
-    "templateId" INTEGER NOT NULL,
+    "templateId" TEXT NOT NULL,
     "fileId" INTEGER NOT NULL,
 
     CONSTRAINT "ProjectTemplateFile_pkey" PRIMARY KEY ("templateId","fileId")
@@ -177,7 +177,7 @@ CREATE TABLE "ToDoItem" (
 
 -- CreateTable
 CREATE TABLE "ToDoAssignee" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "toDoItemId" TEXT NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE "ToDoAssignee" (
 
 -- CreateTable
 CREATE TABLE "BlogPost" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "title" VARCHAR(255) NOT NULL,
@@ -228,7 +228,7 @@ CREATE TABLE "Partner" (
 
 -- CreateTable
 CREATE TABLE "Invite" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "fromId" TEXT NOT NULL,
@@ -265,7 +265,7 @@ CREATE TABLE "Stage" (
 -- CreateTable
 CREATE TABLE "_CategoryToProjectTemplate" (
     "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL
+    "B" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -279,6 +279,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Project_joinCode_key" ON "Project"("joinCode");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "BlogPost_slug_key" ON "BlogPost"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CategoryToProjectTemplate_AB_unique" ON "_CategoryToProjectTemplate"("A", "B");
