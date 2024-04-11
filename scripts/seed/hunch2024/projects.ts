@@ -16,23 +16,25 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 	// For every organization, create 5 projects
 	const organizationCount = schools.length + 1;
 
+	// Create 5 projects for each organization
+	const organizationProjectCount = 5;
+	const projectIds = Array.from({
+		length: (organizationCount - 1) * organizationProjectCount
+	}).map(createId);
+
+	await prisma.project.createMany({
+		data: projectIds.map((id, i) => ({
+			id,
+			submitted: Math.random() > 0.9,
+			orgId: Math.floor(i / organizationProjectCount) + 2,
+			projectTemplateId: chance.integer({ min: 1, max: projectTemplateCount }),
+			joinCode: 123456 + i
+		}))
+	});
+
 	for (let i = 2; i < organizationCount + 1; i++) {
-		const projectIds = Array.from({
-			length: 5
-		}).map(createId);
-
-		await prisma.project.createMany({
-			data: projectIds.map((id, j) => ({
-				id,
-				submitted: Math.random() > 0.9,
-				orgId: i,
-				projectTemplateId: chance.integer({ min: 1, max: projectTemplateCount }),
-				joinCode: 123456 + i * 10 + j
-			}))
-		});
-
 		for (let j = 0; j < 5; j++) {
-			const id = projectIds[j];
+			const id = projectIds[(i - 2) * organizationProjectCount + j];
 			
 			const teacherIds = Array.from({ length: chance.weighted([1, 2], [9, 1]) }).map(createId);
 			await prisma.user.createMany({
