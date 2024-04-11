@@ -8,9 +8,10 @@ import { verifySession } from '$lib/server/verifySession.js';
 export const actions = {
 	updateDesc: formHandler(
 		z.object({
-			description: z.string().min(1)
+			description: z.string().min(1),
+			shortDescription: z.string().min(1)
 		}),
-		async ({ description }, { cookies, params }) => {
+		async ({ description, shortDescription }, { cookies, params }) => {
 			await verifySession(cookies, Role.HUNCH_ADMIN);
 
 			await prisma.projectTemplate.update({
@@ -18,7 +19,8 @@ export const actions = {
 					id: parseInt(params.templateId)
 				},
 				data: {
-					description
+					description,
+					shortDescription
 				}
 			});
 

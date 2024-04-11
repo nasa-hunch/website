@@ -8,12 +8,21 @@
 
 <div class="wrap">
 	<form class="content" action="?/updateDesc" method="post" use:enhance>
+		<h2>Short Description</h2>
+
+		<Editor 
+			name="shortDescription"
+			placeholder="Enter short description..."
+			bind:content={data.projectTemplate.shortDescription}
+		/>
+
+		<h2>Description</h2>
 		<Editor
 			name="description"
 			placeholder="Enter project description..."
 			bind:content={data.projectTemplate.description}
 		/>
-		<div class="ButtonWrap">
+		<div class="buttonWrap">
 			<div class="innerButtonWrap">
 				<Button value="Save" />
 			</div>
@@ -26,15 +35,17 @@
 		width: 100%;
 
 		display: flex;
-		align-items: start;
+		align-items: center;
 		justify-content: center;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 
-	.content {
-		padding-top: 20px;
+	h2 {
+		text-align: center;
 	}
 
-	.ButtonWrap {
+	.buttonWrap {
 		display: flex;
 		align-items: center;
 		justify-content: center;
