@@ -1,4 +1,4 @@
-`import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { createId } from '@paralleldrive/cuid2';
 import { ProjectUserPermission, Role } from '@prisma/client';
 import { Chance } from 'chance';
@@ -164,4 +164,3 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 
 	console.log('Projects seeded!');
 }
-`
