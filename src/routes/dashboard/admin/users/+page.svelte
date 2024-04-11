@@ -19,12 +19,12 @@
 
 	export let data: PageData;
 
-	let selectedUserId = 0;
+	let selectedUserId = '';
 
 	const perPageOptions = [10, 25, 50, 100];
 
 	type DeleteData = {
-		id: number;
+		id: string;
 		firstName: string;
 		lastName: string;
 	};
@@ -39,7 +39,7 @@
 
 	let deleteData: DeleteData | undefined = undefined;
 
-	let deletePerson = (id: number, firstName: string, lastName: string) => {
+	let deletePerson = (id: string, firstName: string, lastName: string) => {
 		pushState('', {
 			modal: 'deleteUser'
 		});

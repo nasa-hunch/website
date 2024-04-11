@@ -5,12 +5,11 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
 
 export const load = async ({ params, parent }) => {
 	const parentData = await parent();
-	const id = parseInt(params.id);
 
 	const project = await prisma.project.findFirst({
 		where: {
 			AND: {
-				id: id,
+				id: params.id,
 				OR:
 					parentData.user.role == Role.HUNCH_ADMIN
 						? []

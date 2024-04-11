@@ -7,7 +7,7 @@ export const load = async ({ params }) => {
 		where: {
 			projects: {
 				some: {
-					id: parseInt(params.id)
+					id: params.id
 				}
 			}
 		}

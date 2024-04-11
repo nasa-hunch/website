@@ -44,7 +44,7 @@ export const actions = {
 	uploadFile: async ({ request, cookies, params }) => {
 		const file = (await request.formData()).get('file'); // If your machine is too fast, this stops the request from hanging.
 		const user = await verifySession(cookies);
-		const projectId = parseInt(params.id);
+		const projectId = params.id;
 
 		const projectUser = await prisma.projectUser.findFirst({
 			where: {

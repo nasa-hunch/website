@@ -27,7 +27,7 @@ export const actions = {
 		const allUsers = await prisma.projectUser.findMany({
 			where: {
 				AND: {
-					projectId: parseInt(params.id),
+					projectId: params.id,
 					voteSubmit: false
 				}
 			}
@@ -42,7 +42,7 @@ export const actions = {
 
 		await prisma.project.update({
 			where: {
-				id: parseInt(params.id)
+				id: params.id
 			},
 			data: {
 				submitted: true,

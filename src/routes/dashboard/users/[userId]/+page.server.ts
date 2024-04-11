@@ -59,7 +59,7 @@ export const actions = {
 
 			await prisma.user.update({
 				where: {
-					id: parseInt(params.userId)
+					id: params.userId
 				},
 				data: {
 					firstName,

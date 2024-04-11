@@ -55,7 +55,7 @@ export const actions = {
 		await prisma.toDoItem.create({
 			data: {
 				name,
-				projectId: parseInt(params.id),
+				projectId: params.id,
 				checked: false
 			}
 		});
