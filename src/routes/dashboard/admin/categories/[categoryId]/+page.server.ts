@@ -95,7 +95,7 @@ export const actions = {
 				},
 				data: {
 					name: name || category.name,
-					color: color?.substring(1, 6) || category.color,
+					color: color?.substring(1, 7) || category.color,
 					deadline: deadLineDate || category.deadline
 				}
 			});

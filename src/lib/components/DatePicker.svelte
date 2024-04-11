@@ -1,17 +1,21 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	export let name = 'Input';
 	export let label = 'Input';
 	export let bgColor = '#f8f8f8';
 	export let value: Date | undefined = undefined;
-
-	onMount(() => (value = value));
 	let active = false;
+
+	let derivedValue = value ? (`${value.getFullYear()}-${
+		value.getMonth().toString().padStart(2, '0')
+	}-${
+		value.getDay().toString().padStart(2, '0')
+	}`) : '';
+
+	$: console.log(derivedValue)
 </script>
 
 <button style="--bgColor: {bgColor}" class="wrap" class:active tabindex="-1" type="button">
-	<input {name} class="placeholder" type="date" {value} />
+	<input {name} class="placeholder" on:change type="date" value={derivedValue} />
 
 	<div class="labelBase labelMoved">
 		{label}
