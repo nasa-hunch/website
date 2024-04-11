@@ -156,6 +156,8 @@ model ProjectTemplate {
   category Category[]
   projects Project[]
   files ProjectTemplateFile[]
+  branchId Int?
+  branch Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)
 }
 
 // project management items
@@ -263,4 +265,23 @@ model Invite {
   to User? @relation("to", fields: [toId], references: [id], onDelete: SetNull)
 
   used Boolean @default(false)
+}
+
+model Branch {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String
+  projectTemplates ProjectTemplate[]
+  stages Stage[]
+}
+
+model Stage {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  dueDate DateTime
+  name String
+  branchId Int 
+  branch Branch @relation(fields: [branchId], references: [id])
 }

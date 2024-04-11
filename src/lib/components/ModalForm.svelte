@@ -17,6 +17,7 @@
 		width: 100%;
 		max-width: 500px;
 		padding: 25px;
+		min-width: 20rem;
 		border-radius: 5px;
 		box-sizing: border-box;
 		background: $background;

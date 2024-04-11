@@ -1,185 +1,252 @@
 <script generics="K" lang="ts">
-	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
+	import type { ChangeEventHandler } from 'svelte/elements';
+	const dispath = createEventDispatcher<{
+		selectOption: {
+			value: string;
+			display: string;
+		};
+	}>();
 
-	type ComboOptions<T> = [T[], (input: T) => number, (input: T) => string];
-	export let options: ComboOptions<K>;
+	type Options = [K[], (arg: K) => string, (arg: K) => string | number];
 
-	let getItemString = options[2];
-	let getItemId = options[1];
+	export let options: Options = [[], () => '', () => 0];
 
-	export let name = 'Input';
-	export let label = 'Input';
-	export let bgColor = '#ffffff';
-	export let required = false;
-	export let autocomplete: HTMLInputElement['autocomplete'] | null = null;
+	export let name = 'dropDown';
+	export let label = 'Select Option';
 
-	export let value: string = '';
+	export let placeholder: string = 'Select Option';
+	export let value: string = 'cui_default_option';
 
-	$: moveText = value.length > 0 || active;
+	export let searchValue = '';
+	export let disableSearch = false;
 
-	onMount(() => (value = value));
-	let active = false;
+	export let style: string = '';
+	export let disabled = false;
 
-	export let selected = options[1](options[0][0]);
+	let showingOptions = false;
 
-	let outerButton: HTMLButtonElement;
-	const buttonClick = (e: MouseEvent) => {
-		if (e.currentTarget == outerButton) {
-			active = true;
-		}
+	const close = () => {
+		showingOptions = false;
+	};
+
+	let filteredItems = options[0];
+
+	const changeFilter: ChangeEventHandler<HTMLInputElement> = (e) => {
+		filteredItems = options[0].filter((item) => {
+			if (
+				options[1](item)
+					.toLowerCase()
+					.includes((e.target as HTMLInputElement)?.value.toLowerCase())
+			) {
+				return item;
+			}
+		});
 	};
 </script>
 
-<div style="--bgColor: {bgColor}" class="wrap" class:active>
-	<button bind:this={outerButton} class="wrap" tabindex="-1" type="button" on:click={buttonClick}>
-		<input {name} hidden bind:value={selected} />
-		<input {autocomplete} {required} bind:value />
-		<div class="labelBase" class:label1={!moveText} class:labelMoved={moveText}>
+{#if showingOptions}
+	<button class="antiClick" type="button" on:mousedown|self={close} />
+{/if}
+
+<div {style} class="wrap" class:disabled>
+	<label>
+		<span class="label">
 			{label}
-		</div>
-	</button>
-	{#if active}
-		<div class="options">
-			{#each options[0] as option}
-				{#if getItemString(option).toLowerCase().includes(value.toLowerCase())}
+		</span>
+		<span class="label labelBG">
+			{label}
+		</span>
+
+		<!-- if we have js, we want a completely new element -->
+		<input {name} hidden {value} />
+		<button class="openOptions" type="button" on:click={() => (showingOptions = true)}>
+			<p>
+				{placeholder}
+			</p>
+			<svg style="fill: var(--cui_text)" height="24" viewBox="0 0 24 24" width="24">
+				<path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z" />
+			</svg>
+		</button>
+		{#if showingOptions}
+			<div class="options">
+				<!-- svelte-ignore a11y-autofocus -->
+				{#if !disableSearch}
+					<input autofocus placeholder="Search" bind:value={searchValue} on:input={changeFilter} />
+				{/if}
+				{#if filteredItems.length < 1}
+					<p>No Items</p>
+				{/if}
+				{#each filteredItems as option}
 					<button
 						class="option"
-						type="button"
 						on:click={() => {
-							selected = getItemId(option);
-							value = getItemString(option);
-							active = false;
+							close();
+							value = options[2](option).toString();
+							placeholder = options[1](option);
+							dispath('selectOption', {
+								value: value,
+								display: placeholder
+							});
 						}}
 					>
-						{getItemString(option)}
+						{options[1](option)}
 					</button>
-				{/if}
-			{/each}
-		</div>
-	{/if}
+				{/each}
+			</div>
+		{/if}
+	</label>
 </div>
-
-{#if active}
-	<button
-		class="deselect"
-		type="button"
-		on:mousedown={() => {
-			active = false;
-		}}
-	/>
-{/if}
 
 <style lang="scss">
 	.wrap {
-		all: unset;
 		position: relative;
-		width: 100%;
-		font-family: 'Lexend Variable', sans-serif;
-		border-radius: 3px;
-		outline: 1px solid gray;
-		cursor: text;
-		z-index: 2;
 		background: var(--bgColor);
-	}
-	input {
-		border: 0px;
-		outline: 0px;
-		box-sizing: border-box;
-		padding: 10px;
-		font-size: 1.2rem;
 		width: 100%;
-		font-family: 'Lexend Variable', sans-serif;
-		background: transparent;
-		z-index: -1;
 	}
 
-	.labelBase {
-		transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
-	}
-
-	.label1 {
-		font-size: 1.12rem;
-		font-weight: 400;
-		box-sizing: border-box;
-		padding: 10px;
-		top: 0px;
-		left: 0px;
-		position: absolute;
+	.antiClick {
+		all: unset;
 		width: 100%;
 		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: start;
-		background: transparent;
-		color: #333;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		z-index: 9;
 	}
-	.labelMoved {
-		font-size: 0.8rem;
+
+	.label {
+		height: 20px;
 		position: absolute;
 		top: -10px;
 		left: 10px;
-		background: var(--bgColor);
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		padding: 0px 5px;
+		font-size: 0.8rem;
 		color: black;
+		opacity: 0.75;
+		text-wrap: nowrap;
+		z-index: 7;
 	}
-	.active > button {
-		outline: 1px solid $secondary;
-		border-radius: 3px 3px 0px 0px;
+	.labelBG {
+		color: transparent;
+		background: var(--bgColor);
+		opacity: 1;
+		text-wrap: nowrap;
+		z-index: 6;
+	}
+	label {
+		width: 100%;
+		height: 100%;
+	}
+	.openOptions {
+		position: relative;
+		color: black;
+		background: transparent;
+		border-radius: 3px;
+		padding: 10px;
+		box-sizing: border-box;
+		font-size: 1.2rem;
+		cursor: pointer;
+		transition: background cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+		text-decoration: none;
+		width: 100%;
+		text-align: left;
+		outline: 0px;
+		border: 1px solid $background3;
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		z-index: 2;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
 	}
 
-	.active {
-		z-index: 1000;
+	.openOptions:hover {
+		border: 1px solid $secondary;
 	}
+
+	p {
+		all: unset;
+		overflow-x: hidden;
+	}
+
+	svg {
+		position: absolute;
+		right: 0px;
+		padding-right: 3px;
+	}
+
 	.options {
 		position: absolute;
-		left: 0px;
 		width: 100%;
-		display: flex;
-		flex-direction: column;
-		max-height: 300px;
-		outline: 1px solid $secondary;
-		padding: 5px;
-		box-sizing: border-box;
+		top: 100%;
+		margin-top: 5px;
 		background: var(--bgColor);
+		z-index: 10;
+		padding: 5px 5px 5px 5px;
+		box-sizing: border-box;
+		border: 1px solid $background3;
+		border-radius: 3px;
+		max-height: 200px;
 		overflow-y: auto;
-		z-index: 1000;
-
-		&::-webkit-scrollbar {
-			width: 12px;
-		}
-		&::-webkit-scrollbar-track-piece,
-		&::-webkit-scrollbar-track {
-			background: $background;
-			background-clip: content-box;
-		}
-		&::-webkit-scrollbar-thumb {
-			background: $background2;
-			background-clip: content-box;
-			border: 3px solid transparent;
-			border-radius: 7px;
-		}
 	}
 
 	.option {
 		all: unset;
-		height: 100%;
-		padding: 5px 10px;
+		width: 100%;
 		box-sizing: border-box;
-		background: $background;
-		cursor: pointer;
+		position: relative;
+		padding: 5px 5px;
+		font-size: 1.2rem;
 		border-radius: 5px;
 	}
-	.option:hover {
-		background: $background2;
-	}
-	.deselect {
-		all: unset;
-		left: 0px;
-		z-index: 0;
-		top: 0px;
-		position: fixed;
+
+	.option::after {
+		position: absolute;
 		width: 100%;
 		height: 100%;
+		content: '';
+		left: 0px;
+		top: 0px;
+		opacity: 0.1;
+		border-radius: 5px;
+	}
+
+	.option:hover::after {
+		background: rgba(0, 0, 0, 0.3)
+	}
+
+	.options input {
+		width: 100%;
+		box-sizing: border-box;
 		background: transparent;
+		outline: 0px;
+		border: 0px;
+		font-size: 1.2rem;
+		border-bottom: 1px solid $background3;
+		padding: 5px 5px;
+		padding-top: 10px;
+		margin-bottom: 5px;
+		margin-top: -5px;
+		position: sticky;
+		top: -5px;
+		background: var(--bgColor);
+		z-index: 5;
+	}
+
+	.options p {
+		all: unset;
+		width: 100%;
+		box-sizing: border-box;
+		position: relative;
+		padding: 5px 5px;
+		font-size: 1.2rem;
+		border-radius: 5px;
+		padding-top: 10px;
 	}
 </style>

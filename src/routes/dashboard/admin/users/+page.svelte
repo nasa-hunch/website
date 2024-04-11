@@ -108,7 +108,7 @@
 			<Combobox
 				name="orgId"
 				label="Organization"
-				options={[data.orgList, (orgItem) => orgItem.id, (orgItem) => orgItem.name.toString()]}
+				options={[data.orgList, (orgItem) => orgItem.name.toString(), (orgItem) => orgItem.id]}
 			/>
 			<hr class="spacer" />
 			<Button value="verify" />
