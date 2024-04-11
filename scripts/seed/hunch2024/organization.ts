@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { createId } from '@paralleldrive/cuid2';
 import { Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
@@ -7,6 +8,8 @@ import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
 export async function seed(prisma: PrismaTransactionClient) {
+	console.log('Seeding organizations...');
+
 	// Make the base organization
 	await prisma.organization.upsert({
 		where: { id: 1, name: 'Cardboard' },
@@ -15,6 +18,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 			name: 'Cardboard',
 			users: {
 				create: {
+					id: createId(),
 					email: 'admin@card.board',
 					firstName: 'Admin',
 					lastName: 'Cardboard',
@@ -27,21 +31,26 @@ export async function seed(prisma: PrismaTransactionClient) {
 	});
 
 	// Make other organizations
-	for (let i = 2; i < schools.length + 2; i++) {
-		await prisma.organization.create({
-			data: {
-				name: schools[i - 2].name,
-				users: {
-					create: {
-						email: `${i}@org.admin`,
-						firstName: faker.person.firstName(),
-						lastName: faker.person.lastName(),
-						role: Role.ORG_ADMIN,
-						pfp: pickAvatar(),
-						...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-					}
-				}
-			}
-		});
-	}
+	await prisma.organization.createMany({
+		data: schools.map((school, i) => ({
+			id: i + 2,
+			name: school.name,
+		}))
+	});
+
+	// Attach admins to organizations
+	await prisma.user.createMany({
+		data: await Promise.all(schools.map(async (_, i) => ({
+			id: createId(),
+			email: `${i + 2}@org.admin`,
+			firstName: faker.person.firstName(),
+			lastName: faker.person.lastName(),
+			role: Role.ORG_ADMIN,
+			pfp: pickAvatar(),
+			orgId: i + 2,
+			...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+		})))
+	});
+
+	console.log('Organizations seeded!');
 }

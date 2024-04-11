@@ -52,7 +52,7 @@ CREATE TABLE "Session" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastUsed" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "sessionText" TEXT NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
     "ip" TEXT NOT NULL,
     "userAgent" TEXT NOT NULL,
 
@@ -61,7 +61,7 @@ CREATE TABLE "Session" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "firstName" VARCHAR(255) NOT NULL,
@@ -83,8 +83,8 @@ CREATE TABLE "Notification" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "senderId" INTEGER NOT NULL,
-    "receiverId" INTEGER NOT NULL,
+    "senderId" TEXT NOT NULL,
+    "receiverId" TEXT NOT NULL,
     "title" VARCHAR(255) NOT NULL,
     "message" TEXT NOT NULL,
 
@@ -93,11 +93,11 @@ CREATE TABLE "Notification" (
 
 -- CreateTable
 CREATE TABLE "ProjectUser" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "projectId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
+    "projectId" TEXT NOT NULL,
     "owner" BOOLEAN NOT NULL DEFAULT false,
     "voteSubmit" BOOLEAN NOT NULL DEFAULT false,
     "permission" "ProjectUserPermission" NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE "ProjectUser" (
 
 -- CreateTable
 CREATE TABLE "Project" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "orgId" INTEGER NOT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE "File" (
 
 -- CreateTable
 CREATE TABLE "ProjectFile" (
-    "projectId" INTEGER NOT NULL,
+    "projectId" TEXT NOT NULL,
     "fileId" INTEGER NOT NULL,
 
     CONSTRAINT "ProjectFile_pkey" PRIMARY KEY ("projectId","fileId")
@@ -168,8 +168,8 @@ CREATE TABLE "ToDoItem" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
     "checked" BOOLEAN NOT NULL,
-    "projectId" INTEGER NOT NULL,
-    "checkedById" INTEGER,
+    "projectId" TEXT NOT NULL,
+    "checkedById" TEXT,
 
     CONSTRAINT "ToDoItem_pkey" PRIMARY KEY ("id")
 );
@@ -180,7 +180,7 @@ CREATE TABLE "ToDoAssignee" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "toDoItemId" INTEGER NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
 
     CONSTRAINT "ToDoAssignee_pkey" PRIMARY KEY ("id")
 );
@@ -194,7 +194,7 @@ CREATE TABLE "BlogPost" (
     "slug" VARCHAR(255) NOT NULL,
     "summary" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "authorId" INTEGER NOT NULL,
+    "authorId" TEXT NOT NULL,
 
     CONSTRAINT "BlogPost_pkey" PRIMARY KEY ("id")
 );
@@ -230,10 +230,10 @@ CREATE TABLE "Invite" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "fromId" INTEGER NOT NULL,
+    "fromId" TEXT NOT NULL,
     "role" "Role" NOT NULL,
     "form" TEXT NOT NULL,
-    "toId" INTEGER NOT NULL,
+    "toId" TEXT NOT NULL,
     "used" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Invite_pkey" PRIMARY KEY ("id")
@@ -247,7 +247,7 @@ CREATE TABLE "_CategoryToProjectTemplate" (
 
 -- CreateTable
 CREATE TABLE "_ProjectToTeamMember" (
-    "A" INTEGER NOT NULL,
+    "A" TEXT NOT NULL,
     "B" INTEGER NOT NULL
 );
 

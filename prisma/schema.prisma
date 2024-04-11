@@ -65,14 +65,14 @@ model Session {
   createdAt DateTime @default(now())
   lastUsed DateTime @default(now())
   sessionText String
-  userId Int
+  userId String
   user User @relation(fields: [userId], references: [id])
   ip String
   userAgent String
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   firstName String @db.VarChar(255)
@@ -99,9 +99,9 @@ model Notification {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  senderId Int
+  senderId String
   sender User @relation("sender", fields: [senderId], references: [id])
-  receiverId Int
+  receiverId String
   receiver User @relation("receiver", fields: [receiverId], references: [id])
   title String @db.VarChar(255)
   message String @db.Text
@@ -114,11 +114,11 @@ enum ProjectUserPermission {
 }
 
 model ProjectUser {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId Int
-  projectId Int
+  userId String
+  projectId String
   owner Boolean @default(false)
   user User @relation(fields: [userId], references: [id])
   project Project @relation("users", fields: [projectId], references: [id])
@@ -129,7 +129,7 @@ model ProjectUser {
 }
 
 model Project {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   organization Organization @relation(fields: [orgId], references: [id])
@@ -173,7 +173,7 @@ model File {
 }
 
 model ProjectFile {
-  projectId Int
+  projectId String
   project Project @relation(fields: [projectId], references: [id])
   fileId Int
   file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
@@ -196,9 +196,9 @@ model ToDoItem {
   updatedAt DateTime @updatedAt
   name String
   checked Boolean
-  projectId Int
+  projectId String
   project Project @relation(fields: [projectId], references: [id])
-  checkedById Int?
+  checkedById String?
   checkedBy ProjectUser? @relation(fields: [checkedById], references: [id], onDelete: SetNull)
   assignees ToDoAssignee[]
 }
@@ -209,7 +209,7 @@ model ToDoAssignee {
   updatedAt DateTime @updatedAt
   toDoItemId Int
   toDoItem ToDoItem @relation(fields: [toDoItemId], references: [id], onDelete: Cascade)
-  userId Int
+  userId String
   projectUser ProjectUser @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -221,7 +221,7 @@ model BlogPost {
   slug String @db.VarChar(255)
   summary String
   content String @db.Text
-  authorId Int
+  authorId String
   author User @relation(fields: [authorId], references: [id])
 }
 
@@ -251,7 +251,7 @@ model Invite {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  fromId Int
+  fromId String
   from User @relation("from", fields: [fromId], references: [id], onDelete: Cascade)
 
   role Role
@@ -259,7 +259,7 @@ model Invite {
   // Any additional information attatched when they recieve the invite
   form String @db.Text
 
-  toId Int
+  toId String
   to User? @relation("to", fields: [toId], references: [id], onDelete: SetNull)
 
   used Boolean @default(false)

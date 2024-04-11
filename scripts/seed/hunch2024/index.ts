@@ -41,9 +41,9 @@ async function main() {
 		async (tx) => {
 			await partners.seed(tx);
 			await teams.seed(tx);
-			await categories.seed(tx);
+			const templateCount = await categories.seed(tx);
 			await organizations.seed(tx);
-			await projects.seed(tx);
+			await projects.seed(tx, templateCount);
 			await unverifiedTeachers.seed(tx);
 			await admin.seed(tx);
 		},
