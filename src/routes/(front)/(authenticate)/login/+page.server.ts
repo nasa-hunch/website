@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 
-import { checkPassword } from '$lib/server/password';
+import { checkPassword, verifyToken } from '$lib/server/password';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 
 export const actions = {
@@ -11,6 +11,7 @@ export const actions = {
 
 		const email = formData.get('email')?.toString();
 		const password = formData.get('password')?.toString();
+		const token = formData.get("token")?.toString();
 
 		if (!email || !password) {
 			return {
@@ -40,6 +41,13 @@ export const actions = {
 				success: false,
 				message: 'Email or password is incorrect.'
 			};
+		}
+
+		if (user.mfa && (!token || !verifyToken(token, user.secret))) {
+			return {
+				success: false,
+				message: 'Incorrect or invalid MFA token.'
+			}
 		}
 
 		// Generate a new session for the user

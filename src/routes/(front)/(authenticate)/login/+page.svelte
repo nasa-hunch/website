@@ -12,10 +12,13 @@
 		<form class="content" action="?/login" method="post" use:enhance>
 			<h1>Login</h1>
 			<span class="inputDiv">
-				<Input name="email" label="Email" />
+				<Input name="email" label="Email" required />
 			</span>
 			<span class="inputDiv">
-				<Input name="password" label="Password" type="password" />
+				<Input name="password" label="Password" type="password" required />
+			</span>
+			<span class="inputDiv">
+				<Input name="token" label="MFA Code" type="number" />
 			</span>
 			<span class="inputDiv">
 				<Button type="submit" value="Log In" />
