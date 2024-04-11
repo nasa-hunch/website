@@ -1,5 +1,6 @@
 <script lang="ts">
 	import sanitizeHtml from 'sanitize-html';
+
 	import Pfp from '$lib/components/Pfp.svelte';
 
 	export let data;

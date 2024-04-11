@@ -8,7 +8,7 @@ interface Marker {
 }
 
 export const nasa: Marker[] = [
-    {
+	{
 		name: 'NASA Johnson Space Center',
 		address: '2101 E NASA Pkwy, Houston, TX 77058, USA',
 		location: {
@@ -79,8 +79,8 @@ export const nasa: Marker[] = [
 			lat: 37.4149371,
 			lng: -122.0631175
 		}
-	},
-]
+	}
+];
 
 export const schools: Marker[] = [
 	{
@@ -389,7 +389,7 @@ export const schools: Marker[] = [
 	},
 	{
 		name: 'Kennett High School',
-		address: '409 Eagle\'s Way, North Conway, NH 03860, USA',
+		address: "409 Eagle's Way, North Conway, NH 03860, USA",
 		location: {
 			lat: 44.0050967,
 			lng: -71.09810329999999
@@ -509,7 +509,7 @@ export const schools: Marker[] = [
 	},
 	{
 		name: 'Monroe One - Eastern Monroe Career Center (EMCC)',
-		address: '41 O\'Connor Rd, Fairport, NY 14450, USA',
+		address: "41 O'Connor Rd, Fairport, NY 14450, USA",
 		location: {
 			lat: 43.1056911,
 			lng: -77.4599368
@@ -1220,7 +1220,7 @@ export const schools: Marker[] = [
 		}
 	},
 	{
-		name: 'St. Mark\'s School Of Texas',
+		name: "St. Mark's School Of Texas",
 		address: '10600 Preston Rd, Dallas, TX 75230, USA',
 		location: {
 			lat: 32.8907333,

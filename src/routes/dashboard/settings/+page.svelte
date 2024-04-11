@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { renderSVG } from 'scannable/qr';
 	import toast from 'svelte-french-toast';
-	import { renderSVG } from "scannable/qr";
+
 	import { enhance } from '$app/forms';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -16,10 +17,10 @@
 	export let form;
 
 	let svgHTML = renderSVG({
-	value: `otpauth://totp/NASA%20Hunch?secret=${data.user.secret}`,
-	width: 200,
-	height: 200
-})
+		value: `otpauth://totp/NASA%20Hunch?secret=${data.user.secret}`,
+		width: 200,
+		height: 200
+	});
 
 	let fileBox: HTMLInputElement;
 	let fileUploadButton: HTMLButtonElement;
@@ -64,15 +65,15 @@
 		pushState('', {
 			modal: 'enableMFA'
 		});
-	}
+	};
 
 	const disableMFAModal = () => {
 		pushState('', {
 			modal: 'disableMFA'
 		});
-	
-	}
+	};
 </script>
+
 <form action="?/uploadPfp" enctype="multipart/form-data" hidden method="post" use:enhance>
 	<input bind:this={fileBox} name="file" type="file" />
 	<button bind:this={fileUploadButton} />
@@ -186,37 +187,27 @@
 			<h1>Enable Multifactor Authentication</h1>
 			{@html svgHTML}
 			<div class="margin-separator" />
-			
-			<form action="?/confirmMFA" method="POST">
-				<Input
-				name="token"
-				label="Code"
-				required
-				type="text"
-			/>
-			<div class="margin-separator" />
 
-			<Button type="submit" value="Confirm Code" />
-		</form>
+			<form action="?/confirmMFA" method="POST">
+				<Input name="token" label="Code" required type="text" />
+				<div class="margin-separator" />
+
+				<Button type="submit" value="Confirm Code" />
+			</form>
 		</ModalForm>
 	</Modal>
 {:else if $page.state.modal === 'disableMFA'}
-<Modal on:close={() => history.back()}>
-	<ModalForm action="?/enableMFA" method="POST">
-		<h1>Disable Multifactor Authentication</h1>
-		<div class="margin-separator" />
-		<form action="?/disableMFA" method="POST">
-			<Input
-			name="password"
-			label="Password"
-			required
-			type="password"
-		/>
-		<div class="margin-separator" />
-		<Button type="submit" value="Disable MFA" />
-	</form>
-	</ModalForm>
-</Modal>
+	<Modal on:close={() => history.back()}>
+		<ModalForm action="?/enableMFA" method="POST">
+			<h1>Disable Multifactor Authentication</h1>
+			<div class="margin-separator" />
+			<form action="?/disableMFA" method="POST">
+				<Input name="password" label="Password" required type="password" />
+				<div class="margin-separator" />
+				<Button type="submit" value="Disable MFA" />
+			</form>
+		</ModalForm>
+	</Modal>
 {/if}
 
 <style lang="scss">

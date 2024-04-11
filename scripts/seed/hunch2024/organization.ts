@@ -3,7 +3,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
-import { schools } from './dump/orgs'
+import { schools } from './dump/orgs';
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
@@ -34,22 +34,24 @@ export async function seed(prisma: PrismaTransactionClient) {
 	await prisma.organization.createMany({
 		data: schools.map((school, i) => ({
 			id: i + 2,
-			name: school.name,
+			name: school.name
 		}))
 	});
 
 	// Attach admins to organizations
 	await prisma.user.createMany({
-		data: await Promise.all(schools.map(async (_, i) => ({
-			id: createId(),
-			email: `${i + 2}@org.admin`,
-			firstName: faker.person.firstName(),
-			lastName: faker.person.lastName(),
-			role: Role.ORG_ADMIN,
-			pfp: pickAvatar(),
-			orgId: i + 2,
-			...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-		})))
+		data: await Promise.all(
+			schools.map(async (_, i) => ({
+				id: createId(),
+				email: `${i + 2}@org.admin`,
+				firstName: faker.person.firstName(),
+				lastName: faker.person.lastName(),
+				role: Role.ORG_ADMIN,
+				pfp: pickAvatar(),
+				orgId: i + 2,
+				...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+			}))
+		)
 	});
 
 	console.log('Organizations seeded!');

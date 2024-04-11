@@ -1,6 +1,7 @@
 import { pbkdf2, randomBytes } from 'node:crypto';
 import { promisify } from 'node:util';
-import speakeasy from "speakeasy";
+
+import speakeasy from 'speakeasy';
 
 const pkdf2 = promisify(pbkdf2);
 
@@ -31,8 +32,7 @@ export async function checkPassword(
 	return newHash === hash;
 }
 
-export function verifyToken(token: string, secret: string) 
-{
+export function verifyToken(token: string, secret: string) {
 	return speakeasy.totp.verify({
 		secret: secret,
 		encoding: 'base32',

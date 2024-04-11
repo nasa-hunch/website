@@ -116,12 +116,7 @@ export const actions = {
 			title: z.string().min(1)
 		}),
 		async ({ message, title }, { params, cookies }) => {
-			const sender = await verifySession(
-				cookies,
-				Role.HUNCH_ADMIN,
-				Role.ORG_ADMIN,
-				Role.TEACHER
-			);
+			const sender = await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN, Role.TEACHER);
 
 			const user = await prisma.user.findFirst({
 				where: {

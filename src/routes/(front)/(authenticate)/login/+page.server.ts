@@ -11,7 +11,7 @@ export const actions = {
 
 		const email = formData.get('email')?.toString();
 		const password = formData.get('password')?.toString();
-		const token = formData.get("token")?.toString();
+		const token = formData.get('token')?.toString();
 
 		if (!email || !password) {
 			return {
@@ -47,7 +47,7 @@ export const actions = {
 			return {
 				success: false,
 				message: 'Incorrect or invalid MFA token.'
-			}
+			};
 		}
 
 		// Generate a new session for the user

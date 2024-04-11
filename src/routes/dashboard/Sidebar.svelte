@@ -7,16 +7,15 @@
 
 	import { tooltip } from '@svelte-plugins/tooltips';
 
+	import UsersIcon from '~icons/mdi/account-group';
 	import BellIcon from '~icons/mdi/bell';
+	import StagingIcon from '~icons/mdi/chart-gantt';
+	import ProjectIcon from '~icons/mdi/cube-outline';
+	import OrgIcon from '~icons/mdi/domain';
+	import CatIcon from '~icons/mdi/group';
 	import HomeIcon from '~icons/mdi/home';
 	import SettingsIcon from '~icons/mdi/settings';
-
-	import DashboardIcon from "~icons/mdi/view-dashboard"
-	import UsersIcon from "~icons/mdi/account-group"
-	import OrgIcon from "~icons/mdi/domain"
-	import CatIcon from "~icons/mdi/group"
-	import StagingIcon from "~icons/mdi/chart-gantt"
-	import ProjectIcon from "~icons/mdi/cube-outline"
+	import DashboardIcon from '~icons/mdi/view-dashboard';
 </script>
 
 <nav class="nav">
@@ -27,46 +26,46 @@
 			</a>
 			<a class="button buttonCenter" href="/dashboard">
 				<div class="icon">
-					<DashboardIcon width="23px" height="23px" />
+					<DashboardIcon height="23px" width="23px" />
 				</div>
 				Dashboard
 			</a>
 			{#if data.user.role == Role.HUNCH_ADMIN}
-			<a class="button buttonCenter" href="/dashboard/admin/users">
-				<div class="icon">
-					<UsersIcon width="23px" height="23px" />
-				</div>
-				Users
-			</a>
-			<a class="button buttonCenter" href="/dashboard/admin/orgs">
-				<div class="icon">
-					<OrgIcon width="23px" height="23px" />
-				</div>
-				Organizations
-			</a>
-			<a class="button buttonCenter" href="/dashboard/admin/categories">
-				<div class="icon">
-					<CatIcon width="23px" height="23px" />
-				</div>
-				Categories
-			</a>
-			<a class="button buttonCenter" href="/dashboard/admin/staging">
-				<div class="icon">
-					<StagingIcon width="23px" height="23px" />
-				</div>
-				Staging
-			</a>
+				<a class="button buttonCenter" href="/dashboard/admin/users">
+					<div class="icon">
+						<UsersIcon height="23px" width="23px" />
+					</div>
+					Users
+				</a>
+				<a class="button buttonCenter" href="/dashboard/admin/orgs">
+					<div class="icon">
+						<OrgIcon height="23px" width="23px" />
+					</div>
+					Organizations
+				</a>
+				<a class="button buttonCenter" href="/dashboard/admin/categories">
+					<div class="icon">
+						<CatIcon height="23px" width="23px" />
+					</div>
+					Categories
+				</a>
+				<a class="button buttonCenter" href="/dashboard/admin/staging">
+					<div class="icon">
+						<StagingIcon height="23px" width="23px" />
+					</div>
+					Staging
+				</a>
 			{:else if data.user.role == Role.ORG_ADMIN}
-			<a class="button buttonCenter" href="/dashboard/orgs/{data.user.orgId}">
-				<div class="icon">
-					<OrgIcon width="23px" height="23px" />
-				</div>
-				My Organization
-			</a>
+				<a class="button buttonCenter" href="/dashboard/orgs/{data.user.orgId}">
+					<div class="icon">
+						<OrgIcon height="23px" width="23px" />
+					</div>
+					My Organization
+				</a>
 			{:else}
 				<a class="button buttonCenter" href="/dashboard/projects">
 					<div class="icon">
-						<ProjectIcon width="23px" height="23px" />
+						<ProjectIcon height="23px" width="23px" />
 					</div>
 					Projects
 				</a>

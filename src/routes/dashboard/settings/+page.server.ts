@@ -75,8 +75,8 @@ export const actions = {
 		z.object({
 			password: z.string()
 		}),
-		async ({ password}, { cookies }) => {
-			const user = await verifySession(cookies)
+		async ({ password }, { cookies }) => {
+			const user = await verifySession(cookies);
 			const validPass = await checkPassword(user.hash, user.salt, password);
 			if (!validPass) {
 				return {
@@ -95,8 +95,8 @@ export const actions = {
 			});
 			return {
 				success: true,
-				message: "Successfully disabled MFA."
-			}
+				message: 'Successfully disabled MFA.'
+			};
 		}
 	),
 	confirmMFA: formHandler(
@@ -104,29 +104,30 @@ export const actions = {
 			token: z.string().length(6)
 		}),
 		async ({ token }, { cookies }) => {
-		const user = await verifySession(cookies);
-		const verified = verifyToken(token, user.secret);
-		if (!verified) {
+			const user = await verifySession(cookies);
+			const verified = verifyToken(token, user.secret);
+			if (!verified) {
+				return {
+					success: false,
+					message: 'Token is incorrect.'
+				};
+			}
+
+			await prisma.user.update({
+				where: {
+					id: user.id
+				},
+				data: {
+					mfa: true
+				}
+			});
+
 			return {
-				success: false,
-				message: 'Token is incorrect.'
+				success: true,
+				message: 'MFA Confirmed.'
 			};
 		}
-
-		await prisma.user.update({
-			where: {
-				id: user.id
-			},
-			data: {
-				mfa: true
-			}
-		});
-
-		return {
-			success: true,
-			message: 'MFA Confirmed.'
-		};
-	}),
+	),
 	uploadPfp: async ({ request, cookies }) => {
 		const user = await verifySession(cookies);
 

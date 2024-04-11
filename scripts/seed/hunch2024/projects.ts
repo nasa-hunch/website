@@ -4,7 +4,7 @@ import { ProjectUserPermission, Role } from '@prisma/client';
 import { Chance } from 'chance';
 
 import { makePassword } from '../../../src/lib/server/password';
-import { schools } from './dump/orgs'
+import { schools } from './dump/orgs';
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
@@ -35,33 +35,37 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 	for (let i = 2; i < organizationCount + 1; i++) {
 		for (let j = 0; j < 5; j++) {
 			const id = projectIds[(i - 2) * organizationProjectCount + j];
-			
+
 			const teacherIds = Array.from({ length: chance.weighted([1, 2], [9, 1]) }).map(createId);
 			await prisma.user.createMany({
-				data: await Promise.all(teacherIds.map(async (id, k) => ({
-					id,
-					email: `${i}@project${j}.teacher${k}`,
-					firstName: faker.person.firstName(),
-					lastName: faker.person.lastName(),
-					role: Role.TEACHER,
-					orgId: i,
-					...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
-					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-				})))
+				data: await Promise.all(
+					teacherIds.map(async (id, k) => ({
+						id,
+						email: `${i}@project${j}.teacher${k}`,
+						firstName: faker.person.firstName(),
+						lastName: faker.person.lastName(),
+						role: Role.TEACHER,
+						orgId: i,
+						...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
+						...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+					}))
+				)
 			});
 
 			const studentIds = Array.from({ length: 3 }).map(createId);
 			await prisma.user.createMany({
-				data: await Promise.all(studentIds.map(async (id, k) => ({
-					id,
-					email: `${i}@project${j}.student${k}`,
-					firstName: faker.person.firstName(),
-					lastName: faker.person.lastName(),
-					role: Role.STUDENT,
-					orgId: i,
-					...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
-					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-				})))
+				data: await Promise.all(
+					studentIds.map(async (id, k) => ({
+						id,
+						email: `${i}@project${j}.student${k}`,
+						firstName: faker.person.firstName(),
+						lastName: faker.person.lastName(),
+						role: Role.STUDENT,
+						orgId: i,
+						...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
+						...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+					}))
+				)
 			});
 
 			const projectEditorIds = [...teacherIds, ...studentIds].map(createId);
@@ -74,18 +78,22 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 				}))
 			});
 
-			const unverifiedStudentIds = Array.from({ length: chance.weighted([1, 2], [9, 1]) }).map(createId);
+			const unverifiedStudentIds = Array.from({ length: chance.weighted([1, 2], [9, 1]) }).map(
+				createId
+			);
 			await prisma.user.createMany({
-				data: await Promise.all(unverifiedStudentIds.map(async (id, k) => ({
-					id,
-					email: `${i}@project${j}.unverified${k}`,
-					firstName: faker.person.firstName(),
-					lastName: faker.person.lastName(),
-					role: Role.STUDENT,
-					orgId: i,
-					...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
-					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-				})))
+				data: await Promise.all(
+					unverifiedStudentIds.map(async (id, k) => ({
+						id,
+						email: `${i}@project${j}.unverified${k}`,
+						firstName: faker.person.firstName(),
+						lastName: faker.person.lastName(),
+						role: Role.STUDENT,
+						orgId: i,
+						...chance.weighted([{ pfp: pickAvatar() }, {}], [0.9, 0.1]),
+						...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+					}))
+				)
 			});
 
 			const projectViewerIds = unverifiedStudentIds.map(createId);
@@ -112,7 +120,10 @@ export async function seed(prisma: PrismaTransactionClient, projectTemplateCount
 						},
 						assignees: {
 							create: chance
-								.pickset(projectEditorIds, chance.natural({ min: 0, max: projectEditorIds.length - 1 }))
+								.pickset(
+									projectEditorIds,
+									chance.natural({ min: 0, max: projectEditorIds.length - 1 })
+								)
 								.map((id) => ({
 									userId: id
 								}))

@@ -218,7 +218,7 @@
 	}
 
 	.option:hover::after {
-		background: rgba(0, 0, 0, 0.3)
+		background: rgba(0, 0, 0, 0.3);
 	}
 
 	.options input {

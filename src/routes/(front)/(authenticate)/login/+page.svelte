@@ -15,7 +15,7 @@
 				<Input name="email" label="Email" required />
 			</span>
 			<span class="inputDiv">
-				<Input name="password" label="Password" type="password" required />
+				<Input name="password" label="Password" required type="password" />
 			</span>
 			<span class="inputDiv">
 				<Input name="token" label="MFA Code" type="number" />
