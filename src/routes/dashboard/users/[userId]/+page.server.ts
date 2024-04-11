@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -6,7 +7,6 @@ import { formHandler } from '$lib/server/bodyguard.js';
 import { makePassword } from '$lib/server/password.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 import { verifySession } from '$lib/server/verifySession.js';
-import { createId } from '@paralleldrive/cuid2';
 
 export const load = async ({ params, parent }) => {
 	const data = await parent();
@@ -37,7 +37,32 @@ export const load = async ({ params, parent }) => {
 			firstName: true,
 			lastName: true,
 			pfp: true,
-			email: true
+			email: true,
+			projectUser: {
+				include: {
+					project: {
+						include: {
+							projectTemplate: {
+								select: {
+									name: true
+								}
+							},
+							users: {
+								select: {
+									user: {
+										select: {
+											firstName: true,
+											lastName: true,
+											pfp: true,
+											id: true
+										}
+									}
+								}
+							},
+						},
+					}
+				}
+			}
 		}
 	});
 
