@@ -15,7 +15,4 @@ export enum ProjectUserPermission {
 	VIEWER = 'VIEWER'
 }
 
-export type ProjectUserPermissionString
-	= 'NEEDS_APPROVAL'
-	| 'EDITOR'
-	| 'VIEWER';
+export type ProjectUserPermissionString = 'NEEDS_APPROVAL' | 'EDITOR' | 'VIEWER';

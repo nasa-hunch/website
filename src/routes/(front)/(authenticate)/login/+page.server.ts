@@ -1,9 +1,9 @@
+import { createId } from '@paralleldrive/cuid2';
 import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 
 import { checkPassword, verifyToken } from '$lib/server/password';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
-import { createId } from '@paralleldrive/cuid2';
 
 export const actions = {
 	login: async ({ request, cookies, getClientAddress }) => {
@@ -47,14 +47,14 @@ export const actions = {
 			if (!token) {
 				return {
 					success: false,
-					message: "TOKEN",
-				}
-			} else if (!verifyToken(token, user.secret)) {			
-			return {
-				success: false,
-				message: 'Incorrect or invalid MFA token.'
-			};
-		}
+					message: 'TOKEN'
+				};
+			} else if (!verifyToken(token, user.secret)) {
+				return {
+					success: false,
+					message: 'Incorrect or invalid MFA token.'
+				};
+			}
 		}
 
 		// Generate a new session for the user

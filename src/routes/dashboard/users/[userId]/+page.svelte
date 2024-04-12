@@ -71,7 +71,9 @@
 				</h3>
 				<div class="projectFooter">
 					<div class="avatars">
-						{#each projectUser.project.users.filter(user => user.user.id !== data.selectedUser.id).map(user => user.user) as user}
+						{#each projectUser.project.users
+							.filter((user) => user.user.id !== data.selectedUser.id)
+							.map((user) => user.user) as user}
 							<Pfp size="32px" {user} />
 						{/each}
 					</div>

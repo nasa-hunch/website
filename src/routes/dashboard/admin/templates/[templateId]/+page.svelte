@@ -10,7 +10,7 @@
 	<form class="content" action="?/updateDesc" method="post" use:enhance>
 		<h2>Short Description</h2>
 
-		<Editor 
+		<Editor
 			name="shortDescription"
 			placeholder="Enter short description..."
 			bind:content={data.projectTemplate.shortDescription}

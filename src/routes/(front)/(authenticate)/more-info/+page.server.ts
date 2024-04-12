@@ -1,9 +1,9 @@
+import { createId } from '@paralleldrive/cuid2';
 import { error, redirect } from '@sveltejs/kit';
 
 import { ProjectUserPermission, Role } from '$lib/enums';
 import { validateSession } from '$lib/server/auth.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
-import { createId } from '@paralleldrive/cuid2';
 
 export const load = async ({ cookies }) => {
 	const user = await validateSession(cookies.get('session'), {
@@ -38,12 +38,12 @@ export const actions = {
 	},
 	setRoleTeacher: async ({ cookies }) => {
 		const user = await validateSession(cookies.get('session'));
-		// await prisma.user.update({
-		// 	where: {
-		// 		id: user.id
+		// Await prisma.user.update({
+		// 	Where: {
+		// 		Id: user.id
 		// 	},
-		// 	data: {
-		// 		role: Role.UNVERIFIED_TEACHER
+		// 	Data: {
+		// 		Role: Role.UNVERIFIED_TEACHER
 		// 	}
 		// });
 	},

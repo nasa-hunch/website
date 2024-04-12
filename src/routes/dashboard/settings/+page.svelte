@@ -75,7 +75,7 @@
 </script>
 
 <form action="?/uploadPfp" enctype="multipart/form-data" hidden method="post" use:enhance>
-	<input bind:this={fileBox} name="file" type="file" on:change={() => fileUploadButton.click()}/>
+	<input bind:this={fileBox} name="file" type="file" on:change={() => fileUploadButton.click()} />
 	<button bind:this={fileUploadButton} />
 </form>
 
@@ -310,7 +310,7 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-		gap: .5rem;
+		gap: 0.5rem;
 		flex-grow: 1;
 	}
 
