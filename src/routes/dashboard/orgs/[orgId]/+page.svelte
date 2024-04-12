@@ -23,6 +23,20 @@
 		[Role.STUDENT]: []
 	} satisfies Record<Role, Role[]>;
 
+	const roleHeirachyKeys = Object.keys(roleHeirachy) as Role[];
+
+	$: sortedUsers = data.org.users.sort((a, b) => {
+		const aRole = (a.role as Role) ?? Role.STUDENT;
+		const bRole = (b.role as Role) ?? Role.STUDENT;
+		if (roleHeirachyKeys.indexOf(aRole) > roleHeirachyKeys.indexOf(bRole)) {
+			return 1;
+		} else if (roleHeirachyKeys.indexOf(aRole) < roleHeirachyKeys.indexOf(bRole)) {
+			return -1;
+		} else {
+			return 0;
+		}
+	});
+
 	function openOrgSettings() {
 		pushState('', {
 			modal: 'orgSettings'
@@ -42,7 +56,7 @@
 		<button class="icon gear" on:click={openOrgSettings}>
 			<MdiGear height="2rem" width="2rem" />
 		</button>
-		{#if roleHeirachy[data.user.role]}
+		{#if roleHeirachy[data.user.role].length > 0}
 			<button class="icon" on:click={openInviteModal}>
 				<MdiInvite height="2rem" width="2rem" />
 			</button>
@@ -67,7 +81,7 @@
 		<h2>Users</h2>
 
 		<div class="users">
-			{#each data.org.users as user}
+			{#each sortedUsers as user}
 				<a class="user" href="/dashboard/users/{user.id}">
 					<Pfp size="50px" {user} />
 					<div class="content">

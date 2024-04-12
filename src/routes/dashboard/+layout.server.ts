@@ -114,7 +114,7 @@ export const load = async ({ cookies }) => {
 				...session,
 				sessionText: sessionCheck.sessionText == session.sessionText ? 'current' : 'not'
 			})),
-			role: user.role,
+			role: user.role as Role,
 			orgId: user.role == Role.HUNCH_ADMIN ? null : user.orgId ?? user.projectUser[0].project.orgId
 		}
 	};
