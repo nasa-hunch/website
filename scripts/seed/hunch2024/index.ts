@@ -15,7 +15,6 @@ import * as organizations from './organization';
 import * as partners from './partners';
 import * as projects from './projects';
 import * as teams from './teams';
-import * as unverifiedTeachers from './unverified_teachers';
 
 const prisma = new PrismaClient();
 
@@ -44,7 +43,6 @@ async function main() {
 			const templateIds = await categories.seed(tx);
 			await organizations.seed(tx);
 			await projects.seed(tx, templateIds);
-			await unverifiedTeachers.seed(tx);
 			await admin.seed(tx);
 		},
 		{

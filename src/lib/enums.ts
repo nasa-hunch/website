@@ -2,13 +2,12 @@
 
 export enum Role {
 	STUDENT = 'STUDENT',
-	UNVERIFIED_TEACHER = 'UNVERIFIED_TEACHER',
 	TEACHER = 'TEACHER',
 	ORG_ADMIN = 'ORG_ADMIN',
 	HUNCH_ADMIN = 'HUNCH_ADMIN'
 }
 
-export type RoleString = 'STUDENT' | 'UNVERIFIED_TEACHER' | 'TEACHER' | 'ORG_ADMIN' | 'HUNCH_ADMIN';
+export type RoleString = 'STUDENT' | 'TEACHER' | 'ORG_ADMIN' | 'HUNCH_ADMIN';
 
 export enum ProjectUserPermission {
 	NEEDS_APPROVAL = 'NEEDS_APPROVAL',

@@ -12,13 +12,16 @@
 	import Combobox from '$lib/components/Combobox.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 
+	import { Role } from '$lib/enums';
+
 	export let data;
 
 	const roleHeirachy = {
-		'HUNCH_ADMIN': ['ORG_ADMIN', 'TEACHER', 'STUDENT'],
-		'ORG_ADMIN': ['ORG_ADMIN', 'TEACHER', 'STUDENT'],
-		'TEACHER': ['STUDENT'],
-	}
+		[Role.HUNCH_ADMIN]: [Role.ORG_ADMIN, Role.TEACHER, Role.STUDENT],
+		[Role.ORG_ADMIN]: [Role.ORG_ADMIN, Role.TEACHER, Role.STUDENT],
+		[Role.TEACHER]: [Role.STUDENT],
+		[Role.STUDENT]: []
+	} satisfies Record<Role, Role[]>;
 
 	function openOrgSettings() {
 		pushState('', {

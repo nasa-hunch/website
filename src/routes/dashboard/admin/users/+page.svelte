@@ -141,16 +141,7 @@
 				<td>{user.lastName}</td>
 				<td>{user.role ? snakeCaseToTitleCase(user.role) : 'Unknown'}</td>
 				<td>
-					{#if user.role == Role.UNVERIFIED_TEACHER}
-						<button
-							on:click={() => {
-								selectedUserId = user.id;
-								pushState('', {
-									modal: 'verifyUser'
-								});
-							}}>verify</button
-						>
-					{:else if user.role != Role.HUNCH_ADMIN}
+					{#if user.role != Role.HUNCH_ADMIN}
 						<button
 							on:click={() => {
 								deletePerson(user.id, user.firstName, user.lastName);

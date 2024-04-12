@@ -38,14 +38,14 @@ export const actions = {
 	},
 	setRoleTeacher: async ({ cookies }) => {
 		const user = await validateSession(cookies.get('session'));
-		await prisma.user.update({
-			where: {
-				id: user.id
-			},
-			data: {
-				role: Role.UNVERIFIED_TEACHER
-			}
-		});
+		// await prisma.user.update({
+		// 	where: {
+		// 		id: user.id
+		// 	},
+		// 	data: {
+		// 		role: Role.UNVERIFIED_TEACHER
+		// 	}
+		// });
 	},
 	submitJoinCode: async ({ cookies, request }) => {
 		const data = await request.formData();

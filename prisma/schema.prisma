@@ -12,7 +12,6 @@ datasource db {
 
 enum Role {
   STUDENT
-  UNVERIFIED_TEACHER
   TEACHER
   ORG_ADMIN
   HUNCH_ADMIN
