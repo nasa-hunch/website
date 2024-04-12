@@ -4,7 +4,7 @@
 	export let name = 'Input';
 	export let label = 'Input';
 	export let bgColor = '#f8f8f8';
-	export let type: 'password' | 'email' | 'text' | undefined = undefined;
+	export let type: 'password' | 'email' | 'text' | 'number' | undefined = undefined;
 	export let required = false;
 	export let autocomplete: HTMLInputElement['autocomplete'] | null = null;
 
