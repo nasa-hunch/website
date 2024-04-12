@@ -4,7 +4,7 @@ version: '3.9'
 # The containers that compose the project
 services:
   db:
-    image: postgres:13
+    image: docker.io/postgres:13
     restart: always
     container_name: nasa-hunch-postgres
     environment:
@@ -15,7 +15,7 @@ services:
       - '5432:5432'
   storage:
     container_name: s3.docker.test
-    image: zenko/cloudserver
+    image: docker.io/zenko/cloudserver
     ports:
       - '8000:8000'
     environment:
@@ -23,7 +23,7 @@ services:
       - S3BACKEND=mem
     command: bash -c "yarn start"
   web:
-    image: node:20.9.0-alpine3.18
+    image: docker.io/node:20.9.0-alpine3.18
     container_name: nasa-hunch-web
     environment:
       - ORIGIN=http://localhost:3000
