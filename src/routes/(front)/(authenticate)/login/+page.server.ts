@@ -12,7 +12,6 @@ export const actions = {
 		const email = formData.get('email')?.toString();
 		const password = formData.get('password')?.toString();
 		const token = formData.get('token')?.toString();
-
 		if (!email || !password) {
 			return {
 				success: false,
