@@ -31,6 +31,25 @@ export const load = async ({ cookies }) => {
 										select: {
 											name: true
 										}
+									},
+									users: {
+										select: {
+											user: {
+												select: {
+													pfp: true,
+													id: true,
+													firstName: true,
+													lastName: true
+												}
+											}
+										}
+									},
+									toDoItems: {
+										select: {
+											id: true,
+											name: true,
+											checked: true
+										}
 									}
 								}
 							}

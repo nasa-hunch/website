@@ -3,6 +3,7 @@ import { error, redirect } from '@sveltejs/kit';
 import { ProjectUserPermission, Role } from '$lib/enums';
 import { validateSession } from '$lib/server/auth.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
+import { createId } from '@paralleldrive/cuid2';
 
 export const load = async ({ cookies }) => {
 	const user = await validateSession(cookies.get('session'), {
@@ -76,6 +77,7 @@ export const actions = {
 
 		await prisma.projectUser.create({
 			data: {
+				id: createId(),
 				project: {
 					connect: {
 						id: project.id

@@ -7,26 +7,26 @@
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
-	import type { ProjectUserPermission, Role } from '$lib/enums';
+	import type { ProjectUserPermissionString, RoleString } from '$lib/enums';
 
 	type Data = {
 		user: {
 			firstName: string;
 			lastName: string;
 			pfp: string | null;
-			role: Role;
+			role: RoleString | null;
 		};
-		id: number;
+		id: string;
 		createdAt: Date;
 		updatedAt: Date;
-		userId: number;
-		projectId: number;
+		userId: string;
+		projectId: string;
 		owner: boolean;
-		permission: ProjectUserPermission;
+		permission: ProjectUserPermissionString;
 	};
 
 	export let memberData: Data;
-	export let userRole: Role;
+	export let userRole: RoleString;
 	$: role = memberData.permission;
 </script>
 

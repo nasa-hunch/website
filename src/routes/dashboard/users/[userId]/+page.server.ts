@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -36,7 +37,32 @@ export const load = async ({ params, parent }) => {
 			firstName: true,
 			lastName: true,
 			pfp: true,
-			email: true
+			email: true,
+			projectUser: {
+				include: {
+					project: {
+						include: {
+							projectTemplate: {
+								select: {
+									name: true
+								}
+							},
+							users: {
+								select: {
+									user: {
+										select: {
+											firstName: true,
+											lastName: true,
+											pfp: true,
+											id: true
+										}
+									}
+								}
+							},
+						},
+					}
+				}
+			}
 		}
 	});
 
@@ -59,7 +85,7 @@ export const actions = {
 
 			await prisma.user.update({
 				where: {
-					id: parseInt(params.userId)
+					id: params.userId
 				},
 				data: {
 					firstName,
@@ -128,6 +154,7 @@ export const actions = {
 
 			await prisma.notification.create({
 				data: {
+					id: createId(),
 					receiverId: user.id,
 					senderId: sender.id,
 					message,

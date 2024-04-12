@@ -3,6 +3,7 @@ import crypto from 'crypto';
 
 import { checkPassword, verifyToken } from '$lib/server/password';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
+import { createId } from '@paralleldrive/cuid2';
 
 export const actions = {
 	login: async ({ request, cookies, getClientAddress }) => {
@@ -61,6 +62,7 @@ export const actions = {
 		const sessionToken = crypto.randomBytes(32).toString('hex');
 		await prisma.session.create({
 			data: {
+				id: createId(),
 				sessionText: sessionToken,
 				userId: user.id,
 				ip: getClientAddress(),

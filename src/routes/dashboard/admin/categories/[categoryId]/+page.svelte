@@ -8,6 +8,8 @@
 	import { page } from '$app/stores';
 	import DatePicker from '$lib/components/DatePicker.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
+	import ColorCircle from '$lib/components/ColorCircle.svelte';
+	import ColorPicker from '$lib/components/ColorPicker.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
@@ -45,22 +47,25 @@
 {#if $page.state.modal === 'updateCategory'}
 	<Modal on:close={() => history.back()}>
 		<ModelForm action="?/updateCategory" method="post">
-			<h2>Update Category</h2>
-			<Input name="name" bgColor="#f1f1f1" label="Name" />
-			<input name="color" type="color" />
-			<input name="deadline" type="date" />
-			<Button value="Create" />
+			<h2>
+				Update Category
+				<ColorPicker name="color" value={"#" + data.category.color} />
+			</h2>
+			<Input name="name" bgColor="#f1f1f1" label="Name" value={data.category.name} />
+			<div class="margin-separator" />
+			<DatePicker name="deadline" label="Deadline" value={data.category.deadline} />
+			<div class="margin-separator" />
+			<Button value="Update" />
 		</ModelForm>
 	</Modal>
 {/if}
 
-<div style="--catColor: {'#' + data.category.color};" class="wrap">
+<div class="wrap">
 	<header>
 		<h1>
-			<!-- TODO: actually get this to send to server -->
+			<ColorCircle value={"#" + data.category.color} />
 			{data.category.name}
 			<IconButton
-				style="margin-left: 1rem;"
 				on:click={() => {
 					pushState('', {
 						modal: 'updateCategory'
@@ -99,6 +104,10 @@
 <style lang="scss">
 	hr {
 		border: 0px;
+	}
+
+	.margin-separator {
+		margin-bottom: 1rem;
 	}
 
 	.wrap {
@@ -174,8 +183,13 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		gap: 1rem;
 	}
 	h2 {
 		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
 	}
 </style>

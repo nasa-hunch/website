@@ -2,9 +2,9 @@
 	import { enhance } from '$app/forms';
 
 	type Assignees = {
-		id: number;
+		id: string;
 		projectUser: {
-			id: number;
+			id: string;
 			user: {
 				pfp: string | null;
 				firstName: string;

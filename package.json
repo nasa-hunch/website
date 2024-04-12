@@ -10,6 +10,7 @@
 		"test": "npm run test:integration && npm run test:unit",
 		"sync": "svelte-kit sync",
 		"check": "pnpm run sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:raw": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "pnpm run sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write . && eslint . --fix",

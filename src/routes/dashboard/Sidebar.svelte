@@ -15,7 +15,14 @@
 	import CatIcon from '~icons/mdi/group';
 	import HomeIcon from '~icons/mdi/home';
 	import SettingsIcon from '~icons/mdi/settings';
+	import MdiWeb from '~icons/mdi/web';
 	import DashboardIcon from '~icons/mdi/view-dashboard';
+	import MapIcon from '~icons/mdi/map';
+	import BlogIcon from '~icons/mdi/blog';
+	import SponsorIcon from '~icons/mdi/attach-money';
+	import StaffIcon from '~icons/mdi/shield-account';
+
+	let websiteDropdownEnabled = false;
 </script>
 
 <nav class="nav">
@@ -55,6 +62,40 @@
 					</div>
 					Staging
 				</a>
+				<button class="button buttonCenter" on:click={() => (websiteDropdownEnabled = !websiteDropdownEnabled)}>
+					<div class="icon">
+						<MdiWeb height="23px" width="23px" />
+					</div>
+					Website
+				</button>
+				{#if websiteDropdownEnabled}
+					<div class="indent">
+						<a class="button buttonCenter" href="/dashboard/admin/website/staff">
+							<div class="icon">
+								<StaffIcon height="23px" width="23px" />
+							</div>
+							Staff
+						</a>
+						<a class="button buttonCenter" href="/dashboard/admin/website/blog">
+							<div class="icon">
+								<BlogIcon height="23px" width="23px" />
+							</div>
+							Blog
+						</a>
+						<a class="button buttonCenter" href="/dashboard/admin/website/map">
+							<div class="icon">
+								<MapIcon height="23px" width="23px" />
+							</div>
+							Map
+						</a>
+						<a class="button buttonCenter" href="/dashboard/admin/website/sponsors">
+							<div class="icon">
+								<SponsorIcon height="23px" width="23px" />
+							</div>
+							Sponsors
+						</a>
+					</div>
+				{/if}
 			{:else if data.user.role == Role.ORG_ADMIN}
 				<a class="button buttonCenter" href="/dashboard/orgs/{data.user.orgId}">
 					<div class="icon">

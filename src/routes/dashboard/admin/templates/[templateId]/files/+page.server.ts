@@ -40,7 +40,7 @@ export const actions = {
 
 		const templateCheck = await prisma.projectTemplate.findFirst({
 			where: {
-				id: parseInt(params.templateId)
+				id: params.templateId
 			}
 		});
 		if (!templateCheck) {
@@ -75,7 +75,7 @@ export const actions = {
 						id: fileId,
 						templateFiles: {
 							some: {
-								templateId: parseInt(params.templateId)
+								templateId: params.templateId
 							}
 						}
 					}

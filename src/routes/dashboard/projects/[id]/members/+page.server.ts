@@ -22,7 +22,7 @@ export const actions = {
 
 		await prisma.project.update({
 			where: {
-				id: parseInt(params.id)
+				id: params.id
 			},
 			data: {
 				joinCode: 1e7 + Math.floor(Math.random() * 9e7)
@@ -52,7 +52,7 @@ export const actions = {
 	),
 	makeNone: formHandler(
 		z.object({
-			memberId: z.coerce.number()
+			memberId: z.string()
 		}),
 		async ({ memberId }, { cookies, params }) => {
 			return await updateMemberRole(
@@ -65,7 +65,7 @@ export const actions = {
 	),
 	kickMember: formHandler(
 		z.object({
-			memberId: z.coerce.number()
+			memberId: z.string()
 		}),
 		async ({ memberId }, { cookies, params }) => {
 			const projectUser = await verifyProjectUser(cookies, params.id);
@@ -80,7 +80,7 @@ export const actions = {
 			const projectUserToDelete = await prisma.projectUser.findFirst({
 				where: {
 					AND: {
-						projectId: parseInt(params.id),
+						projectId: params.id,
 						id: memberId
 					}
 				}

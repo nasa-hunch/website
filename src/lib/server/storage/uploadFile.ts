@@ -9,7 +9,7 @@ import type { FileDestination } from './fileTypes';
 import { destinations } from './fileTypes';
 
 //Destination information SHOULD already be checked elsewhere, therefore it will not be validated a second time here.
-export const uploadFile = async (uploadFile: File, destinationDetails: FileDestination) => {
+export const uploadFile = async (uploadFile: File, destinationDetails?: FileDestination) => {
 	if (!uploadFile) {
 		return {
 			success: false,
@@ -51,26 +51,22 @@ export const uploadFile = async (uploadFile: File, destinationDetails: FileDesti
 		}
 	});
 
-	if (destinationDetails.destinationName == destinations.PROJECT) {
-		await prisma.projectFile.create({
-			data: {
-				fileId: file.id,
-				projectId: destinationDetails.destinationId
-			}
-		});
-	} else if (destinationDetails.destinationName == destinations.TEMPLATE) {
-		await prisma.projectTemplateFile.create({
-			data: {
-				fileId: file.id,
-				templateId: destinationDetails.destinationId
-			}
-		});
-	} else {
-		return {
-			success: false,
-			message: 'No idea where to put this file.'
-		};
-	}
+	if (destinationDetails)
+		if (destinationDetails.destinationName == destinations.PROJECT) {
+			await prisma.projectFile.create({
+				data: {
+					fileId: file.id,
+					projectId: destinationDetails.destinationId
+				}
+			});
+		} else if (destinationDetails.destinationName == destinations.TEMPLATE) {
+			await prisma.projectTemplateFile.create({
+				data: {
+					fileId: file.id,
+					templateId: destinationDetails.destinationId
+				}
+			});
+		}
 
 	return {
 		success: true,

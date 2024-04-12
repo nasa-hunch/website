@@ -4,6 +4,7 @@ import { Role } from '$lib/enums';
 import { formHandler } from '$lib/server/bodyguard';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { verifySession } from '$lib/server/verifySession';
+import { createId } from '@paralleldrive/cuid2';
 
 export const actions = {
 	createProject: formHandler(
@@ -37,6 +38,7 @@ export const actions = {
 
 			await prisma.projectTemplate.create({
 				data: {
+					id: createId(),
 					name,
 					description: desc,
 					shortDescription: '',
@@ -95,7 +97,7 @@ export const actions = {
 				},
 				data: {
 					name: name || category.name,
-					color: color?.substring(1, 6) || category.color,
+					color: color?.substring(1, 7) || category.color,
 					deadline: deadLineDate || category.deadline
 				}
 			});

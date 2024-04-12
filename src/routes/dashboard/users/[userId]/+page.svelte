@@ -57,6 +57,28 @@
 			<Button value="Change Password" on:click={changePasswordModal} />
 		{/if}
 	</div>
+	<div class="projects">
+		<h2>Projects</h2>
+		{#each user.projectUser as projectUser}
+			<a
+				class="project"
+				class:submitted={projectUser.project.submitted}
+				href="/dashboard/projects/{projectUser.project.id}"
+			>
+				<h3>
+					{projectUser.project.projectTemplate.name.substring(0, 25)}
+					{projectUser.project.projectTemplate.name.length > 25 ? '...' : ''}
+				</h3>
+				<div class="projectFooter">
+					<div class="avatars">
+						{#each projectUser.project.users.filter(user => user.user.id !== data.selectedUser.id).map(user => user.user) as user}
+							<Pfp size="32px" {user} />
+						{/each}
+					</div>
+				</div>
+			</a>
+		{/each}
+	</div>
 </main>
 
 {#if $page.state.modal === 'sendNotification'}
@@ -127,5 +149,33 @@
 		border-radius: 0.5rem;
 		background-color: var(--background-alt);
 		color: black;
+	}
+
+	.info {
+		margin-top: 1rem;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		background-color: $background-alt;
+		color: black;
+	}
+
+	.projects {
+		margin-top: 1rem;
+	}
+
+	.project {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		background-color: $background-alt;
+		color: black;
+		text-decoration: none;
+		transition: background-color 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+		&:hover {
+			background-color: darken($background-alt, 10%);
+		}
 	}
 </style>

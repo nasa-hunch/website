@@ -6,7 +6,7 @@
 </script>
 
 <input bind:this={colorPicker} {name} hidden type="color" bind:value />
-<button style="background-color: {value ?? '#000000'};" on:click={() => colorPicker.click()} />
+<button type="button" style="background-color: {value ?? '#000000'};" on:click={() => colorPicker.click()} />
 
 <style lang="scss">
 	button {

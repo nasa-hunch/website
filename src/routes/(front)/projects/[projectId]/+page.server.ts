@@ -5,7 +5,7 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
 export const load = async ({ params }) => {
 	const projectTemplate = await prisma.projectTemplate.findFirst({
 		where: {
-			id: parseInt(params.projectId)
+			id: params.projectId
 		}
 	});
 

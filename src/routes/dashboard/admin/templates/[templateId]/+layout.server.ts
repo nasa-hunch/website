@@ -5,7 +5,7 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
 export const load = async ({ params }) => {
 	const projectTemplate = await prisma.projectTemplate.findUnique({
 		where: {
-			id: parseInt(params.templateId)
+			id: params.templateId
 		},
 		include: {
 			projects: {

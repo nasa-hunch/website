@@ -129,9 +129,10 @@ export const actions = {
 		}
 	),
 	uploadPfp: async ({ request, cookies }) => {
+		const file = (await request.formData()).get('file') as File;
 		const user = await verifySession(cookies);
 
-		const uploaded = await uploadFile(request);
+		const uploaded = await uploadFile(file);
 		if (!uploaded.success) {
 			return {
 				success: false,

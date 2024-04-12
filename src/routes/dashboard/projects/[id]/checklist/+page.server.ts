@@ -4,6 +4,7 @@ import { ProjectUserPermission } from '$lib/enums.js';
 import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
+import { createId } from '@paralleldrive/cuid2';
 
 export const load = async ({ parent }) => {
 	const parentData = await parent();
@@ -54,8 +55,9 @@ export const actions = {
 
 		await prisma.toDoItem.create({
 			data: {
+				id: createId(),
 				name,
-				projectId: parseInt(params.id),
+				projectId: params.id,
 				checked: false
 			}
 		});
@@ -67,7 +69,7 @@ export const actions = {
 	}),
 	deleteToDoItem: formHandler(
 		z.object({
-			itemId: z.coerce.number()
+			itemId: z.string()
 		}),
 		async ({ itemId }, { cookies, params }) => {
 			const projectUser = await verifyProjectUser(cookies, params.id);
@@ -106,7 +108,7 @@ export const actions = {
 	),
 	completeToDoItem: formHandler(
 		z.object({
-			itemId: z.coerce.number()
+			itemId: z.string()
 		}),
 		async ({ itemId }, { cookies, params }) => {
 			const projectUser = await verifyProjectUser(cookies, params.id);
@@ -149,7 +151,7 @@ export const actions = {
 	addAssignee: formHandler(
 		z.object({
 			projectUserId: z.string(),
-			itemId: z.coerce.number()
+			itemId: z.string()
 		}),
 		async ({ projectUserId, itemId }, { cookies, params }) => {
 			const projectUser = await verifyProjectUser(cookies, params.id);
@@ -208,6 +210,7 @@ export const actions = {
 			// Add the assignee
 			await prisma.toDoAssignee.create({
 				data: {
+					id: createId(),
 					userId: userCheck.id,
 					toDoItemId: toDoItem.id
 				}
@@ -221,7 +224,7 @@ export const actions = {
 	),
 	removeAssignee: formHandler(
 		z.object({
-			assigneeId: z.coerce.number()
+			assigneeId: z.string()
 		}),
 		async ({ assigneeId }, { cookies, params }) => {
 			const projectUser = await verifyProjectUser(cookies, params.id);

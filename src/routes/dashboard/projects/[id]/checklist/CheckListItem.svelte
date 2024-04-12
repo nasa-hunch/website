@@ -15,18 +15,18 @@
 	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 
-	import Assignees from './Assignees.svelte';
+	import Assignees from '$lib/components/Assignees.svelte';
 
 	type CheckListItem = {
-		id: number;
+		id: string;
 		createdAt: Date;
 		updatedAt: Date;
 		name: string;
 		checked: boolean;
-		projectId: number;
-		checkedById: number | null;
+		projectId: string;
+		checkedById: string | null;
 		assignees: {
-			id: number;
+			id: string;
 			projectUser: {
 				id: string;
 				user: {
@@ -42,8 +42,8 @@
 		id: string;
 		createdAt: Date;
 		updatedAt: Date;
-		userId: number;
-		projectId: number;
+		userId: string;
+		projectId: string;
 		owner: boolean;
 		user: {
 			firstName: string;

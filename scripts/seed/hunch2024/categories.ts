@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { createId } from '@paralleldrive/cuid2';
 import { Prisma } from '@prisma/client';
 import frontMatter from 'front-matter';
 import showdown from 'showdown';
@@ -85,7 +86,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 		})
 	);
 
-	let templateCount = 0;
+	const templateIds: string[] = [];
 	for (const { html, name, categories, shortDescription } of transformedFiles) {
 		const categoriesInDatabase = await prisma.category.findMany({
 			where: {
@@ -99,9 +100,10 @@ export async function seed(prisma: PrismaTransactionClient) {
 			throw new Error(`Category ${categories.join(', ')} not found`);
 		}
 
+		const currentId = createId();
 		await prisma.projectTemplate.create({
 			data: {
-				id: templateCount + 1,
+				id: currentId,
 				name,
 				category: {
 					connect: [
@@ -115,10 +117,10 @@ export async function seed(prisma: PrismaTransactionClient) {
 				shortDescription
 			}
 		});
-		templateCount++;
+		templateIds.push(currentId);
 	}
 
 	console.log('Categories seeded');
 
-	return templateCount;
+	return templateIds;
 }
