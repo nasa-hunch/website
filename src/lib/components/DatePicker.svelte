@@ -5,17 +5,18 @@
 	export let value: Date | undefined = undefined;
 	let active = false;
 
-	let derivedValue = value ? (`${value.getFullYear()}-${
-		value.getMonth().toString().padStart(2, '0')
-	}-${
-		value.getDay().toString().padStart(2, '0')
-	}`) : '';
+	let derivedValue = value
+		? `${value.getFullYear()}-${value.getMonth().toString().padStart(2, '0')}-${value
+				.getDay()
+				.toString()
+				.padStart(2, '0')}`
+		: '';
 
-	$: console.log(derivedValue)
+	$: console.log(derivedValue);
 </script>
 
 <button style="--bgColor: {bgColor}" class="wrap" class:active tabindex="-1" type="button">
-	<input {name} class="placeholder" on:change type="date" value={derivedValue} />
+	<input {name} class="placeholder" type="date" value={derivedValue} on:change />
 
 	<div class="labelBase labelMoved">
 		{label}

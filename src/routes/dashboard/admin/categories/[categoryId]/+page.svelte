@@ -6,10 +6,10 @@
 	import PencilIcon from '~icons/mdi/pencil-outline';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
-	import DatePicker from '$lib/components/DatePicker.svelte';
-	import IconButton from '$lib/components/IconButton.svelte';
 	import ColorCircle from '$lib/components/ColorCircle.svelte';
 	import ColorPicker from '$lib/components/ColorPicker.svelte';
+	import DatePicker from '$lib/components/DatePicker.svelte';
+	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
@@ -49,7 +49,7 @@
 		<ModelForm action="?/updateCategory" method="post">
 			<h2>
 				Update Category
-				<ColorPicker name="color" value={"#" + data.category.color} />
+				<ColorPicker name="color" value={'#' + data.category.color} />
 			</h2>
 			<Input name="name" bgColor="#f1f1f1" label="Name" value={data.category.name} />
 			<div class="margin-separator" />
@@ -63,7 +63,7 @@
 <div class="wrap">
 	<header>
 		<h1>
-			<ColorCircle value={"#" + data.category.color} />
+			<ColorCircle value={'#' + data.category.color} />
 			{data.category.name}
 			<IconButton
 				on:click={() => {

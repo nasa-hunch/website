@@ -8,14 +8,13 @@
 	import { enhance } from '$app/forms';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Assignees from '$lib/components/Assignees.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import FloatingComboBox from '$lib/components/FloatingComboBox.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
-
-	import Assignees from '$lib/components/Assignees.svelte';
 
 	type CheckListItem = {
 		id: string;

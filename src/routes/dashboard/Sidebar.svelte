@@ -8,19 +8,19 @@
 	import { tooltip } from '@svelte-plugins/tooltips';
 
 	import UsersIcon from '~icons/mdi/account-group';
+	import SponsorIcon from '~icons/mdi/attach-money';
 	import BellIcon from '~icons/mdi/bell';
+	import BlogIcon from '~icons/mdi/blog';
 	import StagingIcon from '~icons/mdi/chart-gantt';
 	import ProjectIcon from '~icons/mdi/cube-outline';
 	import OrgIcon from '~icons/mdi/domain';
 	import CatIcon from '~icons/mdi/group';
 	import HomeIcon from '~icons/mdi/home';
-	import SettingsIcon from '~icons/mdi/settings';
-	import MdiWeb from '~icons/mdi/web';
-	import DashboardIcon from '~icons/mdi/view-dashboard';
 	import MapIcon from '~icons/mdi/map';
-	import BlogIcon from '~icons/mdi/blog';
-	import SponsorIcon from '~icons/mdi/attach-money';
+	import SettingsIcon from '~icons/mdi/settings';
 	import StaffIcon from '~icons/mdi/shield-account';
+	import DashboardIcon from '~icons/mdi/view-dashboard';
+	import MdiWeb from '~icons/mdi/web';
 
 	let websiteDropdownEnabled = false;
 </script>
@@ -62,7 +62,10 @@
 					</div>
 					Staging
 				</a>
-				<button class="button buttonCenter" on:click={() => (websiteDropdownEnabled = !websiteDropdownEnabled)}>
+				<button
+					class="button buttonCenter"
+					on:click={() => (websiteDropdownEnabled = !websiteDropdownEnabled)}
+				>
 					<div class="icon">
 						<MdiWeb height="23px" width="23px" />
 					</div>

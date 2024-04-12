@@ -5,13 +5,12 @@
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case.js';
 	import Button from '$lib/components/Button.svelte';
+	import Combobox from '$lib/components/Combobox.svelte';
 	import InlineButton from '$lib/components/InlineButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
-	import Combobox from '$lib/components/Combobox.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
-
 	import { Role } from '$lib/enums';
 
 	export let data;
@@ -46,7 +45,7 @@
 	function openInviteModal() {
 		pushState('', {
 			modal: 'invite'
-		})
+		});
 	}
 </script>
 

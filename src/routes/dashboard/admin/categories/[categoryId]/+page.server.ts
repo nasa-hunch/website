@@ -1,10 +1,10 @@
+import { createId } from '@paralleldrive/cuid2';
 import { z } from 'zod';
 
 import { Role } from '$lib/enums';
 import { formHandler } from '$lib/server/bodyguard';
 import { prisma } from '$lib/server/prisma/prismaConnection';
 import { verifySession } from '$lib/server/verifySession';
-import { createId } from '@paralleldrive/cuid2';
 
 export const actions = {
 	createProject: formHandler(
