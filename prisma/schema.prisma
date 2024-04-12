@@ -265,6 +265,8 @@ model Invite {
   to User? @relation("to", fields: [toId], references: [id], onDelete: Cascade)
 
   used Boolean @default(false)
+
+  joinCode String @unique
 }
 
 model Branch {

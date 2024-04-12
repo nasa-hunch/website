@@ -8,7 +8,11 @@
 		};
 	}>();
 
-	type Options = [K[], (arg: K) => string, (arg: K) => string | number];
+	type Options = [
+		items: K[],
+		display: (arg: K) => string,
+		id: (arg: K) => string | number
+	];
 
 	export let options: Options = [[], () => '', () => 0];
 

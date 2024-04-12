@@ -236,6 +236,7 @@ CREATE TABLE "Invite" (
     "form" TEXT NOT NULL,
     "toId" TEXT NOT NULL,
     "used" BOOLEAN NOT NULL DEFAULT false,
+    "joinCode" TEXT NOT NULL,
 
     CONSTRAINT "Invite_pkey" PRIMARY KEY ("id")
 );
@@ -282,6 +283,9 @@ CREATE UNIQUE INDEX "Project_joinCode_key" ON "Project"("joinCode");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "BlogPost_slug_key" ON "BlogPost"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Invite_joinCode_key" ON "Invite"("joinCode");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CategoryToProjectTemplate_AB_unique" ON "_CategoryToProjectTemplate"("A", "B");

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MdiGear from '~icons/mdi/gear';
+	import MdiInvite from '~icons/mdi/invite';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case.js';
@@ -8,23 +9,41 @@
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
+	import Combobox from '$lib/components/Combobox.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 
 	export let data;
+
+	const roleHeirachy = {
+		'HUNCH_ADMIN': ['ORG_ADMIN', 'TEACHER', 'STUDENT'],
+		'ORG_ADMIN': ['ORG_ADMIN', 'TEACHER', 'STUDENT'],
+		'TEACHER': ['STUDENT'],
+	}
 
 	function openOrgSettings() {
 		pushState('', {
 			modal: 'orgSettings'
 		});
 	}
+
+	function openInviteModal() {
+		pushState('', {
+			modal: 'invite'
+		})
+	}
 </script>
 
 <main>
 	<div class="title">
 		<h1>{data.org.name}</h1>
-		<button class="gear" on:click={openOrgSettings}>
+		<button class="icon gear" on:click={openOrgSettings}>
 			<MdiGear height="2rem" width="2rem" />
 		</button>
+		{#if roleHeirachy[data.user.role]}
+			<button class="icon" on:click={openInviteModal}>
+				<MdiInvite height="2rem" width="2rem" />
+			</button>
+		{/if}
 	</div>
 
 	{#if data.org.projects.length > 0}
@@ -73,6 +92,25 @@
 	</Modal>
 {/if}
 
+{#if $page.state.modal === 'invite'}
+	<Modal on:close={() => history.back()}>
+		<ModalForm action="?/generateInvite" method="POST">
+			<h2>Invite User</h2>
+			<Combobox
+				name="role"
+				label="Select Role"
+				options={[
+					roleHeirachy[data.user.role],
+					(role) => snakeCaseToTitleCase(role),
+					(role) => role
+				]}
+			/>
+			<div class="margin-separator" />
+			<Button type="submit" value="Invite" />
+		</ModalForm>
+	</Modal>
+{/if}
+
 <style lang="scss">
 	.margin-separator {
 		margin: 1rem 0;
@@ -83,17 +121,20 @@
 		align-items: center;
 		gap: 1rem;
 
-		.gear {
+		.icon {
 			background-color: transparent;
 			border: none;
 			margin: 0;
 			padding: 0;
 			width: 2rem;
 			height: 2rem;
+			cursor: pointer;
+		}
+
+		.gear {
 			transform: rotate(0deg);
 			transition: 0.2s all cubic-bezier(0.075, 0.82, 0.165, 1);
 			&:hover {
-				cursor: pointer;
 				transform: rotate(45deg);
 			}
 		}
