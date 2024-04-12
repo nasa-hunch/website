@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 
@@ -76,5 +77,30 @@ export const actions = {
 				message: 'Organization updated'
 			};
 		}
-	)
+	),
+    generateInvite: formHandler(
+        z.object({
+            role: z.enum(['STUDENT', 'TEACHER', 'ORG_ADMIN'])
+        }),
+        async ({ role }, { params, cookies }) => {
+            const user = await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN);
+
+            const invite = await prisma.invite.create({
+                data: {
+                    id: createId(),
+                    role: role as Role,
+                    orgId: parseInt(params.orgId),
+                    fromId: user.id,
+                    form: '',
+                    joinCode: Math.floor(Math.random() * 1000000).toString()
+                }
+            });
+
+            return {
+                success: true,
+                message: 'Invite generated',
+                invite
+            };
+        }
+    )
 };
