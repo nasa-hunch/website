@@ -3,6 +3,9 @@ import { type Cookies, redirect } from '@sveltejs/kit';
 import type { Role } from '../enums';
 import { prisma } from './prisma/prismaConnection';
 
+// = one week
+const expirationTime = 1000 * 60 * 60 * 24 * 7;
+
 export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
 	const session = cookies.get('session');
 
@@ -20,6 +23,15 @@ export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
 	});
 
 	if (!sessionCheck?.user) {
+		throw redirect(303, '/login');
+	}
+
+	if (sessionCheck.createdAt.getTime() + expirationTime < Date.now()) {
+		await prisma.session.delete({
+			where: {
+				id: sessionCheck.id
+			}
+		});
 		throw redirect(303, '/login');
 	}
 
