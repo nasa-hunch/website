@@ -13,7 +13,6 @@ export const actions = {
 		const email = formData.get('email')?.toString();
 		const password = formData.get('password')?.toString();
 		const token = formData.get('token')?.toString();
-
 		if (!email || !password) {
 			return {
 				success: false,
@@ -44,11 +43,18 @@ export const actions = {
 			};
 		}
 
-		if (user.mfa && (!token || !verifyToken(token, user.secret))) {
+		if (user.mfa) {
+			if (!token) {
+				return {
+					success: false,
+					message: "TOKEN",
+				}
+			} else if (!verifyToken(token, user.secret)) {			
 			return {
 				success: false,
 				message: 'Incorrect or invalid MFA token.'
 			};
+		}
 		}
 
 		// Generate a new session for the user

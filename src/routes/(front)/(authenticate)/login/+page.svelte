@@ -1,35 +1,66 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { enhance, applyAction } from '$app/forms';
+	import { page } from "$app/stores";
+	import { pushState } from '$app/navigation';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
-
+	import Modal from '$lib/components/Modal.svelte';
+	import ModelForm from '$lib/components/ModalForm.svelte';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
+
+	let email = "";
+	let password = "";
+
+	$: if (form?.message === "TOKEN") pushState("", { modal: "mfa" });
+	$: console.log(form?.message);
 </script>
 
 <div class="wrap">
 	<div class="contentWrap">
-		<form class="content" action="?/login" method="post" use:enhance>
+		<form class="content" action="?/login" method="post" use:enhance={() => {
+			return async ({ result }) => {
+				await applyAction(result)
+			}
+		}}>
 			<h1>Login</h1>
 			<span class="inputDiv">
-				<Input name="email" label="Email" required />
+				<Input name="email" label="Email" required bind:value={email} />
 			</span>
 			<span class="inputDiv">
-				<Input name="password" label="Password" required type="password" />
-			</span>
-			<span class="inputDiv">
-				<Input name="token" label="MFA Code" type="number" />
+				<Input name="password" label="Password" required type="password" bind:value={password} />
 			</span>
 			<span class="inputDiv">
 				<Button type="submit" value="Log In" />
 			</span>
 			<p>No account? <a href="/get-started">Sign Up</a></p>
 			{#if form?.success == false}
-				<p class="error">Error: {form?.message}</p>
+				{#if form?.message !== "TOKEN"}
+					<p class="error">Error: {form?.message}</p>
+				{/if}
 			{/if}
 		</form>
 	</div>
 </div>
+
+{#if $page.state.modal === "mfa"}
+<Modal on:close={() => history.back()}>
+	<ModelForm action="?/login" method="post" >
+		<div class="MFAForm content">
+			<h1>Multifactor Authentication</h1>
+				<input type="hidden" name="email" value={email} />
+				<input type="hidden" name="password" value={password} />
+				<span class="inputDiv">
+				<Input name="token" label="MFA Code" required type="number" />
+				</span>
+				<span class="inputDiv">
+				
+				<Button type="submit" value="Log In" />
+				</span>
+		</div>
+	</ModelForm>
+</Modal>
+{/if}
 
 <style lang="scss">
 	form {
