@@ -14,7 +14,7 @@
 	};
 
 	let keyHelper = (e: KeyboardEvent) => {
-		if (e.key == 'Escape') {
+		if (e.key == 'Escape' && document.activeElement?.tagName != 'INPUT') {
 			dispatch('close');
 		}
 	};
