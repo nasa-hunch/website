@@ -110,7 +110,10 @@
 
 {#if $page.state.modal === 'invite'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm action="?/generateInvite" method="POST">
+		<ModalForm
+			action="?/generateInvite"
+			method="POST"
+		>
 			<h2>Invite User</h2>
 			<Combobox
 				name="role"
