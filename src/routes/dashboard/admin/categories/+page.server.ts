@@ -30,7 +30,6 @@ export const actions = {
 			await prisma.category.create({
 				data: {
 					name,
-					icon: '',
 					color: newColor,
 					deadline: projectDeadline
 				}

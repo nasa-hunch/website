@@ -30,7 +30,6 @@ model Category {
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
   color String @db.VarChar(6)
-  icon String @db.VarChar(255)
   deadline DateTime
   projectTemplates ProjectTemplate[]
 }
