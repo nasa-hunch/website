@@ -79,7 +79,6 @@ export async function seed(prisma: PrismaTransactionClient) {
 	await prisma.category.createMany({
 		data: categories.map((category) => ({
 			...category,
-			icon: 'no',
 			deadline: deadline()
 		}))
 	});

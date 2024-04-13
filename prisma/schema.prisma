@@ -30,7 +30,6 @@ model Category {
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
   color String @db.VarChar(6)
-  icon String @db.VarChar(255)
   deadline DateTime
   projectTemplates ProjectTemplate[]
   banner String @db.VarChar(255) @default("/og-img.webp")
@@ -46,6 +45,7 @@ model Organization {
   users User[]
   projects Project[]
   locations Location[]
+  invites Invite[]
 }
 
 model Location {
@@ -263,8 +263,11 @@ model Invite {
   // Any additional information attatched when they recieve the invite
   form String @db.Text
 
-  toId String
+  toId String?
   to User? @relation("to", fields: [toId], references: [id], onDelete: Cascade)
+
+  orgId Int?
+  organization Organization? @relation(fields: [orgId], references: [id])
 
   used Boolean @default(false)
 

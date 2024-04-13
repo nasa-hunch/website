@@ -13,6 +13,7 @@
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModelForm from '$lib/components/ModalForm.svelte';
+	import MdiAccountPlus from '~icons/mdi/account-plus';
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
@@ -116,7 +117,12 @@
 	</Modal>
 {/if}
 <main>
-	<h1>User Management Panel</h1>
+	<h1>
+		User Management Panel
+		<button class="plus">
+			<MdiAccountPlus width="2rem" height="2rem"/>
+		</button>
+	</h1>
 
 	<table>
 		<tr class="headRow row">
@@ -197,6 +203,22 @@
 </main>
 
 <style lang="scss">
+	h1 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+
+		.plus {
+			background: none;
+			border: none;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
 	main {
 		width: 100%;
 		box-sizing: border-box;
