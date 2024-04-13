@@ -1,7 +1,7 @@
 ---
-name: software
-banner: https://nasahunch.com/images/software.jpg
-color: "3F88C5"
+name: Flight Configuration
+banner: https://nasahunch.com/images/flight-configuration-card-image.jpg
+color: "F1C8DB"
 ---
 Bring **HUNCH** projects to **life**.
 
