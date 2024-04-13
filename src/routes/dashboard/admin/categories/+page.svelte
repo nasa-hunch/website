@@ -24,7 +24,7 @@
 {/if}
 
 <main>
-	<h2>Project Categories</h2>
+	<h1>Project Categories</h1>
 	<div class="categories">
 		{#each data.categories as category}
 			<a
@@ -97,7 +97,7 @@
 		font-size: 1.2rem;
 		margin: 0px;
 	}
-	h2 {
+	h1 {
 		text-align: center;
 		display: flex;
 		gap: 1rem;
