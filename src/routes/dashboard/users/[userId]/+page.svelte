@@ -57,30 +57,32 @@
 			<Button value="Change Password" on:click={changePasswordModal} />
 		{/if}
 	</div>
-	<div class="projects">
-		<h2>Projects</h2>
-		{#each user.projectUser as projectUser}
-			<a
-				class="project"
-				class:submitted={projectUser.project.submitted}
-				href="/dashboard/projects/{projectUser.project.id}"
-			>
-				<h3>
-					{projectUser.project.projectTemplate.name.substring(0, 25)}
-					{projectUser.project.projectTemplate.name.length > 25 ? '...' : ''}
-				</h3>
-				<div class="projectFooter">
-					<div class="avatars">
-						{#each projectUser.project.users
-							.filter((user) => user.user.id !== data.selectedUser.id)
-							.map((user) => user.user) as user}
-							<Pfp size="32px" {user} />
-						{/each}
+	{#if user.projectUser.length > 0}
+		<div class="projects">
+			<h2>Projects</h2>
+			{#each user.projectUser as projectUser}
+				<a
+					class="project"
+					class:submitted={projectUser.project.submitted}
+					href="/dashboard/projects/{projectUser.project.id}"
+				>
+					<h3>
+						{projectUser.project.projectTemplate.name.substring(0, 25)}
+						{projectUser.project.projectTemplate.name.length > 25 ? '...' : ''}
+					</h3>
+					<div class="projectFooter">
+						<div class="avatars">
+							{#each projectUser.project.users
+								.filter((user) => user.user.id !== data.selectedUser.id)
+								.map((user) => user.user) as user}
+								<Pfp size="32px" {user} />
+							{/each}
+						</div>
 					</div>
-				</div>
-			</a>
-		{/each}
-	</div>
+				</a>
+			{/each}
+		</div>
+	{/if}
 </main>
 
 {#if $page.state.modal === 'sendNotification'}
