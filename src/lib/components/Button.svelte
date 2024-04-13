@@ -2,14 +2,21 @@
 	export let value = 'Button!';
 	export let type: HTMLButtonElement['type'] = 'submit';
 	export let disabled = false;
+	export let href: string | undefined = undefined;
 </script>
 
-<button {disabled} {type} on:click>
-	{value}
-</button>
+{#if href}
+	<a class="button" {href}>
+		{value}
+	</a>
+{:else}
+	<button class="button" {disabled} {type} on:click>
+		{value}
+	</button>
+{/if}
 
 <style lang="scss">
-	button {
+	.button {
 		background: transparent;
 		border: 1px solid gray;
 		border-radius: 3px;
@@ -20,13 +27,13 @@
 		cursor: pointer;
 		transition: 0.2s all cubic-bezier(0.075, 0.82, 0.165, 1);
 	}
-	button:disabled {
+	.button:disabled {
 		opacity: 0.25;
 		cursor: not-allowed;
 	}
-	button:focus,
-	button:hover,
-	button:active {
+	.button:focus,
+	.button:hover,
+	.button:active {
 		border: 1px solid $secondary;
 	}
 </style>

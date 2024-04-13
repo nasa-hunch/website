@@ -6,11 +6,11 @@ import { prisma } from './prisma/prismaConnection';
 // = one week
 const expirationTime = 1000 * 60 * 60 * 24 * 7;
 
-export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
+export const verifySessionOptional = async (cookies: Cookies, ...roles: Role[]) => {
 	const session = cookies.get('session');
 
 	if (!session) {
-		throw redirect(303, '/login');
+		return undefined;
 	}
 
 	const sessionCheck = await prisma.session.findFirst({
@@ -23,7 +23,7 @@ export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
 	});
 
 	if (!sessionCheck?.user) {
-		throw redirect(303, '/login');
+		return undefined;
 	}
 
 	if (sessionCheck.createdAt.getTime() + expirationTime < Date.now()) {
@@ -32,15 +32,25 @@ export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
 				id: sessionCheck.id
 			}
 		});
-		throw redirect(303, '/login');
+		return undefined;
 	}
 
 	if (
 		roles.length > 0 &&
 		!(sessionCheck.user.role && roles.includes(sessionCheck.user.role as Role))
 	) {
-		throw redirect(303, '/login');
+		return undefined;
 	}
 
 	return sessionCheck.user;
+}
+
+export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
+	const check = await verifySessionOptional(cookies, ...roles);
+	
+	if (check) {
+		return check;
+	}
+	
+	throw redirect(303, '/login');
 };

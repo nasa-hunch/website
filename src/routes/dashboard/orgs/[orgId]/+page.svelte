@@ -1,7 +1,7 @@
 <script lang="ts">
 	import MdiGear from '~icons/mdi/gear';
 	import MdiInvite from '~icons/mdi/invite';
-	import { pushState } from '$app/navigation';
+	import { pushState, replaceState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case.js';
 	import Button from '$lib/components/Button.svelte';
@@ -12,8 +12,10 @@
 	import ModalForm from '$lib/components/ModalForm.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 	import { Role } from '$lib/enums';
+	import ModalWrap from '$lib/components/ModalWrap.svelte';
 
 	export let data;
+	export let form;
 
 	const roleHeirachy = {
 		[Role.HUNCH_ADMIN]: [Role.ORG_ADMIN, Role.TEACHER, Role.STUDENT],
@@ -113,6 +115,14 @@
 		<ModalForm
 			action="?/generateInvite"
 			method="POST"
+			enhanceBody={() => {
+				return async ({ update }) => {
+					await update();
+					replaceState('', {
+						modal: 'inviteSent'
+					})
+				}
+			}}
 		>
 			<h2>Invite User</h2>
 			<Combobox
@@ -127,6 +137,23 @@
 			<div class="margin-separator" />
 			<Button type="submit" value="Invite" />
 		</ModalForm>
+	</Modal>
+{/if}
+
+{#if $page.state.modal === 'inviteSent'}
+	<Modal on:close={() => history.back()}>
+		<ModalWrap>
+			{#if form && form.invite}
+				<h2>Invite Generated</h2>
+				<p>An invite has generated.</p>
+				<p>Code: {form.invite.joinCode}</p>
+				<p>Link: <a href="/invite/{form.invite.joinCode}">
+					{location.origin}/invite/{form.invite.joinCode}
+				</a></p>
+			{:else}
+				<p>Waiting for server response.</p>
+			{/if}
+		</ModalWrap>
 	</Modal>
 {/if}
 

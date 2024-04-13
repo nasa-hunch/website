@@ -85,6 +85,9 @@ export const actions = {
         async ({ role }, { params, cookies }) => {
             const user = await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN);
 
+			if (user.orgId !== parseInt(params.orgId) && user.role !== Role.HUNCH_ADMIN)
+				error(404, 'Organization not found');
+
             const invite = await prisma.invite.create({
                 data: {
                     id: createId(),
