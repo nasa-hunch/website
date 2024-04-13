@@ -43,14 +43,14 @@ export const verifySessionOptional = async (cookies: Cookies, ...roles: Role[]) 
 	}
 
 	return sessionCheck.user;
-}
+};
 
 export const verifySession = async (cookies: Cookies, ...roles: Role[]) => {
 	const check = await verifySessionOptional(cookies, ...roles);
-	
+
 	if (check) {
 		return check;
 	}
-	
+
 	throw redirect(303, '/login');
 };

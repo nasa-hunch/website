@@ -1,8 +1,9 @@
 ---
 name: Flight Configuration
 banner: https://nasahunch.com/images/flight-configuration-card-image.jpg
-color: "F1C8DB"
+color: 'F1C8DB'
 ---
+
 Bring **HUNCH** projects to **life**.
 
 Design is one part of the process, but there is more to it than that. The **Flight Configuration** program is the next step in the process of bringing a project to the International Space Station.

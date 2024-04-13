@@ -9,10 +9,10 @@
 	import ColorCircle from '$lib/components/ColorCircle.svelte';
 	import ColorPicker from '$lib/components/ColorPicker.svelte';
 	import DatePicker from '$lib/components/DatePicker.svelte';
+	import Editor from '$lib/components/Editor.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import Editor from "$lib/components/Editor.svelte";
 	import ModelForm from '$lib/components/ModalForm.svelte';
 	const calculatePercentDone = (startDay: Date, endDay: Date) => {
 		const startTimestamp = dayjs(startDay).unix();
@@ -28,6 +28,7 @@
 		return maxPercent;
 	};
 </script>
+
 {#if $page.state.modal === 'createProject'}
 	<Modal on:close={() => history.back()}>
 		<ModelForm action="?/createProject" method="post">
@@ -55,7 +56,7 @@
 			<DatePicker name="deadline" label="Deadline" value={data.category.deadline} />
 			<div class="margin-separator" />
 			<h2>Description</h2>
-			<Editor placeholder="Description" name="description" content={data.category.description} />
+			<Editor name="description" content={data.category.description} placeholder="Description" />
 			<div class="margin-separator" />
 			<Button value="Update" />
 		</ModelForm>

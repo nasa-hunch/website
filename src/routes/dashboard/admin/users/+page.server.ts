@@ -95,21 +95,21 @@ export const actions = {
 			const user = await verifySession(cookies, Role.HUNCH_ADMIN);
 
 			const invite = await prisma.invite.create({
-                data: {
-                    id: createId(),
-                    role: role as Role,
-                    ...(organization ? { orgId: parseInt(organization) } : {}),
-                    fromId: user.id,
-                    form: '',
-                    joinCode: Math.floor(Math.random() * 1000000).toString()
-                }
-            });
+				data: {
+					id: createId(),
+					role: role as Role,
+					...(organization ? { orgId: parseInt(organization) } : {}),
+					fromId: user.id,
+					form: '',
+					joinCode: Math.floor(Math.random() * 1000000).toString()
+				}
+			});
 
-            return {
-                success: true,
-                message: 'Invite generated',
-                invite
-            };
+			return {
+				success: true,
+				message: 'Invite generated',
+				invite
+			};
 		}
 	)
 };

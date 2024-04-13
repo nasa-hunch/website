@@ -10,9 +10,9 @@
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
+	import ModalWrap from '$lib/components/ModalWrap.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 	import { Role } from '$lib/enums';
-	import ModalWrap from '$lib/components/ModalWrap.svelte';
 
 	export let data;
 	export let form;
@@ -114,15 +114,15 @@
 	<Modal on:close={() => history.back()}>
 		<ModalForm
 			action="?/generateInvite"
-			method="POST"
 			enhanceBody={() => {
 				return async ({ update }) => {
 					await update();
 					replaceState('', {
 						modal: 'inviteSent'
-					})
-				}
+					});
+				};
 			}}
+			method="POST"
 		>
 			<h2>Invite User</h2>
 			<Combobox
@@ -147,9 +147,11 @@
 				<h2>Invite Generated</h2>
 				<p>An invite has generated.</p>
 				<p>Code: {form.invite.joinCode}</p>
-				<p>Link: <a href="/invite/{form.invite.joinCode}">
-					{location.origin}/invite/{form.invite.joinCode}
-				</a></p>
+				<p>
+					Link: <a href="/invite/{form.invite.joinCode}">
+						{location.origin}/invite/{form.invite.joinCode}
+					</a>
+				</p>
 			{:else}
 				<p>Waiting for server response.</p>
 			{/if}

@@ -78,32 +78,32 @@ export const actions = {
 			};
 		}
 	),
-    generateInvite: formHandler(
-        z.object({
-            role: z.enum(['STUDENT', 'TEACHER', 'ORG_ADMIN'])
-        }),
-        async ({ role }, { params, cookies }) => {
-            const user = await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN);
+	generateInvite: formHandler(
+		z.object({
+			role: z.enum(['STUDENT', 'TEACHER', 'ORG_ADMIN'])
+		}),
+		async ({ role }, { params, cookies }) => {
+			const user = await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN);
 
 			if (user.orgId !== parseInt(params.orgId) && user.role !== Role.HUNCH_ADMIN)
 				error(404, 'Organization not found');
 
-            const invite = await prisma.invite.create({
-                data: {
-                    id: createId(),
-                    role: role as Role,
-                    orgId: parseInt(params.orgId),
-                    fromId: user.id,
-                    form: '',
-                    joinCode: Math.floor(Math.random() * 1000000).toString()
-                }
-            });
+			const invite = await prisma.invite.create({
+				data: {
+					id: createId(),
+					role: role as Role,
+					orgId: parseInt(params.orgId),
+					fromId: user.id,
+					form: '',
+					joinCode: Math.floor(Math.random() * 1000000).toString()
+				}
+			});
 
-            return {
-                success: true,
-                message: 'Invite generated',
-                invite
-            };
-        }
-    )
+			return {
+				success: true,
+				message: 'Invite generated',
+				invite
+			};
+		}
+	)
 };

@@ -25,7 +25,7 @@ const categoryAttributesSchema = z.object({
 	name: z.string(),
 	color: z.string().length(6),
 	banner: z.string().url()
-})
+});
 
 async function generateData<T extends z.ZodRawShape>(directory: string, schema: z.ZodObject<T>) {
 	const converter = new showdown.Converter();
@@ -42,7 +42,7 @@ async function generateData<T extends z.ZodRawShape>(directory: string, schema: 
 			const { attributes, body } = frontMatter(content);
 			const html = converter.makeHtml(body);
 			const parsedAttributes = schema.parse(attributes);
-			return { 
+			return {
 				html,
 				fileName: path.basename(file, path.extname(file)),
 				...parsedAttributes
@@ -65,7 +65,6 @@ export async function seed(prisma: PrismaTransactionClient) {
 			deadline: deadline()
 		}))
 	});
-
 
 	const templateIds: string[] = [];
 	const transformedTemplateFiles = await generateData('projects', attributesSchema);

@@ -1,8 +1,9 @@
 ---
-color: "FFF275"
-name: "Video & Media"
-banner: "https://nasahunch.com/images/video.png"
+color: 'FFF275'
+name: 'Video & Media'
+banner: 'https://nasahunch.com/images/video.png'
 ---
+
 # Video & Media
 
 **Inspire** the next generation of explorers.

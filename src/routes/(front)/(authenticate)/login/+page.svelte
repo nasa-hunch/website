@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { applyAction,enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';

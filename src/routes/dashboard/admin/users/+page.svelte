@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { toast } from 'svelte-french-toast';
 
+	import MdiAccountPlus from '~icons/mdi/account-plus';
 	import ChevronLeft from '~icons/mdi/chevron-left';
 	import ChevronRight from '~icons/mdi/chevron-right';
 	import FilterIcon from '~icons/mdi/filter';
@@ -14,7 +15,6 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
 	import ModalWrap from '$lib/components/ModalWrap.svelte';
-	import MdiAccountPlus from '~icons/mdi/account-plus';
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
@@ -55,7 +55,7 @@
 	function inviteUserModal() {
 		pushState('', {
 			modal: 'inviteUser'
-		})
+		});
 	}
 
 	export let form;
@@ -130,40 +130,36 @@
 
 {#if $page.state.modal === 'inviteUser'}
 	<Modal on:close={() => history.back()}>
-		<ModalForm 
-			method="POST"
+		<ModalForm
 			action="?/inviteUser"
 			enhanceBody={() => {
 				return async ({ update }) => {
 					await update();
 					replaceState('', {
 						modal: 'inviteSent'
-					})
-				}
+					});
+				};
 			}}
+			method="POST"
 		>
 			<h2>Invite User</h2>
 
 			<Combobox
 				name="role"
 				label="Role"
-				bind:value={selectedRole}
 				options={[
 					['HUNCH_ADMIN', 'ORG_ADMIN', 'TEACHER', 'STUDENT'],
-					role => snakeCaseToTitleCase(role),
-					role => role
+					(role) => snakeCaseToTitleCase(role),
+					(role) => role
 				]}
+				bind:value={selectedRole}
 			/>
 			{#if selectedRole !== 'HUNCH_ADMIN' && roles.includes(selectedRole)}
 				<div class="margin-separator" />
-				<Combobox 
+				<Combobox
 					name="organization"
 					label="Organization"
-					options={[
-						data.orgList,
-						org => org.name,
-						org => org.id
-					]}
+					options={[data.orgList, (org) => org.name, (org) => org.id]}
 				/>
 			{/if}
 			<div class="margin-separator" />
@@ -179,9 +175,11 @@
 				<h2>Invite Generated</h2>
 				<p>An invite has generated.</p>
 				<p>Code: {form.invite.joinCode}</p>
-				<p>Link: <a href="/invite/{form.invite.joinCode}">
-					{location.origin}/invite/{form.invite.joinCode}
-				</a></p>
+				<p>
+					Link: <a href="/invite/{form.invite.joinCode}">
+						{location.origin}/invite/{form.invite.joinCode}
+					</a>
+				</p>
 			{:else}
 				<p>Waiting for server response.</p>
 			{/if}
@@ -193,7 +191,7 @@
 	<h1>
 		User Management Panel
 		<button class="plus" on:click={inviteUserModal}>
-			<MdiAccountPlus width="2rem" height="2rem"/>
+			<MdiAccountPlus height="2rem" width="2rem" />
 		</button>
 	</h1>
 
