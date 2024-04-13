@@ -2,7 +2,7 @@
 	import sanitizeHtml from 'sanitize-html';
 
 	export let program: string;
-
+	export let description: string;
 	export let projectTemplates: {
 		id: string;
 		name: string;
@@ -15,16 +15,15 @@
 	<div class="inner">
 		<header>
 			<div class="reach" />
-			<div class="description">
+			<div class="header">
 				<h1>{program}</h1>
-				<h2><slot name="subtitle" /></h2>
 			</div>
 		</header>
 
 		<div class="content">
 			<div class="mainWrap">
 				<main>
-					<slot name="main" />
+					{@html sanitizeHtml(description)}
 				</main>
 			</div>
 			<div class="projects">
@@ -115,7 +114,7 @@
 		}
 	}
 
-	.description {
+	.header {
 		h1 {
 			font-size: 4rem;
 			font-weight: 700;
