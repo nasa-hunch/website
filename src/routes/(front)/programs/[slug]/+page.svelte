@@ -7,7 +7,7 @@
 <Program
     program={data.name}
     projectTemplates={data.projectTemplates}
-    
+    description={data.description}
 >
     {data.description}
 </Program>
