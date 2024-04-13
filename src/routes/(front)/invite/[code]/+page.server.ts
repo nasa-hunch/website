@@ -4,12 +4,14 @@ import { prisma } from '$lib/server/prisma/prismaConnection.js'
 import { verifySessionOptional } from '$lib/server/verifySession.js';
 
 export const load = async ({ params, cookies }) => {
-    const session = await verifySessionOptional(cookies);
+    const user = await verifySessionOptional(cookies);
 
     const invite = await prisma.invite.findUnique({
         where: {
             joinCode: params.code,
-            to: null,
+            OR: [{
+                toId: null
+            }, ...(user ? [{ toId: user.id }] : [])], 
             used: false
         },
         include: {
@@ -18,6 +20,11 @@ export const load = async ({ params, cookies }) => {
                     firstName: true,
                     lastName: true,
                     pfp: true,
+                }
+            },
+            to: {
+                select: {
+                    id: true
                 }
             },
             organization: {
@@ -31,8 +38,7 @@ export const load = async ({ params, cookies }) => {
     if (!invite) error(404, 'Invite not found');
 
     return {
-        invite,
-        session
+        invite
     };
 }
 
@@ -85,6 +91,8 @@ export const actions = {
                     }
                 })
             ]);
+            
+            redirect(302, '/dashboard');
         }
     }
 }
