@@ -61,9 +61,10 @@ export const actions = {
 		z.object({
 			name: z.string().optional(),
 			color: z.string().optional(),
-			deadline: z.string().optional()
+			deadline: z.string().optional(),
+			description: z.string().optional()
 		}),
-		async ({ name, color, deadline }, { cookies, params }) => {
+		async ({ name, color, deadline, description }, { cookies, params }) => {
 			await verifySession(cookies, Role.HUNCH_ADMIN);
 
 			if (!params.categoryId) {
@@ -98,7 +99,8 @@ export const actions = {
 				data: {
 					name: name || category.name,
 					color: color?.substring(1, 7) || category.color,
-					deadline: deadLineDate || category.deadline
+					deadline: deadLineDate || category.deadline,
+					description: description || category.description
 				}
 			});
 

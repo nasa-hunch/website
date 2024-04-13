@@ -54,6 +54,9 @@
 			<div class="margin-separator" />
 			<DatePicker name="deadline" label="Deadline" value={data.category.deadline} />
 			<div class="margin-separator" />
+			<h2>Description</h2>
+			<Editor placeholder="Description" name="description" content={data.category.description} />
+			<div class="margin-separator" />
 			<Button value="Update" />
 		</ModelForm>
 	</Modal>
@@ -76,8 +79,6 @@
 		</h1>
 	</header>
 	<div class="projectWrap">
-<Editor />
-
 		{#each data.category.projectTemplates as template}
 			{@const percentDone = calculatePercentDone(template.createdAt, template.deadline)}
 			<a class="project" href="/dashboard/admin/templates/{template.id}">

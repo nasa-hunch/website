@@ -5,8 +5,13 @@ export async function load({ params }) {
     const item = await prisma.category.findFirst({
         where: {
             slug
+        },
+        include: {
+            projectTemplates: true
         }
     });
+
     if (!item) error(404);
+
     return item;
 }
