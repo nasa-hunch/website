@@ -22,7 +22,7 @@
 		"seed:hunch2024": "tsx scripts/seed/hunch2024/index.ts",
 		"seed": "npm run seed:hunch2024",
 		"s3devdata": "tsx scripts/s3.ts",
-		"submodule:clone": "cd scripts/seed/hunch2024 && mkdir assets && cd assets && npx degit https://github.com/nasa-hunch/website-seed-assets.git",
+		"submodule:clone": "cd scripts/seed/hunch2024 && cd assets && npx degit https://github.com/nasa-hunch/website-seed-assets.git",
 		"deployPreviewServer": "pnpm run submodule:clone && pnpm install && prisma migrate reset -f && prisma migrate deploy && prisma generate && pnpm run sync && pnpm run seed && prisma generate && pnpm run build",
 		"deploy": "pnpm install && prisma migrate deploy && prisma generate && pnpm run build"
 	},
