@@ -14,7 +14,6 @@ CREATE TABLE "Category" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" VARCHAR(255) NOT NULL,
     "color" VARCHAR(6) NOT NULL,
-    "icon" VARCHAR(255) NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
     "banner" VARCHAR(255) NOT NULL DEFAULT '/og-img.webp',
     "description" TEXT NOT NULL DEFAULT 'No description provided.',
@@ -237,7 +236,8 @@ CREATE TABLE "Invite" (
     "fromId" TEXT NOT NULL,
     "role" "Role" NOT NULL,
     "form" TEXT NOT NULL,
-    "toId" TEXT NOT NULL,
+    "toId" TEXT,
+    "orgId" INTEGER,
     "used" BOOLEAN NOT NULL DEFAULT false,
     "joinCode" TEXT NOT NULL,
 
@@ -367,6 +367,9 @@ ALTER TABLE "Invite" ADD CONSTRAINT "Invite_fromId_fkey" FOREIGN KEY ("fromId") 
 
 -- AddForeignKey
 ALTER TABLE "Invite" ADD CONSTRAINT "Invite_toId_fkey" FOREIGN KEY ("toId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Invite" ADD CONSTRAINT "Invite_orgId_fkey" FOREIGN KEY ("orgId") REFERENCES "Organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Stage" ADD CONSTRAINT "Stage_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "Branch"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
