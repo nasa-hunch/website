@@ -1,13 +1,13 @@
 <script>
-    import Program from '$lib/Program.svelte';
+	import Program from '$lib/Program.svelte';
 
-    export let data;
+	export let data;
 </script>
 
 <Program
-    program={data.name}
-    projectTemplates={data.projectTemplates}
-    description={data.description}
+	description={data.description}
+	program={data.name}
+	projectTemplates={data.projectTemplates}
 >
-    {data.description}
+	{data.description}
 </Program>

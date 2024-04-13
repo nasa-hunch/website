@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { z } from 'zod';
 
 import { Role } from '$lib/enums.js';
@@ -47,7 +48,7 @@ export const load = async ({ url }) => {
 		}
 	});
 
-	const orgList = await prisma.organization.findMany({});
+	const orgList = await prisma.organization.findMany();
 	return {
 		userList,
 		orgList,
@@ -82,6 +83,32 @@ export const actions = {
 			return {
 				success: true,
 				message: 'Teacher Verified'
+			};
+		}
+	),
+	inviteUser: formHandler(
+		z.object({
+			role: z.string(),
+			organization: z.string().optional().nullable()
+		}),
+		async ({ role, organization }, { cookies }) => {
+			const user = await verifySession(cookies, Role.HUNCH_ADMIN);
+
+			const invite = await prisma.invite.create({
+				data: {
+					id: createId(),
+					role: role as Role,
+					...(organization ? { orgId: parseInt(organization) } : {}),
+					fromId: user.id,
+					form: '',
+					joinCode: Math.floor(Math.random() * 1000000).toString()
+				}
+			});
+
+			return {
+				success: true,
+				message: 'Invite generated',
+				invite
 			};
 		}
 	)

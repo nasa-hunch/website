@@ -1,8 +1,9 @@
 ---
-color: "44BBA4"
-name: "Sewn Flight Articles"
-banner: "https://nasahunch.com/images/softgoods.jpg"
+color: '44BBA4'
+name: 'Sewn Flight Articles'
+banner: 'https://nasahunch.com/images/softgoods.jpg'
 ---
+
 Sew with the **stars**.
 
 "Sewn Flight Articles", also known as Softgoods, allows students to use soft materials to

@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { toast } from 'svelte-french-toast';
 
+	import MdiAccountPlus from '~icons/mdi/account-plus';
 	import ChevronLeft from '~icons/mdi/chevron-left';
 	import ChevronRight from '~icons/mdi/chevron-right';
 	import FilterIcon from '~icons/mdi/filter';
-	import { goto, pushState } from '$app/navigation';
+	import { goto, pushState, replaceState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import Button from '$lib/components/Button.svelte';
@@ -12,8 +13,8 @@
 	import Filter from '$lib/components/Filter.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import ModelForm from '$lib/components/ModalForm.svelte';
-	import MdiAccountPlus from '~icons/mdi/account-plus';
+	import ModalForm from '$lib/components/ModalForm.svelte';
+	import ModalWrap from '$lib/components/ModalWrap.svelte';
 	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
@@ -51,6 +52,12 @@
 		};
 	};
 
+	function inviteUserModal() {
+		pushState('', {
+			modal: 'inviteUser'
+		});
+	}
+
 	export let form;
 	$: if (form) {
 		if (form.success) {
@@ -82,6 +89,10 @@
 		});
 	};
 
+	const roles = ['HUNCH_ADMIN', 'ORG_ADMIN', 'TEACHER', 'STUDENT'];
+
+	let selectedRole = 'unknown';
+
 	const setItemsPerPage = (itemsPerPage: number) => {
 		$page.url.searchParams.set('perPage', itemsPerPage.toString());
 		goto($page.url, {
@@ -94,16 +105,16 @@
 
 {#if $page.state.modal === 'deleteUser'}
 	<Modal on:close={() => history.back()}>
-		<ModelForm action="?/deleteUser" method="post">
+		<ModalForm action="?/deleteUser" method="post">
 			<p>Are you sure you want to delete user #{deleteData?.id}</p>
 			<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`} />
-		</ModelForm>
+		</ModalForm>
 	</Modal>
 {/if}
 
 {#if $page.state.modal === 'verifyUser'}
 	<Modal on:close={() => history.back()}>
-		<ModelForm action="?/verifyUser" method="post">
+		<ModalForm action="?/verifyUser" method="post">
 			<h2>Verify User</h2>
 			<input name="id" hidden bind:value={selectedUserId} />
 			<Combobox
@@ -113,14 +124,74 @@
 			/>
 			<hr class="spacer" />
 			<Button value="verify" />
-		</ModelForm>
+		</ModalForm>
 	</Modal>
 {/if}
+
+{#if $page.state.modal === 'inviteUser'}
+	<Modal on:close={() => history.back()}>
+		<ModalForm
+			action="?/inviteUser"
+			enhanceBody={() => {
+				return async ({ update }) => {
+					await update();
+					replaceState('', {
+						modal: 'inviteSent'
+					});
+				};
+			}}
+			method="POST"
+		>
+			<h2>Invite User</h2>
+
+			<Combobox
+				name="role"
+				label="Role"
+				options={[
+					['HUNCH_ADMIN', 'ORG_ADMIN', 'TEACHER', 'STUDENT'],
+					(role) => snakeCaseToTitleCase(role),
+					(role) => role
+				]}
+				bind:value={selectedRole}
+			/>
+			{#if selectedRole !== 'HUNCH_ADMIN' && roles.includes(selectedRole)}
+				<div class="margin-separator" />
+				<Combobox
+					name="organization"
+					label="Organization"
+					options={[data.orgList, (org) => org.name, (org) => org.id]}
+				/>
+			{/if}
+			<div class="margin-separator" />
+			<Button type="submit" value="Invite" />
+		</ModalForm>
+	</Modal>
+{/if}
+
+{#if $page.state.modal === 'inviteSent'}
+	<Modal on:close={() => history.back()}>
+		<ModalWrap>
+			{#if form && form.invite}
+				<h2>Invite Generated</h2>
+				<p>An invite has generated.</p>
+				<p>Code: {form.invite.joinCode}</p>
+				<p>
+					Link: <a href="/invite/{form.invite.joinCode}">
+						{location.origin}/invite/{form.invite.joinCode}
+					</a>
+				</p>
+			{:else}
+				<p>Waiting for server response.</p>
+			{/if}
+		</ModalWrap>
+	</Modal>
+{/if}
+
 <main>
 	<h1>
 		User Management Panel
-		<button class="plus">
-			<MdiAccountPlus width="2rem" height="2rem"/>
+		<button class="plus" on:click={inviteUserModal}>
+			<MdiAccountPlus height="2rem" width="2rem" />
 		</button>
 	</h1>
 
@@ -288,6 +359,9 @@
 		align-items: start;
 		justify-content: start;
 		overflow: hidden;
+	}
+	.margin-separator {
+		margin-bottom: 1rem;
 	}
 	.headRow {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
