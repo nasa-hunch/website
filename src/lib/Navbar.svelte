@@ -30,7 +30,7 @@
 
 <svelte:window bind:innerWidth />
 <nav>
-	<a class="hamburger" href="/">
+	<a class="hamburger" href="#">
 		<Hamburger {open} on:click={() => (open = !open)} />
 	</a>
 	<a class="logoLink" href="/">
