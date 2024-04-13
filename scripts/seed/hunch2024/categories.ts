@@ -19,35 +19,51 @@ const deadline = (minMonths = 3, maxMonths = 5) =>
 const categories: Omit<Prisma.CategoryCreateInput, 'icon' | 'deadline'>[] = [
 	{
 		color: 'ff0000',
-		name: 'Design & Prototype'
+		name: 'Design & Prototype',
+		banner: "https://nasahunch.com/images/design.jpg",
+		slug: "design"
 	},
 	{
 		color: '3F88C5',
-		name: 'Software'
+		name: 'Software',
+		banner: "https://nasahunch.com/images/software.jpg",
+		slug: "software"
 	},
 	{
 		color: 'E94F37',
-		name: 'Hardware'
+		name: 'Hardware',
+		banner: "https://nasahunch.com/images/hardware.jpg",
+		slug: "hardware"
 	},
 	{
 		color: '44BBA4',
-		name: 'Sewn Flight Articles'
+		name: 'Sewn Flight Articles',
+		banner: "https://nasahunch.com/images/softgoods.jpg",
+		slug: "softgoods"
 	},
 	{
 		color: 'FFF275',
-		name: 'Video & Media'
+		name: 'Video & Media',
+		banner: "https://nasahunch.com/images/video.png",
+		slug: "video"
 	},
 	{
 		color: 'FED18C',
-		name: 'Culinary'
+		name: 'Culinary',
+		banner: "https://nasahunch.com/images/culinary.jpg",
+		slug: "culinary"
 	},
 	{
 		color: '80DED9',
-		name: 'Biomedical Science'
+		name: 'Biomedical Science',
+		banner: "https://nasahunch.com/images/biomed-program-card-image.jpg",
+		slug: "biomed"
 	},
 	{
 		color: 'F1C8DB',
-		name: 'Flight Configuration'
+		name: 'Flight Configuration',
+		banner: "https://nasahunch.com/images/flight-configuration-card-image.jpg",
+		slug: "flight-configuration"
 	}
 ];
 

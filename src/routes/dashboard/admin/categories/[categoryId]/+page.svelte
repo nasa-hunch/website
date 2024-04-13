@@ -12,8 +12,8 @@
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import Editor from "$lib/components/Editor.svelte";
 	import ModelForm from '$lib/components/ModalForm.svelte';
-
 	const calculatePercentDone = (startDay: Date, endDay: Date) => {
 		const startTimestamp = dayjs(startDay).unix();
 		const endTimestamp = dayjs(endDay).unix();
@@ -28,7 +28,6 @@
 		return maxPercent;
 	};
 </script>
-
 {#if $page.state.modal === 'createProject'}
 	<Modal on:close={() => history.back()}>
 		<ModelForm action="?/createProject" method="post">
@@ -77,6 +76,8 @@
 		</h1>
 	</header>
 	<div class="projectWrap">
+<Editor />
+
 		{#each data.category.projectTemplates as template}
 			{@const percentDone = calculatePercentDone(template.createdAt, template.deadline)}
 			<a class="project" href="/dashboard/admin/templates/{template.id}">

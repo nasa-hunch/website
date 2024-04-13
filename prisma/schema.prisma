@@ -33,6 +33,9 @@ model Category {
   icon String @db.VarChar(255)
   deadline DateTime
   projectTemplates ProjectTemplate[]
+  banner String @db.VarChar(255) @default("/og-img.webp")
+  description String @db.Text @default("No description provided.")
+  slug String @db.VarChar(255) @unique
 }
 
 model Organization {

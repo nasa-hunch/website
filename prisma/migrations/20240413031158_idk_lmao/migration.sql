@@ -16,6 +16,9 @@ CREATE TABLE "Category" (
     "color" VARCHAR(6) NOT NULL,
     "icon" VARCHAR(255) NOT NULL,
     "deadline" TIMESTAMP(3) NOT NULL,
+    "banner" VARCHAR(255) NOT NULL DEFAULT '/og-img.webp',
+    "description" TEXT NOT NULL DEFAULT 'No description provided.',
+    "slug" VARCHAR(255) NOT NULL,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
@@ -274,6 +277,9 @@ CREATE TABLE "_ProjectToTeamMember" (
     "A" TEXT NOT NULL,
     "B" INTEGER NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
