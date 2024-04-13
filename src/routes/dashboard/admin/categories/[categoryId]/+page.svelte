@@ -7,9 +7,7 @@
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import ColorCircle from '$lib/components/ColorCircle.svelte';
-	import ColorPicker from '$lib/components/ColorPicker.svelte';
 	import DatePicker from '$lib/components/DatePicker.svelte';
-	import Editor from '$lib/components/Editor.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import Input from '$lib/components/Input.svelte';
 	import Modal from '$lib/components/Modal.svelte';
@@ -44,37 +42,12 @@
 	</Modal>
 {/if}
 
-{#if $page.state.modal === 'updateCategory'}
-	<Modal on:close={() => history.back()}>
-		<ModelForm action="?/updateCategory" method="post">
-			<h2>
-				Update Category
-				<ColorPicker name="color" value={'#' + data.category.color} />
-			</h2>
-			<Input name="name" bgColor="#f1f1f1" label="Name" value={data.category.name} />
-			<div class="margin-separator" />
-			<DatePicker name="deadline" label="Deadline" value={data.category.deadline} />
-			<div class="margin-separator" />
-			<h2>Description</h2>
-			<Editor name="description" content={data.category.description} placeholder="Description" />
-			<div class="margin-separator" />
-			<Button value="Update" />
-		</ModelForm>
-	</Modal>
-{/if}
-
 <div class="wrap">
 	<header>
 		<h1>
 			<ColorCircle value={'#' + data.category.color} />
 			{data.category.name}
-			<IconButton
-				on:click={() => {
-					pushState('', {
-						modal: 'updateCategory'
-					});
-				}}
-			>
+			<IconButton href="/dashboard/admin/categories/{data.category.id}/edit">
 				<PencilIcon />
 			</IconButton>
 		</h1>
@@ -107,10 +80,6 @@
 <style lang="scss">
 	hr {
 		border: 0px;
-	}
-
-	.margin-separator {
-		margin-bottom: 1rem;
 	}
 
 	.wrap {
