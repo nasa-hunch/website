@@ -58,7 +58,7 @@ export const actions = {
 	renameFile: formHandler(
 		z.object({
 			fileName: z.string(),
-			fileId: z.coerce.number()
+			fileId: z.string()
 		}),
 		async ({ fileName, fileId }, { cookies, params }) => {
 			const user = await verifySession(cookies);
@@ -106,7 +106,7 @@ export const actions = {
 	),
 	deleteFile: formHandler(
 		z.object({
-			fileId: z.coerce.number()
+			fileId: z.string()
 		}),
 		async ({ fileId }, { cookies, params }) => {
 			const user = await verifySession(cookies);
@@ -119,7 +119,7 @@ export const actions = {
 
 			return await deleteFile(fileId, {
 				destinationName: destinations.TEMPLATE,
-				destinationId: parseInt(params.templateId)
+				destinationId: params.templateId
 			});
 		}
 	)

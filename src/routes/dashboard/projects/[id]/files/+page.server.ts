@@ -69,7 +69,7 @@ export const actions = {
 	},
 	deleteFile: formHandler(
 		z.object({
-			fileId: z.coerce.number()
+			fileId: z.string()
 		}),
 		async ({ fileId }, { cookies, params }) => {
 			const user = await verifySession(cookies);
@@ -139,7 +139,7 @@ export const actions = {
 	),
 	renameFile: formHandler(
 		z.object({
-			fileId: z.coerce.number(),
+			fileId: z.string(),
 			fileName: z.string()
 		}),
 		async ({ fileId, fileName }, { cookies, params }) => {

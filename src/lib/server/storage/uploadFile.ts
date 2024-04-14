@@ -1,4 +1,5 @@
 import { PutObjectCommand } from '@aws-sdk/client-s3';
+import { createId } from '@paralleldrive/cuid2';
 import crypto from 'crypto';
 
 import { bucket, mediaurl } from '$env/static/private';
@@ -44,6 +45,7 @@ export const uploadFile = async (uploadFile: File, destinationDetails?: FileDest
 
 	const file = await prisma.file.create({
 		data: {
+			id: createId(),
 			name: uploadFile.name,
 			key: key,
 			link: `${mediaurl}/${key}`,

@@ -6,7 +6,7 @@ import { prisma } from '../prisma/prismaConnection';
 import { destinations, type FileDestination } from './fileTypes';
 import { S3 } from './s3';
 
-export const deleteFile = async (fileId: number, fileDestination: FileDestination) => {
+export const deleteFile = async (fileId: string, fileDestination: FileDestination) => {
 	let fileCheck;
 	if (fileDestination.destinationName == destinations.TEMPLATE) {
 		fileCheck = await prisma.file.findFirst({
