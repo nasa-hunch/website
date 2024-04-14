@@ -26,10 +26,15 @@
 <div class="wrap">
 	<div class="header">
 		<div class="headerInner">
-			<h1 class:no-margin-bottom={isHunchAdmin}>{data.project.projectTemplate.name}</h1>
+			<h1 class:no-margin-bottom={isHunchAdmin}>
+				{data.project.projectTemplate.name}
+			</h1>
 			{#if isHunchAdmin}
-				<h2>
+				<h2 class="no-margin-bottom">
 					<a href="/dashboard/orgs/{data.project.orgId}">{data.project.organization.name}</a>
+				</h2>
+				<h2>
+					<a href="/dashboard/admin/templates/{data.project.projectTemplate.id}">See Project Template</a>
 				</h2>
 			{/if}
 			<nav class="nav">
