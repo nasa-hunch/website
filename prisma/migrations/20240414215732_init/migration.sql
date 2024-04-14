@@ -76,6 +76,7 @@ CREATE TABLE "User" (
     "pfp" TEXT,
     "role" "Role",
     "orgId" INTEGER,
+    "lastReadNotifications" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -113,7 +114,6 @@ CREATE TABLE "Project" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "orgId" INTEGER NOT NULL,
-    "joinCode" INTEGER NOT NULL,
     "projectTemplateId" TEXT NOT NULL,
     "submissionDate" TIMESTAMP(3),
     "submitted" BOOLEAN NOT NULL DEFAULT false,
@@ -137,7 +137,7 @@ CREATE TABLE "ProjectTemplate" (
 
 -- CreateTable
 CREATE TABLE "File" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" VARCHAR(255) NOT NULL,
@@ -151,7 +151,7 @@ CREATE TABLE "File" (
 -- CreateTable
 CREATE TABLE "ProjectFile" (
     "projectId" TEXT NOT NULL,
-    "fileId" INTEGER NOT NULL,
+    "fileId" TEXT NOT NULL,
 
     CONSTRAINT "ProjectFile_pkey" PRIMARY KEY ("projectId","fileId")
 );
@@ -159,7 +159,7 @@ CREATE TABLE "ProjectFile" (
 -- CreateTable
 CREATE TABLE "ProjectTemplateFile" (
     "templateId" TEXT NOT NULL,
-    "fileId" INTEGER NOT NULL,
+    "fileId" TEXT NOT NULL,
 
     CONSTRAINT "ProjectTemplateFile_pkey" PRIMARY KEY ("templateId","fileId")
 );
@@ -238,6 +238,7 @@ CREATE TABLE "Invite" (
     "form" TEXT NOT NULL,
     "toId" TEXT,
     "orgId" INTEGER,
+    "projectId" TEXT,
     "used" BOOLEAN NOT NULL DEFAULT false,
     "joinCode" TEXT NOT NULL,
 
@@ -283,9 +284,6 @@ CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Project_joinCode_key" ON "Project"("joinCode");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "BlogPost_slug_key" ON "BlogPost"("slug");
@@ -370,6 +368,9 @@ ALTER TABLE "Invite" ADD CONSTRAINT "Invite_toId_fkey" FOREIGN KEY ("toId") REFE
 
 -- AddForeignKey
 ALTER TABLE "Invite" ADD CONSTRAINT "Invite_orgId_fkey" FOREIGN KEY ("orgId") REFERENCES "Organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Invite" ADD CONSTRAINT "Invite_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Stage" ADD CONSTRAINT "Stage_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "Branch"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

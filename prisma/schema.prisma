@@ -165,7 +165,7 @@ model ProjectTemplate {
 
 // project management items
 model File {
-  id Int @id @default(autoincrement())
+  id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String @db.VarChar(255)
@@ -180,7 +180,7 @@ model File {
 model ProjectFile {
   projectId String
   project Project @relation(fields: [projectId], references: [id])
-  fileId Int
+  fileId String
   file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
 
   @@id([projectId, fileId])
@@ -189,7 +189,7 @@ model ProjectFile {
 model ProjectTemplateFile {
   templateId String
   template ProjectTemplate @relation(fields: [templateId], references: [id])
-  fileId Int
+  fileId String
   file File @relation(fields: [fileId], references: [id], onDelete: Cascade)
 
   @@id([templateId, fileId])
