@@ -65,7 +65,9 @@
 					<div class="person">
 						<Pfp size="32px" user={person.user} />
 						{#if data.user.role === 'HUNCH_ADMIN' || data.user.role === 'ORG_ADMIN'}
-							<a href="/dashboard/users/{person.user.id}"><p>{person.user.firstName} {person.user.lastName}</p></a>
+							<a href="/dashboard/users/{person.user.id}"
+								><p>{person.user.firstName} {person.user.lastName}</p></a
+							>
 						{:else}
 							<p>{person.user.firstName} {person.user.lastName}</p>
 						{/if}

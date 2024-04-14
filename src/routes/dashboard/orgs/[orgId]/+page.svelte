@@ -133,12 +133,12 @@
 			<Combobox
 				name="role"
 				label="Select Role"
-				bind:value={selectedRole}
 				options={[
 					roleHeirachy[data.user.role],
 					(role) => snakeCaseToTitleCase(role),
 					(role) => role
 				]}
+				bind:value={selectedRole}
 			/>
 			{#if selectedRole === 'STUDENT'}
 				<div class="margin-separator" />
@@ -147,8 +147,8 @@
 					label="Project"
 					options={[
 						data.org.projects,
-						project => project.projectTemplate.name,
-						project => project.id
+						(project) => project.projectTemplate.name,
+						(project) => project.id
 					]}
 				/>
 			{/if}

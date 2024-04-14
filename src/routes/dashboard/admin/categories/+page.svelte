@@ -45,6 +45,7 @@
 		/>
 	</div>
 </main>
+
 <style lang="scss">
 	.margin-separator {
 		margin-bottom: 1rem;

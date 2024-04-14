@@ -1,4 +1,5 @@
 import { createId } from '@paralleldrive/cuid2';
+import { error } from '@sveltejs/kit';
 import { z } from 'zod';
 
 import { ProjectUserPermission, Role } from '$lib/enums';
@@ -8,7 +9,6 @@ import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
 import { verifySession } from '$lib/server/verifySession.js';
 
 import { updateMemberRole } from './changeRoleHelper.js';
-import { error } from '@sveltejs/kit';
 
 export const actions = {
 	makeViewer: formHandler(
@@ -117,8 +117,8 @@ export const actions = {
 
 		return {
 			success: true,
-			message: "Invite created!",
+			message: 'Invite created!',
 			invite
-		}
+		};
 	}
 };

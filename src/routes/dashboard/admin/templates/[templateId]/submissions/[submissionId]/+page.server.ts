@@ -8,7 +8,7 @@ export const load = async ({ parent, params }) => {
 			AND: {
 				submitted: true,
 				projectTemplateId: parentData.projectTemplate.id,
-                id: params.submissionId
+				id: params.submissionId
 			}
 		},
 		include: {

@@ -12,8 +12,8 @@
 	<div class="content">
 		{#if data.user.role == null}
 			<h2>Join with an invite code</h2>
-			<form action="?/joinInviteCode" method="post" use:enhance class="joinInviteCode">
-				<Input label="Invite Code" name="code" bgColor="#f1f1f1" />
+			<form class="joinInviteCode" action="?/joinInviteCode" method="post" use:enhance>
+				<Input name="code" bgColor="#f1f1f1" label="Invite Code" />
 				<div class="margin-separator" />
 				<Button type="submit" value="Join" />
 			</form>

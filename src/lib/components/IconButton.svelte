@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
 	import type { SubmitFunction } from '@sveltejs/kit';
+
+	import { enhance } from '$app/forms';
 
 	/**
 	 * Href and formData are not compatible, use one or the other.
@@ -19,7 +20,7 @@
 				action: HTMLFormElement['action'];
 		  }
 		| undefined = undefined;
-	
+
 	export let enhanceBody: SubmitFunction | undefined = undefined;
 </script>
 
@@ -32,7 +33,12 @@
 		<slot />
 	</a>
 {:else if formData}
-	<form class="formButton" action={formData.action} method={formData.method} use:enhance={enhanceBody}>
+	<form
+		class="formButton"
+		action={formData.action}
+		method={formData.method}
+		use:enhance={enhanceBody}
+	>
 		<button {style} class="iconButton" on:click>
 			<slot />
 		</button>

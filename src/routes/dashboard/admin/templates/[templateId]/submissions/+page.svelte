@@ -5,9 +5,11 @@
 <div class="wrap">
 	{#each data.submissions as submission}
 		<div class="submission">
-			<p><a href="/dashboard/admin/templates/{data.projectTemplate.id}/submissions/{submission.id}">
-				{submission.organization.name}
-			</a></p>
+			<p>
+				<a href="/dashboard/admin/templates/{data.projectTemplate.id}/submissions/{submission.id}">
+					{submission.organization.name}
+				</a>
+			</p>
 		</div>
 	{/each}
 </div>

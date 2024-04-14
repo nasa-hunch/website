@@ -55,17 +55,17 @@
 	<div class="title">
 		<h2>Members</h2>
 		<IconButton
-			formData={{
-				method: "POST",
-				action: "?/invite"
-			}}
 			enhanceBody={() => {
 				return async ({ update }) => {
 					await update({ invalidateAll: false });
 					pushState('', {
 						modal: 'inviteSent'
 					});
-				}
+				};
+			}}
+			formData={{
+				method: 'POST',
+				action: '?/invite'
 			}}
 		>
 			<AddUserIcon />

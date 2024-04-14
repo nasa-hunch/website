@@ -3,17 +3,17 @@
 	import { page } from '$app/stores';
 	import ColorCircle from '$lib/components/ColorCircle.svelte';
 	let route = '';
-	$: route = $page.route.id?.split('/').at(-1) || "";
-    $: console.log(route);
+	$: route = $page.route.id?.split('/').at(-1) || '';
+	$: console.log(route);
 	$: isHunchAdmin = data.user.role === 'HUNCH_ADMIN';
 </script>
 
 <div class="wrap">
 	<div class="header">
 		<div class="headerInner">
-            <div class="headerText">
-                <ColorCircle value={'#' + data.category.color} />
-                <h1 class:no-margin-bottom={isHunchAdmin}>{data.category.name}</h1>
+			<div class="headerText">
+				<ColorCircle value={'#' + data.category.color} />
+				<h1 class:no-margin-bottom={isHunchAdmin}>{data.category.name}</h1>
 			</div>
 			<nav class="nav">
 				<a
@@ -51,16 +51,16 @@
 	.headerInner {
 		width: 90%;
 
-        .headerText {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            margin: 1.3rem 0;
-        }
+		.headerText {
+			display: flex;
+			gap: 1rem;
+			align-items: center;
+			margin: 1.3rem 0;
+		}
 
-        .headerText h1 {
-            margin-top: 0;
-        }
+		.headerText h1 {
+			margin-top: 0;
+		}
 	}
 
 	.content {

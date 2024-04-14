@@ -29,17 +29,21 @@ export const actions = {
 	joinInviteCode: formHandler(
 		z.object({
 			code: z.string()
-		}), async ({ code }, { cookies }) => {
+		}),
+		async ({ code }, { cookies }) => {
 			const user = await verifySession(cookies);
 
 			const invite = await prisma.invite.findFirst({
 				where: {
 					joinCode: code,
-					OR: [{
-						toId: null
-					}, {
-						toId: user.id
-					}]
+					OR: [
+						{
+							toId: null
+						},
+						{
+							toId: user.id
+						}
+					]
 				}
 			});
 
@@ -47,7 +51,7 @@ export const actions = {
 				return {
 					success: false,
 					message: 'Invite not found'
-				}
+				};
 			}
 
 			redirect(302, `/invite/${code}`);

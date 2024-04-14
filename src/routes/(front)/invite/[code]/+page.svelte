@@ -8,7 +8,7 @@
 
 <main>
 	{#if data.invite.to}
-		<form method="POST" action="?/submitForm">
+		<form action="?/submitForm" method="POST">
 			{#if data.invite.role === 'ORG_ADMIN'}
 				<p>Filling out a form</p>
 			{:else if data.invite.role === 'TEACHER'}

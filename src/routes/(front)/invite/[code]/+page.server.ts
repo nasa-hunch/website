@@ -91,20 +91,26 @@ export const actions = {
 					},
 					data: {
 						role: invite.role,
-						...(invite.orgId ? { organization: {
-							connect: {
-								id: invite.orgId
-							}
-						} } : {}),
-						...(invite.projectId ? {
-							projectUser: {
-								create: {
-									id: createId(),
-									projectId: invite.projectId,
-									permission: 'NEEDS_APPROVAL'
-								}
-							}
-						} : {})
+						...(invite.orgId
+							? {
+									organization: {
+										connect: {
+											id: invite.orgId
+										}
+									}
+							  }
+							: {}),
+						...(invite.projectId
+							? {
+									projectUser: {
+										create: {
+											id: createId(),
+											projectId: invite.projectId,
+											permission: 'NEEDS_APPROVAL'
+										}
+									}
+							  }
+							: {})
 					}
 				})
 			]);

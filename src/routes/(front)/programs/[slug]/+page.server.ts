@@ -12,7 +12,7 @@ export async function load({ params }) {
 		}
 	});
 
-	if (!item) error(404, "Program not found!");
+	if (!item) error(404, 'Program not found!');
 
 	return item;
 }
