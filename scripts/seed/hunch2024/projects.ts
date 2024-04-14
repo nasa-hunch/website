@@ -1,7 +1,3 @@
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { faker } from '@faker-js/faker';
 import { createId } from '@paralleldrive/cuid2';
 import { ProjectUserPermission, Role } from '@prisma/client';
@@ -9,9 +5,9 @@ import { Chance } from 'chance';
 
 import { makePassword } from '../../../src/lib/server/password';
 import { schools } from './dump/orgs';
+import { getFileInfo } from './files';
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
-import { githubURL } from './url';
 
 const chance = new Chance();
 
@@ -232,20 +228,7 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 	// Batch create files
 	{
 		console.log('Projects | Collecting files...');
-		const currentDirectory = fileURLToPath(new URL('.', import.meta.url));
-		const files = await fs.readdir
-			(path.normalize(path.join(currentDirectory, 'assets/files')))
-			// [name: string, size: number, link: string][
-			.then(files => Promise.all(
-				files.map(async (file) => {
-					const fileName = path.basename(file);
-					const filePath = path.normalize(path.join(currentDirectory, 'assets/files', file));
-					return [
-						fileName,
-						await fs.stat(filePath),
-						`${githubURL}/files/${fileName}`
-					] as const
-				})))
+		const files = await getFileInfo();
 		
 		const fileIds = allIds
 			.flat()
@@ -255,11 +238,11 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 		console.log('Projects | Creating files...');
 		await prisma.file.createMany({
 			data: fileIds.map(({ id }) => {
-				const [fileName, fileStats, fileLink] = chance.pickone(files);
+				const [fileName, fileSize, fileLink] = chance.pickone(files);
 				return {
 					id,
 					name: fileName,
-					size: fileStats.size,
+					size: fileSize,
 					link: fileLink,
 				}
 			})

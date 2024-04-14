@@ -7,6 +7,7 @@ import frontMatter from 'front-matter';
 import showdown from 'showdown';
 import { z } from 'zod';
 
+import { getFileInfo } from './files';
 import { PrismaTransactionClient } from './returnType';
 
 const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -96,6 +97,34 @@ export async function seed(prisma: PrismaTransactionClient) {
 		});
 		templateIds.push(currentId);
 	}
+
+	const files = await getFileInfo();
+	const fileIds = templateIds.map(id => [
+		id,
+		Array.from({ length: random(0, 5) }, () => createId())
+	] as const);
+
+	await prisma.file.createMany({
+		data: fileIds.flatMap(([, fileId]) => fileId.map(id => {
+			const [name, size, link] = files[random(0, files.length - 1)];
+
+			return {
+				id,
+				name,
+				size,
+				link
+			}
+		}))
+	});
+
+	await prisma.projectTemplateFile.createMany({
+		data: fileIds.flatMap(([templateId, fileId]) => 
+			fileId.map(id => ({
+				fileId: id,
+				templateId: templateId
+			}))
+		)
+	});
 
 	console.log('Categories seeded');
 
