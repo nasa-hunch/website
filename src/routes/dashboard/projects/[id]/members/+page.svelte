@@ -25,63 +25,29 @@
 
 	export let data;
 
-	const copyCode = async () => {
+	const copyCode = (code: string) => async () => {
 		try {
-			await window.navigator.clipboard.writeText(data.project.joinCode.toString());
+			await window.navigator.clipboard.writeText(code);
 			toast.success('Code copied!');
 		} catch (e) {
 			toast.error('Could not copy code.');
 		}
 	};
-
-	function showRefreshConfirmModal() {
-		pushState('', {
-			modal: 'refreshConfirm'
-		});
-	}
 </script>
 
-{#if $page.state.modal === 'invite'}
+{#if $page.state.modal === 'inviteSent'}
 	<Modal on:close={() => history.back()}>
 		<ModalWrap>
-			<div class="inviteCode">
+			{#if form?.invite}
 				<p>Send project invite:</p>
 				<span class="projectCode"
-					><input disabled value={data.project.joinCode} />
-					<button type="button" on:click={copyCode}>Copy</button></span
+					><input disabled value={form.invite.joinCode} />
+					<button type="button" on:click={copyCode(form.invite.joinCode)}>Copy</button></span
 				>
-				{#if data.user.role === 'TEACHER'}
-					<p>
-						You may also<TextButton on:click={showRefreshConfirmModal}
-							>refresh your join code</TextButton
-						>
-					</p>
-				{/if}
-			</div>
+			{:else}
+				<p>Odd.. form not found. Try again.</p>
+			{/if}
 		</ModalWrap>
-	</Modal>
-{/if}
-
-{#if $page.state.modal === 'refreshConfirm'}
-	<Modal on:close={() => history.back()}>
-		<ModalForm
-			action="?/refreshCode"
-			enhanceBody={() => {
-				return async ({ update }) => {
-					await update();
-					await invalidateAll();
-					history.back();
-				};
-			}}
-			method="POST"
-		>
-			<p>Are you sure you want to refresh your project's join code?</p>
-			<p>This will break existing codes.</p>
-			<div class="buttons">
-				<Button type="submit" value="Yes" />
-				<Button type="button" value="No" on:click={() => history.back()} />
-			</div>
-		</ModalForm>
 	</Modal>
 {/if}
 
@@ -89,10 +55,17 @@
 	<div class="title">
 		<h2>Members</h2>
 		<IconButton
-			on:click={() => {
-				pushState('', {
-					modal: 'invite'
-				});
+			formData={{
+				method: "POST",
+				action: "?/invite"
+			}}
+			enhanceBody={() => {
+				return async ({ update }) => {
+					await update();
+					pushState('', {
+						modal: 'inviteSent'
+					});
+				}
 			}}
 		>
 			<AddUserIcon />

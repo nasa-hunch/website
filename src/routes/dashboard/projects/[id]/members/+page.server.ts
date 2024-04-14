@@ -4,39 +4,15 @@ import { ProjectUserPermission, Role } from '$lib/enums';
 import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
-import { verifySession } from '$lib/server/verifySession.js';
 
 import { updateMemberRole } from './changeRoleHelper.js';
+import { verifySession } from '$lib/server/verifySession.js';
+import { createId } from '@paralleldrive/cuid2';
 
 export const actions = {
-	refreshCode: async ({ cookies, params }) => {
-		const user = await verifySession(cookies);
-		await verifyProjectUser(cookies, params.id);
-
-		if (user.role != Role.TEACHER) {
-			return {
-				success: false,
-				message: 'Not a teacher'
-			};
-		}
-
-		await prisma.project.update({
-			where: {
-				id: params.id
-			},
-			data: {
-				joinCode: 1e7 + Math.floor(Math.random() * 9e7)
-			}
-		});
-
-		return {
-			success: true,
-			message: 'Code Refreshed'
-		};
-	},
 	makeViewer: formHandler(
 		z.object({
-			memberId: z.coerce.number()
+			memberId: z.string()
 		}),
 		async ({ memberId }, { cookies, params }) => {
 			return await updateMemberRole(memberId, ProjectUserPermission.VIEWER, cookies, params);
@@ -44,7 +20,7 @@ export const actions = {
 	),
 	makeEditor: formHandler(
 		z.object({
-			memberId: z.coerce.number()
+			memberId: z.string()
 		}),
 		async ({ memberId }, { cookies, params }) => {
 			return await updateMemberRole(memberId, ProjectUserPermission.EDITOR, cookies, params);
@@ -111,5 +87,27 @@ export const actions = {
 				message: 'User Removed'
 			};
 		}
-	)
+	),
+	invite: async ({ params, cookies }) => {
+		const projectUser = await verifyProjectUser(cookies, params.id);
+		const user = await verifySession(cookies);
+
+		const invite = await prisma.invite.create({
+			data: {
+				id: createId(),
+				role: Role.STUDENT,
+				orgId: parseInt(projectUser.project.orgId),
+				projectId: params.id,
+				fromId: user.id,
+				form: '',
+				joinCode: Math.floor(Math.random() * 1000000).toString()
+			}
+		});
+
+		return {
+			success: true,
+			message: "Invite created!",
+			invite
+		}
+	}
 };
