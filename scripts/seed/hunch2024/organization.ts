@@ -19,10 +19,10 @@ export async function seed(prisma: PrismaTransactionClient) {
 			users: {
 				create: {
 					id: createId(),
-					email: 'admin@card.board',
-					firstName: 'Admin',
+					email: 'teacher@card.board',
+					firstName: 'Teacher',
 					lastName: 'Cardboard',
-					role: Role.ORG_ADMIN,
+					role: Role.TEACHER,
 					pfp: pickAvatar(),
 					...(await makePassword(process.env.PASSWORD_DEMO || 'password'))
 				}
