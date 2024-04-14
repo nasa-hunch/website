@@ -1,11 +1,7 @@
 <script lang="ts">
-	import MdiAccountStudent from '~icons/mdi/account-student';
-	import MdiShieldAccount from '~icons/mdi/shield-account';
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/Button.svelte';
-	import InlineButton from '$lib/components/InlineButton.svelte';
 	import Input from '$lib/components/Input.svelte';
-	import { Role } from '$lib/enums';
 
 	import type { PageData } from './$types';
 
@@ -15,7 +11,11 @@
 <div class="wrap">
 	<div class="content">
 		{#if data.user.role == null}
-			<p>We're still constructing this page.</p>
+			<h2>Join with an invite code</h2>
+			<form action="?/joinInviteCode" method="post" use:enhance>
+				<Input label="Invite Code" name="code" />
+			</form>
+			<div class="margin-separator" />
 			<form action="/logout" method="post" use:enhance>
 				<Button value="Or Sign Out" />
 			</form>
@@ -32,6 +32,11 @@
 		align-items: center;
 		justify-content: start;
 	}
+
+	.margin-separator {
+		margin-bottom: 1rem;
+	}
+
 	.content {
 		width: 100%;
 		height: 100%;

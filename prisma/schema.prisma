@@ -138,7 +138,6 @@ model Project {
   orgId Int
   users ProjectUser[] @relation("users")
   files ProjectFile[]
-  joinCode Int @unique
   projectTemplateId String
   projectTemplate ProjectTemplate @relation(fields: [projectTemplateId], references: [id])
   toDoItems ToDoItem[]
