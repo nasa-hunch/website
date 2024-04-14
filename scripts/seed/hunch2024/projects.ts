@@ -189,7 +189,7 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 	await prisma.toDoItem.createMany({
 		data: taskIds.map(({ id, projectId }) => ({
 			id,
-			name: faker.company.buzzPhrase(),
+			name: faker.company.buzzPhrase().replace(/^\w/, (c) => c.toUpperCase()),
 			checked: chance.weighted([true, false], [1, 2]),
 			projectId
 		}))
