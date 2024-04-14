@@ -24,7 +24,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 					lastName: 'Cardboard',
 					role: Role.ORG_ADMIN,
 					pfp: pickAvatar(),
-					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+					...(await makePassword(process.env.PASSWORD_DEMO || 'password'))
 				}
 			}
 		}

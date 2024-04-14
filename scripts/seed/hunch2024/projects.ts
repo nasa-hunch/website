@@ -64,12 +64,11 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 
 	// Batch create every project
 	await prisma.project.createMany({
-		data: allIds.flat().map(({ projectId, orgId }, i) => ({
+		data: allIds.flat().map(({ projectId, orgId }) => ({
 			id: projectId,
 			submitted: Math.random() > 0.9,
 			orgId,
-			projectTemplateId: chance.pickone(templateIds),
-			joinCode: 123456 + i
+			projectTemplateId: chance.pickone(templateIds)
 		}))
 	});
 

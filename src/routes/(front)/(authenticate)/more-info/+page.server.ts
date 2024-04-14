@@ -1,9 +1,11 @@
-import { createId } from '@paralleldrive/cuid2';
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import { z } from 'zod';
 
-import { ProjectUserPermission, Role } from '$lib/enums';
+import { Role } from '$lib/enums';
 import { validateSession } from '$lib/server/auth.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
+import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async ({ cookies }) => {
 	const user = await validateSession(cookies.get('session'), {
@@ -24,90 +26,31 @@ export const load = async ({ cookies }) => {
 };
 
 export const actions = {
-	setRoleStudent: async ({ cookies }) => {
-		const user = await validateSession(cookies.get('session'));
+	joinInviteCode: formHandler(
+		z.object({
+			code: z.string()
+		}), async ({ code }, { cookies }) => {
+			const user = await verifySession(cookies);
 
-		await prisma.user.update({
-			where: {
-				id: user.id
-			},
-			data: {
-				role: Role.STUDENT
-			}
-		});
-	},
-	setRoleTeacher: async ({ cookies }) => {
-		const user = await validateSession(cookies.get('session'));
-		// Await prisma.user.update({
-		// 	Where: {
-		// 		Id: user.id
-		// 	},
-		// 	Data: {
-		// 		Role: Role.UNVERIFIED_TEACHER
-		// 	}
-		// });
-	},
-	submitJoinCode: async ({ cookies, request }) => {
-		const data = await request.formData();
-
-		const code = data.get('code');
-
-		if (!code) {
-			error(400, 'No code provided.');
-		}
-
-		const user = await validateSession(cookies.get('session'));
-
-		const project = await prisma.project.findUnique({
-			where: {
-				joinCode: parseInt(code.toString())
-			},
-			include: {
-				users: true
-			}
-		});
-
-		if (!project) {
-			error(400, 'Invalid code.');
-		}
-
-		if (project.users.find((u) => u.id == user.id)) {
-			error(400, 'You are already a member of this project.');
-		}
-
-		await prisma.projectUser.create({
-			data: {
-				id: createId(),
-				project: {
-					connect: {
-						id: project.id
-					}
-				},
-				user: {
-					connect: {
-						id: user.id
-					}
-				},
-				permission: ProjectUserPermission.NEEDS_APPROVAL
-			}
-		});
-
-		redirect(303, '/dashboard');
-	},
-	rescindRole: async ({ cookies }) => {
-		const user = await validateSession(cookies.get('session'));
-
-		if (user.orgId == null) {
-			await prisma.user.update({
+			const invite = await prisma.invite.findFirst({
 				where: {
-					id: user.id
-				},
-				data: {
-					role: null
+					joinCode: code,
+					OR: [{
+						toId: null
+					}, {
+						toId: user.id
+					}]
 				}
 			});
-		} else {
-			error(400, 'You cannot rescind your role if you are a member of an organization.');
+
+			if (!invite) {
+				return {
+					success: false,
+					message: 'Invite not found'
+				}
+			}
+
+			redirect(302, `/invite/${code}`);
 		}
-	}
+	)
 };

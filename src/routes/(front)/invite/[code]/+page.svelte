@@ -8,7 +8,16 @@
 
 <main>
 	{#if data.invite.to}
-		<p>Filling out a form</p>
+		<form method="POST" action="?/submitForm">
+			{#if data.invite.role === 'ORG_ADMIN'}
+				<p>Filling out a form</p>
+			{:else if data.invite.role === 'TEACHER'}
+				<p>Filling out a form</p>
+			{:else}
+				<p>Something has gone wrong. Please contact an administrator</p>
+				<p>Expected a non-student or non-hunch admin role, instead got {data.invite.role}</p>
+			{/if}
+		</form>
 	{:else}
 		<h1>
 			<span class="accent">{data.invite.from.firstName} {data.invite.from.lastName}</span>
