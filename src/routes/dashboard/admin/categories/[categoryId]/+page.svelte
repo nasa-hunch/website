@@ -43,15 +43,6 @@
 {/if}
 
 <div class="wrap">
-	<header>
-		<h1>
-			<ColorCircle value={'#' + data.category.color} />
-			{data.category.name}
-			<IconButton href="/dashboard/admin/categories/{data.category.id}/edit">
-				<PencilIcon />
-			</IconButton>
-		</h1>
-	</header>
 	<div class="projectWrap">
 		{#each data.category.projectTemplates as template}
 			{@const percentDone = calculatePercentDone(template.createdAt, template.deadline)}
@@ -90,26 +81,7 @@
 		align-items: center;
 		justify-content: start;
 	}
-	header {
-		position: relative;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: $background-alt;
-		z-index: 1;
-		&::after {
-			content: '';
-			height: 100%;
-			width: 100%;
-			top: 0px;
-			left: 0px;
-			position: absolute;
-			background: $background-alt;
-			z-index: -1;
-			opacity: 0.25;
-		}
-	}
+
 	.projectWrap {
 		padding-top: 20px;
 		display: flex;
@@ -150,12 +122,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: end;
-	}
-	h1 {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1rem;
 	}
 	h2 {
 		text-align: center;

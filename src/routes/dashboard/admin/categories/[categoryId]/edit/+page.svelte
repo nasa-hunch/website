@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { enhance, applyAction } from "$app/forms";
-    import ColorPicker from '$lib/components/ColorPicker.svelte';
     import Input from '$lib/components/Input.svelte';
     import DatePicker from '$lib/components/DatePicker.svelte';
     import Editor from '$lib/components/Editor.svelte';
@@ -18,10 +17,6 @@
                 await invalidateAll();
             }
         }}>
-            <h2>
-                Update Category <a href="/dashboard/admin/categories/{data.category.id}"><span class="accent">{data.category.name}</span></a>
-                <ColorPicker name="color" value={'#' + data.category.color} />
-            </h2>
             <Input name="name" bgColor="#f1f1f1" label="Name" value={data.category.name} />
             <div class="margin-separator" />
             <DatePicker name="deadline" label="Deadline" value={data.category.deadline} />
