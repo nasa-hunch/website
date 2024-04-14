@@ -106,7 +106,7 @@
 {#if $page.state.modal === 'deleteUser'}
 	<Modal on:close={() => history.back()}>
 		<ModalForm action="?/deleteUser" method="post">
-			<p>Are you sure you want to delete user #{deleteData?.id}</p>
+			<p>Are you sure you want to delete user #{deleteData?.id}?</p>
 			<Button value={`Delete ${deleteData?.firstName} ${deleteData?.lastName}'s account`} />
 		</ModalForm>
 	</Modal>

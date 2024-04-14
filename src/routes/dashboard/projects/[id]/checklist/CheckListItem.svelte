@@ -129,7 +129,7 @@
 			on:reset={() => history.back()}
 		>
 			<h2>Delete Item</h2>
-			<p>Are you sure you want to delete <b>{data.name}</b></p>
+			<p>Are you sure you want to delete <b>{data.name}</b>?</p>
 			<input name="itemId" hidden value={data.id} />
 			<Button value="Delete" />
 		</ModelForm>

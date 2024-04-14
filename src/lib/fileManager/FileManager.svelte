@@ -91,7 +91,7 @@
 			<div class="deleteForm">
 				<input name="fileId" hidden value={doingFileDeleteOnId} />
 				<h2>Are you sure?</h2>
-				<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b></p>
+				<p>Are you sure you want to delete <b>{doingFileDeleteOn}</b>?</p>
 				<Button type="submit" value="Confirm" />
 			</div>
 		</ModelForm>
