@@ -72,6 +72,9 @@
 			{#each data.org.projects as project}
 				<a class="project" href="/dashboard/projects/{project.id}">
 					<h2>{project.projectTemplate.name}</h2>
+					{#if project.submitted}
+						<div class="submitted">Submitted</div>
+					{/if}
 					<p>
 						{project.users.map(({ user }) => `${user.firstName} ${user.lastName}`).join(', ')}
 					</p>
@@ -236,6 +239,13 @@
 
 		&:hover {
 			background-color: $background2;
+		}
+
+		.submitted {
+			background-color: #2e7d32;
+			color: white;
+			padding: 0.25rem 0.5rem;
+			border-radius: 0.25rem;
 		}
 	}
 
