@@ -171,7 +171,7 @@ model File {
   name String @db.VarChar(255)
   key String? @db.VarChar(255)
   link String @db.VarChar(255)
-  size Int @default(0)
+  size Int
 
   projectFiles ProjectFile[]
   templateFiles ProjectTemplateFile[]

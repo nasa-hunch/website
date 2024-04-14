@@ -143,7 +143,7 @@ CREATE TABLE "File" (
     "name" VARCHAR(255) NOT NULL,
     "key" VARCHAR(255),
     "link" VARCHAR(255) NOT NULL,
-    "size" INTEGER NOT NULL DEFAULT 0,
+    "size" INTEGER NOT NULL,
 
     CONSTRAINT "File_pkey" PRIMARY KEY ("id")
 );
