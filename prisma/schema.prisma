@@ -95,6 +95,7 @@ model User {
   blogPosts BlogPost[]
   invites Invite[] @relation("from")
   invitations Invite[] @relation("to")
+  lastReadNotifications DateTime @default(now())
 }
 
 model Notification {
