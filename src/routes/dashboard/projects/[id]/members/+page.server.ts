@@ -1,13 +1,14 @@
+import { createId } from '@paralleldrive/cuid2';
 import { z } from 'zod';
 
 import { ProjectUserPermission, Role } from '$lib/enums';
 import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
 import { verifyProjectUser } from '$lib/server/verifyProjectUser.js';
+import { verifySession } from '$lib/server/verifySession.js';
 
 import { updateMemberRole } from './changeRoleHelper.js';
-import { verifySession } from '$lib/server/verifySession.js';
-import { createId } from '@paralleldrive/cuid2';
+import { error } from '@sveltejs/kit';
 
 export const actions = {
 	makeViewer: formHandler(
@@ -89,14 +90,24 @@ export const actions = {
 		}
 	),
 	invite: async ({ params, cookies }) => {
-		const projectUser = await verifyProjectUser(cookies, params.id);
 		const user = await verifySession(cookies);
+
+		const project = await prisma.project.findFirst({
+			where: {
+				id: params.id
+			},
+			select: {
+				orgId: true
+			}
+		});
+
+		if (!project) error(404, 'Project not found');
 
 		const invite = await prisma.invite.create({
 			data: {
 				id: createId(),
 				role: Role.STUDENT,
-				orgId: parseInt(projectUser.project.orgId),
+				orgId: project.orgId,
 				projectId: params.id,
 				fromId: user.id,
 				form: '',

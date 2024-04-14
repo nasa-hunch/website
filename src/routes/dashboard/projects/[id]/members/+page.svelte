@@ -61,7 +61,7 @@
 			}}
 			enhanceBody={() => {
 				return async ({ update }) => {
-					await update();
+					await update({ invalidateAll: false });
 					pushState('', {
 						modal: 'inviteSent'
 					});
