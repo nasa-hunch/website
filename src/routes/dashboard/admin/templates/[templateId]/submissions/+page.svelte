@@ -5,9 +5,9 @@
 <div class="wrap">
 	{#each data.submissions as submission}
 		<div class="submission">
-			<p>
+			<p><a href="/dashboard/admin/templates/{data.projectTemplate.id}/submissions/{submission.id}">
 				{submission.organization.name}
-			</p>
+			</a></p>
 		</div>
 	{/each}
 </div>
@@ -27,5 +27,9 @@
 		border-radius: 0.25rem;
 		margin-bottom: 0.3rem;
 		padding: 0rem 1rem;
+
+		a {
+			color: black;
+		}
 	}
 </style>
