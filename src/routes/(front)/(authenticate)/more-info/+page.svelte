@@ -12,8 +12,10 @@
 	<div class="content">
 		{#if data.user.role == null}
 			<h2>Join with an invite code</h2>
-			<form action="?/joinInviteCode" method="post" use:enhance>
-				<Input label="Invite Code" name="code" />
+			<form action="?/joinInviteCode" method="post" use:enhance class="joinInviteCode">
+				<Input label="Invite Code" name="code" bgColor="#f1f1f1" />
+				<div class="margin-separator" />
+				<Button type="submit" value="Join" />
 			</form>
 			<div class="margin-separator" />
 			<form action="/logout" method="post" use:enhance>
@@ -24,6 +26,12 @@
 </div>
 
 <style lang="scss">
+	.joinInviteCode {
+		background-color: $background-alt;
+		padding: 1rem;
+		border-radius: 0.5rem;
+	}
+
 	.wrap {
 		width: 100%;
 		height: calc(100vh - 100px - 75px);

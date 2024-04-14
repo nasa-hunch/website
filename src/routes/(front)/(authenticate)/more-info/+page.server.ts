@@ -1,9 +1,11 @@
-import { createId } from '@paralleldrive/cuid2';
-import { error, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import { z } from 'zod';
 
-import { ProjectUserPermission, Role } from '$lib/enums';
+import { Role } from '$lib/enums';
 import { validateSession } from '$lib/server/auth.js';
+import { formHandler } from '$lib/server/bodyguard.js';
 import { prisma } from '$lib/server/prisma/prismaConnection';
+import { verifySession } from '$lib/server/verifySession.js';
 
 export const load = async ({ cookies }) => {
 	const user = await validateSession(cookies.get('session'), {
@@ -24,5 +26,31 @@ export const load = async ({ cookies }) => {
 };
 
 export const actions = {
-	
+	joinInviteCode: formHandler(
+		z.object({
+			code: z.string()
+		}), async ({ code }, { cookies }) => {
+			const user = await verifySession(cookies);
+
+			const invite = await prisma.invite.findFirst({
+				where: {
+					joinCode: code,
+					OR: [{
+						toId: null
+					}, {
+						toId: user.id
+					}]
+				}
+			});
+
+			if (!invite) {
+				return {
+					success: false,
+					message: 'Invite not found'
+				}
+			}
+
+			redirect(302, `/invite/${code}`);
+		}
+	)
 };
