@@ -18,6 +18,7 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 
 	const organizationCount = schools.length;
 
+	console.log("Projects | Creating IDs...");
 	const allIds = arr(organizationCount, (id) =>
 		arr(chance.pickone([4, 5, 6]), () => {
 			const projectId = createId();
@@ -63,6 +64,7 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 	);
 
 	// Batch create every project
+	console.log("Projects | Creating projects...");
 	await prisma.project.createMany({
 		data: allIds.flat().map(({ projectId, orgId }) => ({
 			id: projectId,
@@ -77,6 +79,8 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 		.flat()
 		.map((id) => id.teacherIds)
 		.flat();
+	
+	console.log("Projects | Creating teachers...");
 	await prisma.user.createMany({
 		data: await Promise.all(
 			teacherIds.map(async ({ userId, orgId }) => ({
@@ -97,6 +101,8 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 		.flat()
 		.map((id) => id.studentIds)
 		.flat();
+	
+	console.log("Projects | Creating students...");
 	await prisma.user.createMany({
 		data: await Promise.all(
 			studentIds.map(async ({ userId, orgId }) => ({
@@ -123,12 +129,15 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 			.map((id) => id.studentIds)
 			.flat()
 	];
+
+	console.log("Projects | Creating editors...");
 	await prisma.projectUser.createMany({
 		data: editorIds.map(({ projectUserId, userId, projectId }) => ({
 			id: projectUserId,
 			userId,
 			projectId,
-			permission: ProjectUserPermission.EDITOR
+			permission: ProjectUserPermission.EDITOR,
+			voteSubmit: chance.weighted([true, false], [1, 2])
 		}))
 	});
 
@@ -137,6 +146,8 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 		.flat()
 		.map((id) => id.unverifieduserIds)
 		.flat();
+	
+	console.log("Projects | Creating unverified students...");
 	await prisma.user.createMany({
 		data: await Promise.all(
 			unverifiedStudentIds.map(async ({ userId, orgId }) => ({
@@ -157,6 +168,8 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 		.flat()
 		.map((id) => id.unverifieduserIds)
 		.flat();
+	
+	console.log("Projects | Creating viewers...");
 	await prisma.projectUser.createMany({
 		data: viewerIds.map(({ projectUserId, userId, projectId }) => ({
 			id: projectUserId,
@@ -171,6 +184,8 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 		.flat()
 		.map((id) => id.taskIds)
 		.flat();
+	
+	console.log("Projects | Creating tasks...");
 	await prisma.toDoItem.createMany({
 		data: taskIds.map(({ id, projectId }) => ({
 			id,
@@ -181,6 +196,7 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 	});
 
 	// Batch create task assignees
+	console.log("Projects | Creating task assignees...");
 	await prisma.toDoAssignee.createMany({
 		data: taskIds.flatMap(({ id, assigneeIds }) =>
 			assigneeIds.map((assigneeId) => ({
