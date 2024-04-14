@@ -49,6 +49,8 @@
 			modal: 'invite'
 		});
 	}
+
+	let selectedRole = 'unknown';
 </script>
 
 <main>
@@ -128,12 +130,25 @@
 			<Combobox
 				name="role"
 				label="Select Role"
+				bind:value={selectedRole}
 				options={[
 					roleHeirachy[data.user.role],
 					(role) => snakeCaseToTitleCase(role),
 					(role) => role
 				]}
 			/>
+			{#if selectedRole === 'STUDENT'}
+				<div class="margin-separator" />
+				<Combobox
+					name="projectId"
+					label="Project"
+					options={[
+						data.org.projects,
+						project => project.projectTemplate.name,
+						project => project.id
+					]}
+				/>
+			{/if}
 			<div class="margin-separator" />
 			<Button type="submit" value="Invite" />
 		</ModalForm>

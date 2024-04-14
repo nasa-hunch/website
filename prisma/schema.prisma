@@ -145,6 +145,7 @@ model Project {
   submissionDate DateTime?
   submitted Boolean @default(false)
   contactTeamMembers TeamMember[]
+  invites Invite[]
 }
 
 model ProjectTemplate { 
@@ -268,6 +269,9 @@ model Invite {
 
   orgId Int?
   organization Organization? @relation(fields: [orgId], references: [id])
+
+  projectId String?
+  project Project? @relation(fields: [projectId], references: [id])
 
   used Boolean @default(false)
 

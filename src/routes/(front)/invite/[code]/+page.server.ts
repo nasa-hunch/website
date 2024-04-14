@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { error, redirect } from '@sveltejs/kit';
 
 import { prisma } from '$lib/server/prisma/prismaConnection.js';
@@ -90,7 +91,20 @@ export const actions = {
 					},
 					data: {
 						role: invite.role,
-						...(invite.orgId ? { orgId: invite.orgId } : {})
+						...(invite.orgId ? { organization: {
+							connect: {
+								id: invite.orgId
+							}
+						} } : {}),
+						...(invite.projectId ? {
+							projectUser: {
+								create: {
+									id: createId(),
+									projectId: invite.projectId,
+									permission: 'NEEDS_APPROVAL'
+								}
+							}
+						} : {})
 					}
 				})
 			]);

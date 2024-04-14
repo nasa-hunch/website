@@ -80,9 +80,10 @@ export const actions = {
 	),
 	generateInvite: formHandler(
 		z.object({
-			role: z.enum(['STUDENT', 'TEACHER', 'ORG_ADMIN'])
+			role: z.enum(['STUDENT', 'TEACHER', 'ORG_ADMIN']),
+			projectId: z.string().optional().nullable()
 		}),
-		async ({ role }, { params, cookies }) => {
+		async ({ role, projectId }, { params, cookies }) => {
 			const user = await verifySession(cookies, Role.HUNCH_ADMIN, Role.ORG_ADMIN);
 
 			if (user.orgId !== parseInt(params.orgId) && user.role !== Role.HUNCH_ADMIN)
@@ -93,6 +94,7 @@ export const actions = {
 					id: createId(),
 					role: role as Role,
 					orgId: parseInt(params.orgId),
+					...(projectId ? { projectId } : {}),
 					fromId: user.id,
 					form: '',
 					joinCode: Math.floor(Math.random() * 1000000).toString()
