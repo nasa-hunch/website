@@ -5,12 +5,12 @@
 		projectTemplate: {
 			name: string;
 			description: string;
-			category: ({
+			category: {
 				id: string;
 				slug: string;
 				name: string;
 				color: string;
-			})[]
+			}[];
 		};
 	};
 
@@ -24,11 +24,9 @@
 			<p>
 				Categories:
 				{#each data.projectTemplate.category as category, i}
-					<a
-						class="program"
-						href="/programs/{category.slug}"
-						style="--color: #{category.color}"
-					><span class="name">{category.name}</span></a>
+					<a style="--color: #{category.color}" class="program" href="/programs/{category.slug}"
+						><span class="name">{category.name}</span></a
+					>
 				{/each}
 			</p>
 			<hr />
@@ -37,8 +35,7 @@
 		<hr />
 		{#if presentation}
 			<p>
-				Interested on working with this project?
-				Invite your school, coordinate with NASA admins,
+				Interested on working with this project? Invite your school, coordinate with NASA admins,
 				and <a href="/get-started">Get started</a>!
 			</p>
 		{/if}

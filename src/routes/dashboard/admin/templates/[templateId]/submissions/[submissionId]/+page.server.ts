@@ -35,7 +35,7 @@ export const load = async ({ parent, params }) => {
 			}
 		}
 	});
-	
+
 	if (!submission) error(404, 'Submission not found');
 
 	return {

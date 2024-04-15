@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { SubmitFunction } from '@sveltejs/kit';
 	import { tooltip } from '@svelte-plugins/tooltips';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	import { enhance } from '$app/forms';
 
@@ -31,10 +31,7 @@
 
 <div use:tooltip={{ content: tooltipText, action: 'hover', arrow: false, animation: 'fade' }}>
 	{#if disabled}
-		<div 
-			{style}
-			class="iconButton disabled"
-		>
+		<div {style} class="iconButton disabled">
 			<slot />
 		</div>
 	{:else if href}

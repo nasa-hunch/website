@@ -10,7 +10,7 @@
 
 	const setBranch = (value: string) => {
 		goto(`/dashboard/admin/staging/${value}`);
-	}
+	};
 </script>
 
 {#if $page.state.modal == 'createBranch'}
@@ -38,9 +38,8 @@
 					options={[data.branches, (branch) => branch.name, (branch) => branch.id]}
 					placeholder={data.branch.name}
 					on:selectOption={(e) => {
-						setBranch(e.detail.value)
+						setBranch(e.detail.value);
 					}}
-					
 				/>
 			</div>
 			<div class="action">

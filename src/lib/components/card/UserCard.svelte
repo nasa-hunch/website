@@ -1,30 +1,30 @@
 <script lang="ts">
-    import { snakeCaseToTitleCase } from '$lib/case.js';
-    import Pfp from '$lib/components/Pfp.svelte';
+	import { snakeCaseToTitleCase } from '$lib/case.js';
+	import Pfp from '$lib/components/Pfp.svelte';
 
-    interface UserLike {
-        id: string;
-        firstName: string;
-        lastName: string;
-        pfp: string | null;
-        role: string | null;
-    }
+	interface UserLike {
+		id: string;
+		firstName: string;
+		lastName: string;
+		pfp: string | null;
+		role: string | null;
+	}
 
-    export let user: UserLike;
+	export let user: UserLike;
 </script>
 
 <a class="user" href="/dashboard/users/{user.id}">
-    <Pfp size="50px" {user} />
-    <div class="content">
-        <p>{user.firstName} {user.lastName}</p>
-        {#if user.role && user.role !== 'STUDENT'}
-            <p class="role">{snakeCaseToTitleCase(user.role)}</p>
-        {/if}
-    </div>
+	<Pfp size="50px" {user} />
+	<div class="content">
+		<p>{user.firstName} {user.lastName}</p>
+		{#if user.role && user.role !== 'STUDENT'}
+			<p class="role">{snakeCaseToTitleCase(user.role)}</p>
+		{/if}
+	</div>
 </a>
 
 <style lang="scss">
-    .role {
+	.role {
 		display: inline-block;
 		padding: 0.25rem 0.5rem;
 		margin: 0;
@@ -34,7 +34,7 @@
 		border: 1px solid #dd361c;
 	}
 
-    .user {
+	.user {
 		display: flex;
 		align-items: center;
 		gap: 1rem;

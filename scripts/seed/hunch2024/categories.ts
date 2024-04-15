@@ -99,27 +99,28 @@ export async function seed(prisma: PrismaTransactionClient) {
 	}
 
 	const files = await getFileInfo();
-	const fileIds = templateIds.map(id => [
-		id,
-		Array.from({ length: random(0, 5) }, () => createId())
-	] as const);
+	const fileIds = templateIds.map(
+		(id) => [id, Array.from({ length: random(0, 5) }, () => createId())] as const
+	);
 
 	await prisma.file.createMany({
-		data: fileIds.flatMap(([, fileId]) => fileId.map(id => {
-			const [name, size, link] = files[random(0, files.length - 1)];
+		data: fileIds.flatMap(([, fileId]) =>
+			fileId.map((id) => {
+				const [name, size, link] = files[random(0, files.length - 1)];
 
-			return {
-				id,
-				name,
-				size,
-				link
-			}
-		}))
+				return {
+					id,
+					name,
+					size,
+					link
+				};
+			})
+		)
 	});
 
 	await prisma.projectTemplateFile.createMany({
-		data: fileIds.flatMap(([templateId, fileId]) => 
-			fileId.map(id => ({
+		data: fileIds.flatMap(([templateId, fileId]) =>
+			fileId.map((id) => ({
 				fileId: id,
 				templateId: templateId
 			}))
