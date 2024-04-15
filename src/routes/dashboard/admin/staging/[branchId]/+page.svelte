@@ -4,11 +4,14 @@
     import Button from "$lib/components/Button.svelte"
 </script>
 <div class="wrap">
-    {#each data.stages as stage}
-        <div class="stage">
-            <p>{stage.dueDate}</p>
-        </div>
-    {/each}
+    <div class="stages">
+        {#each data.stages as stage}
+            <div class="stage">
+                <p>{stage.dueDate}</p>
+            </div>
+        {/each}
+    </div>
+    
     <form method="post" action="?/createStage" use:enhance>
         <Button value="New Stage"/>
     </form>

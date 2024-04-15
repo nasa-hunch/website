@@ -17,7 +17,7 @@
 			<ComboBox
 				name="projectId"
 				label="Project"
-				options={[data.possibleProjects, (project) => project.id, (project) => project.name]}
+				options={[data.possibleProjects, (project) => project.name, (project) => project.id]}
 			/>
 			<hr class="spacer" />
 			<Button value="Create" />
