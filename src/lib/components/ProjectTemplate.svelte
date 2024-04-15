@@ -24,7 +24,8 @@
 			<p>
 				Categories:
 				{#each data.projectTemplate.category as category, i}
-					<a 
+					<a
+						class="program"
 						href="/programs/{category.slug}"
 						style="--color: #{category.color}"
 					><span class="name">{category.name}</span></a>
@@ -61,7 +62,7 @@
 		text-align: center;
 	}
 
-	a {
+	.program {
 		background-color: var(--color);
 		padding: 0.25rem 0.5rem;
 		border-radius: 0.25rem;
