@@ -5,6 +5,7 @@
 
 	export let method = 'post';
 	export let action = '?/uploadFile';
+	export let disabled = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -33,20 +34,24 @@
 	};
 </script>
 
-<form {action} enctype="multipart/form-data" hidden {method} use:enhance>
-	<input bind:this={fileBox} name="file" type="file" />
-	<button bind:this={fileUploadButton} type="submit" />
-</form>
-
-<button
-	class="dragField"
-	class:active={draggedOver}
-	on:dragover={dragOverHandler}
-	on:drop={dropHandler}
-	on:dragleave={dragOverEnd}
->
+{#if disabled}
 	<slot />
-</button>
+{:else}
+	<form {action} enctype="multipart/form-data" hidden {method} use:enhance>
+		<input bind:this={fileBox} name="file" type="file" />
+		<button bind:this={fileUploadButton} type="submit" />
+	</form>
+
+	<button
+		class="dragField"
+		class:active={draggedOver}
+		on:dragover={dragOverHandler}
+		on:drop={dropHandler}
+		on:dragleave={dragOverEnd}
+	>
+		<slot />
+	</button>
+{/if}
 
 <style lang="scss">
 	.dragField {

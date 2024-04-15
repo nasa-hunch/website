@@ -2,7 +2,7 @@
 	export let form: {
 		message: string;
 		success?: boolean;
-	} | null;
+	} | null = null;
 
 	import dayjs from 'dayjs';
 	import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -63,6 +63,8 @@
 		form = null;
 	}
 
+	export let actions = true;
+
 	let doingFileDeleteOn: string;
 	let doingFileDeleteOnId: number;
 	const deleteFile = (id: number, fileName: string) => {
@@ -99,7 +101,7 @@
 {/if}
 
 <div class="wrap">
-	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload}>
+	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload} disabled={!actions}>
 		<table class="fileList">
 			<thead>
 				<tr>
@@ -135,27 +137,31 @@
 							<IconButton href={file.link}>
 								<IconDownload />
 							</IconButton>
-							<IconButton
-								disabled={file.locked}
-								on:click={() => {
-									deleteFile(file.id, file.name);
-								}}
-							>
-								<IconTrash />
-							</IconButton>
+							{#if actions}
+								<IconButton
+									disabled={file.locked}
+									on:click={() => {
+										deleteFile(file.id, file.name);
+									}}
+								>
+									<IconTrash />
+								</IconButton>
+							{/if}
 						</td>
 					</tr>
 				{/each}
 			</tbody>
 		</table>
-		<div class="infoBox">
-			<p>
-				{#if files.length < 1}
-					<span class="accentText">No files yet!</span>
-				{/if}
-				<span>Drag and drop to upload files.</span>
-			</p>
-		</div>
+		{#if actions}
+			<div class="infoBox">
+				<p>
+					{#if files.length < 1}
+						<span class="accentText">No files yet!</span>
+					{/if}
+					<span>Drag and drop to upload files.</span>
+				</p>
+			</div>
+		{/if}
 	</DragDropUpload>
 </div>
 

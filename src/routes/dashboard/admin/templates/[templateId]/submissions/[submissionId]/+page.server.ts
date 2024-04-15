@@ -27,6 +27,11 @@ export const load = async ({ parent, params }) => {
 						}
 					}
 				}
+			},
+			files: {
+				include: {
+					file: true
+				}
 			}
 		}
 	});

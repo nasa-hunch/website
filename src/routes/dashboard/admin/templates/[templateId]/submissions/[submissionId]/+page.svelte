@@ -1,5 +1,6 @@
 <script lang="ts">
 	import UserCard from '$lib/components/card/UserCard.svelte';
+    import FileManager from '$lib/fileManager/FileManager.svelte';
 
     export let data;
 </script>
@@ -18,6 +19,10 @@
         <UserCard {user} />
     {/each}
 </div>
+
+<h2>Files</h2>
+
+<FileManager files={data.submission.files.map(({ file }) => file)} actions={false} />
 
 <style lang="scss">
     a {
