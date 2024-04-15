@@ -146,6 +146,7 @@ model Project {
   submitted Boolean @default(false)
   contactTeamMembers TeamMember[]
   invites Invite[]
+  joinCode String @unique
 }
 
 model ProjectTemplate { 

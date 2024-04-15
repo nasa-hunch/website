@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { createId } from '@paralleldrive/cuid2';
 
 import { ProjectUserPermission, Role } from '$lib/enums.js';
 import { formHandler } from '$lib/server/bodyguard.js';
@@ -19,6 +20,7 @@ export const actions = {
 			projectId: z.string()
 		}),
 		async ({ projectId }, { cookies }) => {
+			console.log(`"${projectId}"`);
 			const user = await verifySession(cookies);
 			if (
 				user.role != Role.HUNCH_ADMIN &&
@@ -37,7 +39,6 @@ export const actions = {
 					message: 'No Organization.'
 				};
 			}
-
 			const projectTemplate = await prisma.projectTemplate.findUnique({
 				where: {
 					id: projectId
@@ -64,7 +65,8 @@ export const actions = {
 							owner: true,
 							permission: ProjectUserPermission.EDITOR
 						}
-					}
+					},
+					id: createId()
 				}
 			});
 
