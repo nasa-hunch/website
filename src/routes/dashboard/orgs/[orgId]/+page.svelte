@@ -71,7 +71,11 @@
 		<div class="projects">
 			{#each data.org.projects as project}
 				<a class="project" href="/dashboard/projects/{project.id}">
-					<h2>{project.projectTemplate.name.substring(0, 36)}{project.projectTemplate.name.length > 36 ? "..." : ""}</h2>
+					<h2>
+						{project.projectTemplate.name.substring(0, 36)}{project.projectTemplate.name.length > 36
+							? '...'
+							: ''}
+					</h2>
 					{#if project.submitted}
 						<div class="submitted">Submitted</div>
 					{/if}
@@ -242,5 +246,4 @@
 		align-items: start;
 		text-decoration: underline;
 	}
-	
 </style>

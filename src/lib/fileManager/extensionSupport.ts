@@ -7,12 +7,12 @@ import JsIcon from '~icons/vscode-icons/file-type-js-official';
 import CssIcon from '~icons/vscode-icons/file-type-css';
 import VideoIcon from '~icons/vscode-icons/file-type-video';
 import PdfIcon from '~icons/vscode-icons/file-type-pdf2';
-import MarkdownIcon from "~icons/vscode-icons/file-type-markdown";
-import ExcelIcon from "~icons/vscode-icons/file-type-excel2";
-import WordIcon from "~icons/vscode-icons/file-type-word2";
-import PowerPointIcon from "~icons/vscode-icons/file-type-powerpoint2";
-import ThreeDimensionIcon from "~icons/mdi/video-3d";
-import BlenderIcon from "~icons/mdi/blender-software"
+import MarkdownIcon from '~icons/vscode-icons/file-type-markdown';
+import ExcelIcon from '~icons/vscode-icons/file-type-excel2';
+import WordIcon from '~icons/vscode-icons/file-type-word2';
+import PowerPointIcon from '~icons/vscode-icons/file-type-powerpoint2';
+import ThreeDimensionIcon from '~icons/mdi/video-3d';
+import BlenderIcon from '~icons/mdi/blender-software';
 
 const extensionIcons: { [key: string]: ComponentType } = {
 	png: IconImage,
@@ -45,20 +45,19 @@ const extensionIcons: { [key: string]: ComponentType } = {
 	odp: PowerPointIcon,
 	obj: ThreeDimensionIcon,
 	fbx: ThreeDimensionIcon,
-	"3ds": ThreeDimensionIcon,
-	BLEND: BlenderIcon,
+	'3ds': ThreeDimensionIcon,
+	BLEND: BlenderIcon
 };
 
 export const createDisplayInformation = (fileName: string, showExtension: boolean) => {
-	
-	const fileParts = fileName.split(".");
-	const extension = fileParts[fileParts.length - 1].toLowerCase()
-	const newFileName =  showExtension ? fileName : fileParts.toSpliced(fileParts.length - 1, 1).join(".");
-	
-
+	const fileParts = fileName.split('.');
+	const extension = fileParts[fileParts.length - 1].toLowerCase();
+	const newFileName = showExtension
+		? fileName
+		: fileParts.toSpliced(fileParts.length - 1, 1).join('.');
 
 	return {
 		fileName: newFileName,
 		extensionIcon: extensionIcons[extension] || (IconFile as ComponentType)
-	}
-}
+	};
+};

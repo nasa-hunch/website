@@ -24,7 +24,7 @@
 
 	import { getFormattedSize } from './sizeCalculator';
 	import Filter from '$lib/components/Filter.svelte';
-	import FilterIcon from "~icons/mdi/filter"
+	import FilterIcon from '~icons/mdi/filter';
 
 	export let files: {
 		name: string;
@@ -104,23 +104,33 @@
 	</Modal>
 {/if}
 
-<Filter bind:this={filterComponent} param="showFileExtension" filters={[
-	{
-		name: "Show Extensions",
-		value: "true",
-	},
-	{
-		name: "Hide Extensions",
-		value: "false"
-	}
-]}/>
+<Filter
+	bind:this={filterComponent}
+	param="showFileExtension"
+	filters={[
+		{
+			name: 'Show Extensions',
+			value: 'true'
+		},
+		{
+			name: 'Hide Extensions',
+			value: 'false'
+		}
+	]}
+/>
 
 <div class="wrap">
 	<DragDropUpload action="?/uploadFile" disabled={!actions} on:startUpload={startFileUpload}>
 		<table class="fileList">
 			<thead>
 				<tr>
-					<th class="nameRow" scope="col">Name <IconButton on:click={(e) => {filterComponent.propagateClick(e)}}><FilterIcon/></IconButton></th>
+					<th class="nameRow" scope="col"
+						>Name <IconButton
+							on:click={(e) => {
+								filterComponent.propagateClick(e);
+							}}><FilterIcon /></IconButton
+						></th
+					>
 					<th scope="col">Size</th>
 					<th scope="col">Modified</th>
 					<th scope="col">Actions</th>
@@ -128,13 +138,15 @@
 			</thead>
 			<tbody>
 				{#each files as file}
-					{@const fileData = createDisplayInformation(file.name, $page.url.searchParams.get("showFileExtension") == "true")}
+					{@const fileData = createDisplayInformation(
+						file.name,
+						$page.url.searchParams.get('showFileExtension') == 'true'
+					)}
 					<tr class="file">
 						<th class="name" class:dimmed={file.locked} scope="row">
-							
 							<div class="icon">
-								<svelte:component this={fileData.extensionIcon}/>
-							</div>						
+								<svelte:component this={fileData.extensionIcon} />
+							</div>
 							<InTextInput
 								name="fileName"
 								action="?/renameFile"
@@ -142,7 +154,11 @@
 								disabled={file.locked}
 								on:submit={fileNameChange}
 							>
-								<input type="checkbox" name="showFileExtension" checked={$page.url.searchParams.get("showFileExtension") == "true"}/>
+								<input
+									type="checkbox"
+									name="showFileExtension"
+									checked={$page.url.searchParams.get('showFileExtension') == 'true'}
+								/>
 								<input name="fileId" value={file.id} />
 							</InTextInput>
 						</th>
@@ -161,7 +177,7 @@
 									disabled={file.locked}
 									on:click={() => {
 										deleteFile(file.id, file.name);
- 									}}
+									}}
 								>
 									<IconTrash />
 								</IconButton>

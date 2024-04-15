@@ -143,7 +143,7 @@ export const actions = {
 			fileName: z.string(),
 			showFileExtension: z.coerce.boolean()
 		}),
-		async ({ fileId, fileName, showFileExtension }, {cookies, params }) => {
+		async ({ fileId, fileName, showFileExtension }, { cookies, params }) => {
 			const user = await verifySession(cookies);
 
 			const projectUser = await prisma.projectUser.findFirst({
@@ -181,9 +181,9 @@ export const actions = {
 					message: 'No file exists'
 				};
 			}
-			const fileNameParts = fileCheck.name.split(".")
+			const fileNameParts = fileCheck.name.split('.');
 			const oldFileExtension = fileNameParts[fileNameParts.length - 1];
-			const newFileName = showFileExtension ? fileName : fileName + "." + oldFileExtension;
+			const newFileName = showFileExtension ? fileName : fileName + '.' + oldFileExtension;
 
 			await prisma.file.update({
 				where: {
@@ -193,7 +193,6 @@ export const actions = {
 					name: newFileName
 				}
 			});
-
 
 			return {
 				success: true,

@@ -32,9 +32,17 @@
 	{#if disabled}
 		<span class="inputSpacing">{value}</span>
 	{:else}
-		<input {name} {style} class="inputSpacing inputEffects" on:change on:input on:change={submitForm} bind:value />
+		<input
+			{name}
+			{style}
+			class="inputSpacing inputEffects"
+			on:change
+			on:input
+			on:change={submitForm}
+			bind:value
+		/>
 	{/if}
-	
+
 	<div hidden>
 		<slot />
 	</div>

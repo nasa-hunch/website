@@ -70,8 +70,6 @@ export const actions = {
 				};
 			}
 
-			
-
 			const fileCheck = await prisma.file.findFirst({
 				where: {
 					AND: {
@@ -85,8 +83,6 @@ export const actions = {
 				}
 			});
 
-			
-
 			if (!fileCheck) {
 				return {
 					success: false,
@@ -94,9 +90,9 @@ export const actions = {
 				};
 			}
 
-			const fileNameParts = fileCheck.name.split(".")
+			const fileNameParts = fileCheck.name.split('.');
 			const oldFileExtension = fileNameParts[fileNameParts.length - 1];
-			const newFileName = showFileExtension ? fileName : fileName + "." + oldFileExtension;
+			const newFileName = showFileExtension ? fileName : fileName + '.' + oldFileExtension;
 
 			await prisma.file.update({
 				where: {
