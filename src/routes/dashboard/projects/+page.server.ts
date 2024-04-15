@@ -1,3 +1,4 @@
+import { createId } from '@paralleldrive/cuid2';
 import { z } from 'zod';
 
 import { ProjectUserPermission, Role } from '$lib/enums.js';
@@ -51,15 +52,14 @@ export const actions = {
 				};
 			}
 
-			const joinCode = 1e7 + Math.floor(Math.random() * 9e7);
-
 			await prisma.project.create({
 				data: {
+					id: createId(),
 					orgId: user.orgId,
 					projectTemplateId: projectTemplate.id,
-					joinCode: joinCode,
 					users: {
 						create: {
+							id: createId(),
 							userId: user.id,
 							owner: true,
 							permission: ProjectUserPermission.EDITOR
