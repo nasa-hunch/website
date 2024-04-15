@@ -15,16 +15,16 @@
 
 	import IconTrash from '~icons/mdi/delete-outline';
 	import IconDownload from '~icons/mdi/download';
+	import FilterIcon from '~icons/mdi/filter';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Filter from '$lib/components/Filter.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import InTextInput from '$lib/components/InTextInput.svelte';
 	import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
 	import { createDisplayInformation } from '$lib/fileManager/extensionSupport.js';
 
 	import { getFormattedSize } from './sizeCalculator';
-	import Filter from '$lib/components/Filter.svelte';
-	import FilterIcon from '~icons/mdi/filter';
 
 	export let files: {
 		name: string;
@@ -106,7 +106,6 @@
 
 <Filter
 	bind:this={filterComponent}
-	param="showFileExtension"
 	filters={[
 		{
 			name: 'Show Extensions',
@@ -117,6 +116,7 @@
 			value: 'false'
 		}
 	]}
+	param="showFileExtension"
 />
 
 <div class="wrap">
@@ -150,14 +150,14 @@
 							<InTextInput
 								name="fileName"
 								action="?/renameFile"
-								value={fileData.fileName}
 								disabled={file.locked}
+								value={fileData.fileName}
 								on:submit={fileNameChange}
 							>
 								<input
-									type="checkbox"
 									name="showFileExtension"
 									checked={$page.url.searchParams.get('showFileExtension') == 'true'}
+									type="checkbox"
 								/>
 								<input name="fileId" value={file.id} />
 							</InTextInput>

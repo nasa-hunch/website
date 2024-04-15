@@ -1,18 +1,18 @@
 import type { ComponentType } from 'svelte';
 
-import IconFile from '~icons/mdi/file';
-import IconImage from '~icons/vscode-icons/file-type-image';
-import HtmlIcon from '~icons/vscode-icons/file-type-html';
-import JsIcon from '~icons/vscode-icons/file-type-js-official';
-import CssIcon from '~icons/vscode-icons/file-type-css';
-import VideoIcon from '~icons/vscode-icons/file-type-video';
-import PdfIcon from '~icons/vscode-icons/file-type-pdf2';
-import MarkdownIcon from '~icons/vscode-icons/file-type-markdown';
-import ExcelIcon from '~icons/vscode-icons/file-type-excel2';
-import WordIcon from '~icons/vscode-icons/file-type-word2';
-import PowerPointIcon from '~icons/vscode-icons/file-type-powerpoint2';
-import ThreeDimensionIcon from '~icons/mdi/video-3d';
 import BlenderIcon from '~icons/mdi/blender-software';
+import IconFile from '~icons/mdi/file';
+import ThreeDimensionIcon from '~icons/mdi/video-3d';
+import CssIcon from '~icons/vscode-icons/file-type-css';
+import ExcelIcon from '~icons/vscode-icons/file-type-excel2';
+import HtmlIcon from '~icons/vscode-icons/file-type-html';
+import IconImage from '~icons/vscode-icons/file-type-image';
+import JsIcon from '~icons/vscode-icons/file-type-js-official';
+import MarkdownIcon from '~icons/vscode-icons/file-type-markdown';
+import PdfIcon from '~icons/vscode-icons/file-type-pdf2';
+import PowerPointIcon from '~icons/vscode-icons/file-type-powerpoint2';
+import VideoIcon from '~icons/vscode-icons/file-type-video';
+import WordIcon from '~icons/vscode-icons/file-type-word2';
 
 const extensionIcons: { [key: string]: ComponentType } = {
 	png: IconImage,
