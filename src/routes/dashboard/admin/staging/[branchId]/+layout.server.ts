@@ -5,7 +5,7 @@ import { prisma } from '$lib/server/prisma/prismaConnection';
 export const load = async ({ params }) => {
 	const branches = await prisma.branch.findMany({
 		orderBy: {
-			createdAt: 'asc'
+			createdAt: 'desc'
 		}
 	});
 
