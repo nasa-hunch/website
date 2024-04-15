@@ -20,9 +20,11 @@
 	import IconButton from '$lib/components/IconButton.svelte';
 	import InTextInput from '$lib/components/InTextInput.svelte';
 	import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
-	import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
+	import { createDisplayInformation } from '$lib/fileManager/extensionSupport.js';
 
 	import { getFormattedSize } from './sizeCalculator';
+	import Filter from '$lib/components/Filter.svelte';
+	import FilterIcon from "~icons/mdi/filter"
 
 	export let files: {
 		name: string;
@@ -85,6 +87,8 @@
 	const fileNameChange = () => {
 		createToast('Updating File...', 'File Updated!', 'Could not update file.');
 	};
+
+	let filterComponent: Filter;
 </script>
 
 {#if $page.state.modal === 'deleteFile'}
@@ -100,12 +104,23 @@
 	</Modal>
 {/if}
 
+<Filter bind:this={filterComponent} param="showFileExtension" filters={[
+	{
+		name: "Show Extensions",
+		value: "true",
+	},
+	{
+		name: "Hide Extensions",
+		value: "false"
+	}
+]}/>
+
 <div class="wrap">
 	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload} disabled={!actions}>
 		<table class="fileList">
 			<thead>
 				<tr>
-					<th scope="col">Name</th>
+					<th class="nameRow" scope="col">Name <IconButton on:click={(e) => {filterComponent.propagateClick(e)}}><FilterIcon/></IconButton></th>
 					<th scope="col">Size</th>
 					<th scope="col">Modified</th>
 					<th scope="col">Actions</th>
@@ -113,17 +128,21 @@
 			</thead>
 			<tbody>
 				{#each files as file}
+					{@const fileData = createDisplayInformation(file.name, $page.url.searchParams.get("showFileExtension") == "true")}
 					<tr class="file">
-						<th class="name" scope="row">
+						<th class="name" class:dimmed={file.locked} scope="row">
+							
 							<div class="icon">
-								<svelte:component this={extensionSupport(file.name)} />
-							</div>
+								<svelte:component this={fileData.extensionIcon}/>
+							</div>						
 							<InTextInput
 								name="fileName"
 								action="?/renameFile"
-								value={file.name}
+								value={fileData.fileName}
+								disabled={file.locked}
 								on:submit={fileNameChange}
 							>
+								<input type="checkbox" name="showFileExtension" checked={$page.url.searchParams.get("showFileExtension") == "true"}/>
 								<input name="fileId" value={file.id} />
 							</InTextInput>
 						</th>
@@ -142,7 +161,7 @@
 									disabled={file.locked}
 									on:click={() => {
 										deleteFile(file.id, file.name);
-									}}
+ 									}}
 								>
 									<IconTrash />
 								</IconButton>
@@ -197,6 +216,10 @@
 			justify-content: center;
 		}
 	}
+	.nameRow {
+		display: flex;
+		align-items: center;
+	}
 
 	.name {
 		display: flex;
@@ -230,5 +253,9 @@
 	}
 	.accentText {
 		color: $primary;
+	}
+	.dimmed {
+		opacity: 0.5;
+		cursor: not-allowed;
 	}
 </style>
