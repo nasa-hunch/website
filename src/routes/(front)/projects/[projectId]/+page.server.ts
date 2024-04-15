@@ -6,6 +6,16 @@ export const load = async ({ params }) => {
 	const projectTemplate = await prisma.projectTemplate.findFirst({
 		where: {
 			id: params.projectId
+		},
+		include: {
+			category: {
+				select: {
+					slug: true,
+					id: true,
+					name: true,
+					color: true
+				}
+			}
 		}
 	});
 

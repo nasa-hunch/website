@@ -5,14 +5,42 @@
 		projectTemplate: {
 			name: string;
 			description: string;
+			category: ({
+				id: string;
+				slug: string;
+				name: string;
+				color: string;
+			})[]
 		};
 	};
+
+	export let presentation = false;
 </script>
 
 <div class="content">
 	<div class="inner">
 		<h1 class="name">{data.projectTemplate.name}</h1>
+		{#if presentation}
+			<p>
+				Categories:
+				{#each data.projectTemplate.category as category, i}
+					<a 
+						href="/programs/{category.slug}"
+						style="--color: #{category.color}"
+					><span class="name">{category.name}</span></a>
+				{/each}
+			</p>
+			<hr />
+		{/if}
 		{@html sanitizeHtml(data.projectTemplate.description)}
+		<hr />
+		{#if presentation}
+			<p>
+				Interested on working with this project?
+				Invite your school, coordinate with NASA admins,
+				and <a href="/get-started">Get started</a>!
+			</p>
+		{/if}
 	</div>
 </div>
 
@@ -31,5 +59,18 @@
 
 	.name {
 		text-align: center;
+	}
+
+	a {
+		background-color: var(--color);
+		padding: 0.25rem 0.5rem;
+		border-radius: 0.25rem;
+		margin: 0 0.25rem;
+		color: white;
+
+		.name {
+			font-weight: bold;
+			filter: invert(1);
+		}
 	}
 </style>

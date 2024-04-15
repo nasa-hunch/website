@@ -3,4 +3,4 @@
 	import ProjectTemplate from '$lib/components/ProjectTemplate.svelte';
 </script>
 
-<ProjectTemplate {data} />
+<ProjectTemplate presentation {data} />

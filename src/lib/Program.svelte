@@ -121,12 +121,5 @@
 			margin-bottom: 1rem;
 			text-align: center;
 		}
-
-		h2 {
-			font-size: 3rem;
-			font-weight: 700;
-			margin-bottom: 1rem;
-			text-align: center;
-		}
 	}
 </style>
