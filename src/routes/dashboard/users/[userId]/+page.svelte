@@ -67,8 +67,7 @@
 					href="/dashboard/projects/{projectUser.project.id}"
 				>
 					<h3>
-						{projectUser.project.projectTemplate.name.substring(0, 25)}
-						{projectUser.project.projectTemplate.name.length > 25 ? '...' : ''}
+						{projectUser.project.projectTemplate.name}
 					</h3>
 					<div class="projectFooter">
 						<div class="avatars">

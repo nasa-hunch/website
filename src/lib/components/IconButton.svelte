@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { SubmitFunction } from '@sveltejs/kit';
+	import { tooltip } from '@svelte-plugins/tooltips';
 
 	import { enhance } from '$app/forms';
 
@@ -22,32 +23,41 @@
 		| undefined = undefined;
 
 	export let enhanceBody: SubmitFunction | undefined = undefined;
+
+	let tooltipText: string | undefined = undefined;
+
+	export { tooltipText as tooltip };
 </script>
 
-{#if disabled}
-	<div {style} class="iconButton disabled">
-		<slot />
-	</div>
-{:else if href}
-	<a {style} class="iconButton" {href} on:click>
-		<slot />
-	</a>
-{:else if formData}
-	<form
-		class="formButton"
-		action={formData.action}
-		method={formData.method}
-		use:enhance={enhanceBody}
-	>
+<div use:tooltip={{ content: tooltipText, action: 'hover', arrow: false, animation: 'fade' }}>
+	{#if disabled}
+		<div 
+			{style}
+			class="iconButton disabled"
+		>
+			<slot />
+		</div>
+	{:else if href}
+		<a {style} class="iconButton" {href} on:click>
+			<slot />
+		</a>
+	{:else if formData}
+		<form
+			class="formButton"
+			action={formData.action}
+			method={formData.method}
+			use:enhance={enhanceBody}
+		>
+			<button {style} class="iconButton" on:click>
+				<slot />
+			</button>
+		</form>
+	{:else}
 		<button {style} class="iconButton" on:click>
 			<slot />
 		</button>
-	</form>
-{:else}
-	<button {style} class="iconButton" on:click>
-		<slot />
-	</button>
-{/if}
+	{/if}
+</div>
 
 <style lang="scss">
 	.iconButton {
