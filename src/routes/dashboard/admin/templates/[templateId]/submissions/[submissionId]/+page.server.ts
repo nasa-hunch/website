@@ -1,9 +1,11 @@
+import { error } from '@sveltejs/kit';
+
 import { prisma } from '$lib/server/prisma/prismaConnection';
 
 export const load = async ({ parent, params }) => {
 	const parentData = await parent();
 
-	const submissions = await prisma.project.findFirst({
+	const submission = await prisma.project.findFirst({
 		where: {
 			AND: {
 				submitted: true,
@@ -12,11 +14,26 @@ export const load = async ({ parent, params }) => {
 			}
 		},
 		include: {
-			organization: true
+			organization: true,
+			users: {
+				include: {
+					user: {
+						select: {
+							id: true,
+							firstName: true,
+							lastName: true,
+							role: true,
+							pfp: true
+						}
+					}
+				}
+			}
 		}
 	});
+	
+	if (!submission) error(404, 'Submission not found');
 
 	return {
-		submissions
+		submission
 	};
 };

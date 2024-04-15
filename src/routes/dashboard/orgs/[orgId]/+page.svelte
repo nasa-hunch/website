@@ -13,6 +13,7 @@
 	import ModalWrap from '$lib/components/ModalWrap.svelte';
 	import Pfp from '$lib/components/Pfp.svelte';
 	import { Role } from '$lib/enums';
+	import UserCard from '$lib/components/card/UserCard.svelte';
 
 	export let data;
 	export let form;
@@ -88,15 +89,7 @@
 
 		<div class="users">
 			{#each sortedUsers as user}
-				<a class="user" href="/dashboard/users/{user.id}">
-					<Pfp size="50px" {user} />
-					<div class="content">
-						<p>{user.firstName} {user.lastName}</p>
-						{#if user.role && user.role !== 'STUDENT'}
-							<p class="role">{snakeCaseToTitleCase(user.role)}</p>
-						{/if}
-					</div>
-				</a>
+				<UserCard {user} />
 			{/each}
 		</div>
 	{:else}
@@ -216,17 +209,6 @@
 		gap: 1rem;
 	}
 
-	.role {
-		display: inline-block;
-		padding: 0.25rem 0.5rem;
-		margin: 0;
-		font-size: 0.8rem;
-		color: var(--text-alt);
-		background-color: rgba(221, 54, 28, 0.25);
-		border: 1px solid #dd361c;
-	}
-
-	.user,
 	.project {
 		display: flex;
 		align-items: center;

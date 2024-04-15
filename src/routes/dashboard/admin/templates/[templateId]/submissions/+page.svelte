@@ -29,9 +29,14 @@
 		border-radius: 0.25rem;
 		margin-bottom: 0.3rem;
 		padding: 0rem 1rem;
+		transition: background 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 
 		a {
 			color: black;
+		}
+
+		&:hover {
+			background: darken($background-alt, 5%);
 		}
 	}
 </style>
