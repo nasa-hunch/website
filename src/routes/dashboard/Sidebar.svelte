@@ -35,32 +35,32 @@
 				<div class="icon">
 					<DashboardIcon height="23px" width="23px" />
 				</div>
-				Dashboard
+				<span class="buttonText">Dashboard</span>
 			</a>
 			{#if data.user.role == Role.HUNCH_ADMIN}
 				<a class="button buttonCenter" href="/dashboard/admin/users">
 					<div class="icon">
 						<UsersIcon height="23px" width="23px" />
 					</div>
-					Users
+					<span class="buttonText">Users</span>
 				</a>
 				<a class="button buttonCenter" href="/dashboard/admin/orgs">
 					<div class="icon">
 						<OrgIcon height="23px" width="23px" />
 					</div>
-					Organizations
+					<span class="buttonText">Organizations</span>
 				</a>
 				<a class="button buttonCenter" href="/dashboard/admin/categories">
 					<div class="icon">
 						<CatIcon height="23px" width="23px" />
 					</div>
-					Categories
+					<span class="buttonText">Categories</span>
 				</a>
 				<a class="button buttonCenter" href="/dashboard/admin/staging">
 					<div class="icon">
 						<StagingIcon height="23px" width="23px" />
 					</div>
-					Staging
+					<span class="buttonText">Staging</span>
 				</a>
 				<button
 					class="button buttonCenter"
@@ -69,7 +69,7 @@
 					<div class="icon">
 						<MdiWeb height="23px" width="23px" />
 					</div>
-					Website
+					<span class="buttonText">Website</span>
 				</button>
 				{#if websiteDropdownEnabled}
 					<div class="indent">
@@ -77,25 +77,25 @@
 							<div class="icon">
 								<StaffIcon height="23px" width="23px" />
 							</div>
-							Staff
+							<span class="buttonText">Staff</span>
 						</a>
 						<a class="button buttonCenter" href="/dashboard/admin/website/blog">
 							<div class="icon">
 								<BlogIcon height="23px" width="23px" />
 							</div>
-							Blog
+							<span class="buttonText">Blog</span>
 						</a>
 						<a class="button buttonCenter" href="/dashboard/admin/website/map">
 							<div class="icon">
 								<MapIcon height="23px" width="23px" />
 							</div>
-							Map
+							<span class="buttonText">Map</span>
 						</a>
 						<a class="button buttonCenter" href="/dashboard/admin/website/sponsors">
 							<div class="icon">
 								<SponsorIcon height="23px" width="23px" />
 							</div>
-							Sponsors
+							<span class="buttonText">Sponsors</span>
 						</a>
 					</div>
 				{/if}
@@ -104,14 +104,14 @@
 					<div class="icon">
 						<OrgIcon height="23px" width="23px" />
 					</div>
-					My Organization
+					<span class="buttonText">My Organization</span>
 				</a>
 			{:else}
 				<a class="button buttonCenter" href="/dashboard/projects">
 					<div class="icon">
 						<ProjectIcon height="23px" width="23px" />
 					</div>
-					Projects
+					<span class="buttonText">Projects</span>
 				</a>
 			{/if}
 		</div>
@@ -226,4 +226,46 @@
 		padding: 5px;
 		margin: 0px 10px;
 	}
+
+
+	@media (max-width: 768px) {
+        .nav {
+            width: fit-content;
+        }
+        .top {
+            width: fit-content;
+			padding-right: 0;
+        }
+
+		.indent {
+			padding: 0;
+		}
+        .button {
+            padding: 10px;
+            font-size: 1rem;
+			width: fit-content;
+        }
+		.logoButton {
+			display: none;
+			visibility: none;
+		}
+
+        .bottom {
+            padding-bottom: 10px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .bottomButton {
+            margin: 5px 0;
+        }
+
+		.buttonText {
+			display: none;
+			visibility: hidden;
+		}
+
+		.icon {
+			margin-right: 0!important;
+		}
+    }
 </style>

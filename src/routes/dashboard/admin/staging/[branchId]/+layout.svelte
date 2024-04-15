@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pushState } from '$app/navigation';
+	import { goto, pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/Button.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
@@ -7,6 +7,10 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
 	export let data;
+
+	const setBranch = (value: string) => {
+		goto(`/dashboard/admin/staging/${value}`);
+	}
 </script>
 
 {#if $page.state.modal == 'createBranch'}
@@ -33,6 +37,10 @@
 					label="Branch"
 					options={[data.branches, (branch) => branch.name, (branch) => branch.id]}
 					placeholder={data.branch.name}
+					on:selectOption={(e) => {
+						setBranch(e.detail.value)
+					}}
+					
 				/>
 			</div>
 			<div class="action">
