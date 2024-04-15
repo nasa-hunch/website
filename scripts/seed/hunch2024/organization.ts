@@ -32,7 +32,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 					lastName: "Cardboard",
 					role: Role.TEACHER,
 					pfp: pickAvatar(),
-					...(await makePassword(process.env.DEMO_PASSWORD || "password"))
+					...(await makePassword(process.env.PASSWORD_DEMO || "password"))
 				}]
 			}
 		}
