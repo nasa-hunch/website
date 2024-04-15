@@ -17,23 +17,26 @@ export async function seed(prisma: PrismaTransactionClient) {
 		create: {
 			name: 'Cardboard',
 			users: {
-				create: [{
-					id: createId(),
-					email: 'admin@card.board',
-					firstName: 'Admin',
-					lastName: 'Cardboard',
-					role: Role.ORG_ADMIN,
-					pfp: pickAvatar(),
-					...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
-				}, {
-					id: createId(),
-					email: "teacher@card.board",
-					firstName: "Teacher",
-					lastName: "Cardboard",
-					role: Role.TEACHER,
-					pfp: pickAvatar(),
-					...(await makePassword(process.env.PASSWORD_DEMO || "password"))
-				}]
+				create: [
+					{
+						id: createId(),
+						email: 'admin@card.board',
+						firstName: 'Admin',
+						lastName: 'Cardboard',
+						role: Role.ORG_ADMIN,
+						pfp: pickAvatar(),
+						...(await makePassword('password' + process.env.PASSWORD_SUFFIX || ''))
+					},
+					{
+						id: createId(),
+						email: 'teacher@card.board',
+						firstName: 'Teacher',
+						lastName: 'Cardboard',
+						role: Role.TEACHER,
+						pfp: pickAvatar(),
+						...(await makePassword(process.env.PASSWORD_DEMO || 'password'))
+					}
+				]
 			}
 		}
 	});

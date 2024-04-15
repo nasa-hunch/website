@@ -48,6 +48,20 @@
 		})
 		.filter((x) => Array.isArray(x) && x.length === 2) as [number, number][];
 
+	const triggerClick = () => {
+		const mouseProjection = projection.invert([mouseX, mouseY]);
+
+		if (!mouseProjection || !geoAlbersInstance.invert) return;
+
+		const albersProjection = geoAlbersInstance.invert(mouseProjection);
+
+		for (const { arcs, properties } of usRaw.objects.states.geometries) {
+			const { name } = properties;
+		}
+
+		console.log(albersProjection);
+	};
+
 	const render: Render = ({ context }) => {
 		for (let i = 0; i < pixelData.length; i++) {
 			const [x, y] = pixelData[i];
@@ -103,11 +117,10 @@
 				autoplay
 				on:resize={({ detail }) => (width = detail.width)}
 				on:mousemove={(e) => {
-					const { clientX, clientY } = e;
-
-					mouseX = clientX;
-					mouseY = clientY;
+					mouseX = e.clientX - canvas.getBoundingClientRect().left;
+					mouseY = e.clientY - canvas.getBoundingClientRect().top;
 				}}
+				on:click={triggerClick}
 			>
 				<Layer {render} />
 			</Canvas>

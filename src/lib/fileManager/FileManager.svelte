@@ -116,7 +116,7 @@
 ]}/>
 
 <div class="wrap">
-	<DragDropUpload action="?/uploadFile" on:startUpload={startFileUpload} disabled={!actions}>
+	<DragDropUpload action="?/uploadFile" disabled={!actions} on:startUpload={startFileUpload}>
 		<table class="fileList">
 			<thead>
 				<tr>

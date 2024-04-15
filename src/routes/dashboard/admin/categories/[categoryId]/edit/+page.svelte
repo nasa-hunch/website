@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { applyAction,enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import Button from '$lib/components/Button.svelte';
 	import DatePicker from '$lib/components/DatePicker.svelte';
