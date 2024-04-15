@@ -70,7 +70,11 @@ export const load = async ({ params, parent }) => {
 	}
 
 	if (project.submitted) {
-		throw redirect(303, '/dashboard/congrats');
+		if (parentData.user.role == Role.HUNCH_ADMIN) {
+			redirect(303, `/dashboard/admin/templates/${project.projectTemplate.id}/submissions/${project.id}`);
+		}
+
+		redirect(303, '/dashboard/congrats');
 	}
 
 	return {
