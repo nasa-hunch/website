@@ -197,9 +197,9 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 	// Tasks
 	{
 		const taskIds = allIds
-				.flat()
-				.map((id) => id.taskIds)
-				.flat();
+			.flat()
+			.map((id) => id.taskIds)
+			.flat();
 
 		// Batch create tasks
 		console.log('Projects | Creating tasks...');
@@ -229,7 +229,7 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 	{
 		console.log('Projects | Collecting files...');
 		const files = await getFileInfo();
-		
+
 		const fileIds = allIds
 			.flat()
 			.map((id) => id.files)
@@ -243,8 +243,8 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 					id,
 					name: fileName,
 					size: fileSize,
-					link: fileLink,
-				}
+					link: fileLink
+				};
 			})
 		});
 

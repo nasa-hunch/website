@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { tooltip } from '@svelte-plugins/tooltips';
+
 	import MakeUnverified from '~icons/mdi/close';
 	import MakeEditor from '~icons/mdi/edit-outline';
 	import RemoveMember from '~icons/mdi/person-remove-outline';
-	import { tooltip } from '@svelte-plugins/tooltips';
-
 	import MakeViewer from '~icons/mdi/visibility-outline';
 	import { snakeCaseToTitleCase } from '$lib/case';
 	import IconButton from '$lib/components/IconButton.svelte';
@@ -54,15 +54,15 @@
 				<input name="memberId" hidden value={memberData.id} />
 				<MakeViewer />
 			</IconButton>
-			<IconButton tooltip="Make Editor" formData={{ action: '?/makeEditor', method: 'post' }}>
+			<IconButton formData={{ action: '?/makeEditor', method: 'post' }} tooltip="Make Editor">
 				<input name="memberId" hidden value={memberData.id} />
 				<MakeEditor />
 			</IconButton>
-			<IconButton tooltip="Make Unverified" formData={{ action: '?/makeNone', method: 'post' }}>
+			<IconButton formData={{ action: '?/makeNone', method: 'post' }} tooltip="Make Unverified">
 				<input name="memberId" hidden value={memberData.id} />
 				<MakeUnverified />
 			</IconButton>
-			<IconButton tooltip="Remove Member" formData={{ action: '?/kickMember', method: 'post' }}>
+			<IconButton formData={{ action: '?/kickMember', method: 'post' }} tooltip="Remove Member">
 				<input name="memberId" hidden value={memberData.id} />
 				<RemoveMember />
 			</IconButton>

@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import { snakeCaseToTitleCase } from '$lib/case.js';
 	import Button from '$lib/components/Button.svelte';
+	import UserCard from '$lib/components/card/UserCard.svelte';
 	import Combobox from '$lib/components/Combobox.svelte';
 	import InlineButton from '$lib/components/InlineButton.svelte';
 	import Input from '$lib/components/Input.svelte';
@@ -12,7 +13,6 @@
 	import ModalForm from '$lib/components/ModalForm.svelte';
 	import ModalWrap from '$lib/components/ModalWrap.svelte';
 	import { Role } from '$lib/enums';
-	import UserCard from '$lib/components/card/UserCard.svelte';
 
 	export let data;
 	export let form;

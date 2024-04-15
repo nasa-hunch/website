@@ -1,6 +1,6 @@
 <script lang="ts">
-	import IconButton from '$lib/components/IconButton.svelte';
 	import Plus from '~icons/mdi/note-plus';
+	import IconButton from '$lib/components/IconButton.svelte';
 
 	export let data;
 </script>
