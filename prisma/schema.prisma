@@ -58,8 +58,8 @@ model Location {
   state String @db.VarChar(255)
   zip String @db.VarChar(255)
   coordinates String @db.VarChar(255)
-  organization Organization @relation(fields: [orgId], references: [id])
-  orgId Int
+  organization Organization? @relation(fields: [orgId], references: [id])
+  orgId Int?
 }
 
 model Session {

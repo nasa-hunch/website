@@ -10,6 +10,7 @@
 	import usRaw from 'us-atlas/counties-albers-10m.json';
 
 	import { data } from './map/data';
+	import { getState } from './map/remap';
 
 	const opacity = tweened(0.01, {
 		duration: 1000,
@@ -48,20 +49,13 @@
 		})
 		.filter((x) => Array.isArray(x) && x.length === 2) as [number, number][];
 
-	const triggerClick = () => {
-		const mouseProjection = projection.invert([mouseX, mouseY]);
+	const filterState = (name: string | undefined) =>
+		usRaw.objects.states.geometries.filter((country) => country.properties.name == name)[0];
 
-		if (!mouseProjection || !geoAlbersInstance.invert) return;
-
-		const albersProjection = geoAlbersInstance.invert(mouseProjection);
-
-		for (const { arcs, properties } of usRaw.objects.states.geometries) {
-			const { name } = properties;
-		}
-
-		console.log(albersProjection);
-	};
-
+	let selectedState: string | undefined = undefined;
+	let activeState: string | undefined = undefined;
+	$: foundState = filterState(activeState);
+	$: foundSelectedState = filterState(selectedState);
 	const render: Render = ({ context }) => {
 		for (let i = 0; i < pixelData.length; i++) {
 			const [x, y] = pixelData[i];
@@ -70,6 +64,28 @@
 			context.fillStyle = `rgba(221, 54, 28, ${$opacityElements - i / pixelData.length})`;
 			context.fill();
 		}
+
+		const mouseProjection = projection.invert([mouseX, mouseY]);
+
+		if (!mouseProjection || !geoAlbersInstance.invert) {
+			activeState = undefined;
+			return;
+		}
+
+		const albersProjection = geoAlbersInstance.invert(mouseProjection);
+
+		if (!albersProjection) {
+			activeState = undefined;
+			return;
+		}
+
+		const state = getState(albersProjection);
+		if (!state) {
+			activeState = undefined;
+			return;
+		}
+
+		activeState = state.name;
 	};
 
 	const dataAmount = tweened(0, {
@@ -91,8 +107,15 @@
 </h3>
 
 <div class="wrap">
+	<div class="sidebar">
+		{#if selectedState}
+			<h2>Selections</h2>
+		{:else}
+			<h2 class="unselected">No state selected.</h2>
+		{/if}
+	</div>
 	<div
-		class="canvas"
+		class="canvas {activeState ? 'hoveringState' : ''}"
 		on:inview_enter={() => {
 			opacity.set(2);
 			opacityElements.set(2);
@@ -101,6 +124,16 @@
 		}}
 		use:inview={{ unobserveOnEnter: true }}
 	>
+		<svg style="opacity: {$opacity / 2.5 - 0.5}">
+			{#if foundSelectedState}
+				<path class="selectedState" d={path(mesh(us, foundSelectedState))} />
+			{/if}
+		</svg>
+		<svg style="opacity: {$opacity / 2.5 - 0.5}">
+			{#if foundState}
+				<path class="selectedState" d={path(mesh(us, foundState))} />
+			{/if}
+		</svg>
 		<svg style="opacity: {$opacity}">
 			{#if us}
 				<path d={path(mesh(us, usRaw.objects.states))} />
@@ -120,7 +153,7 @@
 					mouseX = e.clientX - canvas.getBoundingClientRect().left;
 					mouseY = e.clientY - canvas.getBoundingClientRect().top;
 				}}
-				on:click={triggerClick}
+				on:click={() => (selectedState = activeState)}
 			>
 				<Layer {render} />
 			</Canvas>
@@ -145,6 +178,21 @@
 		font-size: 2.5rem;
 	}
 
+	h2.unselected {
+		color: gray;
+		font-style: italic;
+	}
+
+	div.sidebar {
+		width: 20%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border: 4px solid black;
+		border-radius: 1rem;
+	}
+
 	.accent {
 		color: $primary;
 		font-family: inherit;
@@ -155,6 +203,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		align-items: stretch;
+		gap: 1rem;
+		padding: 1rem;
 	}
 
 	div.canvas {
@@ -165,7 +216,7 @@
 		border: 4px solid black;
 		border-radius: 1rem;
 
-		&:hover {
+		&.hoveringState:hover {
 			cursor: pointer;
 		}
 	}
@@ -181,5 +232,9 @@
 	path {
 		stroke: #ccc;
 		fill: transparent;
+	}
+
+	.selectedState {
+		fill: rgba(221, 54, 28, 0.5);
 	}
 </style>
