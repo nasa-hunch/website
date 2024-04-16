@@ -4,7 +4,7 @@ enum MarkerStatus {
 	Special
 }
 
-interface Marker {
+export interface Marker {
 	name: string;
 	status: MarkerStatus;
 	address: string;
