@@ -9,6 +9,7 @@ import ExcelIcon from '~icons/vscode-icons/file-type-excel2';
 import HtmlIcon from '~icons/vscode-icons/file-type-html';
 import IconImage from '~icons/vscode-icons/file-type-image';
 import JsIcon from '~icons/vscode-icons/file-type-js-official';
+import JsonIcon from '~icons/vscode-icons/file-type-json';
 import MarkdownIcon from '~icons/vscode-icons/file-type-markdown';
 import PdfIcon from '~icons/vscode-icons/file-type-pdf2';
 import PowerPointIcon from '~icons/vscode-icons/file-type-powerpoint2';
@@ -51,13 +52,15 @@ const extensionIcons: { [key: string]: ComponentType } = {
 	fbx: ThreeDimensionIcon,
 	stl: ThreeDimensionIcon,
 	'3ds': ThreeDimensionIcon,
-	BLEND: BlenderIcon,
+	blend: BlenderIcon,
 	zip: ZipIcon,
 	ogg: AudioIcon,
 	wav: AudioIcon,
 	mp3: AudioIcon,
 	amr: AudioIcon,
 	acc: AudioIcon,
+	json: JsonIcon,
+	jsonc: JsonIcon
 };
 
 export const createDisplayInformation = (fileName: string, showExtension: boolean) => {
