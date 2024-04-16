@@ -1514,14 +1514,6 @@ export const schools: Marker[] = [
 		}
 	},
 	{
-		name: 'Minnetonka High School',
-		address: { address: '18301 MN-7', city: 'Minnetonka', state: 'MN', zip: '$4' },
-		location: {
-			lat: 44.9091775,
-			lng: -93.51099789999999
-		}
-	},
-	{
 		name: 'Middleton High School',
 		address: { address: '2100 Bristol St', city: 'Middleton', state: 'WI', zip: '$4' },
 		location: {
