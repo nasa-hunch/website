@@ -198,8 +198,7 @@
 	<table>
 		<tr class="headRow row">
 			<th>Email</th>
-			<th>First Name</th>
-			<th>Last Name</th>
+			<th>Name</th>
 			<th
 				>Role
 				<IconButton
@@ -214,8 +213,7 @@
 		{#each data.userList as user}
 			<tr class="row">
 				<td>{user.email}</td>
-				<td>{user.firstName}</td>
-				<td>{user.lastName}</td>
+				<td>{user.firstName} {user.lastName}</td>
 				<td>{user.role ? snakeCaseToTitleCase(user.role) : 'Unknown'}</td>
 				<td>
 					{#if user.role != Role.HUNCH_ADMIN}
