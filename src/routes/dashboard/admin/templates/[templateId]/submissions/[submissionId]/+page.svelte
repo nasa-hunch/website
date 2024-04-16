@@ -7,7 +7,7 @@
 
 <h1>
 	Submission by
-	<a href="/dashboard/org/{data.submission.organization.id}">
+	<a href="/dashboard/orgs/{data.submission.organization.id}">
 		{data.submission.organization.name}
 	</a>
 </h1>

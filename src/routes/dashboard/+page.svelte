@@ -10,36 +10,40 @@
 	<div class="wrap">
 		<div class="left">
 			<h1>Projects</h1>
-			<div class="projects">
-				{#each data.user.projectUser as projectUser}
-					{@const taskCounts = projectUser.project.toDoItems.filter((x) => !x.checked).length}
-					<a
-						class="project"
-						class:submitted={projectUser.project.submitted}
-						href="/dashboard/projects/{projectUser.project.id}"
-					>
-						<h3>
-							{projectUser.project.projectTemplate.name.substring(0, 25)}{projectUser.project
-								.projectTemplate.name.length > 25
-								? '...'
-								: ''}
-						</h3>
-						<div class="projectFooter">
-							<div class="avatars">
-								{#each projectUser.project.users
-									.filter((user) => user.user.id !== data.user.id)
-									.map((user) => user.user) as pfp}
-									<Pfp size="32px" user={pfp} />
-								{/each}
+			{#if data.user.projectUser.length > 0}
+				<div class="projects">
+					{#each data.user.projectUser as projectUser}
+						{@const taskCounts = projectUser.project.toDoItems.filter((x) => !x.checked).length}
+						<a
+							class="project"
+							class:submitted={projectUser.project.submitted}
+							href="/dashboard/projects/{projectUser.project.id}"
+						>
+							<h3>
+								{projectUser.project.projectTemplate.name.substring(0, 25)}{projectUser.project
+									.projectTemplate.name.length > 25
+									? '...'
+									: ''}
+							</h3>
+							<div class="projectFooter">
+								<div class="avatars">
+									{#each projectUser.project.users
+										.filter((user) => user.user.id !== data.user.id)
+										.map((user) => user.user) as pfp}
+										<Pfp size="32px" user={pfp} />
+									{/each}
+								</div>
+								<p>
+									{taskCounts}
+									{taskCounts === 1 ? ' task' : ' tasks'} left
+								</p>
 							</div>
-							<p>
-								{taskCounts}
-								{taskCounts === 1 ? ' task' : ' tasks'} left
-							</p>
-						</div>
-					</a>
-				{/each}
-			</div>
+						</a>
+					{/each}
+				</div>
+			{:else}
+				<p><i>No projects yet.</i></p>
+			{/if}
 		</div>
 		<div class="right">
 			<div class="toDo">
