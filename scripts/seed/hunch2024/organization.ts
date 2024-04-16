@@ -75,7 +75,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 			zip: nasa.address.zip,
 			coordinates: `${nasa.location.lat},${nasa.location.lng}`
 		}))
-	})
+	});
 
 	// Attach admins to organizations
 	await prisma.user.createMany({

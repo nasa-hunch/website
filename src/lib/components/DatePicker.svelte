@@ -1,5 +1,5 @@
 <script lang="ts">
-	import dayjs from "dayjs";
+	import dayjs from 'dayjs';
 
 	export let name = 'Input';
 	export let label = 'Input';
@@ -7,8 +7,8 @@
 	export let value: Date | undefined = undefined;
 	let active = false;
 
-	$: console.log(value)
-	$: derivedValue = dayjs(value).format("YYYY-MM-DD")
+	$: console.log(value);
+	$: derivedValue = dayjs(value).format('YYYY-MM-DD');
 </script>
 
 <button style="--bgColor: {bgColor}" class="wrap" class:active tabindex="-1" type="button">

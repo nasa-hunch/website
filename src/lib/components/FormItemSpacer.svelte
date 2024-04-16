@@ -1,6 +1,6 @@
-<hr/>
+<hr />
 
-<style lang='scss'>
+<style lang="scss">
 	hr {
 		border: 0px;
 	}
