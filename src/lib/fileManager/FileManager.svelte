@@ -15,12 +15,14 @@
 
 	import IconTrash from '~icons/mdi/delete-outline';
 	import IconDownload from '~icons/mdi/download';
+	import FilterIcon from '~icons/mdi/filter';
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Filter from '$lib/components/Filter.svelte';
 	import IconButton from '$lib/components/IconButton.svelte';
 	import InTextInput from '$lib/components/InTextInput.svelte';
 	import DragDropUpload from '$lib/fileManager/DragDropUpload.svelte';
-	import { extensionSupport } from '$lib/fileManager/extensionSupport.js';
+	import { createDisplayInformation } from '$lib/fileManager/extensionSupport.js';
 
 	import { getFormattedSize } from './sizeCalculator';
 
@@ -85,6 +87,8 @@
 	const fileNameChange = () => {
 		createToast('Updating File...', 'File Updated!', 'Could not update file.');
 	};
+
+	let filterComponent: Filter;
 </script>
 
 {#if $page.state.modal === 'deleteFile'}
@@ -100,12 +104,33 @@
 	</Modal>
 {/if}
 
+<Filter
+	bind:this={filterComponent}
+	filters={[
+		{
+			name: 'Show Extensions',
+			value: 'true'
+		},
+		{
+			name: 'Hide Extensions',
+			value: 'false'
+		}
+	]}
+	param="showFileExtension"
+/>
+
 <div class="wrap">
 	<DragDropUpload action="?/uploadFile" disabled={!actions} on:startUpload={startFileUpload}>
 		<table class="fileList">
 			<thead>
 				<tr>
-					<th scope="col">Name</th>
+					<th class="nameRow" scope="col"
+						>Name <IconButton
+							on:click={(e) => {
+								filterComponent.propagateClick(e);
+							}}><FilterIcon /></IconButton
+						></th
+					>
 					<th scope="col">Size</th>
 					<th scope="col">Modified</th>
 					<th scope="col">Actions</th>
@@ -113,17 +138,27 @@
 			</thead>
 			<tbody>
 				{#each files as file}
+					{@const fileData = createDisplayInformation(
+						file.name,
+						$page.url.searchParams.get('showFileExtension') == 'true'
+					)}
 					<tr class="file">
-						<th class="name" scope="row">
+						<th class="name" class:dimmed={file.locked} scope="row">
 							<div class="icon">
-								<svelte:component this={extensionSupport(file.name)} />
+								<svelte:component this={fileData.extensionIcon} />
 							</div>
 							<InTextInput
 								name="fileName"
 								action="?/renameFile"
-								value={file.name}
+								disabled={file.locked}
+								value={fileData.fileName}
 								on:submit={fileNameChange}
 							>
+								<input
+									name="showFileExtension"
+									checked={$page.url.searchParams.get('showFileExtension') == 'true'}
+									type="checkbox"
+								/>
 								<input name="fileId" value={file.id} />
 							</InTextInput>
 						</th>
@@ -197,6 +232,10 @@
 			justify-content: center;
 		}
 	}
+	.nameRow {
+		display: flex;
+		align-items: center;
+	}
 
 	.name {
 		display: flex;
@@ -230,5 +269,9 @@
 	}
 	.accentText {
 		color: $primary;
+	}
+	.dimmed {
+		opacity: 0.5;
+		cursor: not-allowed;
 	}
 </style>

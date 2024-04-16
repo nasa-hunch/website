@@ -12,7 +12,6 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import ModalForm from '$lib/components/ModalForm.svelte';
 	import ModalWrap from '$lib/components/ModalWrap.svelte';
-	import Pfp from '$lib/components/Pfp.svelte';
 	import { Role } from '$lib/enums';
 
 	export let data;
@@ -72,7 +71,11 @@
 		<div class="projects">
 			{#each data.org.projects as project}
 				<a class="project" href="/dashboard/projects/{project.id}">
-					<h2>{project.projectTemplate.name}</h2>
+					<h2>
+						{project.projectTemplate.name.substring(0, 36)}{project.projectTemplate.name.length > 36
+							? '...'
+							: ''}
+					</h2>
 					{#if project.submitted}
 						<div class="submitted">Submitted</div>
 					{/if}
@@ -212,7 +215,7 @@
 	.project {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		gap: 10px;
 		padding: 1rem;
 		border-radius: 0.5rem;
 		background-color: $background-alt;

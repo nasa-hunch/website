@@ -140,9 +140,10 @@ export const actions = {
 	renameFile: formHandler(
 		z.object({
 			fileId: z.string(),
-			fileName: z.string()
+			fileName: z.string(),
+			showFileExtension: z.coerce.boolean()
 		}),
-		async ({ fileId, fileName }, { cookies, params }) => {
+		async ({ fileId, fileName, showFileExtension }, { cookies, params }) => {
 			const user = await verifySession(cookies);
 
 			const projectUser = await prisma.projectUser.findFirst({
@@ -180,13 +181,16 @@ export const actions = {
 					message: 'No file exists'
 				};
 			}
+			const fileNameParts = fileCheck.name.split('.');
+			const oldFileExtension = fileNameParts[fileNameParts.length - 1];
+			const newFileName = showFileExtension ? fileName : fileName + '.' + oldFileExtension;
 
 			await prisma.file.update({
 				where: {
-					id: fileCheck.id
+					id: fileId
 				},
 				data: {
-					name: fileName
+					name: newFileName
 				}
 			});
 

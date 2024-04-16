@@ -133,6 +133,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@iconify-json/vscode-icons": "^1.1.33",
 		"@svelte-plugins/tooltips": "^3.0.0",
 		"dayjs": "^1.11.10",
 		"scannable": "^1.1.0",

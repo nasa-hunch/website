@@ -58,9 +58,10 @@ export const actions = {
 	renameFile: formHandler(
 		z.object({
 			fileName: z.string(),
-			fileId: z.string()
+			fileId: z.string(),
+			showFileExtension: z.coerce.boolean()
 		}),
-		async ({ fileName, fileId }, { cookies, params }) => {
+		async ({ fileName, fileId, showFileExtension }, { cookies, params }) => {
 			const user = await verifySession(cookies);
 			if (user.role != Role.HUNCH_ADMIN) {
 				return {
@@ -89,12 +90,16 @@ export const actions = {
 				};
 			}
 
+			const fileNameParts = fileCheck.name.split('.');
+			const oldFileExtension = fileNameParts[fileNameParts.length - 1];
+			const newFileName = showFileExtension ? fileName : fileName + '.' + oldFileExtension;
+
 			await prisma.file.update({
 				where: {
 					id: fileId
 				},
 				data: {
-					name: fileName
+					name: newFileName
 				}
 			});
 
