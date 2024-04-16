@@ -60,9 +60,11 @@
 			alt: 'Flight Configuration'
 		}
 	];
+
+	export let data;
 </script>
 
 <Hero image={NonTransparent} image2={Transparent} {title} />
 <Mission />
-<Map />
+<Map locations={data.locations} />
 <Gallery galleryImages={gallery} title="Explore Our Programs" />

@@ -8,8 +8,8 @@
 	import { mesh } from 'topojson-client';
 	import type { Objects, Topology } from 'topojson-specification';
 	import usRaw from 'us-atlas/counties-albers-10m.json';
+	import { UsaStates } from 'usa-states';
 
-	import { data } from './map/data';
 	import { getState } from './map/remap';
 
 	const opacity = tweened(0.01, {
@@ -35,11 +35,9 @@
 	$: geoAlbersInstance = geoAlbersUsa().scale(1300).translate([487.5, 305]);
 
 	let pixelData: [number, number][];
-	$: pixelData = data
-		.map(({ location }) => {
-			const { lat, lng } = location;
-
-			if (!location) return undefined;
+	$: pixelData = locations
+		.map(({ coordinates }) => {
+			const [ lat, lng ] = coordinates.split(',').map(Number);
 
 			const coords = geoAlbersInstance([lng, lat]);
 
@@ -52,10 +50,15 @@
 	const filterState = (name: string | undefined) =>
 		usRaw.objects.states.geometries.filter((country) => country.properties.name == name)[0];
 
+	const { states } = new UsaStates();
+	const abbrToName = Object.fromEntries(states.map((state) => [state.abbreviation, state.name]));
+
 	let selectedState: string | undefined = undefined;
 	let activeState: string | undefined = undefined;
+	let selectedStateCursor: [number, number] | undefined = undefined;
 	$: foundState = filterState(activeState);
 	$: foundSelectedState = filterState(selectedState);
+	$: selectedLocations = locations.filter(location => abbrToName[location.state] == selectedState);
 	const render: Render = ({ context }) => {
 		for (let i = 0; i < pixelData.length; i++) {
 			const [x, y] = pixelData[i];
@@ -97,6 +100,17 @@
 		duration: 2000,
 		easing: cubicOut
 	});
+
+	interface LocationLike {
+		name: string;
+		state: string;
+		address: string;
+		city: string;
+		zip: string;
+		coordinates: string;
+	}
+
+	export let locations: LocationLike[]
 </script>
 
 <h2>Connecting Students <span class="accent">Nationwide</span></h2>
@@ -106,20 +120,32 @@
 	<span class="accent">{Math.round($dataAmount)}</span> locations
 </h3>
 
-<div class="wrap">
-	<div class="sidebar">
-		{#if selectedState}
-			<h2>Selections</h2>
-		{:else}
-			<h2 class="unselected">No state selected.</h2>
-		{/if}
+{#if selectedState && selectedStateCursor}
+	<div class="cursorModal" style="top: {selectedStateCursor[1]}px; left: {selectedStateCursor[0]}px">
+		<h3>{selectedState}</h3>
+		{#each selectedLocations as location}
+			<p>
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://www.google.com/maps/search/{
+						encodeURIComponent(location.address)
+					}+{encodeURIComponent(location.city)}+{
+						encodeURIComponent(location.state)
+					}+{encodeURIComponent(location.zip)}"
+				>{location.name}</a>	
+			</p>
+		{/each}
 	</div>
+{/if}
+
+<div class="wrap">
 	<div
 		class="canvas {activeState ? 'hoveringState' : ''}"
 		on:inview_enter={() => {
 			opacity.set(2);
 			opacityElements.set(2);
-			dataAmount.set(data.length);
+			dataAmount.set(locations.length);
 			studentLocations.set(2575);
 		}}
 		use:inview={{ unobserveOnEnter: true }}
@@ -153,7 +179,14 @@
 					mouseX = e.clientX - canvas.getBoundingClientRect().left;
 					mouseY = e.clientY - canvas.getBoundingClientRect().top;
 				}}
-				on:click={() => (selectedState = activeState)}
+				on:click={(e) => {
+					if (selectedState == activeState) {
+						selectedState = undefined;
+					} else {
+						selectedState = activeState;
+						selectedStateCursor = [e.pageX, e.pageY]
+					}
+				}}
 			>
 				<Layer {render} />
 			</Canvas>
@@ -178,19 +211,13 @@
 		font-size: 2.5rem;
 	}
 
-	h2.unselected {
-		color: gray;
-		font-style: italic;
-	}
-
-	div.sidebar {
-		width: 20%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		border: 4px solid black;
-		border-radius: 1rem;
+	.cursorModal {
+		position: absolute;
+		z-index: 10;
+		background: white;
+		border: 1px solid black;
+		border-radius: 0.5rem;
+		padding: 1rem;
 	}
 
 	.accent {
