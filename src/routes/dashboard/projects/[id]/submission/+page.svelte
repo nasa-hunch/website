@@ -61,23 +61,31 @@
 		</div>
 		<div class="columns">
 			<div class="col">
-				{#each users as person}
-					<div class="person">
-						<Pfp size="32px" user={person.user} />
-						{#if data.user.role === 'HUNCH_ADMIN' || data.user.role === 'ORG_ADMIN'}
-							<a href="/dashboard/users/{person.user.id}"
-								><p>{person.user.firstName} {person.user.lastName}</p></a
-							>
-						{:else}
-							<p>{person.user.firstName} {person.user.lastName}</p>
-						{/if}
-						{#if person.voteSubmit}
-							<MdiClipboardCheckOutline class="sicon green" />
-						{:else}
-							<MdiClipboardRemoveOutline class="sicon red" />
-						{/if}
-					</div>
-				{/each}
+				<table>
+					{#each users as person}
+						<tr>
+							<td>
+								<div class="person">
+									<Pfp size="32px" user={person.user} />
+									{#if data.user.role === 'HUNCH_ADMIN' || data.user.role === 'ORG_ADMIN'}
+										<a href="/dashboard/users/{person.user.id}"
+											><p>{person.user.firstName} {person.user.lastName}</p></a
+										>
+									{:else}
+										<p>{person.user.firstName} {person.user.lastName}</p>
+									{/if}
+								</div>
+							</td>
+							<td>
+								{#if person.voteSubmit}
+									<MdiClipboardCheckOutline class="sicon green" />
+								{:else}
+									<MdiClipboardRemoveOutline class="sicon red" />
+								{/if}
+							</td>
+						</tr>
+					{/each}
+				</table>
 			</div>
 		</div>
 		{#if users.some((user) => user.user.id === data.user.id)}
