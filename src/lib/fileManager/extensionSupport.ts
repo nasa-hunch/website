@@ -65,6 +65,7 @@ const extensionIcons: { [key: string]: ComponentType } = {
 
 export const createDisplayInformation = (fileName: string, showExtension: boolean) => {
 	const fileParts = fileName.split('.');
+	if (fileParts.length === 1) return { fileName, extensionIcon: IconFile };
 	const extension = fileParts[fileParts.length - 1].toLowerCase();
 	fileParts.splice(fileParts.length - 1, 1)
 	const newFileName = showExtension

@@ -46,7 +46,7 @@ export async function seed(prisma: PrismaTransactionClient, templateIds: string[
 					projectUserId: createId(),
 					...idInfo
 				})),
-				files: arr(chance.integer({ min: 0, max: 5 }), () => ({
+				files: arr(chance.integer({ min: 1, max: 5 }), () => ({
 					id: createId(),
 					projectId
 				}))

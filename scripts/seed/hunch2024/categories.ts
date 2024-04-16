@@ -100,7 +100,7 @@ export async function seed(prisma: PrismaTransactionClient) {
 
 	const files = await getFileInfo();
 	const fileIds = templateIds.map(
-		(id) => [id, Array.from({ length: random(0, 5) }, () => createId())] as const
+		(id) => [id, Array.from({ length: random(1, 5) }, () => createId())] as const
 	);
 
 	await prisma.file.createMany({
