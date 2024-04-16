@@ -41,7 +41,7 @@ export const actions = {
 			if (n.receiverId === user.id) {
 				await prisma.notification.update({
 					where: {
-						id: notification.id
+						id: n.id
 					},
 					data: {
 						read: true
