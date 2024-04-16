@@ -25,7 +25,7 @@ test('user can register', async ({ page }) => {
 
 	await expect(
 		page.locator(
-			'text=Welcome to NASA Hunch! To verify your identity, we need to know a little more about you.'
+			'text=Join with an invite code'
 		)
 	).toBeVisible();
 });
