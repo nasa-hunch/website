@@ -3,7 +3,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { Role } from '@prisma/client';
 
 import { makePassword } from '../../../src/lib/server/password';
-import { schools } from './dump/orgs';
+import { nasa, schools } from './dump/orgs';
 import { pickAvatar } from './pickAvatar';
 import { PrismaTransactionClient } from './returnType';
 
@@ -48,6 +48,34 @@ export async function seed(prisma: PrismaTransactionClient) {
 			name: school.name
 		}))
 	});
+
+	// Make organization locations
+	await prisma.location.createMany({
+		data: schools.map((school, i) => ({
+			id: i + 2,
+			orgId: i + 2,
+			name: school.name,
+			address: school.address.address,
+			city: school.address.city,
+			state: school.address.state,
+			zip: school.address.zip,
+			coordinates: `${school.location.lat},${school.location.lng}`
+		}))
+	});
+
+	// Make NASA location
+	await prisma.location.createMany({
+		data: nasa.map((nasa, i) => ({
+			id: i + schools.length + 2,
+			orgId: 1,
+			name: nasa.name,
+			address: nasa.address.address,
+			city: nasa.address.city,
+			state: nasa.address.state,
+			zip: nasa.address.zip,
+			coordinates: `${nasa.location.lat},${nasa.location.lng}`
+		}))
+	})
 
 	// Attach admins to organizations
 	await prisma.user.createMany({

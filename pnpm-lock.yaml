@@ -334,6 +334,9 @@ devDependencies:
   us-atlas:
     specifier: ^3.0.1
     version: 3.0.1
+  usa-states:
+    specifier: ^0.0.6
+    version: 0.0.6
   vite:
     specifier: ^5.1.0
     version: 5.1.0(sass@1.69.7)
@@ -8521,6 +8524,10 @@ packages:
 
   /us-atlas@3.0.1:
     resolution: {integrity: sha512-wEIZCq0ImPvGblTd8gZMqNNCPkQshugMUG/8nkSWXb02+XqNFREg9atHOKP9w6prLZTpqcLhSvdBW81MkV3/0Q==}
+    dev: true
+
+  /usa-states@0.0.6:
+    resolution: {integrity: sha512-f2RAYNLcw8ZXocYWx0EwFUcjJt0uuY3brlrCQXLC8Xuj7K0eIn7r9343wEe6Kg9Hg5KLYLFF9WVRjkxIhP+wSA==}
     dev: true
 
   /util-deprecate@1.0.2:
