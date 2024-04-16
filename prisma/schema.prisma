@@ -108,6 +108,7 @@ model Notification {
   receiver User @relation("receiver", fields: [receiverId], references: [id])
   title String @db.VarChar(255)
   message String @db.Text
+  read Boolean @default(false)
 }
 
 enum ProjectUserPermission {
