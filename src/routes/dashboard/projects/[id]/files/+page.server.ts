@@ -182,7 +182,7 @@ export const actions = {
 				};
 			}
 			const fileNameParts = fileCheck.name.split('.');
-			const oldFileExtension = fileNameParts[fileNameParts.length - 1];
+			const oldFileExtension = fileNameParts.length === 1 ? '' : fileNameParts[fileNameParts.length - 1];
 			const newFileName = showFileExtension ? fileName : fileName + '.' + oldFileExtension;
 
 			await prisma.file.update({
