@@ -14,7 +14,7 @@ export const load = async ({ parent }) => {
 			branchId: parentData.branch.id
 		},
 		orderBy: {
-			dueDate: "asc"
+			dueDate: 'asc'
 		}
 	});
 
@@ -63,68 +63,72 @@ export const actions = {
 			}
 		});
 	},
-	editStage: formHandler(z.object({
-		stageId: z.coerce.number(),
-		name: z.string(),
-		dueDate: z.coerce.date()
-	}), async ({stageId, name, dueDate}, {cookies}) => {
-		await verifySession(cookies, Role.HUNCH_ADMIN);
-		const stage = await prisma.stage.findFirst({
-			where: {
-				id: stageId
-			}
-		})
+	editStage: formHandler(
+		z.object({
+			stageId: z.coerce.number(),
+			name: z.string(),
+			dueDate: z.coerce.date()
+		}),
+		async ({ stageId, name, dueDate }, { cookies }) => {
+			await verifySession(cookies, Role.HUNCH_ADMIN);
+			const stage = await prisma.stage.findFirst({
+				where: {
+					id: stageId
+				}
+			});
 
-		if(!stage) {
+			if (!stage) {
+				return {
+					success: false,
+					message: 'No stage'
+				};
+			}
+
+			await prisma.stage.update({
+				where: {
+					id: stage.id
+				},
+				data: {
+					name,
+					dueDate
+				}
+			});
+
 			return {
-				success: false,
-				message: "No stage"
-			}
+				success: true,
+				message: 'Stage updated!'
+			};
 		}
+	),
+	deleteStage: formHandler(
+		z.object({
+			confirm: z.string().optional(),
+			stageId: z.coerce.number()
+		}),
+		async ({ stageId }, { cookies }) => {
+			await verifySession(cookies, Role.HUNCH_ADMIN);
+			const stage = await prisma.stage.findFirst({
+				where: {
+					id: stageId
+				}
+			});
 
-		await prisma.stage.update({
-			where: {
-				id: stage.id
-			},
-			data: {
-				name,
-				dueDate
+			if (!stage) {
+				return {
+					success: false,
+					message: 'No stage'
+				};
 			}
-		})
+			await prisma.stage.delete({
+				where: {
+					id: stage.id
+				}
+			});
 
-		return {
-			success: true,
-			message: "Stage updated!"
-		}
-
-
-	}),
-	deleteStage: formHandler(z.object({
-		confirm: z.string().optional(),
-		stageId: z.coerce.number()
-	}), async ({stageId}, {cookies}) => {
-		await verifySession(cookies, Role.HUNCH_ADMIN);
-		const stage = await prisma.stage.findFirst({
-			where: {
-				id: stageId
-			}
-		})
-
-		if(!stage) {
 			return {
-				success: false,
-				message: "No stage"
-			}
+				success: true,
+				message: 'Stage Deleted.'
+			};
 		}
-		await prisma.stage.delete({
-			where: {
-				id: stage.id
-			}
-		})
-
-		return {
-			success: true,
-			message: "Stage Deleted."
-		}
-	})
+	)
 };

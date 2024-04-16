@@ -37,7 +37,7 @@
 	let pixelData: [number, number][];
 	$: pixelData = locations
 		.map(({ coordinates }) => {
-			const [ lat, lng ] = coordinates.split(',').map(Number);
+			const [lat, lng] = coordinates.split(',').map(Number);
 
 			const coords = geoAlbersInstance([lng, lat]);
 
@@ -58,7 +58,9 @@
 	let selectedStateCursor: [number, number] | undefined = undefined;
 	$: foundState = filterState(activeState);
 	$: foundSelectedState = filterState(selectedState);
-	$: selectedLocations = locations.filter(location => abbrToName[location.state] == selectedState);
+	$: selectedLocations = locations.filter(
+		(location) => abbrToName[location.state] == selectedState
+	);
 	const render: Render = ({ context }) => {
 		for (let i = 0; i < pixelData.length; i++) {
 			const [x, y] = pixelData[i];
@@ -110,7 +112,7 @@
 		coordinates: string;
 	}
 
-	export let locations: LocationLike[]
+	export let locations: LocationLike[];
 </script>
 
 <h2>Connecting Students <span class="accent">Nationwide</span></h2>
@@ -121,19 +123,22 @@
 </h3>
 
 {#if selectedState && selectedStateCursor}
-	<div class="cursorModal" style="top: {selectedStateCursor[1]}px; left: {selectedStateCursor[0]}px">
+	<div
+		style="top: {selectedStateCursor[1]}px; left: {selectedStateCursor[0]}px"
+		class="cursorModal"
+	>
 		<h3>{selectedState}</h3>
 		{#each selectedLocations as location}
 			<p>
 				<a
-					target="_blank"
+					href="https://www.google.com/maps/search/{encodeURIComponent(
+						location.address
+					)}+{encodeURIComponent(location.city)}+{encodeURIComponent(
+						location.state
+					)}+{encodeURIComponent(location.zip)}"
 					rel="noopener noreferrer"
-					href="https://www.google.com/maps/search/{
-						encodeURIComponent(location.address)
-					}+{encodeURIComponent(location.city)}+{
-						encodeURIComponent(location.state)
-					}+{encodeURIComponent(location.zip)}"
-				>{location.name}</a>	
+					target="_blank">{location.name}</a
+				>
 			</p>
 		{/each}
 	</div>
@@ -184,7 +189,7 @@
 						selectedState = undefined;
 					} else {
 						selectedState = activeState;
-						selectedStateCursor = [e.pageX, e.pageY]
+						selectedStateCursor = [e.pageX, e.pageY];
 					}
 				}}
 			>

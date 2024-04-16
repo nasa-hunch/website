@@ -1,7 +1,8 @@
-import { prisma } from '$lib/server/prisma/prismaConnection.js';
 import { z } from 'zod';
-import { verifySession } from '$lib/server/verifySession.js';
+
 import { formHandler } from '$lib/server/bodyguard.js';
+import { prisma } from '$lib/server/prisma/prismaConnection.js';
+import { verifySession } from '$lib/server/verifySession.js';
 export const load = async ({ parent }) => {
 	const data = await parent();
 	return {
@@ -34,10 +35,7 @@ export const actions = {
 		z.object({
 			notification: z.string()
 		}),
-		async (
-			{ notification },
-			{ cookies }
-		) => {
+		async ({ notification }, { cookies }) => {
 			const user = await verifySession(cookies);
 			const n = JSON.parse(notification);
 			if (n.receiverId === user.id) {
@@ -51,15 +49,14 @@ export const actions = {
 				});
 				return {
 					success: true,
-					message: "Marked as read."
-				}
+					message: 'Marked as read.'
+				};
 			} else {
 				return {
 					success: false,
-					message: "Not your notification."
-				}
+					message: 'Not your notification.'
+				};
 			}
-			
 		}
 	)
 };

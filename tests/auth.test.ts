@@ -23,11 +23,7 @@ test('user can register', async ({ page }) => {
 
 	await page.waitForURL('/more-info');
 
-	await expect(
-		page.locator(
-			'text=Join with an invite code'
-		)
-	).toBeVisible();
+	await expect(page.locator('text=Join with an invite code')).toBeVisible();
 });
 
 test('User can log in', async ({ page }) => {

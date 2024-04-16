@@ -67,10 +67,8 @@ export const createDisplayInformation = (fileName: string, showExtension: boolea
 	const fileParts = fileName.split('.');
 	if (fileParts.length === 1) return { fileName, extensionIcon: IconFile };
 	const extension = fileParts[fileParts.length - 1].toLowerCase();
-	fileParts.splice(fileParts.length - 1, 1)
-	const newFileName = showExtension
-		? fileName
-		: fileParts.join('.');
+	fileParts.splice(fileParts.length - 1, 1);
+	const newFileName = showExtension ? fileName : fileParts.join('.');
 
 	return {
 		fileName: newFileName,
