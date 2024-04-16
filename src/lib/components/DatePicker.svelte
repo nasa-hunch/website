@@ -1,18 +1,14 @@
 <script lang="ts">
+	import dayjs from "dayjs";
+
 	export let name = 'Input';
 	export let label = 'Input';
 	export let bgColor = '#f8f8f8';
 	export let value: Date | undefined = undefined;
 	let active = false;
 
-	let derivedValue = value
-		? `${value.getFullYear()}-${value.getMonth().toString().padStart(2, '0')}-${value
-				.getDay()
-				.toString()
-				.padStart(2, '0')}`
-		: '';
-
-	$: console.log(derivedValue);
+	$: console.log(value)
+	$: derivedValue = dayjs(value).format("YYYY-MM-DD")
 </script>
 
 <button style="--bgColor: {bgColor}" class="wrap" class:active tabindex="-1" type="button">
