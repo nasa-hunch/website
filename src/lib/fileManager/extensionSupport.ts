@@ -3,6 +3,7 @@ import type { ComponentType } from 'svelte';
 import BlenderIcon from '~icons/mdi/blender-software';
 import IconFile from '~icons/mdi/file';
 import ThreeDimensionIcon from '~icons/mdi/video-3d';
+import AudioIcon from '~icons/vscode-icons/file-type-audio';
 import CssIcon from '~icons/vscode-icons/file-type-css';
 import ExcelIcon from '~icons/vscode-icons/file-type-excel2';
 import HtmlIcon from '~icons/vscode-icons/file-type-html';
@@ -13,12 +14,14 @@ import PdfIcon from '~icons/vscode-icons/file-type-pdf2';
 import PowerPointIcon from '~icons/vscode-icons/file-type-powerpoint2';
 import VideoIcon from '~icons/vscode-icons/file-type-video';
 import WordIcon from '~icons/vscode-icons/file-type-word2';
+import ZipIcon from '~icons/vscode-icons/file-type-zip';
 
 const extensionIcons: { [key: string]: ComponentType } = {
 	png: IconImage,
 	jpg: IconImage,
 	jpeg: IconImage,
 	svg: IconImage,
+	webp: IconImage,
 	html: HtmlIcon,
 	js: JsIcon,
 	css: CssIcon,
@@ -29,6 +32,7 @@ const extensionIcons: { [key: string]: ComponentType } = {
 	pdf: PdfIcon,
 	md: MarkdownIcon,
 	xls: ExcelIcon,
+	xlsx: ExcelIcon,
 	xlsm: ExcelIcon,
 	xlsb: ExcelIcon,
 	xltx: ExcelIcon,
@@ -45,8 +49,15 @@ const extensionIcons: { [key: string]: ComponentType } = {
 	odp: PowerPointIcon,
 	obj: ThreeDimensionIcon,
 	fbx: ThreeDimensionIcon,
+	stl: ThreeDimensionIcon,
 	'3ds': ThreeDimensionIcon,
-	BLEND: BlenderIcon
+	BLEND: BlenderIcon,
+	zip: ZipIcon,
+	ogg: AudioIcon,
+	wav: AudioIcon,
+	mp3: AudioIcon,
+	amr: AudioIcon,
+	acc: AudioIcon,
 };
 
 export const createDisplayInformation = (fileName: string, showExtension: boolean) => {
