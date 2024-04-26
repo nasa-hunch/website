@@ -1,5 +1,5 @@
 <script lang="ts">
-	import toast from 'svelte-french-toast';
+	import toast from '@leodog896/svelte-french-toast';
 
 	import AddUserIcon from '~icons/mdi/person-add-outline';
 	import { invalidateAll, pushState } from '$app/navigation';

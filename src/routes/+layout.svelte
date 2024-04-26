@@ -4,7 +4,7 @@
 	import '../app.css';
 
 	import { onMount } from 'svelte';
-	import { Toaster } from 'svelte-french-toast';
+	import { Toaster } from '@leodog896/svelte-french-toast';
 	import { pwaInfo } from 'virtual:pwa-info';
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import toast from 'svelte-french-toast';
+	import toast from '@leodog896/svelte-french-toast';
 
 	import NotDoneIcon from '~icons/mdi/close';
 	import DeleteIcon from '~icons/mdi/delete-outline';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cubicInOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
-	import toast from 'svelte-french-toast';
+	import toast from '@leodog896/svelte-french-toast';
 
 	import AddItemIcon from '~icons/mdi/plus';
 	import { invalidateAll, pushState, replaceState } from '$app/navigation';

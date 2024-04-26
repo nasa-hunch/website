@@ -13,7 +13,7 @@
 		};
 	}[];
 
-	import toast from 'svelte-french-toast';
+	import toast from '@leodog896/svelte-french-toast';
 
 	import Pfp from '$lib/components/Pfp.svelte';
 	export let assignees: Assignees;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { renderSVG } from 'scannable/qr';
-	import toast from 'svelte-french-toast';
+	import toast from '@leodog896/svelte-french-toast';
 
 	import { enhance } from '$app/forms';
 	import { pushState } from '$app/navigation';

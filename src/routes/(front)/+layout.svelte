@@ -7,9 +7,16 @@
 
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/Navbar.svelte';
+	import toast from '@leodog896/svelte-french-toast';
+	import DemoAccount from './DemoAccount.svelte';
 
 	onMount(() => {
 		const lenis = new Lenis();
+
+		toast(DemoAccount, {
+			position: "bottom-right",
+			duration: 20_000
+		})
 
 		function raf(time: number) {
 			lenis.raf(time);

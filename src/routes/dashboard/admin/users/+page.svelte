@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toast } from 'svelte-french-toast';
+	import { toast } from '@leodog896/svelte-french-toast';
 
 	import MdiAccountPlus from '~icons/mdi/account-plus';
 	import ChevronLeft from '~icons/mdi/chevron-left';

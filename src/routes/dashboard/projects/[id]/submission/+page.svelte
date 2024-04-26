@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { cubicInOut } from 'svelte/easing';
 	import { tweened } from 'svelte/motion';
-	import toast from 'svelte-french-toast';
+	import toast from '@leodog896/svelte-french-toast';
 
 	import MdiClipboardCheckOutline from '~icons/mdi/clipboard-check-outline';
 	import MdiClipboardRemoveOutline from '~icons/mdi/clipboard-remove-outline';

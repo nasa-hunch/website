@@ -6,7 +6,7 @@
 
 	import dayjs from 'dayjs';
 	import localizedFormat from 'dayjs/plugin/localizedFormat';
-	import { toast } from 'svelte-french-toast';
+	import { toast } from '@leodog896/svelte-french-toast';
 
 	import Button from '$lib/components/Button.svelte';
 	import Modal from '$lib/components/Modal.svelte';
