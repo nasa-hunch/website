@@ -9,6 +9,7 @@
 	import type { Objects, Topology } from 'topojson-specification';
 	import usRaw from 'us-atlas/counties-albers-10m.json';
 	import { UsaStates } from 'usa-states';
+	import Fuse from 'fuse.js';
 
 	import { getState } from './map/remap';
 
@@ -112,6 +113,16 @@
 		coordinates: string;
 	}
 
+	let searchLocations = '';
+
+	$: fuse = new Fuse(selectedLocations, {
+		keys: ['name', 'city', 'address', 'zip']
+	});
+
+	$: searchedLocations = searchLocations
+		? fuse.search(searchLocations).map((data) => data.item)
+		: selectedLocations;
+
 	export let locations: LocationLike[];
 </script>
 
@@ -126,21 +137,27 @@
 	<div
 		style="top: {selectedStateCursor[1]}px; left: {selectedStateCursor[0]}px"
 		class="cursorModal"
+		data-lenis-prevent
 	>
 		<h3>{selectedState}</h3>
-		{#each selectedLocations as location}
-			<p>
-				<a
-					href="https://www.google.com/maps/search/{encodeURIComponent(
-						location.address
-					)}+{encodeURIComponent(location.city)}+{encodeURIComponent(
-						location.state
-					)}+{encodeURIComponent(location.zip)}"
-					rel="noopener noreferrer"
-					target="_blank">{location.name}</a
-				>
-			</p>
-		{/each}
+		{#if searchedLocations.length > 0}
+			<input bind:value={searchLocations} placeholder="Search Locations..." />
+			{#each searchedLocations as location}
+				<p>
+					<a
+						href="https://www.google.com/maps/search/{encodeURIComponent(
+							location.address
+						)}+{encodeURIComponent(location.city)}+{encodeURIComponent(
+							location.state
+						)}+{encodeURIComponent(location.zip)}"
+						rel="noopener noreferrer"
+						target="_blank">{location.name}</a
+					>
+				</p>
+			{/each}
+		{:else}
+			<p><i>No locations in this area.<br /><a href="/get-started">Perhaps you can be the first?</a></i></p>
+		{/if}
 	</div>
 {/if}
 
@@ -206,14 +223,13 @@
 		text-align: center;
 		font-weight: 500;
 		font-family: 'Lexend Variable', sans-serif;
+		font-size: 1.5rem;
+		margin-top: 0;
+		margin-bottom: 0.75rem;
 	}
 
 	h2 {
 		font-size: 3rem;
-	}
-
-	h3 {
-		font-size: 2.5rem;
 	}
 
 	.cursorModal {
@@ -223,6 +239,19 @@
 		border: 1px solid black;
 		border-radius: 0.5rem;
 		padding: 1rem;
+		overflow-y: scroll;
+		max-height: 500px;
+
+		input {
+			width: 100%;
+			padding: 0.5rem;
+			border: 1px solid black;
+			border-radius: 0.5rem;
+		}
+
+		a {
+			color: $primary;
+		}
 	}
 
 	.accent {
