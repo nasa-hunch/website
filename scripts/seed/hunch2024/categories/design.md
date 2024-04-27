@@ -16,3 +16,10 @@ bringing students together nationwide to collaborate and present the very best t
 at our Design Reviews. This year, we are preparing a new schedule of design reviews to help
 keep the process moving forward and bring the best ideas to the forefront. Our goal is to
 bring the best ideas from each project together for a final review at Johnson Space Center.
+
+## How NASA Uses Design & Prototype
+
+Every NASA project starts with an idea. These ideas are the frontier of innovation
+and are the first step in creating a new product. The Design & Prototype program
+allows NASA to gather a wide range of ideas from students across the country and
+bring them together to create the best possible solution to a problem.
