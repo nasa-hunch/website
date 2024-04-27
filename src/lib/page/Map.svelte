@@ -9,6 +9,7 @@
 	import type { Objects, Topology } from 'topojson-specification';
 	import usRaw from 'us-atlas/counties-albers-10m.json';
 	import { UsaStates } from 'usa-states';
+	import { clickOutside } from '$lib/actions/clickOutside';
 	import Fuse from 'fuse.js';
 
 	import { getState } from './map/remap';
@@ -169,6 +170,9 @@
 			opacityElements.set(2);
 			dataAmount.set(locations.length);
 			studentLocations.set(2575);
+		}}
+		use:clickOutside={() => {
+			selectedState = undefined;
 		}}
 		use:inview={{ unobserveOnEnter: true }}
 	>
