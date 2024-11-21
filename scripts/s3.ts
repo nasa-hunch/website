@@ -16,6 +16,8 @@ const S3 = new S3Client({
 	}
 });
 
+const bucketName = 'nasahunch';
+
 const readOnlyAnonUserPolicy = {
 	Version: '2012-10-17',
 	Statement: [
@@ -24,12 +26,12 @@ const readOnlyAnonUserPolicy = {
 			Effect: 'Allow',
 			Principal: '*',
 			Action: ['s3:GetObject'],
-			Resource: ['arn:aws:s3:::nasahunch/*']
+			Resource: [`arn:aws:s3:::${bucketName}/*`]
 		}
 	]
 };
 
-const bucketName = 'nasahunch';
+
 
 const hasBucket = await S3.send(new ListBucketsCommand({})).then((data) =>
 	data.Buckets?.some((bucket) => bucket.Name === bucketName)
